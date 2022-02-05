@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grandmother : Enemy
+public class Cat : Enemy
 {
     // Start is called before the first frame update
     void Start()
@@ -13,8 +13,9 @@ public class Grandmother : Enemy
     // Update is called once per frame
     void Update()
     {
-
+        
     }
+
 
     public override void AlertMoveTowards()
     {
@@ -22,7 +23,7 @@ public class Grandmother : Enemy
         if (target == null || (alertTime > alertTimeDuration))
         {
             isAlerted = false;
-        }      
+        }
 
         Vector2 distanceFromTarget = target.gameObject.transform.position - transform.position;
 
@@ -34,11 +35,12 @@ public class Grandmother : Enemy
         }
         else
         {
+            //Attack Xander when you are within range
             /*
-            Strike Xander with Frying Pan   
+            Lunge at Xander (Cat, Rat)
+            
+
              */
         }
     }
-
-
 }

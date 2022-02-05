@@ -9,7 +9,9 @@ public class Enemy : MonoBehaviour
     public GameObject home;
     public float moveSpeed;
     public float runSpeed;
-    public float alertTimeDuration;    
+    public float alertTimeDuration;
+    public float alertRange;
+    public float attackRange;
 
 
     [Header("Set Dynamically")]
@@ -26,7 +28,7 @@ public class Enemy : MonoBehaviour
     /*
      Planning: 
     Movement
-        Movement Patterns and how they switch depending on the alert mode
+        -Movement Patterns and how they switch depending on the alert mode
         Handle flipping sprites (Animator)
         
     Detection
@@ -36,13 +38,21 @@ public class Enemy : MonoBehaviour
     To Do: Create Different Animation Modes?
     */
 
-    void Awake()
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+        rigid = GetComponent<Rigidbody2D>();
+    }
+
+void Awake()
     {
         DetermineDestination();
     }
 
     void Update()
     {
+        ConfigureAnimation();
+
         if (isAlerted)
         {
             AlertMoveTowards();
@@ -53,8 +63,9 @@ public class Enemy : MonoBehaviour
             RegularMove();
         }
     }
+    
 
-    private void AlertMoveTowards()
+    public virtual void AlertMoveTowards()
     {
         //Possibly add in more conditions to make the object leave alert phase, like checking if the target left the room
         if (target == null || (alertTime > alertTimeDuration)) 
@@ -62,7 +73,7 @@ public class Enemy : MonoBehaviour
             isAlerted = false;
         }
 
-        transform.position = Vector2.MoveTowards(transform.position, target.gameObject.transform.position, runSpeed * Time.deltaTime);               
+        transform.position = Vector2.MoveTowards(transform.position, target.gameObject.transform.position, runSpeed * Time.deltaTime);
     }
 
     private void RegularMove()
@@ -91,6 +102,21 @@ public class Enemy : MonoBehaviour
 
         currentWaypointDestination = waypoints[waypointIndex]; 
     }
+
+    public void ConfigureAnimation()
+    {
+        if (!isAlerted)
+        {
+            anim.SetFloat("xMovement", (currentWaypointDestination.transform.position.x - transform.position.x));
+            anim.SetFloat("yMovement", (currentWaypointDestination.transform.position.y - transform.position.y));
+        }
+        else
+        {
+            anim.SetFloat("xMovement", (target.transform.position.x - transform.position.x));
+            anim.SetFloat("yMovement", (target.transform.position.y - transform.position.y));
+        }
+    }
+
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
