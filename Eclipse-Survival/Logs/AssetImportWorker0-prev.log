@@ -140,3 +140,4 @@ Received Import Request.
 Start importing Assets/Scripts/Grandmother.cs using Guid(d1695c66901032d4a9d0f4db371b98f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '40767a72c25029cbf4a1a012ba25c3a4') in 0.040482 seconds 
   Import took 0.057053 seconds .
 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
