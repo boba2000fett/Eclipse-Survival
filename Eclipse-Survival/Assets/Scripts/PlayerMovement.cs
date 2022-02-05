@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
             detectionCollider.radius = 10f;
         }
 
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
         {
             rb.velocity = new Vector2(0, -moveSpeed * Time.deltaTime);
             if (facing != Facing.Down && dirSwitch == false)
@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
                 dirSwitch = true;
             }
         }
-        else if (Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
             rb.velocity = new Vector2(moveSpeed * Time.deltaTime, 0);
             if (facing != Facing.Right && dirSwitch == false)
@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
                 dirSwitch = true;
             }
         }
-        else if (Input.GetKey(KeyCode.UpArrow))
+        else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
         {
             rb.velocity = new Vector2(0, moveSpeed * Time.deltaTime);
             if (facing != Facing.Up && dirSwitch == false)
@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
                 dirSwitch = true;
             }
         }
-        else if (Input.GetKey(KeyCode.LeftArrow))
+        else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
             rb.velocity = new Vector2(-moveSpeed * Time.deltaTime, 0);
             if (facing != Facing.Left && dirSwitch == false)
