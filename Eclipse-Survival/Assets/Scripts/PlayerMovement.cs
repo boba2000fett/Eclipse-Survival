@@ -92,4 +92,10 @@ public class PlayerMovement : MonoBehaviour
             detectionCollider.radius = 5f;
         }
     }
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log($"{collision.gameObject.name}");
+    }
 }
