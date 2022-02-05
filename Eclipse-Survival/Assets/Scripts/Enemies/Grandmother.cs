@@ -81,21 +81,13 @@ public class Grandmother : Enemy
     public void UpdateFryingPanPosition()
     {
         if (this.direction == Facing.Down)
-        {
             fryingPan.transform.localPosition = downFacingPositionFryingPan;
-        }
         else if (this.direction == Facing.Up)
-        {
             fryingPan.transform.localPosition = upFacingPositionFryingPan;
-        }
         else if (this.direction == Facing.Right)
-        {
             fryingPan.transform.localPosition = rightFacingPositionFryingPan;
-        }
         else if (this.direction == Facing.Left)
-        {
             fryingPan.transform.localPosition = leftFacingPositionFryingPan;
-        }
     }
 
     public void CheckFryingPan()
