@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3162051697547688893}
   - component: {fileID: 3162051697547688892}
   - component: {fileID: 3162051697547688891}
+  - component: {fileID: 1022625063857495621}
   m_Layer: 0
   m_Name: Xander
   m_TagString: Xander
@@ -234,3 +235,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 10
+--- !u!114 &1022625063857495621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3162051697547688890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb9c59c19be6f904ea6e14a4cdb0ff80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hunger: 100
+  health: 10
+  hungerDecrementInterval: 10
+  hungerText: {fileID: 0}
