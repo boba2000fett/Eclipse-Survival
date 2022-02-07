@@ -7,15 +7,19 @@ public class Xander : MonoBehaviour
 {
     [Header("Set in Inspector")]   
     public int hunger;
-    public int health;
+    public float health;
     public float hungerDecrementInterval; // in seconds
     public Text hungerText;
+
+    [Header("Set Dynamically")]
+    public bool isAlive;
 
     private float hungerTimer;
     // Start is called before the first frame update
     void Start()
     {
         hungerTimer = hungerDecrementInterval;
+        isAlive = true;
     }
 
     // Update is called once per frame
@@ -33,6 +37,16 @@ public class Xander : MonoBehaviour
 
             UpdateUI();
             hungerTimer = hungerDecrementInterval;
+        }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        if (health >= 0)
+        {
+            isAlive = false;
+            //Here Xander will die. Perhaps we could make the screen switch to the Game Over screen here. 
         }
     }
 
