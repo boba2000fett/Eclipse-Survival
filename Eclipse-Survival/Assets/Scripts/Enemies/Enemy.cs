@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     public float alertTimeDuration;
     public float alertRange;
     public float attackRange;
+    public float strength;
 
 
     [Header("Set Dynamically")]

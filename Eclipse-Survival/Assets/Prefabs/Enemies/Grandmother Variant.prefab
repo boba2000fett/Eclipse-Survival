@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7401073557779090506}
   - component: {fileID: 339541085}
   - component: {fileID: 339541087}
+  - component: {fileID: 8821415555027619273}
   m_Layer: 0
   m_Name: FryingPan
   m_TagString: Untagged
@@ -149,8 +150,21 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 9, y: 9}
+  m_Size: {x: 3, y: 3}
   m_EdgeRadius: 0
+--- !u!114 &8821415555027619273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6594481961122364496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36e44dcef9613c34aa8eb22a4767aa54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strength: 0
 --- !u!1001 &2338365022941172556
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -214,6 +228,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grandmother
       objectReference: {fileID: 0}
+    - target: {fileID: 4033998086720353580, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353581, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_Controller
       value: 
@@ -270,6 +288,7 @@ MonoBehaviour:
   alertTimeDuration: 5
   alertRange: 0
   attackRange: 0.75
+  strength: 0
   isAlerted: 0
   target: {fileID: 0}
   waypointIndex: 0
@@ -277,11 +296,12 @@ MonoBehaviour:
   currentWaypointDestination: {fileID: 0}
   direction: 0
   hittingDuration: 0.5
+  fryingPanStrength: 0
+  fryingPan: {fileID: 0}
+  isHitting: 0
+  hittingTime: 0
   leftFacingPositionFryingPan: {x: -15, y: 0}
   rightFacingPositionFryingPan: {x: 15, y: 0}
   upFacingPositionFryingPan: {x: 0, y: 18}
   downFacingPositionFryingPan: {x: 0, y: -18}
   standardPositionFryingPan: {x: 0, y: 0}
-  fryingPan: {fileID: 0}
-  isHitting: 0
-  hittingTime: 0

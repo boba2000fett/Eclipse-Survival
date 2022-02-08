@@ -4,43 +4,135 @@ using UnityEngine;
 
 public class Cat : Enemy
 {
-    // Start is called before the first frame update
-    void Start()
+    public enum PounceState
     {
-        
+        Prepare,
+        Jumping,
+        Landed,
+        NotPouncing
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Header("Set In Inspector: Cat")]
+    public float pouncePrepateTimeInverval;
+    public float pounceStopTimeInverval;
 
 
+    [Header("Set Dynamically: Cat")]
+    public Vector3 hoppingPoint;
+    public bool isPouncing = false;
+    public PounceState pounceState = PounceState.NotPouncing;
+    public float pouncePrepareTime;
+    public float pounceStopTime;
+  
     public override void AlertMoveTowards()
     {
-        //Possibly add in more conditions to make the object leave alert phase, like checking if the target left the room
-        if (target == null || (alertTime > alertTimeDuration))
+        if (!isPouncing)
         {
-            isAlerted = false;
-        }
+            //Possibly add in more conditions to make the object leave alert phase, like checking if the target left the room
+            if (target == null || (alertTime > alertTimeDuration))
+            {
+                isAlerted = false;
+            }
 
-        Vector2 distanceFromTarget = target.gameObject.transform.position - transform.position;
+            Vector2 distanceFromTarget = target.gameObject.transform.position - transform.position;
+            Debug.Log(distanceFromTarget.magnitude);
 
-        Debug.Log(distanceFromTarget.magnitude);
-
-        if (distanceFromTarget.magnitude > attackRange)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, target.gameObject.transform.position, runSpeed * Time.deltaTime);
+            if (distanceFromTarget.magnitude > attackRange)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, target.gameObject.transform.position, runSpeed * Time.deltaTime);
+            }
+            else
+            {
+                //Attack Xander when you are within range
+                /* Lunge at Xander (Cat, Rat) */
+                hoppingPoint = target.transform.position;
+                isPouncing = true;
+                pouncePrepareTime = 0f;
+                pounceStopTime = 0f;
+                pounceState = PounceState.Prepare;
+            }
         }
         else
-        {
-            //Attack Xander when you are within range
-            /*
-            Lunge at Xander (Cat, Rat)
-            
-
-             */
+        {           
+            Pounce();
         }
     }
+
+    private void Pounce()
+    {
+        if (pounceState == PounceState.Prepare)
+        {
+            //Switch to stance position animation
+            pouncePrepareTime += Time.deltaTime;
+
+            if (pouncePrepareTime >= pouncePrepateTimeInverval)
+            {
+                pounceState = PounceState.Jumping;
+                pouncePrepareTime = 0f;
+            }               
+        }
+        else if (pounceState == PounceState.Jumping)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, hoppingPoint, runSpeed * Time.deltaTime);
+            //Switch to jumping position animation
+
+            if ((this.transform.position.magnitude - hoppingPoint.magnitude) <= .2)
+            {                
+                pounceState = PounceState.Landed;                
+            }
+        }
+        else if (pounceState == PounceState.Landed)
+        {
+            //Switch to stance position animation
+            pounceStopTime += Time.deltaTime;
+
+            if (pounceStopTime >= pounceStopTimeInverval)
+            {
+                isPouncing = false;
+                pounceState = PounceState.NotPouncing;
+                pounceStopTime = 0f;
+            }
+        }           
+    }
 }
+
+#region Planning
+/*
+ * Planning: 
+ * What I am thinking for the AI
+ * The cat will run at Xander. If within range, the Cat will lunge. The cat will use a 
+ * simular child Game Object like the Grandmother does for the frying pan, except the cat will lunge at that position. 
+ * So, the Cat will change to a jump stance, and then change to a jumping stance towards that position. Then, it will land (same animation
+ * as the jump stance), and wait for a few seconds. The ordeal should take in total around 2 seconds. 
+ * 
+ * Variables
+ * Vector2 - Xander's Last Position - Hopping Point (This will be where the Cat hops too (Don't really need a child game object))
+ * enum Pounce State {Prepare, Jumping, Landed, NotPouncing}
+ * 
+ * If (within Range)
+ *  state = Pounce: (or just have isPouncing)
+ * 
+ * Update Method
+ * Pounce();
+ * 
+ * 
+ * void Pounce()
+ *  if (isPouncing)
+ *      if(PounceState.Prepare)
+ *          Switch to stance position animation
+ *          pouncePrepareTime += Time.deltaTime;
+ *      else if(PounceState.Jumping)
+ *          Move towards pouncePosition
+ *          Switch to jumping position animation    
+ *      else if (Reached pouncePosition)
+ *          Switch to stance position animation
+ *          pounceStopTime += Time.deltaTime;    
+ *
+ *      if(pouncePrepareTime >= pouncePrepateTimeInverval)
+ *          pounceState = PounceState.Jump
+ *      if(pounceStopTime  >= pounceStopTimeInverval)
+ *          isPouncing = false;
+ *  
+ * 
+ */
+#endregion

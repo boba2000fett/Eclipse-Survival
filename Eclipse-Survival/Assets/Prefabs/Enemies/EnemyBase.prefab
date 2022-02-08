@@ -21,7 +21,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4033998086720353579
 Transform:
   m_ObjectHideFlags: 0
@@ -147,11 +147,13 @@ MonoBehaviour:
   alertTimeDuration: 5
   alertRange: 2
   attackRange: 0.75
+  strength: 0
   isAlerted: 0
   target: {fileID: 0}
   waypointIndex: 0
   alertTime: 0
   currentWaypointDestination: {fileID: 0}
+  direction: 0
 --- !u!61 &4033998086720353582
 BoxCollider2D:
   m_ObjectHideFlags: 0
