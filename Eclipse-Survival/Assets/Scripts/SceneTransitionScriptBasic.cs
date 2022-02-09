@@ -30,6 +30,7 @@ public class SceneTransitionScriptBasic : MonoBehaviour
             else
             {
                 SceneManager.LoadScene(Constants.PLAYABLE_TOP_DOWN_VIEW);
+                Physics2D.gravity = new Vector2(0, 0);
             }     
         }
 

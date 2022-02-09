@@ -12,6 +12,7 @@ public class ClimbingMovement : MonoBehaviour
     // May add different variables for walk/run for climbing areas 
     public float walkSpeed;
     public float runSpeed;
+    public float climbSpeed;
 
     // Added variables for detection radius & jump height/power
     public float defaultRadius;
@@ -51,164 +52,113 @@ public class ClimbingMovement : MonoBehaviour
         detectionCollider = detectCircle.GetComponent<CircleCollider2D>();
         detectionCollider.radius = defaultRadius;
 
-        climbMode = true;
-
         // Set gravity here in inspector temporarily (Easier than going into settings every single time)
         Physics2D.gravity = new Vector2(0, -gravity);
     }
 
     void Update()
     {
-        // Added a climb mode to change movement and controls
-        if (climbMode)
+        if (Input.GetKey(KeyCode.Space) && onGround)
         {
-            if (Input.GetKey(KeyCode.Space) && onGround)
+            rb.AddForce(new Vector2(0f, jumpPower));
+            onGround = false;
+            jumpTime = 0f;
+            if (climbing)
             {
-                rb.AddForce(new Vector2(0f, jumpPower));
-                onGround = false;
-                jumpTime = 0f;
-                if (climbing)
-                {
-                    climbing = false;
-                    Physics2D.gravity = new Vector2(0, -gravity);
-                }
-            }
-            else if (!onGround)
-            {
-                jumpTime += Time.deltaTime;
-                if (jumpCooldown <= jumpTime)
-                {
-                    onGround = true;
-                }
-            }
-
-            Vector2 pVel = rb.velocity;
-            pVel.x = 0f;
-            if(climbing) pVel.y = 0f;
-
-            // NOTE:
-            // Climbing on climbable background enviroments was assumed
-            // This can be easily changed if we want to climb on sidewalls or similar things later
-            // If we do not want sideways movement/or only limited sideways movement that can be changed easily later too
-
-            if (climbing && !onClimbable)
-            {
-                Physics2D.gravity = new Vector2(0, -gravity);
                 climbing = false;
+                Physics2D.gravity = new Vector2(0, -gravity);
             }
-                
-
-            if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
-            {
-                // Place Ducking here if we want
-
-                if (climbing)
-                {
-                    pVel.y -= walkSpeed * Time.deltaTime;
-                }
-            }
-            else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
-            {
-                pVel.x = walkSpeed * Time.deltaTime;
-
-                if (facing != Facing.Right)
-                {
-                    facing = Facing.Right;
-                    TurnXander();
-                }
-            }
-            else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
-            {
-                if (onClimbable && !climbing)
-                {
-                    climbing = true;
-                    Physics2D.gravity = new Vector2(0, 0f);
-                    facing = Facing.Up;
-                    TurnXander();
-                }
-                if (climbing)
-                {
-                    pVel.y = walkSpeed * Time.deltaTime;
-                }
-            }
-            else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
-            {
-                pVel.x = -walkSpeed * Time.deltaTime;
-
-                if (facing != Facing.Left)
-                {
-                    facing = Facing.Left;
-                    TurnXander();
-                }
-            }
-            else
-            {
-                
-            }
-
-
-            // To Do: Cap speed so that nothing is crazy/either that or long falls kill/damage Xander
-
-            rb.velocity = pVel;
         }
-        //else
-        //{
-        //    rb.velocity = Vector2.zero;
+        else if (!onGround)
+        {
+            jumpTime += Time.deltaTime;
+            if (jumpCooldown <= jumpTime)
+            {
+                onGround = true;
+            }
+        }
 
-        //    if (Input.GetKey(KeyCode.Space))
-        //    {
-        //        moveSpeed = runSpeed;
-        //        detectionCollider.radius = 15f;
-        //    }
-        //    else
-        //    {
-        //        moveSpeed = walkSpeed;
-        //        detectionCollider.radius = 10f;
-        //    }
+        Vector2 pVel = rb.velocity;
+        pVel.x = 0f;
+        if(climbing) pVel.y = 0f;
 
-        //    if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
-        //    {
-        //        rb.velocity = new Vector2(0, -moveSpeed * Time.deltaTime);
-        //        if (facing != Facing.Down)
-        //        {
-        //            facing = Facing.Down;
-        //            TurnXander();
-        //        }
-        //    }
-        //    else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
-        //    {
-        //        rb.velocity = new Vector2(moveSpeed * Time.deltaTime, 0);
-        //        if (facing != Facing.Right)
-        //        {
-        //            facing = Facing.Right;
-        //            transform.localRotation = Quaternion.Euler(0, 0, 90);
-        //            TurnXander();
-        //        }
-        //    }
-        //    else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
-        //    {
-        //        rb.velocity = new Vector2(0, moveSpeed * Time.deltaTime);
-        //        if (facing != Facing.Up)
-        //        {
-        //            facing = Facing.Up;
-        //            TurnXander();
-        //        }
-        //    }
-        //    else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
-        //    {
-        //        rb.velocity = new Vector2(-moveSpeed * Time.deltaTime, 0);
-        //        if (facing != Facing.Left)
-        //        {
-        //            facing = Facing.Left;
-        //            TurnXander();
-        //        }
-        //    }
-        //    else
-        //    {
-        //        // Not moving at all
-        //        detectionCollider.radius = 5f;
-        //    }
-        //}
+        // Adding running
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            moveSpeed = runSpeed;
+            detectionCollider.radius = runRadius;
+        }
+        else if (moveSpeed != walkSpeed)
+        {
+            moveSpeed = walkSpeed;
+            detectionCollider.radius = walkRadius;
+        }
+
+        // NOTE:
+        // Climbing on climbable background enviroments was assumed
+        // This can be easily changed if we want to climb on sidewalls or similar things later
+        // If we do not want sideways movement/or only limited sideways movement that can be changed easily later too
+
+        if (climbing && !onClimbable)
+        {
+            Physics2D.gravity = new Vector2(0, -gravity);
+            climbing = false;
+        }
+                
+
+        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+        {
+            // Place Ducking here if we want
+
+            if (climbing)
+            {
+                pVel.y -= climbSpeed * Time.deltaTime;
+            }
+        }
+        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+        {
+            pVel.x = moveSpeed * Time.deltaTime;
+
+            if (facing != Facing.Right)
+            {
+                facing = Facing.Right;
+                TurnXander();
+            }
+        }
+        else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+        {
+            if (onClimbable && !climbing)
+            {
+                climbing = true;
+                Physics2D.gravity = new Vector2(0, 0f);
+                facing = Facing.Up;
+                TurnXander();
+            }
+            if (climbing)
+            {
+                pVel.y = climbSpeed * Time.deltaTime;
+            }
+        }
+        else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+        {
+            pVel.x = -moveSpeed * Time.deltaTime;
+
+            if (facing != Facing.Left)
+            {
+                facing = Facing.Left;
+                TurnXander();
+            }
+        }
+        else
+        {
+                
+        }
+
+
+        // To Do: Cap speed so that nothing is crazy/either that or long falls kill/damage Xander
+
+        rb.velocity = pVel;
+        
     }
 
     private void TurnXander()
