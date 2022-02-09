@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class GamePlayManager : MonoBehaviour
 {
+    
     [Header("Set in Inspector")]
     public GameObject Xander;
+    public static float healthAdded;
+    public static float hungerRestored;
 
-    [Header("Set Dynamically for testing")]
-    public int counter;
 
     void Update()
     {
-        
+        /*
+         * 
+         */
     }
 }
