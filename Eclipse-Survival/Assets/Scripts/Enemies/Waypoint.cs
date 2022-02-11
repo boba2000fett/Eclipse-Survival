@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class Waypoint : MonoBehaviour
 {
-    GameObject[] possibleTravelPoints;
-    GameObject[] pathToExit;
+    [Header("Set in Inspector: Waypoint")]
+    public Waypoint[] possibleTravelPoints;
+    public Waypoint[] pathToExit;
+    public Waypoint nextNodeExit;
+    //public Waypoint nextNodeNorthExit;
+    //public Waypoint nextNodeWestExit;
+    //public Waypoint nextNodeEastExit;
+    //public Waypoint nextNodeSouthExit;
+
+    public bool isExitNode;
     /*
     When arriving at node 1, the grandmother would then travel to either 2 or 4 (it would pick randomly)
     _______________
