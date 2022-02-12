@@ -1,34 +1,68 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyRoomRoaming : Enemy
 {
-    [Header("Enemy Roaming : Set in Inspector")]
-    //static public Room[] roomList; //This variable is here because all of the Grandmother Objects will share this.
-    //public Room[] roomListSet; //This variable is only here to display 
-    //public bool setRooms = true;
+    [Header("Enemy Roaming : Set in Inspector")]    
+    [Tooltip("This variable is to set the roomList.")]    
+    public Room[] roomListSet; //This variable is to set the roomList.
+    [Tooltip("This variable is only here to display the Room list.")]
+    public Room[] seeRoomList; //This variable is only here to display the Room list.
+    public bool setRooms = true;
     public int requiredWaypointsCount = 4;
+    [Tooltip("This variable is to set current Room Index")]
+    public int currentRoomIndexSet;
+    [Tooltip("This variable is here to see the currentRoomIndex variable (which cannot be directly seen in the inspector because it is static)")]
+    public int seeCurrentRoomIndex;
+    public float outsideRoomTimeInterval;
 
+    static public int currentRoomIndex;
+    static public Room[] roomList; //This variable is here because all of the Grandmother Objects will share this.
 
     [Header("Set Dynamically: Enemy Roaming")]
-    //static public int currentRoom; //Implement this later when doing adding in the Room change functionality
+    ////Implement this later when doing adding in the Room change functionality
     //public int currentRoomSee; //Implement this later when doing adding in the Room change functionality
     public int waypointCount = 0;
-
+    public bool isInRoom;
+    public float outsideRoomTime;
 
     public override void Awake()
-    {        
+    {                
+        //this.transform.position = go.transform.position;
         GameObject go = GameObject.Find("ExitNode");
         currentWaypointDestination = go.gameObject.GetComponent<Waypoint>();
 
         Debug.LogWarning("Found");
-        //this.transform.position = go.transform.position;
+        if (setRooms)
+        {
+            roomList = roomListSet;
+            currentRoomIndex = currentRoomIndexSet;
+        }
+    }
 
-        //if (setRooms)
-        //{
-        //    roomList = roomListSet;
-        //}        
+    public override void Update()
+    {
+        CalculateIfInRoom();
+
+        SeeStaticVariables();
+
+        if (isInRoom)
+        {
+            base.Update();
+        }
+        else
+        {
+            OutsideRoomMoving();
+        }
+        
+    }
+
+    public void SeeStaticVariables()
+    {
+        seeRoomList = roomList;
+        seeCurrentRoomIndex = currentRoomIndex;
     }
 
     public override void RegularMove()
@@ -49,13 +83,14 @@ public class EnemyRoomRoaming : Enemy
         if (waypoints.Length == 0)
             return;
 
-        if (waypointCount > requiredWaypointsCount && !currentWaypointDestination.isExitNode)
+        if (waypointCount >= requiredWaypointsCount && !currentWaypointDestination.isExitNode)
         {
             currentWaypointDestination = currentWaypointDestination.nextNodeExit;
         }
-        else if (waypointCount > requiredWaypointsCount && currentWaypointDestination.isExitNode)
+        else if (waypointCount >= requiredWaypointsCount && currentWaypointDestination.isExitNode)
         {
             //You have reached the entrance node, so you would switch scenes here.
+            SwitchRoom();
         }
         else //You have not traveled to all of the required waypoints
         {
@@ -77,15 +112,58 @@ public class EnemyRoomRoaming : Enemy
     }
 
 
+    public void CalculateIfInRoom()
+    {
+        if (roomList[currentRoomIndex].sceneName == SceneManager.GetActiveScene().name)
+        {
+            //SetPositionComingBackIntoRoom();
+            isInRoom = true;
+        }
+        else
+        {
+            isInRoom = false;
+            this.transform.position = new Vector3(200, 200, 0);
+        }
+    }
+
+    public void SwitchRoom()
+    {
+        currentRoomIndex++;
+    }
+
+    public void OutsideRoomMoving()
+    {
+        outsideRoomTime += Time.deltaTime;
+
+        if (outsideRoomTime > outsideRoomTimeInterval)
+        {
+            SwitchRoom();
+
+        }
+    }
+
+    public void SetPositionComingBackIntoRoom()
+    {
+        /*Here we will want to place the Grandmother object at the correct node. This might
+             prove to be a challenge because we have to know which direction the grandma is traveling from. 
+            For instance, 
+            |-----||--N--|
+            |  1  EW  2  |
+            |-----||--S--|
+             When traveling from Room 1 to Room 2, we will need to know to place the Grandmother at the W Node. 
+             */
+        GameObject go = GameObject.Find("ExitNode");
+        currentWaypointDestination = go.gameObject.GetComponent<Waypoint>();
+        transform.position = currentWaypointDestination.gameObject.transform.position;
+    }
+
 }
 
 #region Planning
 /*
 Planning 
 Options for this code with the Grandma and Cat
--POSSIBLY IMPLEMENT THIS IN THE BASE ENEMY CLASS
--JUST COPY IT TO THE CAT,
--OR MAKE CAT AND GRANDMOTHER INHERIT FROM A DIFFERENT CLASS CALLED ENEMYROAMING, WHICH WILL INHERIT FROM ENEMY.
+-MAKE CAT AND GRANDMOTHER INHERIT FROM A DIFFERENT CLASS CALLED ENEMYROAMING, WHICH WILL INHERIT FROM ENEMY.
     THEN, THE CAT AND GRANDMA CAN SHARE THAT SAME BEHAVIOR WITHOUT CLOGGING DOWN BASE ENEMY SCRIPT WITH THINGS THAT WOULD BE
     OVERRIDEN WITH WOLFSPIDER AND HOUSE RAT
 
@@ -138,8 +216,21 @@ pathToWestExit: Node 13
 
 
 Next problem: The grandmother must be able to know which exit to travel to. 
+Figuring out rooms
+The roomTheGrandmother is in will be a static variable. 
+
+
+
 
 Grandmother sequence. 
+
+If (Grandma reaches end node)
+    NextRoom()
+
+NextRoom(): This will switch the Grandma to the next
+
+Next Thing To DO:
+Make Grandmother go to the Correct Waypoint when re-entering the room
 
  */
 #endregion

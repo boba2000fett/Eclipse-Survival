@@ -1,20 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-[CreateAssetMenu(fileName = "Room", menuName = "ScriptableObjects/Room", order = 1)]
-public class Room : ScriptableObject
+public class Room : MonoBehaviour
 {
+    [Header("Set In Inspector: Room")]
+    public string sceneName; //This will be the name of the Scene that this "Room" is in
+    public int roomID; //This will be the build index of the Scene that this "Room" is in
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        //roomID = SceneManager.GetActiveScene().buildIndex;
+        //sceneName = SceneManager.GetActiveScene().name;
     }
 }
