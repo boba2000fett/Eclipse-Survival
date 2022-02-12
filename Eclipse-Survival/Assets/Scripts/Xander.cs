@@ -54,4 +54,20 @@ public class Xander : MonoBehaviour
     {
         hungerText.text = $"Hunger: {hunger}";
     }
+
+    public virtual void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Item")
+        {
+            //Get the Script Component Value for the item
+            ItemScript itemValue = collision.gameObject.GetComponent<ItemScript>();
+
+            //Add the items determine value to the current health and hunger values
+            health += itemValue.healthRestore;
+            hunger += itemValue.hungerRestore;
+
+            //Update the UI with changed values
+            UpdateUI();
+        }
+    }
 }

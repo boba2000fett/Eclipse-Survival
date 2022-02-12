@@ -6,6 +6,24 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TestLevel.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/TestScenes/Cameron/MockMenuScenes/Splash_Scene.unity
+    guid: 04029ccafd1afe84da45582726ac9aed
+  - enabled: 1
+    path: Assets/Scenes/TestScenes/Cameron/MockMenuScenes/Studio_Scene.unity
+    guid: 4858269c97a707245b9ee8c90767dd69
+  - enabled: 1
+    path: Assets/Scenes/TestScenes/Cameron/MockMenuScenes/Main_Menu_Scene.unity
+    guid: 9d23b331fac76c0488ab0715388d0403
+  - enabled: 1
+    path: Assets/Scenes/TestScenes/Cameron/MockMenuScenes/Options_Scene.unity
+    guid: 9f76eb9e7d2aef0469ce98653fdebf76
+  - enabled: 1
+    path: Assets/Scenes/TestScenes/Cameron/MockMenuScenes/Credits_Scene.unity
+    guid: 89bbf5b6d1620fd42b568826e10405b5
+  - enabled: 0
+    path: Assets/Scenes/TestScenes/Cameron/FirstPlayableRoomCameron.unity
+    guid: bf2dcd1cf1cca474786785ac8d06276e
+  - enabled: 0
+    path: Assets/Scenes/TestScenes/FirstPlayableWallRoom.unity
+    guid: 3e32d934af5466847ae20df2e2e2d573
   m_configObjects: {}

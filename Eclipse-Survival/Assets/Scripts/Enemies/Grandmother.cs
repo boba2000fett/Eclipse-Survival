@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grandmother : Enemy
+public class Grandmother : EnemyRoomRoaming
 {
     [Header("Set in Inspector: Grandmother")]
     public float hittingDuration = 0.5f;
@@ -12,20 +12,19 @@ public class Grandmother : Enemy
     public GameObject fryingPan;
     public bool isHitting;
     public float hittingTime = 0f;
-
-    [HideInInspector]
-    public Vector2 leftFacingPositionFryingPan = new Vector2(-15, 0);
-    public Vector2 rightFacingPositionFryingPan = new Vector2(15, 0);
-    public Vector2 upFacingPositionFryingPan = new Vector2(0, 18);
-    public Vector2 downFacingPositionFryingPan = new Vector2(0, -18);
-    public Vector2 standardPositionFryingPan = new Vector2(0, 0);
+    
+    [HideInInspector] public Vector2 leftFacingPositionFryingPan = new Vector2(-15, 0);
+    [HideInInspector] public Vector2 rightFacingPositionFryingPan = new Vector2(15, 0);
+    [HideInInspector] public Vector2 upFacingPositionFryingPan = new Vector2(0, 18);
+    [HideInInspector] public Vector2 downFacingPositionFryingPan = new Vector2(0, -18);
+    [HideInInspector] public Vector2 standardPositionFryingPan = new Vector2(0, 0);
 
 
     // Start is called before the first frame update
-    public override void Start()
-    {
-        base.Start();
-    }
+    //public override void Start()
+    //{
+    //    base.Start();
+    //}
 
     public override void Awake()
     {
@@ -42,7 +41,7 @@ public class Grandmother : Enemy
 
     public override void Update()
     {
-        base.Update();
+        base.Update();        
 
         if (isHitting)
         {

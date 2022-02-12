@@ -16,7 +16,6 @@ public class Climbable : MonoBehaviour
     {
         if (collision.gameObject.tag == "Climbable")
         {
-            
             GameObject x = GameObject.FindGameObjectWithTag("Xander");
             ClimbingMovement c = x.GetComponent<ClimbingMovement>();
             if (c.OnClimbable) numInBetween++;
