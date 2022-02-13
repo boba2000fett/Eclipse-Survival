@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4049251928940906405}
   m_Layer: 0
   m_Name: RoomTrent
-  m_TagString: Untagged
+  m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,4 +44,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Trent
+  northSceneName: 
+  eastSceneName: 
+  westSceneName: 
+  southSceneName: Trent2
+  availableExits: 1
+  waypointsInRoom:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  southExit: {fileID: 0}
+  northExit: {fileID: 0}
+  eastExit: {fileID: 0}
+  westExit: {fileID: 0}
   roomID: 0

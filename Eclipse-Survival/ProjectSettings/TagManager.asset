@@ -8,6 +8,7 @@ TagManager:
   - Climbable
   - Environment
   - Item
+  - Room
   layers:
   - Default
   - TransparentFX

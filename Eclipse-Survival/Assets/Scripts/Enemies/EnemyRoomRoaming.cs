@@ -5,6 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class EnemyRoomRoaming : Enemy
 {
+    public enum PathToExit
+    {
+        North,
+        South,
+        West,
+        East
+    }
+
     [Header("Enemy Roaming : Set in Inspector")]    
     [Tooltip("This variable is to set the roomList.")]    
     public Room[] roomListSet; //This variable is to set the roomList.
@@ -20,19 +28,29 @@ public class EnemyRoomRoaming : Enemy
 
     static public int currentRoomIndex;
     static public Room[] roomList; //This variable is here because all of the Grandmother Objects will share this.
+    static public PathToExit pathToExit = PathToExit.North; //This will determine which direction the Grandmother should head in when traveling to the exit
+    static public string destinationSceneName;
 
     [Header("Set Dynamically: Enemy Roaming")]
-    ////Implement this later when doing adding in the Room change functionality
     //public int currentRoomSee; //Implement this later when doing adding in the Room change functionality
     public int waypointCount = 0;
     public bool isInRoom;
     public float outsideRoomTime;
+    [Tooltip("This will determine which direction the Grandmother should head in when traveling to the exit.")]
+    public PathToExit pathToExitSee = PathToExit.North; //This will determine which direction the Grandmother should head in when traveling to the exit
+    [Tooltip("This determines if the enemy is active in the Current scene. If it is not, then move the Enemy to the appropriate position")]
+    public bool isActive = false;
+    [Tooltip("This determines the name of the destination scene that an Enemy is traveling to next when the Enemy is not in the current room. This will be used to determine if the enemy should be placed at one of the exits (The enemy is coming from a neighboring room to the current room), or placed at a Random position within the room (the player is enters a room where the Enemy is). \n Note: The main instance of this variable is static, so this variable is here so we can see the other one in the Inspector")]
+    public string destinationSceneNameSee;
+
 
     public override void Awake()
-    {                
-        //this.transform.position = go.transform.position;
-        GameObject go = GameObject.Find("ExitNode");
-        currentWaypointDestination = go.gameObject.GetComponent<Waypoint>();
+    {
+        ////this.transform.position = go.transform.position;
+        //GameObject go = GameObject.Find("SouthExitNode");
+        //currentWaypointDestination = go.gameObject.GetComponent<Waypoint>();
+
+        SetPositionComingBackIntoRoom();
 
         Debug.LogWarning("Found");
         if (setRooms)
@@ -63,6 +81,8 @@ public class EnemyRoomRoaming : Enemy
     {
         seeRoomList = roomList;
         seeCurrentRoomIndex = currentRoomIndex;
+        pathToExitSee = pathToExit;
+        destinationSceneNameSee = destinationSceneName;
     }
 
     public override void RegularMove()
@@ -85,7 +105,9 @@ public class EnemyRoomRoaming : Enemy
 
         if (waypointCount >= requiredWaypointsCount && !currentWaypointDestination.isExitNode)
         {
-            currentWaypointDestination = currentWaypointDestination.nextNodeExit;
+            //Here we want to travel to the proper exit
+            DetermineExitPath();
+            //currentWaypointDestination = currentWaypointDestination.nextNodeEastExit;
         }
         else if (waypointCount >= requiredWaypointsCount && currentWaypointDestination.isExitNode)
         {
@@ -98,31 +120,51 @@ public class EnemyRoomRoaming : Enemy
             currentWaypointDestination = currentWaypointDestination.possibleTravelPoints[nextNodeIndex];
             waypointCount++;
         }
-
-        //if (waypointIndex + 1 > waypoints.Length - 1)
-        //{
-        //    waypointIndex = 0;
-        //}
-        //else
-        //{
-        //    waypointIndex++;
-        //}
-
-        //currentWaypointDestination = waypoints[waypointIndex];
     }
 
+    public void DetermineExitPath()
+    {
+        if (currentRoomIndex == roomList.Length - 1) 
+            return; //Here I will figure out the extra behavior when the Grandmother returns to the first room of the sequence
+
+        if (roomList[currentRoomIndex + 1].sceneName == roomList[currentRoomIndex].northSceneName)
+        {
+            pathToExit = PathToExit.North;
+            currentWaypointDestination = currentWaypointDestination.nextNodeNorthExit;
+        }
+        else if (roomList[currentRoomIndex + 1].sceneName == roomList[currentRoomIndex].southSceneName)
+        {
+            pathToExit = PathToExit.South;
+            currentWaypointDestination = currentWaypointDestination.nextNodeSouthExit;
+        }
+        else if (roomList[currentRoomIndex + 1].sceneName == roomList[currentRoomIndex].westSceneName)
+        {
+            pathToExit = PathToExit.West;
+            currentWaypointDestination = currentWaypointDestination.nextNodeWestExit;
+        }
+        else if (roomList[currentRoomIndex + 1].sceneName == roomList[currentRoomIndex].eastSceneName)
+        {
+            pathToExit = PathToExit.East;
+            currentWaypointDestination = currentWaypointDestination.nextNodeEastExit;
+        }
+    }
 
     public void CalculateIfInRoom()
     {
         if (roomList[currentRoomIndex].sceneName == SceneManager.GetActiveScene().name)
         {
-            //SetPositionComingBackIntoRoom();
+            if (!isActive)
+            {
+                SetPositionComingBackIntoRoom();
+                isActive = true;
+            }            
             isInRoom = true;
         }
         else
         {
             isInRoom = false;
             this.transform.position = new Vector3(200, 200, 0);
+            isActive = false;
         }
     }
 
@@ -134,11 +176,29 @@ public class EnemyRoomRoaming : Enemy
     public void OutsideRoomMoving()
     {
         outsideRoomTime += Time.deltaTime;
+        destinationSceneName = roomList[currentRoomIndex + 1].sceneName;
+
+        if (roomList[currentRoomIndex + 1].sceneName == roomList[currentRoomIndex].northSceneName)
+        {
+            pathToExit = PathToExit.North;
+        }
+        else if (roomList[currentRoomIndex + 1].sceneName == roomList[currentRoomIndex].southSceneName)
+        {
+            pathToExit = PathToExit.South;
+        }
+        else if (roomList[currentRoomIndex + 1].sceneName == roomList[currentRoomIndex].westSceneName)
+        {
+            pathToExit = PathToExit.West;
+        }
+        else if (roomList[currentRoomIndex + 1].sceneName == roomList[currentRoomIndex].eastSceneName)
+        {
+            pathToExit = PathToExit.East;
+        }
 
         if (outsideRoomTime > outsideRoomTimeInterval)
         {
             SwitchRoom();
-
+            outsideRoomTime = 0;
         }
     }
 
@@ -151,10 +211,48 @@ public class EnemyRoomRoaming : Enemy
             |  1  EW  2  |
             |-----||--S--|
              When traveling from Room 1 to Room 2, we will need to know to place the Grandmother at the W Node. 
-             */
-        GameObject go = GameObject.Find("ExitNode");
-        currentWaypointDestination = go.gameObject.GetComponent<Waypoint>();
-        transform.position = currentWaypointDestination.gameObject.transform.position;
+        
+     Update 2/13/2022
+        Here, we would need to determine if the Enemy is either entering the room you are currently in, or if
+        you are entering a room that the enemy is in.
+
+         
+         */
+        Room room = GameObject.FindGameObjectWithTag("Room").GetComponent<Room>();
+        this.waypoints = room.waypointsInRoom;
+
+        if (destinationSceneName == SceneManager.GetActiveScene().name)
+        {
+            //Place at an Endpoint pertaining to the direction the Enemy is Traveling From
+            switch(pathToExit)
+            {
+                case PathToExit.North:
+                    currentWaypointDestination = room.southExit;
+                    break;
+                case PathToExit.East:
+                    currentWaypointDestination = room.westExit;
+                    break;
+                case PathToExit.West:
+                    currentWaypointDestination = room.eastExit;
+                    break;
+                case PathToExit.South:
+                    currentWaypointDestination = room.northExit;
+                    break;
+
+            }
+            transform.position = currentWaypointDestination.gameObject.transform.position;
+        }
+        else
+        {
+            //Place at a random waypoint
+            int index = Random.Range(1, waypoints.Length);
+
+            currentWaypointDestination = waypoints[index];
+            transform.position = currentWaypointDestination.gameObject.transform.position;
+        }
+
+        //Reset Variables
+        waypointCount = 0;
     }
 
 }

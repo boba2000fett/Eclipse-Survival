@@ -7,10 +7,10 @@ public class Waypoint : MonoBehaviour
     [Header("Set in Inspector: Waypoint")]
     public Waypoint[] possibleTravelPoints;
     public Waypoint[] pathToExit;
-    public Waypoint nextNodeExit;
-    //public Waypoint nextNodeNorthExit;
-    //public Waypoint nextNodeWestExit;
-    //public Waypoint nextNodeEastExit;
+    public Waypoint nextNodeSouthExit;
+    public Waypoint nextNodeNorthExit;
+    public Waypoint nextNodeWestExit;
+    public Waypoint nextNodeEastExit;
     //public Waypoint nextNodeSouthExit;
 
     public bool isExitNode;
