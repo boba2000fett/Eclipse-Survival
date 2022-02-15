@@ -50,14 +50,23 @@ public class EnemyRoomRoaming : Enemy
         //GameObject go = GameObject.Find("SouthExitNode");
         //currentWaypointDestination = go.gameObject.GetComponent<Waypoint>();
 
-        SetPositionComingBackIntoRoom();
-
-        Debug.LogWarning("Found");
+        roomList = roomListSet;
         if (setRooms)
         {
-            roomList = roomListSet;
+            //roomList = roomListSet;
             currentRoomIndex = currentRoomIndexSet;
         }
+
+        CalculateIfInRoom();
+
+        if (isInRoom)
+        {
+            SetPositionComingBackIntoRoom();
+        }
+
+
+        Debug.LogWarning("Found");
+       
     }
 
     public override void Update()
