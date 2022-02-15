@@ -86,6 +86,10 @@ public class PlayerMovement : MonoBehaviour
                 dirSwitch = true;
             }
         }
+        else if (Input.GetKey(KeyCode.V))
+        {
+            detectionCollider.radius = 25f;
+        }
         else
         {
             // Not moving at all

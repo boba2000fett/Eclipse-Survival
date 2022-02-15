@@ -22,12 +22,15 @@ public class Constants : MonoBehaviour
     //public const int PLAY_SCENE_WALL_VIEW = 6;
     public const int PAUSE_SCENE = 7;
     public const int GAME_OVER_SCENE = 8;
-    
+
 
     //Test Constant Scene for transition between two scenes
     //public const int PLAYABLE_TOP_DOWN_VIEW = 0;
     //public const int PLAYABLE_WALL_VIEW = 1;
+    public const int ALPHA_CAMERON_TEST_SCENE = 5;
 
     //Constant Values for the game object variables
+    //Constants For the max number of items that can spawn in the different rooms
+
 
 }

@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class SceneTransitionScriptBasic : MonoBehaviour
 {
     [Header("Set In Inspecotr")]
-    public float delay;
+    public float delayBetweenAutoTransition;
 
     [Header("Set Dynamically")]
     Scene currentScene;
@@ -17,29 +17,52 @@ public class SceneTransitionScriptBasic : MonoBehaviour
     {
         //Indetify the current scene that is being shown
         currentScene = SceneManager.GetActiveScene();
+
+        //If the current scene is the splash or studio sceen activate a
+        //delay time for progressing to the next scene
+        if(currentScene.buildIndex == Constants.SPLASH_SCENE || 
+            currentScene.buildIndex == Constants.STUDIO_SCENE)
+        {
+            
+        }
     }
 
     void Update()
     {     
-        
+        //If the current scene is the splash or studio sceen activate 
+        //The space button can be pressed to progress the transition faster
+        if (currentScene.buildIndex == Constants.SPLASH_SCENE ||
+            currentScene.buildIndex == Constants.STUDIO_SCENE)
+        {
+            //Check for the input key of Space for transitioning to the next scene
+            if (Input.GetKey(KeyCode.Space))
+            {
+                    TransitionScene(0);
+            }
+        }
         
         //Check for the input key of X for switching between the two playable scenes
-        if (Input.GetKey(KeyCode.X))
+        if (Input.GetKey(KeyCode.Space))
         {
-            AutoTransitionScene(3);    
+            TransitionScene(3);    
         }
 
         //TODO
         /*
-         * Implement other update in methods to help identify the current scene being shown to help segment the different scene transition operations
-         * Have the scene transitions function and methods be used and called for in their own methods
          * Add a way for a player to return to a previous scene without values being reset or set incorrectly
          * Implement the scene manager either within an appropiate scene script or add the scene manager to the overall game manager
          */
     }
 
-    public void AutoTransitionScene(int nextScene)
+    //public void StartTransition()
+    //{
+    //    TransitionScene(0);
+    //}
+
+    public void TransitionScene(int nextScene)
     {
+        //Switch Structure for determine the main menu scene transitions
+        //The in Play scene transitions for the game will be implemented through triggers and scene names
         switch (currentScene.buildIndex)
         {
             case Constants.SPLASH_SCENE:
@@ -49,9 +72,10 @@ public class SceneTransitionScriptBasic : MonoBehaviour
                 SceneManager.LoadScene(Constants.MAIN_MENU_SCENE);
                 break;
             case Constants.MAIN_MENU_SCENE:
-                if (nextScene == Constants.SPLASH_SCENE)
+                if (nextScene == Constants.ALPHA_CAMERON_TEST_SCENE)
                 {
-                    SceneManager.LoadScene(Constants.SPLASH_SCENE);
+                    GamePlayManager.GPM.NewGame();
+                    SceneManager.LoadScene(Constants.ALPHA_CAMERON_TEST_SCENE);  
                 }
                 else if(nextScene == Constants.OPTION_SCENE)
                 {

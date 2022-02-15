@@ -9,6 +9,7 @@ TagManager:
   - Environment
   - Item
   - Room
+  - ItemSpawner
   layers:
   - Default
   - TransparentFX
