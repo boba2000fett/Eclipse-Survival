@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class ClimbingMovement : MonoBehaviour
 {
-    // Michael's Edit:
-    // Creating this class so it can be merged with the other movement script.
-    // Still haven't decided if that's feasible or neccesary.
+    // Michael's Edit (Revise):
+    // This class is for the Climbing Scene Only
+    // Will contain functionality for all movement and sound creation
 
     [Header("Set in Inspector")]
     // May add different variables for walk/run for climbing areas 
@@ -18,6 +18,7 @@ public class ClimbingMovement : MonoBehaviour
     public float defaultRadius;
     public float walkRadius;
     public float runRadius;
+    public float jumpRadius;
     public float jumpPower;
     public float jumpCooldown;
     public float gravity;
@@ -35,8 +36,10 @@ public class ClimbingMovement : MonoBehaviour
     bool climbMode;
     bool onClimbable;
     bool climbing;
-    // To Do: Implement ground detection
+    
+    // Ground detection & Jump cooldown variables
     bool onGround;
+    bool canJump = true;
     float jumpTime;
 
     [HideInInspector]
@@ -58,23 +61,29 @@ public class ClimbingMovement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space) && onGround)
+        if (Input.GetKey(KeyCode.Space) && onGround && canJump)
         {
             rb.AddForce(new Vector2(0f, jumpPower));
             onGround = false;
-            jumpTime = 0f;
+            canJump = false;
+            detectionCollider.radius = jumpRadius;
             if (climbing)
             {
                 climbing = false;
                 Physics2D.gravity = new Vector2(0, -gravity);
             }
         }
-        else if (!onGround)
+
+        if (!canJump)
         {
+            // Delay jumping even if user is on ground
             jumpTime += Time.deltaTime;
             if (jumpCooldown <= jumpTime)
             {
-                onGround = true;
+                canJump = true;
+                jumpTime = 0f;
+                // Reset moveSpeed so that detection radius will be reset
+                moveSpeed = 0f;
             }
         }
 
@@ -85,13 +94,16 @@ public class ClimbingMovement : MonoBehaviour
         // Adding running
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            moveSpeed = runSpeed;
-            detectionCollider.radius = runRadius;
+            if (moveSpeed != runSpeed)
+            {
+                moveSpeed = runSpeed;
+                if (canJump) detectionCollider.radius = runRadius;
+            }
         }
         else if (moveSpeed != walkSpeed)
         {
             moveSpeed = walkSpeed;
-            detectionCollider.radius = walkRadius;
+            if(canJump) detectionCollider.radius = walkRadius;
         }
 
         // NOTE:
@@ -103,8 +115,8 @@ public class ClimbingMovement : MonoBehaviour
         {
             Physics2D.gravity = new Vector2(0, -gravity);
             climbing = false;
+            onGround = false;
         }
-                
 
         if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
         {
@@ -130,6 +142,7 @@ public class ClimbingMovement : MonoBehaviour
             if (onClimbable && !climbing)
             {
                 climbing = true;
+                onGround = true;
                 Physics2D.gravity = new Vector2(0, 0f);
                 facing = Facing.Up;
                 TurnXander();
@@ -151,7 +164,8 @@ public class ClimbingMovement : MonoBehaviour
         }
         else
         {
-                
+            if(canJump) detectionCollider.radius = defaultRadius;
+            moveSpeed = 0f;
         }
 
 
@@ -161,6 +175,9 @@ public class ClimbingMovement : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Used for turning the Xander sprite to the direction he is facing
+    /// </summary>
     private void TurnXander()
     {
         if (climbing)
@@ -186,4 +203,13 @@ public class ClimbingMovement : MonoBehaviour
                 break;
         }
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            onGround = true;
+        }
+    }
+
 }

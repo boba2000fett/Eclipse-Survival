@@ -9,6 +9,7 @@ TagManager:
   - Environment
   - Item
   - Room
+  - Ground
   layers:
   - Default
   - TransparentFX
