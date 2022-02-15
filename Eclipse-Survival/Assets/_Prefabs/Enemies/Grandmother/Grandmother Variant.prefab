@@ -226,7 +226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353580, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_Name
-      value: Grandmother
+      value: Grandmother Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353580, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_IsActive
@@ -295,6 +295,19 @@ MonoBehaviour:
   alertTime: 0
   currentWaypointDestination: {fileID: 0}
   direction: 0
+  roomListSet: []
+  seeRoomList: []
+  setRooms: 1
+  requiredWaypointsCount: 4
+  currentRoomIndexSet: 0
+  seeCurrentRoomIndex: 0
+  outsideRoomTimeInterval: 0
+  waypointCount: 0
+  isInRoom: 0
+  outsideRoomTime: 0
+  pathToExitSee: 0
+  isActive: 0
+  destinationSceneNameSee: 
   hittingDuration: 0.5
   fryingPanStrength: 0
   fryingPan: {fileID: 0}

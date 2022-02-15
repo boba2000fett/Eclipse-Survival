@@ -44,10 +44,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Trent2
-  northSceneName: Trent
+  northSceneName: 
   eastSceneName: 
-  westSceneName: 
-  southSceneName: 
+  westSceneName: Trent
+  southSceneName: Trent3
   availableExits: 1
   waypointsInRoom:
   - {fileID: 0}

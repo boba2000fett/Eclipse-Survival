@@ -43,7 +43,22 @@ public class Room : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            SceneManager.LoadScene("Trent2");
+            if (SceneManager.GetActiveScene().name == "Trent")
+            {
+                SceneManager.LoadScene("Trent2");
+            }
+            else if (SceneManager.GetActiveScene().name == "Trent2")
+            {
+                SceneManager.LoadScene("Trent3");
+            }
+            else if (SceneManager.GetActiveScene().name == "Trent3")
+            {
+                SceneManager.LoadScene("Trent4");
+            }
+            else if (SceneManager.GetActiveScene().name == "Trent4")
+            {
+                SceneManager.LoadScene("Trent");
+            }
         }
     }
 }
