@@ -4,34 +4,6 @@ using UnityEngine;
 
 public class ClimbingEnemy : MonoBehaviour
 {
-<<<<<<< Updated upstream
-    // Michael's Notes:
-    // Basing this class off of Enemy, but only loosely
-    // This is because ClimbingEnemies must work very differently
-
-    [Header("Set in Inspector: ClimbingEnemy Base Class")]
-    //public Waypoint[] waypoints;
-    //public GameObject home;
-    public float moveSpeed;
-    public float runSpeed;
-    public float alertTimeDuration;
-    public float alertRange;
-    public float attackRange;
-    public float strength;
-
-
-    [Header("Set Dynamically: ClimbingEnemy Base Class")]
-    public bool isAlerted;
-    public GameObject target; //This will be set when the object is alerted
-    //public int waypointIndex;
-    public float alertTime;
-    //public Waypoint currentWaypointDestination;
-    public Facing direction;
-
-    //Components
-    private Animator anim;
-    private Rigidbody2D rigid;
-=======
     #region Planning
     /*
     --Climbing Enemy--
@@ -345,5 +317,4 @@ public class ClimbingEnemy : MonoBehaviour
             }
         }
     }
->>>>>>> Stashed changes
 }
