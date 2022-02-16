@@ -15,6 +15,10 @@ public class PlayerMovement : MonoBehaviour
     [Header("Set in Inspector")]
     public float walkSpeed;
     public float runSpeed;
+    public float idleDetectionRadius;
+    public float walkingDetectionRadius;
+    public float runningDetectionRadius;
+    public float scratchingDetectionRadius;
 
     [Header("Set Dynamically")]
     public Facing facing;
@@ -38,12 +42,12 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             moveSpeed = runSpeed;
-            detectionCollider.radius = 15f;
+            detectionCollider.radius = runningDetectionRadius;
         }
         else
         {
             moveSpeed = walkSpeed;
-            detectionCollider.radius = 10f;
+            detectionCollider.radius = walkingDetectionRadius;
         }
 
         if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
@@ -86,10 +90,14 @@ public class PlayerMovement : MonoBehaviour
                 dirSwitch = true;
             }
         }
+        else if (Input.GetKey(KeyCode.V)) // scratching
+        {
+            detectionCollider.radius = scratchingDetectionRadius;
+        }
         else
         {
             // Not moving at all
-            detectionCollider.radius = 5f;
+            detectionCollider.radius = idleDetectionRadius;
         }
     }
 

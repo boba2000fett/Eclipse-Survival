@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="Workspace" id="{77aa79e1-4933-4bb7-ae46-74ddf28ab73c}">
+		<property name="builtBanksOutputDirectory">
+			<value>../../GitHub/Eclipse-Survival/Eclipse-Survival/Assets/FMODBanks</value>
+		</property>
+		<relationship name="masterEventFolder">
+			<destination>{2f3b75ac-8816-42e5-8ecc-447f6134a067}</destination>
+		</relationship>
+		<relationship name="masterTagFolder">
+			<destination>{6a8afb08-0768-47e0-9d25-39c6179c0542}</destination>
+		</relationship>
+		<relationship name="masterEffectPresetFolder">
+			<destination>{44b8dd17-9937-4632-a13e-8cecaa9ee28e}</destination>
+		</relationship>
+		<relationship name="masterParameterPresetFolder">
+			<destination>{a4b49993-ac1e-408e-850e-1ad4e28a06a0}</destination>
+		</relationship>
+		<relationship name="masterBankFolder">
+			<destination>{61b4fb56-d679-47f9-8fd6-9fae87f54fd2}</destination>
+		</relationship>
+		<relationship name="masterSandboxFolder">
+			<destination>{35a13628-4ac5-4ba3-afd5-0c4064fdc3f3}</destination>
+		</relationship>
+		<relationship name="masterAssetFolder">
+			<destination>{f6bec820-619b-4451-9fc7-14cf014ca227}</destination>
+		</relationship>
+		<relationship name="mixer">
+			<destination>{7c772f90-6be6-4190-9d98-926192a839e9}</destination>
+		</relationship>
+		<relationship name="profilerSessionFolder">
+			<destination>{602c544f-486d-4220-8f98-ae8b03d41afc}</destination>
+		</relationship>
+		<relationship name="platforms">
+			<destination>{8c3d2288-63a3-4818-a189-8f243275b283}</destination>
+		</relationship>
+	</object>
+</objects>

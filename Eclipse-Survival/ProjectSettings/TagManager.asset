@@ -9,6 +9,8 @@ TagManager:
   - Environment
   - Item
   - Room
+  - Ground
+  - ClimbingEnemy
   layers:
   - Default
   - TransparentFX

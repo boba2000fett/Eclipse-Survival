@@ -322,7 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2278418ed14be564b918393b3ce9fc69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0
+  delayBetweenAutoTransition: 0
 --- !u!114 &674341126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -441,7 +441,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 674341125}
         m_TargetAssemblyTypeName: SceneTransitionScriptBasic, Assembly-CSharp
-        m_MethodName: AutoTransitionScene
+        m_MethodName: TransitionScene
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

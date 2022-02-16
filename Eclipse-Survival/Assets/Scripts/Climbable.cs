@@ -12,14 +12,25 @@ public class Climbable : MonoBehaviour
         numInBetween = 0;
     }
 
+    // Updated so Enemies can climb too
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Climbable")
         {
-            GameObject x = GameObject.FindGameObjectWithTag("Xander");
-            ClimbingMovement c = x.GetComponent<ClimbingMovement>();
-            if (c.OnClimbable) numInBetween++;
-            else c.OnClimbable = true;
+            GameObject go = this.transform.parent.gameObject;
+            if (go.tag == "Xander")
+            {
+                ClimbingMovement c = go.GetComponent<ClimbingMovement>();
+                if (c.OnClimbable) numInBetween++;
+                else c.OnClimbable = true;
+            }
+            else if (go.tag == "ClimbingEnemy")
+            {
+                ClimbingEnemy e = go.GetComponent<ClimbingEnemy>();
+                if (e.OnClimbable) numInBetween++;
+                else e.OnClimbable = true;
+            }
         }
     }
 
@@ -27,10 +38,19 @@ public class Climbable : MonoBehaviour
     {
         if (collision.gameObject.tag == "Climbable")
         {
-            GameObject x = GameObject.FindGameObjectWithTag("Xander");
-            ClimbingMovement c = x.GetComponent<ClimbingMovement>();
-            if(numInBetween != 0) numInBetween--;
-            else c.OnClimbable = false;
+            GameObject go = this.transform.parent.gameObject;
+            if (go.tag == "Xander")
+            {
+                ClimbingMovement c = go.GetComponent<ClimbingMovement>();
+                if (numInBetween != 0) numInBetween--;
+                else c.OnClimbable = false;
+            }
+            else if (go.tag == "ClimbingEnemy")
+            {
+                ClimbingEnemy e = go.GetComponent<ClimbingEnemy>();
+                if (numInBetween != 0) numInBetween--;
+                else e.OnClimbable = false;
+            }
         }
     }
 }

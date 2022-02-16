@@ -17,9 +17,6 @@ public class ItemScript : MonoBehaviour
         {
             Destroy(this.gameObject);
 
-            //Add the items determine value to the current health and hunger values
-        }
-
-        
+        }      
     }
 }

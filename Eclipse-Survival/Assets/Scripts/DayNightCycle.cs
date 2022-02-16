@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
+using static Constants;
+
 public class DayNightCycle : MonoBehaviour
 {
     public bool IsDaytime {get; set;}
+    public int Hour { get; set; }
 
     [Header("Set in Inspector")]
     public Light2D[] outdoorLights;
@@ -14,17 +17,19 @@ public class DayNightCycle : MonoBehaviour
 
     [Header("Set Dynamically")]   
     public float timeRemainingInRound;
+    public float timeRemainingInHour;
     public float lightIncrement;
     public float intensity;
     public float roundsElapsed = 0;
     private bool lightIncreasing;
+    private float inGameHour;
 
     // Constants
-    const float MAX_LIGHT_INTENSITY = 0.6f;
-    const float MIN_LIGHT_INTENSITY = 0.05f;
-    const float LIGHT_DECREASE_DURATION = 450f; // in seconds
-    const float LIGHT_INCREASE_DURATION = 450f; // in seconds
-    const float DAY_NIGHT_CUTOFF = 0.3f; // light intensity at which IsDaytime is toggled
+    //const float MAX_LIGHT_INTENSITY = 0.6f;
+    //const float MIN_LIGHT_INTENSITY = 0.05f;
+    //const float LIGHT_DECREASE_DURATION = 450f; // in seconds
+    //const float LIGHT_INCREASE_DURATION = 450f; // in seconds
+    //const float DAY_NIGHT_CUTOFF = 0.3f; // light intensity at which IsDaytime is toggled
 
     float timer1 = 1;
     float timer1TimeRemaining;
@@ -39,6 +44,7 @@ public class DayNightCycle : MonoBehaviour
     void Update()
     {
         timeRemainingInRound -= Time.deltaTime;
+        timeRemainingInHour -= Time.deltaTime;
         timer1TimeRemaining -= Time.deltaTime;
 
         if (timer1TimeRemaining <= 0f) // Do this code at determined increment (timer1) to conserve GPU
@@ -81,6 +87,13 @@ public class DayNightCycle : MonoBehaviour
                 IsDaytime = !IsDaytime;
             }
 
+            // Check for end of the hour
+            if (timeRemainingInHour <= 0)
+            {
+                timeRemainingInHour = inGameHour;
+                Hour++;
+            }
+
             // Reset Timer
             timer1TimeRemaining = timer1;
         }
@@ -91,13 +104,20 @@ public class DayNightCycle : MonoBehaviour
             roundsElapsed++;
             InitializeRound();
         }
+
     }
 
     private void InitializeRound()
     {
+        Hour = 0;
+
         lightIncreasing = startWithLightIncreasing;
         timeRemainingInRound = LIGHT_DECREASE_DURATION + LIGHT_INCREASE_DURATION;
+        inGameHour = timeRemainingInRound / 24;
+        timeRemainingInHour = inGameHour;
+
         intensity = startingBrightness;
+
         foreach (var light in outdoorLights)
         {
             light.intensity = intensity;

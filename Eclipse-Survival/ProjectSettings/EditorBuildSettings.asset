@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestScenes/Cameron/MockMenuScenes/Credits_Scene.unity
     guid: 89bbf5b6d1620fd42b568826e10405b5
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/TestScenes/Cameron/FirstPlayableRoomCameron.unity
     guid: bf2dcd1cf1cca474786785ac8d06276e
   - enabled: 0

@@ -391,7 +391,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 674341125}
         m_TargetAssemblyTypeName: SceneTransitionScriptBasic, Assembly-CSharp
-        m_MethodName: AutoTransitionScene
+        m_MethodName: TransitionScene
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -537,7 +537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2278418ed14be564b918393b3ce9fc69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0
+  delayBetweenAutoTransition: 0
 --- !u!114 &674341126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -656,12 +656,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 674341125}
         m_TargetAssemblyTypeName: SceneTransitionScriptBasic, Assembly-CSharp
-        m_MethodName: AutoTransitionScene
+        m_MethodName: TransitionScene
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -783,6 +783,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 879594766}
   m_CullTransparentMesh: 1
+--- !u!1 &894550112
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 894550114}
+  - component: {fileID: 894550113}
+  m_Layer: 0
+  m_Name: GamePlayManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &894550113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894550112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3ceb80466718514a88b36c5d426cbb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainRoom1: 0
+  mainRoom2: 0
+  spawnWaypoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  foodItems:
+  - {fileID: 3299003221421755294, guid: 77d0d7adc909f1b48ba1814c3532c9dc, type: 3}
+  - {fileID: 8485308149261589299, guid: 377624aeb0c62ba488c954a16dd58d0b, type: 3}
+  - {fileID: 1693678678833915597, guid: 5e3c6374962257243afb33cec1ddd771, type: 3}
+  - {fileID: 2971801047930242139, guid: 458c445f745fab247b94af27908c8119, type: 3}
+  - {fileID: 5925208071340994130, guid: 047caf87ed7dda444970b713af55ac66, type: 3}
+  itemSpawnChance: 0.5
+  maxItemSpawn: 3
+  currentNumberOfCycleSurvived: 0
+--- !u!4 &894550114
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894550112}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.5885158, y: 1.312513, z: -1.7038649}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &958811067
 GameObject:
   m_ObjectHideFlags: 0
@@ -1213,7 +1273,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 674341125}
         m_TargetAssemblyTypeName: SceneTransitionScriptBasic, Assembly-CSharp
-        m_MethodName: AutoTransitionScene
+        m_MethodName: TransitionScene
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
