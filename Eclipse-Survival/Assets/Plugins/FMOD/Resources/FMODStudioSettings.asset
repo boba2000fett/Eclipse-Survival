@@ -463,8 +463,8 @@ MonoBehaviour:
   SwitchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: ../../../FMOD Studio/Eclipse-Survival/Eclipse-Survival.fspro
-  sourceBankPath: ../../../FMOD Studio/Eclipse-Survival/Build
+  sourceProjectPath: Assets/FMODProject/Eclipse-Survival.fspro
+  sourceBankPath: Assets/FMODProject/Build
   SourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
