@@ -70,7 +70,7 @@ public class ClimbingMovement : MonoBehaviour
             if (climbing)
             {
                 climbing = false;
-                Physics2D.gravity = new Vector2(0, -gravity);
+                rb.gravityScale = 1f;
             }
         }
 
@@ -113,7 +113,7 @@ public class ClimbingMovement : MonoBehaviour
 
         if (climbing && !onClimbable)
         {
-            Physics2D.gravity = new Vector2(0, -gravity);
+            rb.gravityScale = 1f;
             climbing = false;
             onGround = false;
         }
@@ -143,7 +143,7 @@ public class ClimbingMovement : MonoBehaviour
             {
                 climbing = true;
                 onGround = true;
-                Physics2D.gravity = new Vector2(0, 0f);
+                rb.gravityScale = 0f;
                 facing = Facing.Up;
                 TurnXander();
             }
@@ -208,7 +208,22 @@ public class ClimbingMovement : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground")
         {
-            onGround = true;
+            if (collision.gameObject.transform.position.y - this.transform.position.y < 0.15f)
+            {
+                onGround = true;
+            }
+            else
+            {
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y - 0.25f);
+            }
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            if(!climbing && rb.velocity.y < -0.05f) onGround = false;
         }
     }
 
