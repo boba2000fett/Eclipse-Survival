@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cat : Enemy
+public class Cat : EnemyRoomRoaming
 {
+    static public Cat catSingleton;
+
     public enum PounceState
     {
         Prepare,
@@ -23,7 +25,29 @@ public class Cat : Enemy
     public PounceState pounceState = PounceState.NotPouncing;
     public float pouncePrepareTime;
     public float pounceStopTime;
-  
+
+    public override void Awake()
+    {
+        base.Awake();
+
+        #region Cat Singleton 
+        if (catSingleton == null)
+        {
+            //Set the GPM instance
+            catSingleton = this;
+        }
+        else if (catSingleton != this)
+        {
+            //If the reference has already been set and
+            //is not the right instance reference, Destroy the GameObject
+            Destroy(gameObject);
+        }
+
+        //Do not Destroy this gameobject when a new scene is loaded
+        DontDestroyOnLoad(gameObject);
+        #endregion
+    }
+
     public override void AlertMoveTowards()
     {
         if (!isPouncing)
@@ -94,6 +118,22 @@ public class Cat : Enemy
             }
         }           
     }
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "Xander":
+                //Here we will want to damage Xander
+                return;
+            case "Grandmother":
+                //If Cat Collides with Grandmother, it will chose a different path.
+                DetermineDestination();
+                return;
+        }
+    }
+   
 }
 
 #region Planning

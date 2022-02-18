@@ -11,9 +11,12 @@ public class Waypoint : MonoBehaviour
     public Waypoint nextNodeNorthExit;
     public Waypoint nextNodeWestExit;
     public Waypoint nextNodeEastExit;
+    [Header("This will only be used in the scene where the home is.")]
+    public Waypoint nextNodeHome;
     //public Waypoint nextNodeSouthExit;
 
     public bool isExitNode;
+    public bool isHomeNode = false;
     /*
     When arriving at node 1, the grandmother would then travel to either 2 or 4 (it would pick randomly)
     _______________

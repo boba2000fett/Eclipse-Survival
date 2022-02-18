@@ -27,6 +27,7 @@ public class Room : MonoBehaviour
     public Waypoint northExit;
     public Waypoint eastExit;
     public Waypoint westExit;
+    public Waypoint homeNode;
 
 
     [Header("Potentially Delete Later: Room")]

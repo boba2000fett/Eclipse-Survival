@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class EnemyRoomRoaming : Enemy
 {
+    static public EnemyRoomRoaming enemySingleton;
+
     public enum PathToExit
     {
         North,
@@ -26,10 +28,12 @@ public class EnemyRoomRoaming : Enemy
     public int seeCurrentRoomIndex;
     public float outsideRoomTimeInterval;
 
-    static public int currentRoomIndex;
-    static public Room[] roomList; //This variable is here because all of the Grandmother Objects will share this.
-    static public PathToExit pathToExit = PathToExit.North; //This will determine which direction the Grandmother should head in when traveling to the exit
-    static public string destinationSceneName;
+    //These are supposed to be Static
+    public int currentRoomIndex;
+    public Room[] roomList; //This variable is here because all of the Grandmother Objects will share this.
+    public PathToExit pathToExit = PathToExit.North; //This will determine which direction the Grandmother should head in when traveling to the exit
+    public string destinationSceneName;
+    //These are supposed to be Static
 
     [Header("Set Dynamically: Enemy Roaming")]
     //public int currentRoomSee; //Implement this later when doing adding in the Room change functionality
@@ -42,36 +46,50 @@ public class EnemyRoomRoaming : Enemy
     public bool isActive = false;
     [Tooltip("This determines the name of the destination scene that an Enemy is traveling to next when the Enemy is not in the current room. This will be used to determine if the enemy should be placed at one of the exits (The enemy is coming from a neighboring room to the current room), or placed at a Random position within the room (the player is enters a room where the Enemy is). \n Note: The main instance of this variable is static, so this variable is here so we can see the other one in the Inspector")]
     public string destinationSceneNameSee;
+    [Tooltip("This will be used to tell the Enemy to go back to it's home node when it is supposed to. \n" +
+        "It will only do this if it is in the final room of the cycle.")]
+    public bool goHome = false;
+    [Tooltip("This will indicate when the Enemy is at their current home node. Here, there will be a certain amout of time that" +
+        "passes until the enemy will get up again. \n After that time, the enemy will reset it's room sequence, and begin the sequence anew.")]
+    public bool atHome = false;
 
+    public float sleepTimerInterval = 5f;
+    public float sleepTimer = 0;
 
     public override void Awake()
     {
-        ////this.transform.position = go.transform.position;
-        //GameObject go = GameObject.Find("SouthExitNode");
-        //currentWaypointDestination = go.gameObject.GetComponent<Waypoint>();
+        #region Added Singleton Things
+        //if (enemySingleton == null)
+        //{
+        //    //Set the GPM instance
+        //    enemySingleton = this;
+        //}
+        //else if (enemySingleton != this)
+        //{
+        //    //If the reference has already been set and
+        //    //is not the right instance reference, Destroy the GameObject
+        //    Destroy(gameObject);
+        //}
 
-        roomList = roomListSet;
-        if (setRooms)
-        {
-            //roomList = roomListSet;
-            currentRoomIndex = currentRoomIndexSet;
-        }
+        ////Do not Destroy this gameobject when a new scene is loaded
+        //DontDestroyOnLoad(gameObject);
+        #endregion
 
-        CalculateIfInRoom();
-
-        if (isInRoom)
-        {
-            SetPositionComingBackIntoRoom();
-        }
-
-
+        RestartCycle();
         Debug.LogWarning("Found");
-       
     }
 
     public override void Update()
     {
+        
+
         CalculateIfInRoom();
+
+        if (atHome)
+        {
+            SleepTimer();
+            return;
+        }
 
         SeeStaticVariables();
 
@@ -83,7 +101,6 @@ public class EnemyRoomRoaming : Enemy
         {
             OutsideRoomMoving();
         }
-        
     }
 
     public void SeeStaticVariables()
@@ -103,7 +120,6 @@ public class EnemyRoomRoaming : Enemy
         }
 
         transform.position = Vector2.MoveTowards(transform.position, currentWaypointDestination.gameObject.transform.position, moveSpeed * Time.deltaTime);
-
     }
 
     public override void DetermineDestination()
@@ -112,18 +128,43 @@ public class EnemyRoomRoaming : Enemy
         if (waypoints.Length == 0)
             return;
 
+        if (goHome)
+        {
+            if (currentWaypointDestination.isHomeNode)
+            //This will be used when the Enemy must return to the Homde Node, and has reached it.
+            {
+                atHome = true;
+                //Here we would want to disable the collision and start the timer
+            }
+            else if (!currentWaypointDestination.isHomeNode)
+            //This will be used when the Enemy must return to it's home node (in it's home room), but still has to reach it
+            {
+                currentWaypointDestination = currentWaypointDestination.nextNodeHome;
+            }
+            if (currentWaypointDestination.isHomeNode)
+            {
+                GetComponent<BoxCollider2D>().enabled = false;
+                GetComponent<CircleCollider2D>().enabled = false;
+            }
+            return;
+        }
+        
         if (waypointCount >= requiredWaypointsCount && !currentWaypointDestination.isExitNode)
+        //This is used when the enemy has reached all of it's required waypoints, and must now go to the exit
         {
             //Here we want to travel to the proper exit
             DetermineExitPath();
             //currentWaypointDestination = currentWaypointDestination.nextNodeEastExit;
         }
         else if (waypointCount >= requiredWaypointsCount && currentWaypointDestination.isExitNode)
+        //This is used when the enemy has reached the exitNode and has traveled to all of the required waypoints. 
+        //Thus, this makes the enemy switch rooms
         {
             //You have reached the entrance node, so you would switch scenes here.
             SwitchRoom();
         }
-        else //You have not traveled to all of the required waypoints
+        else 
+        //This is when the enemy has not traveled to the required waypoints. 
         {
             nextNodeIndex = Random.Range(0, currentWaypointDestination.possibleTravelPoints.Length);
             currentWaypointDestination = currentWaypointDestination.possibleTravelPoints[nextNodeIndex];
@@ -159,7 +200,7 @@ public class EnemyRoomRoaming : Enemy
     }
 
     public void CalculateIfInRoom()
-    {
+    {       
         if (roomList[currentRoomIndex].sceneName == SceneManager.GetActiveScene().name)
         {
             if (!isActive)
@@ -174,6 +215,17 @@ public class EnemyRoomRoaming : Enemy
             isInRoom = false;
             this.transform.position = new Vector3(200, 200, 0);
             isActive = false;
+
+            if (goHome)
+            //This will automatically set the atHome variable true, so the Enemy will automatically be at home
+            {
+                atHome = true;
+            }
+        }
+
+        if (currentRoomIndex == roomList.Length - 1)
+        {
+            goHome = true;
         }
     }
 
@@ -184,6 +236,10 @@ public class EnemyRoomRoaming : Enemy
 
     public void OutsideRoomMoving()
     {
+        if (atHome || goHome)
+        {
+            return;
+        }
         outsideRoomTime += Time.deltaTime;
         destinationSceneName = roomList[currentRoomIndex + 1].sceneName;
 
@@ -230,6 +286,12 @@ public class EnemyRoomRoaming : Enemy
         Room room = GameObject.FindGameObjectWithTag("Room").GetComponent<Room>();
         this.waypoints = room.waypointsInRoom;
 
+        if (atHome || goHome)
+        {
+            transform.position = room.homeNode.transform.position;
+            return;
+        }
+
         if (destinationSceneName == SceneManager.GetActiveScene().name)
         {
             //Place at an Endpoint pertaining to the direction the Enemy is Traveling From
@@ -250,10 +312,11 @@ public class EnemyRoomRoaming : Enemy
 
             }
             transform.position = currentWaypointDestination.gameObject.transform.position;
-        }
+        }       
         else
         {
             //Place at a random waypoint
+            //Use room.waypointsInRoom? 
             int index = Random.Range(1, waypoints.Length);
 
             currentWaypointDestination = waypoints[index];
@@ -264,80 +327,39 @@ public class EnemyRoomRoaming : Enemy
         waypointCount = 0;
     }
 
+    public void AtHome()
+    {
+        /* Set timer for how long the Game Object should be disabled*/
+    }
+
+    public void SleepTimer()
+    {
+        
+        sleepTimer += Time.deltaTime;
+        if (sleepTimer >= sleepTimerInterval)
+        {
+            RestartCycle();
+        }
+    }
+    public void RestartCycle()
+    {
+        roomList = GameObject.Find("RoomManager").GetComponent<RoomManager>().RegenerateRoomList();
+        atHome = false;
+        goHome = false;
+        sleepTimer = 0;
+        currentRoomIndex = 0;
+        GetComponent<BoxCollider2D>().enabled = true;
+        GetComponent<CircleCollider2D>().enabled = true;
+    }
 }
 
 #region Planning
 /*
-Planning 
-Options for this code with the Grandma and Cat
--MAKE CAT AND GRANDMOTHER INHERIT FROM A DIFFERENT CLASS CALLED ENEMYROAMING, WHICH WILL INHERIT FROM ENEMY.
-    THEN, THE CAT AND GRANDMA CAN SHARE THAT SAME BEHAVIOR WITHOUT CLOGGING DOWN BASE ENEMY SCRIPT WITH THINGS THAT WOULD BE
-    OVERRIDEN WITH WOLFSPIDER AND HOUSE RAT
+______________ Planning ______________
+Now I want to implement the Randomization of rounds into the EnemyRoomRoaming class. Essentially I will make the object return back to a "Home" node whenever they are in their
+    Base room. For the Grandma, this will be her bed room. 
 
 
-
-Goal: Make Grandmother be able to switch between Scenes in a sequence. Then, the grandmother will go back
-to her room for a few in-game hours.
-Then, the grandmother will also be able to automatically switch to the GrandmotherWaypoints object in the scene.
-
-Make grandma visit a random number of nodes in the room, and then she will leave
--Make Waypoints have a script that has a simple list of possible waypoints to travel to. 
--Make a Waypoint on the door, which means that the Grandmother will be set at that position.
-
-Grandma requiredWaypoints = Random number between 0 and Number of waypoints in current room
-    (Do get that, find the game object with the name of GrandmotherWaypoints, and get the number of children)
-
-If Grandma reaches a waypoint
-    requiredWaypoints++;
-    if reached enough waypoints
-        travel to one of the random available nodes
-    else
-        then make way to exit (Depending on Room you are in)
-
--If Grandmother must travel to exit, then they will use the list from their currentWaypoint called pathToExit. 
-    This path will give the Grandmother the shortest path to the exit, this will need to be set manually in the inspector.    
-
-Movement Pattern/Pathfinding Update
-Update the Grandmothers Movement pattern to make it more randomized
-When arriving at node 1, the grandmother would then travel to either 2 or 4 (it would pick randomly)
-    _______12______
-    |1   2       6|
-    | XXX  4   7  |
-   13 XXX         11      
-    | XXX  9   0  |
-    |4   3       5|
-    =======10======
-
-Waypoint Script:
-GameObject[] possibleTravelPoints;
-GameObject[] pathToExit;
-
-*****Node 1 Example*****
-       :Node 1:
-possibleTravelPoints: Node 2 and Node 4
-pathToSouthExit: Node 4, Node 3, Node 10
-pathToNorthExit: Node 2, Node 12
-pathToEastExit: Node 2, Node 7, Node 11
-pathToWestExit: Node 13
-
-
-
-Next problem: The grandmother must be able to know which exit to travel to. 
-Figuring out rooms
-The roomTheGrandmother is in will be a static variable. 
-
-
-
-
-Grandmother sequence. 
-
-If (Grandma reaches end node)
-    NextRoom()
-
-NextRoom(): This will switch the Grandma to the next
-
-Next Thing To DO:
-Make Grandmother go to the Correct Waypoint when re-entering the room
 
  */
 #endregion

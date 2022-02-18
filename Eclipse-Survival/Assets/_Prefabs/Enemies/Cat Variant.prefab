@@ -63,6 +63,14 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 19aa277c0e016ae418f38df058108d44, type: 2}
+    - target: {fileID: 4033998086720353582, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
+      propertyPath: m_Size.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4033998086720353582, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
+      propertyPath: m_Size.y
+      value: 25
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4033998086720353583, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
@@ -101,6 +109,27 @@ MonoBehaviour:
   alertTime: 0
   currentWaypointDestination: {fileID: 0}
   direction: 0
+  roomListSet: []
+  seeRoomList: []
+  setRooms: 1
+  requiredWaypointsCount: 4
+  currentRoomIndexSet: 0
+  seeCurrentRoomIndex: 0
+  outsideRoomTimeInterval: 5
+  currentRoomIndex: 0
+  roomList: []
+  pathToExit: 0
+  destinationSceneName: 
+  waypointCount: 0
+  isInRoom: 0
+  outsideRoomTime: 0
+  pathToExitSee: 0
+  isActive: 0
+  destinationSceneNameSee: 
+  goHome: 0
+  atHome: 0
+  sleepTimerInterval: 5
+  sleepTimer: 0
   pouncePrepateTimeInverval: 0.5
   pounceStopTimeInverval: 0.5
   hoppingPoint: {x: 0, y: 0, z: 0}

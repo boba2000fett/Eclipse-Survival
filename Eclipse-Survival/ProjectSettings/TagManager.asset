@@ -11,6 +11,7 @@ TagManager:
   - Room
   - Ground
   - ClimbingEnemy
+  - Grandmother
   layers:
   - Default
   - TransparentFX
