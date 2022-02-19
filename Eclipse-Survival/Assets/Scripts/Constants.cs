@@ -4,12 +4,21 @@ using UnityEngine;
 
 public class Constants : MonoBehaviour
 {
+    // Xander Constants
+    public const float WALK_SPEED = 90f;
+    public const float RUN_SPEED = 250f;
+
+    // Stamina
+    public const float STARTING_STAMINA = 100f;
+    public const float STAMINA_USE_INCREMENT = 0.5f;
+    public const float STAMINA_RECHARGE_INCREMENT = 0.1f;
+    public const float STAMINA_COOLDOWN_PERIOD = 3f;
 
     //Constant Values for the Day/Night light cycle script
     public const float MAX_LIGHT_INTENSITY = 0.9f;
     public const float MIN_LIGHT_INTENSITY = 0.05f;
-    public const float LIGHT_DECREASE_DURATION = 45f; // in seconds
-    public const float LIGHT_INCREASE_DURATION = 45f; // in seconds
+    public const float LIGHT_DECREASE_DURATION = 450f; // in seconds
+    public const float LIGHT_INCREASE_DURATION = 450f; // in seconds
     public const float DAY_NIGHT_CUTOFF = 0.3f; // light intensity at which IsDaytime is toggled
 
     //Constant Int Value for the Scene Index Value

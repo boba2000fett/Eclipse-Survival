@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
+using static Constants;
 
 public enum Facing
 {
@@ -10,48 +13,78 @@ public enum Facing
     Right
 }
 
+public enum ActionState
+{
+    Idle,
+    Walking,
+    Running,
+    Scratching
+}
+
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Set in Inspector")]
-    public float walkSpeed;
-    public float runSpeed;
+    [Header("Set in Inspector")]    
     public float idleDetectionRadius;
     public float walkingDetectionRadius;
     public float runningDetectionRadius;
     public float scratchingDetectionRadius;
+    public GameObject staminaBar;
 
     [Header("Set Dynamically")]
     public Facing facing;
     private Rigidbody2D rb;
     private float moveSpeed;
     CircleCollider2D detectionCollider;
+    public float stamina;
+    public ActionState state;
+    public bool staminaIsInCooldownPeriod;
+    private float timeLeftInStaminaCoolDown;
     
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         facing = Facing.Left;
         detectionCollider = gameObject.GetComponent<CircleCollider2D>();
+        stamina = STARTING_STAMINA;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         rb.velocity = Vector2.zero;
         bool dirSwitch = false;
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && stamina > 0 && state != ActionState.Idle && state != ActionState.Scratching)
         {
-            moveSpeed = runSpeed;
+            moveSpeed = RUN_SPEED;
             detectionCollider.radius = runningDetectionRadius;
+
+            state = ActionState.Running;
+                      
         }
         else
         {
-            moveSpeed = walkSpeed;
+            moveSpeed = WALK_SPEED;
             detectionCollider.radius = walkingDetectionRadius;
+            if (stamina < 100)
+            {
+                stamina += STAMINA_RECHARGE_INCREMENT;
+            }
         }
+        
 
-        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) && state != ActionState.Scratching)
         {
+            if (Input.GetKey(KeyCode.Space) && !staminaIsInCooldownPeriod)
+            {
+                moveSpeed = RUN_SPEED;
+                state = ActionState.Running;
+            }
+            else
+            {
+                moveSpeed = WALK_SPEED;
+                state = ActionState.Walking;
+            }
             rb.velocity = new Vector2(0, -moveSpeed * Time.deltaTime);
             if (facing != Facing.Down && dirSwitch == false)
             {
@@ -60,8 +93,18 @@ public class PlayerMovement : MonoBehaviour
                 dirSwitch = true;
             }
         }
-        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) && state != ActionState.Scratching)
         {
+            if (Input.GetKey(KeyCode.Space) && !staminaIsInCooldownPeriod)
+            {
+                moveSpeed = RUN_SPEED;
+                state = ActionState.Running;
+            }
+            else
+            {
+                moveSpeed = WALK_SPEED;
+                state = ActionState.Walking;
+            }
             rb.velocity = new Vector2(moveSpeed * Time.deltaTime, 0);
             if (facing != Facing.Right && dirSwitch == false)
             {
@@ -70,8 +113,18 @@ public class PlayerMovement : MonoBehaviour
                 dirSwitch = true;
             }
         }
-        else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+        else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) && state != ActionState.Scratching)
         {
+            if (Input.GetKey(KeyCode.Space) && !staminaIsInCooldownPeriod)
+            {
+                moveSpeed = RUN_SPEED;
+                state = ActionState.Running;
+            }
+            else
+            {
+                moveSpeed = WALK_SPEED;
+                state = ActionState.Walking;
+            }
             rb.velocity = new Vector2(0, moveSpeed * Time.deltaTime);
             if (facing != Facing.Up && dirSwitch == false)
             {
@@ -80,8 +133,18 @@ public class PlayerMovement : MonoBehaviour
                 dirSwitch = true;
             }
         }
-        else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) && state != ActionState.Scratching)
         {
+            if (Input.GetKey(KeyCode.Space) && !staminaIsInCooldownPeriod)
+            {
+                moveSpeed = RUN_SPEED;
+                state = ActionState.Running;
+            }
+            else
+            {
+                moveSpeed = WALK_SPEED;
+                state = ActionState.Walking;
+            }
             rb.velocity = new Vector2(-moveSpeed * Time.deltaTime, 0);
             if (facing != Facing.Left && dirSwitch == false)
             {
@@ -90,14 +153,55 @@ public class PlayerMovement : MonoBehaviour
                 dirSwitch = true;
             }
         }
-        else if (Input.GetKey(KeyCode.V)) // scratching
+        else if (Input.GetKey(KeyCode.V))
         {
-            detectionCollider.radius = scratchingDetectionRadius;
+            state = ActionState.Scratching;
         }
         else
         {
-            // Not moving at all
+            state = ActionState.Idle;
+        }
+
+        // Update stamina
+        if (state == ActionState.Running && !staminaIsInCooldownPeriod)
+        {
+            stamina -= STAMINA_USE_INCREMENT;
+            if (stamina <= 0)
+            {
+                stamina = 0;
+
+                // Start stamina cool down
+                staminaIsInCooldownPeriod = true;
+                timeLeftInStaminaCoolDown = STAMINA_COOLDOWN_PERIOD;
+            }
+        }
+        else if (staminaIsInCooldownPeriod)
+        {
+            timeLeftInStaminaCoolDown -= Time.deltaTime;
+            if (timeLeftInStaminaCoolDown <= 0)
+            {
+                staminaIsInCooldownPeriod = false;
+            }
+            stamina += STAMINA_RECHARGE_INCREMENT;
+        }
+        staminaBar.GetComponent<Slider>().value = stamina / 100f;
+
+        // Set detection radius
+        if (state == ActionState.Idle)
+        {
             detectionCollider.radius = idleDetectionRadius;
+        }
+        else if (state == ActionState.Walking)
+        {
+            detectionCollider.radius = walkingDetectionRadius;
+        }
+        else if (state == ActionState.Running)
+        {
+            detectionCollider.radius = runningDetectionRadius;
+        }
+        else if (state == ActionState.Scratching)
+        {
+            detectionCollider.radius = scratchingDetectionRadius;
         }
     }
 
