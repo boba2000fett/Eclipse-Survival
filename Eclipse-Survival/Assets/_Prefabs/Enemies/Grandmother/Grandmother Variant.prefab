@@ -186,11 +186,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353579, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.92
+      value: 2.54
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353579, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.13
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353579, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -226,7 +226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353580, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_Name
-      value: Grandmother Variant
+      value: Grandmother
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353580, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_IsActive
@@ -236,6 +236,14 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 752ed62e06fa2c84eb5dc0120af45ad0, type: 2}
+    - target: {fileID: 4033998086720353582, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
+      propertyPath: m_Size.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4033998086720353582, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
+      propertyPath: m_Size.y
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353583, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
@@ -295,19 +303,32 @@ MonoBehaviour:
   alertTime: 0
   currentWaypointDestination: {fileID: 0}
   direction: 0
-  roomListSet: []
+  roomListSet:
+  - {fileID: 4049251928940906405, guid: d8ec9fa8cbc0ee74dae314342b252206, type: 3}
+  - {fileID: 4510574673565081041, guid: 3bc92173e4713b74c9300fb67e7d0d37, type: 3}
+  - {fileID: 4510574673565081041, guid: 6d917aebefc1b4946a641a8d33f3aa2c, type: 3}
+  - {fileID: 4510574673565081041, guid: 190084bfa4491e6438beb851eab59923, type: 3}
+  - {fileID: 4049251928940906405, guid: d8ec9fa8cbc0ee74dae314342b252206, type: 3}
   seeRoomList: []
-  setRooms: 1
-  requiredWaypointsCount: 4
+  setRooms: 0
+  requiredWaypointsCount: 1
   currentRoomIndexSet: 0
   seeCurrentRoomIndex: 0
-  outsideRoomTimeInterval: 0
+  outsideRoomTimeInterval: 7.79
+  currentRoomIndex: 0
+  roomList: []
+  pathToExit: 0
+  destinationSceneName: 
   waypointCount: 0
   isInRoom: 0
   outsideRoomTime: 0
   pathToExitSee: 0
-  isActive: 0
+  isActive: 1
   destinationSceneNameSee: 
+  goHome: 0
+  atHome: 0
+  sleepTimerInterval: 7.07
+  sleepTimer: 0
   hittingDuration: 0.5
   fryingPanStrength: 0
   fryingPan: {fileID: 0}

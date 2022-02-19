@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Grandmother : EnemyRoomRoaming
 {
+    static public Grandmother grandmaSingleton;
+
     [Header("Set in Inspector: Grandmother")]
     public float hittingDuration = 0.5f;
     public float fryingPanStrength;    
@@ -20,15 +22,28 @@ public class Grandmother : EnemyRoomRoaming
     [HideInInspector] public Vector2 standardPositionFryingPan = new Vector2(0, 0);
 
 
-    // Start is called before the first frame update
-    //public override void Start()
-    //{
-    //    base.Start();
-    //}
-
     public override void Awake()
     {
         base.Awake();
+
+        #region Grandma Singleton 
+        if (grandmaSingleton == null)
+        {
+            //Set the GPM instance
+            grandmaSingleton = this;
+        }
+        else if (grandmaSingleton != this)
+        {
+            //If the reference has already been set and
+            //is not the right instance reference, Destroy the GameObject
+            Destroy(gameObject);
+        }
+
+        //Do not Destroy this gameobject when a new scene is loaded
+        DontDestroyOnLoad(gameObject);
+        #endregion
+
+        #region Grandmother Awake
         fryingPan = this.gameObject.transform.GetChild(0).gameObject;
         fryingPan.transform.localPosition = standardPositionFryingPan;
         fryingPan.SetActive(false);        
@@ -37,6 +52,7 @@ public class Grandmother : EnemyRoomRoaming
 
         isHitting = false;
         hittingTime = 0f;
+        #endregion
     }
 
     public override void Update()
@@ -72,13 +88,13 @@ public class Grandmother : EnemyRoomRoaming
         }        
     }
 
+    #region Frying Pan Methods
     public void StrikeFryingPan()
     {
         UpdateFryingPanPosition();
         fryingPan.SetActive(true);
         isHitting = true;
     }
-
 
     public void UpdateFryingPanPosition()
     {
@@ -103,5 +119,5 @@ public class Grandmother : EnemyRoomRoaming
             fryingPan.SetActive(false);
         }
     }
-
+    #endregion
 }
