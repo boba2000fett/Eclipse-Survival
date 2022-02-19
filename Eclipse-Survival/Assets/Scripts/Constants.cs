@@ -7,6 +7,9 @@ public class Constants : MonoBehaviour
     // Xander Constants
     public const float WALK_SPEED = 90f;
     public const float RUN_SPEED = 250f;
+    public const int STARTING_HUNGER = 100;
+    public const int STARTING_HEALTH = 10;
+    public const float HUNGER_DECREMENT_INTERVAL = 5f;
 
     // Stamina
     public const float STARTING_STAMINA = 100f;

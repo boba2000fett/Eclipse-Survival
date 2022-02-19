@@ -6,7 +6,7 @@ public class ItemScript : MonoBehaviour
 {
     [Header("Set in Inspector")]
     //variable that will be used for affecting the player health and hunger
-    public float healthRestore;
+    public int healthRestore;
     public int hungerRestore;
 
     
