@@ -8,7 +8,7 @@ public class Grandmother : EnemyRoomRoaming
 
     [Header("Set in Inspector: Grandmother")]
     public float hittingDuration = 0.5f;
-    public float fryingPanStrength;    
+    public int fryingPanStrength;    
 
     [Header("Set Dynamically: Grandmother")]
     public GameObject fryingPan;

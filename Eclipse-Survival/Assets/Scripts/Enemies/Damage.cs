@@ -5,7 +5,7 @@ using UnityEngine;
 public class Damage : MonoBehaviour
 {
     [Header("Set in Inspector")]
-    public float strength;
+    public int strength;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
