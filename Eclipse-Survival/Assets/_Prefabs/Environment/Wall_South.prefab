@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7065376279371274622}
   - component: {fileID: 2812132532478352945}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: Wall_South
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -68,7 +68,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -387685721
+  m_SortingLayerID: -1313248463
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
