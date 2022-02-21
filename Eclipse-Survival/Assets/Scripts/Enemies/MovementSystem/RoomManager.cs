@@ -46,10 +46,10 @@ public class RoomManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            generatedRoomTest = RegenerateRoomList();
-        }
+        //if (Input.GetKeyDown(KeyCode.U))
+        //{
+        //    generatedRoomTest = RegenerateRoomList();
+        //}
     }
 
     public Room[] RegenerateRoomList()

@@ -129,7 +129,10 @@ public class Cat : EnemyRoomRoaming
                 return;
             case "Grandmother":
                 //If Cat Collides with Grandmother, it will chose a different path.
-                DetermineDestination();
+                if (!currentWaypointDestination.isExitNode)
+                {
+                    DetermineDestination();
+                }
                 return;
         }
     }

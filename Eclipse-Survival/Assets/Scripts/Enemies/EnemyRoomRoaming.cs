@@ -53,6 +53,10 @@ public class EnemyRoomRoaming : Enemy
         "passes until the enemy will get up again. \n After that time, the enemy will reset it's room sequence, and begin the sequence anew.")]
     public bool atHome = false;
 
+    public bool resetCollision = false;
+    public float resetCollisionTimer = 0;
+    public float resetCollisionTimerInterval = 2;
+
     public float sleepTimerInterval = 5f;
     public float sleepTimer = 0;
 
@@ -81,7 +85,10 @@ public class EnemyRoomRoaming : Enemy
 
     public override void Update()
     {
-        
+        if (resetCollision)
+        {
+            ResetCollision();
+        }
 
         CalculateIfInRoom();
 
@@ -100,6 +107,18 @@ public class EnemyRoomRoaming : Enemy
         else
         {
             OutsideRoomMoving();
+        }
+    }
+
+    public void ResetCollision()
+    {
+        resetCollisionTimer += Time.deltaTime;
+
+        if (resetCollisionTimer >= resetCollisionTimerInterval)
+        {
+            resetCollision = false;
+            GetComponent<BoxCollider2D>().enabled = true;
+            GetComponent<CircleCollider2D>().enabled = true;
         }
     }
 
@@ -226,6 +245,7 @@ public class EnemyRoomRoaming : Enemy
         if (currentRoomIndex == roomList.Length - 1)
         {
             goHome = true;
+            //atHome = true;
         }
     }
 
@@ -289,6 +309,7 @@ public class EnemyRoomRoaming : Enemy
         if (atHome || goHome)
         {
             transform.position = room.homeNode.transform.position;
+            currentRoomIndex = 0;
             return;
         }
 
@@ -348,8 +369,7 @@ public class EnemyRoomRoaming : Enemy
         goHome = false;
         sleepTimer = 0;
         currentRoomIndex = 0;
-        GetComponent<BoxCollider2D>().enabled = true;
-        GetComponent<CircleCollider2D>().enabled = true;
+        //resetCollision = true;
     }
 }
 

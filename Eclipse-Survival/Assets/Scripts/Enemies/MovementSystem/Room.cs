@@ -42,24 +42,47 @@ public class Room : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (SceneManager.GetActiveScene().name == "Trent")
+            if (SceneManager.GetActiveScene().name != "Alex")
             {
-                SceneManager.LoadScene("Trent2");
-            }
-            else if (SceneManager.GetActiveScene().name == "Trent2")
+                SceneManager.LoadScene("Alex");
+            }           
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if (SceneManager.GetActiveScene().name != "Alex2")
             {
-                SceneManager.LoadScene("Trent3");
-            }
-            else if (SceneManager.GetActiveScene().name == "Trent3")
-            {
-                SceneManager.LoadScene("Trent4");
-            }
-            else if (SceneManager.GetActiveScene().name == "Trent4")
-            {
-                SceneManager.LoadScene("Trent");
+                SceneManager.LoadScene("Alex2");
             }
         }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if (SceneManager.GetActiveScene().name != "Alex3")
+            {
+                SceneManager.LoadScene("Alex3");
+            }
+        }
+
+
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    if (SceneManager.GetActiveScene().name == "Trent")
+        //    {
+        //        SceneManager.LoadScene("Trent2");
+        //    }
+        //    else if (SceneManager.GetActiveScene().name == "Trent2")
+        //    {
+        //        SceneManager.LoadScene("Trent3");
+        //    }
+        //    else if (SceneManager.GetActiveScene().name == "Trent3")
+        //    {
+        //        SceneManager.LoadScene("Trent4");
+        //    }
+        //    else if (SceneManager.GetActiveScene().name == "Trent4")
+        //    {
+        //        SceneManager.LoadScene("Trent");
+        //    }
+        //}
     }
 }
