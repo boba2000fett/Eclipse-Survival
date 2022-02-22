@@ -36,6 +36,10 @@ public class ClimbingMovement : MonoBehaviour
     bool climbMode;
     bool onClimbable;
     bool climbing;
+    bool slowedDown;
+    float slowdownTime;
+    float slowTimer;
+    float slowdownAmt;
     
     // Ground detection & Jump cooldown variables
     bool onGround;
@@ -59,8 +63,14 @@ public class ClimbingMovement : MonoBehaviour
         Physics2D.gravity = new Vector2(0, -gravity);
     }
 
-    void Update()
+    void FixedUpdate()
     {
+        // Debug Key
+        //if (Input.GetKeyDown(KeyCode.G))
+        //{
+        //    AIPathfinding.GenerateNodesForLevel();
+        //}
+
         if (Input.GetKey(KeyCode.Space) && onGround && canJump)
         {
             rb.AddForce(new Vector2(0f, jumpPower));
@@ -105,6 +115,21 @@ public class ClimbingMovement : MonoBehaviour
             moveSpeed = walkSpeed;
             if(canJump) detectionCollider.radius = walkRadius;
         }
+
+        if (slowedDown)
+        {
+            slowTimer += Time.deltaTime;
+            if (slowTimer >= slowdownTime)
+            {
+                slowedDown = false;
+                slowTimer = 0f;
+            }
+            else
+            {
+                moveSpeed *= slowdownAmt;
+            }
+        }
+
 
         // NOTE:
         // Climbing on climbable background enviroments was assumed
@@ -173,6 +198,14 @@ public class ClimbingMovement : MonoBehaviour
 
         rb.velocity = pVel;
         
+    }
+
+    public void SlowdownXander(float slowDuration, float slowEffect)
+    {
+        slowdownTime = slowDuration;
+        slowdownAmt = slowEffect;
+        slowedDown = true;
+        slowTimer = 0f;
     }
 
     /// <summary>
