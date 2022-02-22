@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ClimbingMovement : MonoBehaviour
 {
@@ -12,7 +13,8 @@ public class ClimbingMovement : MonoBehaviour
     // May add different variables for walk/run for climbing areas 
     public float walkSpeed;
     public float runSpeed;
-    public float climbSpeed;
+    public float climbWalkSpeed;
+    public float climbRunSpeed;
 
     // Added variables for detection radius & jump height/power
     public float defaultRadius;
@@ -25,11 +27,13 @@ public class ClimbingMovement : MonoBehaviour
 
     // For distinguishing circle colliders
     public GameObject detectCircle;
+    public GameObject staminaBar;
 
     [Header("Set Dynamically")]
     public Facing facing;
     private Rigidbody2D rb;
-    private float moveSpeed; // Remove and replace with run detection (To do for code review)
+    private float moveSpeed;
+    private float climbSpeed;
     CircleCollider2D detectionCollider;
     // Collider for detecting ground/Jump
     CircleCollider2D collisionCollider;
@@ -40,7 +44,10 @@ public class ClimbingMovement : MonoBehaviour
     float slowdownTime;
     float slowTimer;
     float slowdownAmt;
-    
+    public float stamina;
+    public bool staminaCooldown;
+    public float staminaTimer;
+
     // Ground detection & Jump cooldown variables
     bool onGround;
     bool canJump = true;
@@ -58,6 +65,8 @@ public class ClimbingMovement : MonoBehaviour
 
         detectionCollider = detectCircle.GetComponent<CircleCollider2D>();
         detectionCollider.radius = defaultRadius;
+
+        stamina = Constants.STARTING_STAMINA;
 
         // Set gravity here in inspector temporarily (Easier than going into settings every single time)
         Physics2D.gravity = new Vector2(0, -gravity);
@@ -102,19 +111,51 @@ public class ClimbingMovement : MonoBehaviour
         if(climbing) pVel.y = 0f;
 
         // Adding running
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && stamina > 0 && !staminaCooldown)
         {
+            stamina -= Constants.STAMINA_USE_INCREMENT;
+            if (stamina <= 0)
+            {
+                stamina = 0;
+
+                // Start stamina cool down
+                staminaCooldown = true;
+                staminaTimer = 0;
+            }
             if (moveSpeed != runSpeed)
             {
                 moveSpeed = runSpeed;
                 if (canJump) detectionCollider.radius = runRadius;
             }
+            if (climbSpeed != climbRunSpeed)
+            {
+                climbSpeed = climbRunSpeed;
+            }
         }
         else if (moveSpeed != walkSpeed)
         {
             moveSpeed = walkSpeed;
-            if(canJump) detectionCollider.radius = walkRadius;
+            climbSpeed = climbWalkSpeed;
+            if (canJump) detectionCollider.radius = walkRadius;
         }
+        if (moveSpeed == walkSpeed)
+        {
+            if (stamina < 100 && !staminaCooldown)
+            {
+                stamina += Constants.STAMINA_RECHARGE_INCREMENT;
+            }
+        }
+
+        if (staminaCooldown)
+        {
+            staminaTimer += Time.deltaTime;
+            if (staminaTimer >= Constants.STAMINA_COOLDOWN_PERIOD)
+            {
+                staminaCooldown = false;
+            }
+            stamina += Constants.STAMINA_RECHARGE_INCREMENT;
+        }
+        staminaBar.GetComponent<Slider>().value = stamina / 100f;
 
         if (slowedDown)
         {

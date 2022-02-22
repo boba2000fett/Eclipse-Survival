@@ -42,6 +42,10 @@ public class Constants : MonoBehaviour
     public const int ALPHA_CAMERON_TEST_SCENE = 5;
 
     //Constant Values for the game object variables
+    public const float AI_CONNECTION_DISTANCE = 2.3f;
+
+
+
     //Constants For the max number of items that can spawn in the different rooms
 
 

@@ -33,7 +33,7 @@ public class AIPathfinding
                     Vector2 pos1 = groundNodes[i].position;
                     Vector2 pos2 = groundNodes[c].position;
 
-                    if (Vector2.Distance(pos1, pos2) < 2.3f)
+                    if (Vector2.Distance(pos1, pos2) < Constants.AI_CONNECTION_DISTANCE)
                     {
                         // Check if it's directly above or below, cannot go through ground
                         float angle = Vector2.SignedAngle(pos2 - pos1, Vector2.right);
@@ -90,7 +90,7 @@ public class AIPathfinding
                     Vector2 pos1 = groundNodes[i].position;
                     Vector2 pos2 = climbableNodes[c].position;
 
-                    if (Vector2.Distance(pos1, pos2) < 2.3f)
+                    if (Vector2.Distance(pos1, pos2) < Constants.AI_CONNECTION_DISTANCE)
                     {
                         // Check if it's directly below, cannot go through ground
                         float angle = Vector2.SignedAngle(pos2 - pos1, Vector2.right);
@@ -155,7 +155,7 @@ public class AIPathfinding
                     Vector2 pos1 = climbableNodes[i].position;
                     Vector2 pos2 = climbableNodes[c].position;
 
-                    if (Vector2.Distance(pos1, pos2) < 2.3f)
+                    if (Vector2.Distance(pos1, pos2) < Constants.AI_CONNECTION_DISTANCE)
                     {
                         float angle = Vector2.SignedAngle(pos2 - pos1, Vector2.right);
 
