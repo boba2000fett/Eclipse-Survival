@@ -185,6 +185,8 @@ public class EnemyRoomRoaming : Enemy
         else 
         //This is when the enemy has not traveled to the required waypoints. 
         {
+            
+            //Possilby add in fix here ()
             nextNodeIndex = Random.Range(0, currentWaypointDestination.possibleTravelPoints.Length);
             currentWaypointDestination = currentWaypointDestination.possibleTravelPoints[nextNodeIndex];
             waypointCount++;
@@ -369,7 +371,8 @@ public class EnemyRoomRoaming : Enemy
         goHome = false;
         sleepTimer = 0;
         currentRoomIndex = 0;
-        //resetCollision = true;
+        resetCollision = true;
+        currentWaypointDestination = FindObjectOfType<Room>().homeNode;
     }
 }
 

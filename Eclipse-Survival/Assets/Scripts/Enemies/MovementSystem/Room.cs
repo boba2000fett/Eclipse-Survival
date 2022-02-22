@@ -44,25 +44,19 @@ public class Room : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (SceneManager.GetActiveScene().name != "Alex")
+            if (SceneManager.GetActiveScene().name != "Bedroom1")
             {
-                SceneManager.LoadScene("Alex");
+                SceneManager.LoadScene("Bedroom1");
             }           
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (SceneManager.GetActiveScene().name != "Alex2")
+            if (SceneManager.GetActiveScene().name != "Kitchen")
             {
-                SceneManager.LoadScene("Alex2");
+                SceneManager.LoadScene("Kitchen");
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            if (SceneManager.GetActiveScene().name != "Alex3")
-            {
-                SceneManager.LoadScene("Alex3");
-            }
-        }
+        
 
 
         //if (Input.GetKeyDown(KeyCode.P))
