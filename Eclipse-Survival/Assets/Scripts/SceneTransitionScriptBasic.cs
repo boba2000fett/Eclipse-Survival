@@ -92,6 +92,9 @@ public class SceneTransitionScriptBasic : MonoBehaviour
             case Constants.CREDIT_SCENE:
                 SceneManager.LoadScene(Constants.MAIN_MENU_SCENE);
                 break;
+            case 15:
+                SceneManager.LoadScene(Constants.MAIN_MENU_SCENE);
+                break;
         }
 
         

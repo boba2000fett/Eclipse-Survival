@@ -27,11 +27,11 @@ public class PerspectiveSceneChange : MonoBehaviour
             //A switch case for identifying the current room name, which is set in the inspector
             switch (temp.roomName)
             {
-                case "mainRoom1":
+                case "Bedroom":
 
                     GameObject[] tempItemHolder = GameObject.FindGameObjectsWithTag("Item");
-                    GamePlayManager.GPM.itemsLeftInMainRoom1Type = new string[tempItemHolder.Length];
-                    GamePlayManager.GPM.itemsLeftInMainRoom1Location = new Vector2[tempItemHolder.Length];
+                    GamePlayManager.GPM.itemsLeftInBedRoomType = new string[tempItemHolder.Length];
+                    GamePlayManager.GPM.itemsLeftInBedRoomLocation = new Vector2[tempItemHolder.Length];
 
 
                     foreach (GameObject item in tempItemHolder)
@@ -42,19 +42,19 @@ public class PerspectiveSceneChange : MonoBehaviour
 
                         tempArray = nameOfItem.Split(char.Parse("("));
 
-                        GamePlayManager.GPM.itemsLeftInMainRoom1Type[i] = tempArray[0];
-                        GamePlayManager.GPM.itemsLeftInMainRoom1Location[i] = item.gameObject.transform.position;
+                        GamePlayManager.GPM.itemsLeftInBedRoomType[i] = tempArray[0];
+                        GamePlayManager.GPM.itemsLeftInBedRoomLocation[i] = item.gameObject.transform.position;
 
                         i++;
                     }
 
                     break;
 
-                case "mainRoom2":
+                case "Kitchen":
                     tempItemHolder = GameObject.FindGameObjectsWithTag("Item");
 
-                    GamePlayManager.GPM.itemsLeftInMainRoom2Type = new string[tempItemHolder.Length];
-                    GamePlayManager.GPM.itemsLeftInMainRoom2Location = new Vector2[tempItemHolder.Length];
+                    GamePlayManager.GPM.itemsLeftInKitchenRoomType = new string[tempItemHolder.Length];
+                    GamePlayManager.GPM.itemsLeftInKitchenRoomLocation = new Vector2[tempItemHolder.Length];
 
                     foreach (GameObject item in tempItemHolder)
                     {
@@ -64,8 +64,8 @@ public class PerspectiveSceneChange : MonoBehaviour
 
                         tempArray = nameOfItem.Split(char.Parse("("));
 
-                        GamePlayManager.GPM.itemsLeftInMainRoom2Type[i] = tempArray[0];
-                        GamePlayManager.GPM.itemsLeftInMainRoom2Location[i] = item.gameObject.transform.position;
+                        GamePlayManager.GPM.itemsLeftInKitchenRoomType[i] = tempArray[0];
+                        GamePlayManager.GPM.itemsLeftInKitchenRoomLocation[i] = item.gameObject.transform.position;
 
                         i++;
                     }

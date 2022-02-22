@@ -9,8 +9,8 @@ public class GamePlayManager : MonoBehaviour
     static public GamePlayManager GPM; //Singleton of the GamePlayManager
 
     //Static Variables being used to track if the player enter a room that has not been entered during the round
-    public bool mainRoom1Visited;
-    public bool mainRoom2Visited;
+    public bool BedRoomVisited;
+    public bool KitchenRoomVisited;
 
     [Header("Set in Inspector")]
     public int maxItemSpawn; //The Maximum number of items to spawn in a room or a cycle
@@ -19,10 +19,10 @@ public class GamePlayManager : MonoBehaviour
     public int currentNumberOfCycleSurvived;
 
     //These array variables are used to store the remaining item name and vector values, and are set dynamically when the perspective scene transition occurs
-    public string[] itemsLeftInMainRoom1Type;
-    public Vector2[] itemsLeftInMainRoom1Location;
-    public string[] itemsLeftInMainRoom2Type;
-    public Vector2[] itemsLeftInMainRoom2Location;
+    public string[] itemsLeftInBedRoomType;
+    public Vector2[] itemsLeftInBedRoomLocation;
+    public string[] itemsLeftInKitchenRoomType;
+    public Vector2[] itemsLeftInKitchenRoomLocation;
     //Dictionary<string, PersistingGameObject> persistingItems;
 
     // Scene Transition Variables
@@ -56,8 +56,8 @@ public class GamePlayManager : MonoBehaviour
     //This method will be called from the scene transition when the player clicks start new game
     public void NewGame()
     {
-        mainRoom1Visited = false;
-        mainRoom2Visited = false;
+        BedRoomVisited = false;
+        KitchenRoomVisited = false;
         currentNumberOfCycleSurvived = 0;
         
 
@@ -72,8 +72,8 @@ public class GamePlayManager : MonoBehaviour
             currentNumberOfCycleSurvived = roundsPast;
         }
 
-        mainRoom1Visited = false;
-        mainRoom2Visited = false;
+        BedRoomVisited = false;
+        KitchenRoomVisited = false;
     }
 
     public void EndGame()

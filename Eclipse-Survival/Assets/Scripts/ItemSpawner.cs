@@ -23,25 +23,25 @@ public class ItemSpawner : MonoBehaviour
         //A switch case for identifying the current room name, which is set in the inspector
         switch (roomName)
         {
-            case "mainRoom1":
+            case "Bedroom":
                 
                 //If the room hasn't been visited yet, the room will generate new random items and not the old stored item info
-                if (!GamePlayManager.GPM.mainRoom1Visited)
+                if (!GamePlayManager.GPM.BedRoomVisited)
                 {
                     SpawnItems();
-                    GamePlayManager.GPM.mainRoom1Visited = true;
+                    GamePlayManager.GPM.BedRoomVisited = true;
                 }
                 else
                 {
                     //Verify that both the items left lists of name and positions are not length of 0
-                    if (GamePlayManager.GPM.itemsLeftInMainRoom1Type.Length != 0 &&
-                        GamePlayManager.GPM.itemsLeftInMainRoom1Location.Length != 0)
+                    if (GamePlayManager.GPM.itemsLeftInBedRoomType.Length != 0 &&
+                        GamePlayManager.GPM.itemsLeftInBedRoomLocation.Length != 0)
                     {
                         //Go through each of the array value in the room list
-                        for (int i = 0; i < GamePlayManager.GPM.itemsLeftInMainRoom1Type.Length; i++)
+                        for (int i = 0; i < GamePlayManager.GPM.itemsLeftInBedRoomType.Length; i++)
                         {
                             //Switch statement for identifying the item name, which then sets the index value of the list of items
-                            switch (GamePlayManager.GPM.itemsLeftInMainRoom1Type[i])
+                            switch (GamePlayManager.GPM.itemsLeftInBedRoomType[i])
                             {
                                 case "BigCheese":
                                     itemIndexValue = 0;
@@ -64,31 +64,31 @@ public class ItemSpawner : MonoBehaviour
                             //Reinstatiate the item object and place it based on the stored vector value
                             GameObject go = Instantiate<GameObject>(foodItemsIndex[itemIndexValue]);
                             go.transform.position =
-                                GamePlayManager.GPM.itemsLeftInMainRoom1Location[i];
+                                GamePlayManager.GPM.itemsLeftInBedRoomLocation[i];
                         }
                     }
                 }
                 break;
 
-            case "mainRoom2":
+            case "Kitchen":
 
                 //If the room hasn't been visited yet, the room will generate new random items and not the old stored item info
-                if (!GamePlayManager.GPM.mainRoom2Visited)
+                if (!GamePlayManager.GPM.KitchenRoomVisited)
                 {
                     SpawnItems();
-                    GamePlayManager.GPM.mainRoom2Visited = true;
+                    GamePlayManager.GPM.KitchenRoomVisited = true;
                 }
                 else
                 {
                     //Verify that both the items left lists of name and positions are not length of 0
-                    if (GamePlayManager.GPM.itemsLeftInMainRoom2Type.Length != 0 &&
-                        GamePlayManager.GPM.itemsLeftInMainRoom2Location.Length != 0)
+                    if (GamePlayManager.GPM.itemsLeftInKitchenRoomType.Length != 0 &&
+                        GamePlayManager.GPM.itemsLeftInKitchenRoomLocation.Length != 0)
                     {
                         //Go through each of the array value in the room list
-                        for (int i = 0; i < GamePlayManager.GPM.itemsLeftInMainRoom2Type.Length; i++)
+                        for (int i = 0; i < GamePlayManager.GPM.itemsLeftInKitchenRoomType.Length; i++)
                         {
                             //Switch statement for identifying the item name, which then sets the index value of the list of items
-                            switch (GamePlayManager.GPM.itemsLeftInMainRoom2Type[i])
+                            switch (GamePlayManager.GPM.itemsLeftInKitchenRoomType[i])
                             {
                                 case "BigCheese":
                                     itemIndexValue = 0;
@@ -111,7 +111,7 @@ public class ItemSpawner : MonoBehaviour
                             //Reinstatiate the item object and place it based on the stored vector value
                             GameObject go = Instantiate<GameObject>(foodItemsIndex[itemIndexValue]);
                             go.transform.position =
-                                GamePlayManager.GPM.itemsLeftInMainRoom2Location[i];
+                                GamePlayManager.GPM.itemsLeftInKitchenRoomLocation[i];
                         }
                     }
                 }
@@ -126,21 +126,21 @@ public class ItemSpawner : MonoBehaviour
         //This then checks for when the bool value for the room changes
         switch (roomName)
         {
-            case "mainRoom1":
+            case "Bedroom":
 
-                if (!GamePlayManager.GPM.mainRoom1Visited)
+                if (!GamePlayManager.GPM.BedRoomVisited)
                 {
                     SpawnItems();
-                    GamePlayManager.GPM.mainRoom1Visited = true;
+                    GamePlayManager.GPM.BedRoomVisited = true;
                 }
                 break;
 
-            case "mainRoom2":
+            case "Kitchen":
 
-                if (!GamePlayManager.GPM.mainRoom2Visited)
+                if (!GamePlayManager.GPM.KitchenRoomVisited)
                 {
                     SpawnItems();
-                    GamePlayManager.GPM.mainRoom2Visited = true;
+                    GamePlayManager.GPM.KitchenRoomVisited = true;
                 }
                 break;
         }

@@ -53,4 +53,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AlphaBuild/Wall1.unity
     guid: b48ab5e4780510a42ba595fd7f5d4a3b
+  - enabled: 1
+    path: Assets/Scenes/AlphaBuild/GameOver_Scene.unity
+    guid: c7d6a5eab5b76d1498eec666a8bd3f56
   m_configObjects: {}
