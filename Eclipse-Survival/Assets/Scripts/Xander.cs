@@ -26,6 +26,8 @@ public class Xander : MonoBehaviour
         Health = STARTING_HEALTH;
         hungerTimer = HUNGER_DECREMENT_INTERVAL;
         isAlive = true;
+        GameObject spawnPoint = GameObject.FindGameObjectWithTag(GamePlayManager.GPM.targetTag);
+        gameObject.transform.position = spawnPoint.GetComponent<PerspectiveSceneChange>().spawnPoint.transform.position;
     }
 
     // Update is called once per frame

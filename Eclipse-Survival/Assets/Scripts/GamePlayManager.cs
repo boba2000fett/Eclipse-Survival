@@ -11,7 +11,6 @@ public class GamePlayManager : MonoBehaviour
     //Static Variables being used to track if the player enter a room that has not been entered during the round
     public bool mainRoom1Visited;
     public bool mainRoom2Visited;
-    
 
     [Header("Set in Inspector")]
     public int maxItemSpawn; //The Maximum number of items to spawn in a room or a cycle
@@ -24,6 +23,10 @@ public class GamePlayManager : MonoBehaviour
     public Vector2[] itemsLeftInMainRoom1Location;
     public string[] itemsLeftInMainRoom2Type;
     public Vector2[] itemsLeftInMainRoom2Location;
+    //Dictionary<string, PersistingGameObject> persistingItems;
+
+    // Scene Transition Variables
+    public string targetTag;
 
     void Awake()
     {
@@ -31,6 +34,7 @@ public class GamePlayManager : MonoBehaviour
         {
             //Set the GPM instance
             GPM = this;
+            InitializeGame();
         }
         else if(GPM != this)
         {
@@ -43,12 +47,19 @@ public class GamePlayManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void InitializeGame()
+    {
+        targetTag = "SpawnPoint1";
+        //persistingItems = new Dictionary<string, PersistingGameObject>();
+    }
+
     //This method will be called from the scene transition when the player clicks start new game
     public void NewGame()
     {
         mainRoom1Visited = false;
         mainRoom2Visited = false;
         currentNumberOfCycleSurvived = 0;
+        
 
         //spawnWaypoints = null;
     }
@@ -73,3 +84,15 @@ public class GamePlayManager : MonoBehaviour
 
    
 }
+
+//public class PersistingGameObject
+//{
+//    string Type { get; set; }
+//    Vector2 Location { get; set; }
+
+//    public PersistingGameObject(string type, Vector2 location)
+//    {
+//        Type = type;
+//        Location = location;
+//    }
+//}

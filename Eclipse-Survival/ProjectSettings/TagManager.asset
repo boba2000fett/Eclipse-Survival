@@ -12,6 +12,9 @@ TagManager:
   - Ground
   - ClimbingEnemy
   - Grandmother
+  - ItemSpawner
+  - SpawnPoint1
+  - SpawnPoint2
   layers:
   - Default
   - TransparentFX

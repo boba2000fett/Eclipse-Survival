@@ -8,18 +8,18 @@ public class PerspectiveSceneChange : MonoBehaviour
 {
     [Header("Set in Inspector")]
     public string targetPerspectiveScene;
+    public string targetPerspectiveSpawnPoint;
     public string nameOfItem;
+    public GameObject spawnPoint;
 
     [Header("Set Dynamically")]
     public string[] tempArray;
     GameObject[] tempItemHolder;
 
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Xander")
         {
-
             GameObject go = GameObject.Find("ItemSpawnPlaceholder");
             ItemSpawner temp = go.GetComponent<ItemSpawner>();
             int i = 0;
@@ -28,13 +28,13 @@ public class PerspectiveSceneChange : MonoBehaviour
             switch (temp.roomName)
             {
                 case "mainRoom1":
-                    
+
                     GameObject[] tempItemHolder = GameObject.FindGameObjectsWithTag("Item");
                     GamePlayManager.GPM.itemsLeftInMainRoom1Type = new string[tempItemHolder.Length];
                     GamePlayManager.GPM.itemsLeftInMainRoom1Location = new Vector2[tempItemHolder.Length];
 
 
-                    foreach(GameObject item in tempItemHolder)
+                    foreach (GameObject item in tempItemHolder)
                     {
 
 
@@ -72,15 +72,16 @@ public class PerspectiveSceneChange : MonoBehaviour
                     break;
             }
 
-            if (SceneManager.GetActiveScene().buildIndex == 5)
-            {
-                SceneManager.LoadScene(13);
-            }
-            else
-            {
-                SceneManager.LoadScene(5);
-            }
+            //if (SceneManager.GetActiveScene().buildIndex == 5)
+            //{
+            //    SceneManager.LoadScene(13);
+            //}
+            //else
+            //{
+            //    SceneManager.LoadScene(5);
+            //}
+            GamePlayManager.GPM.targetTag = targetPerspectiveSpawnPoint;
+            SceneManager.LoadScene(targetPerspectiveScene);
         }
     }
-
 }
