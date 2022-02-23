@@ -66,7 +66,7 @@ public class ClimbingMovement : MonoBehaviour
         detectionCollider = detectCircle.GetComponent<CircleCollider2D>();
         detectionCollider.radius = defaultRadius;
 
-        stamina = Constants.STARTING_STAMINA;
+        stamina = GamePlayManager.GPM.XanderStamina;
 
         // Set gravity here in inspector temporarily (Easier than going into settings every single time)
         Physics2D.gravity = new Vector2(0, -gravity);
@@ -131,6 +131,7 @@ public class ClimbingMovement : MonoBehaviour
             {
                 climbSpeed = climbRunSpeed;
             }
+            GamePlayManager.GPM.XanderStamina = stamina;
         }
         else if (moveSpeed != walkSpeed)
         {
@@ -143,6 +144,7 @@ public class ClimbingMovement : MonoBehaviour
             if (stamina < 100 && !staminaCooldown)
             {
                 stamina += Constants.STAMINA_RECHARGE_INCREMENT;
+                GamePlayManager.GPM.XanderStamina = stamina;
             }
         }
 
@@ -154,6 +156,7 @@ public class ClimbingMovement : MonoBehaviour
                 staminaCooldown = false;
             }
             stamina += Constants.STAMINA_RECHARGE_INCREMENT;
+            GamePlayManager.GPM.XanderStamina = stamina;
         }
         staminaBar.GetComponent<Slider>().value = stamina / 100f;
 

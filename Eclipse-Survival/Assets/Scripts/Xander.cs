@@ -22,8 +22,8 @@ public class Xander : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Hunger = STARTING_HUNGER;
-        Health = STARTING_HEALTH;
+        Hunger = GamePlayManager.GPM.XanderHunger;
+        Health = GamePlayManager.GPM.XanderHealth;
         hungerTimer = HUNGER_DECREMENT_INTERVAL;
         isAlive = true;
         GameObject spawnPoint = GameObject.FindGameObjectWithTag(GamePlayManager.GPM.targetTag);
@@ -44,6 +44,7 @@ public class Xander : MonoBehaviour
                 Health -= 1;
             }
 
+            UpdateManager();
             UpdateUI();
             hungerTimer = HUNGER_DECREMENT_INTERVAL;
         }
@@ -52,11 +53,18 @@ public class Xander : MonoBehaviour
     public void TakeDamage(int damage)
     {
         Health -= damage;
-        if (Health >= 0)
+        if (Health <= 0)
         {
             isAlive = false;
-            //Here Xander will die. Perhaps we could make the screen switch to the Game Over screen here. 
+            GamePlayManager.GPM.EndGame();
         }
+        UpdateManager();
+    }
+
+    void UpdateManager()
+    {
+        GamePlayManager.GPM.XanderHealth = Health;
+        GamePlayManager.GPM.XanderHunger = Hunger;
     }
 
     void UpdateUI()
@@ -72,10 +80,17 @@ public class Xander : MonoBehaviour
             //Get the Script Component Value for the item
             ItemScript itemValue = collision.gameObject.GetComponent<ItemScript>();
 
-            //Add the items determine value to the current health and hunger values
-            Health += itemValue.healthRestore;
-            Hunger += itemValue.hungerRestore;
+            if (itemValue.isDamage)
+            {
+                TakeDamage(itemValue.healthValue);
+            }
+            else
+            {
+                Health += itemValue.healthValue;
+            }
+            Hunger += itemValue.hungerValue;
 
+            UpdateManager();
             //Update the UI with changed values
             UpdateUI();
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.SceneManagement;
+using static Constants;
 
 public class GamePlayManager : MonoBehaviour
 {
@@ -24,6 +25,12 @@ public class GamePlayManager : MonoBehaviour
     public string[] itemsLeftInKitchenRoomType;
     public Vector2[] itemsLeftInKitchenRoomLocation;
     //Dictionary<string, PersistingGameObject> persistingItems;
+
+    //Persisting Gameplay Values
+    public int XanderHunger;
+    public float XanderStamina;
+    public int XanderHealth;
+    public int outdoorLightIntensity;
 
     // Scene Transition Variables
     public string targetTag;
@@ -59,7 +66,9 @@ public class GamePlayManager : MonoBehaviour
         BedRoomVisited = false;
         KitchenRoomVisited = false;
         currentNumberOfCycleSurvived = 0;
-        
+        XanderHealth = STARTING_HEALTH;
+        XanderHunger = STARTING_HUNGER;
+        XanderStamina = STARTING_STAMINA;
 
         //spawnWaypoints = null;
     }
@@ -79,7 +88,7 @@ public class GamePlayManager : MonoBehaviour
     public void EndGame()
     {
         //The Player is dead, switch to the Game Over Scene
-        SceneManager.LoadScene(Constants.MAIN_MENU_SCENE);
+        SceneManager.LoadScene("GameOver_Scene");
     }
 
    

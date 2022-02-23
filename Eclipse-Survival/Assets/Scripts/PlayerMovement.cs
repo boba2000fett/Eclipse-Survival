@@ -45,7 +45,8 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         facing = Facing.Left;
         detectionCollider = gameObject.GetComponent<CircleCollider2D>();
-        stamina = STARTING_STAMINA;
+        stamina = GamePlayManager.GPM.XanderStamina;
+        //Physics2D.gravity = new Vector2(0, 0);
     }
 
     // Update is called once per frame
@@ -69,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
             if (stamina < 100)
             {
                 stamina += STAMINA_RECHARGE_INCREMENT;
+                GamePlayManager.GPM.XanderStamina = stamina;
             }
         }
         
@@ -174,6 +176,7 @@ public class PlayerMovement : MonoBehaviour
                 staminaIsInCooldownPeriod = true;
                 timeLeftInStaminaCoolDown = STAMINA_COOLDOWN_PERIOD;
             }
+            GamePlayManager.GPM.XanderStamina = stamina;
         }
         else if (staminaIsInCooldownPeriod)
         {
@@ -183,6 +186,7 @@ public class PlayerMovement : MonoBehaviour
                 staminaIsInCooldownPeriod = false;
             }
             stamina += STAMINA_RECHARGE_INCREMENT;
+            GamePlayManager.GPM.XanderStamina = stamina;
         }
         staminaBar.GetComponent<Slider>().value = stamina / 100f;
 

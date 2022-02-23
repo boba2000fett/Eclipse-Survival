@@ -784,7 +784,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Your Final Score: 10 cycles'
+  m_Text: 'Score: 10 Days
+
+    High Score: 23 Days'
 --- !u!222 &1445342116
 CanvasRenderer:
   m_ObjectHideFlags: 0

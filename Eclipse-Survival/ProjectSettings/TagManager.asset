@@ -15,6 +15,9 @@ TagManager:
   - ItemSpawner
   - SpawnPoint1
   - SpawnPoint2
+  - Projectile
+  - OutdoorLight
+  - TimeAndLightController
   layers:
   - Default
   - TransparentFX

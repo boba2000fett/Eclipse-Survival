@@ -6,8 +6,9 @@ public class ItemScript : MonoBehaviour
 {
     [Header("Set in Inspector")]
     //variable that will be used for affecting the player health and hunger
-    public int healthRestore;
-    public int hungerRestore;
+    public int healthValue;
+    public int hungerValue;
+    public bool isDamage;
 
     
     //Detect whether the character collision has hit the item, if true and is declared as Xander destroy the object
@@ -16,7 +17,6 @@ public class ItemScript : MonoBehaviour
         if (collision.gameObject.tag == "Xander")
         {
             Destroy(this.gameObject);
-
         }      
     }
 }

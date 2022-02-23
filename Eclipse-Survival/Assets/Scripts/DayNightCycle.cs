@@ -7,6 +7,7 @@ using static Constants;
 
 public class DayNightCycle : MonoBehaviour
 {
+    static public DayNightCycle DNC;
     public bool IsDaytime {get; set;}
     public int Hour { get; set; }
 
@@ -24,19 +25,21 @@ public class DayNightCycle : MonoBehaviour
     private bool lightIncreasing;
     private float inGameHour;
 
-    // Constants
-    //const float MAX_LIGHT_INTENSITY = 0.6f;
-    //const float MIN_LIGHT_INTENSITY = 0.05f;
-    //const float LIGHT_DECREASE_DURATION = 450f; // in seconds
-    //const float LIGHT_INCREASE_DURATION = 450f; // in seconds
-    //const float DAY_NIGHT_CUTOFF = 0.3f; // light intensity at which IsDaytime is toggled
-
     float timer1 = 1;
     float timer1TimeRemaining;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (DNC == null)
+        {
+            DNC = this;           
+        }
+        else if (DNC != this)
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
         InitializeRound();
     }
 

@@ -96,8 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0506c66b7cd72d443a84abbfa6b69414, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthRestore: 25
-  hungerRestore: 30
+  healthValue: 25
+  hungerValue: 30
+  isDamage: 0
 --- !u!61 &5175977936071090663
 BoxCollider2D:
   m_ObjectHideFlags: 0

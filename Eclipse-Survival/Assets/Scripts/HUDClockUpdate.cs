@@ -16,7 +16,7 @@ public class HUDClockUpdate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cycle = GameObject.Find("Main Camera").GetComponent<DayNightCycle>();
+        cycle = GameObject.Find("TimeAndLightController").GetComponent<DayNightCycle>();
         hour = 0;
     }
 

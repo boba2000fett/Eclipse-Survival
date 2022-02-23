@@ -126,7 +126,7 @@ public class ItemSpawner : MonoBehaviour
         //This then checks for when the bool value for the room changes
         switch (roomName)
         {
-            case "Bedroom1":
+            case "Bedroom":
 
                 if (!GamePlayManager.GPM.BedRoomVisited)
                 {

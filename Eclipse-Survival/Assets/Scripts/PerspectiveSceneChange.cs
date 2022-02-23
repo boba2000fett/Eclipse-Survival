@@ -81,6 +81,7 @@ public class PerspectiveSceneChange : MonoBehaviour
             //    SceneManager.LoadScene(5);
             //}
             GamePlayManager.GPM.targetTag = targetPerspectiveSpawnPoint;
+            //Physics2D.gravity = new Vector2(0, 0);
             SceneManager.LoadScene(targetPerspectiveScene);
         }
     }
