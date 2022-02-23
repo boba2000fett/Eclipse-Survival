@@ -26,17 +26,24 @@ public class ClimbingMovement : MonoBehaviour
     public float gravity;
 
     // For distinguishing circle colliders
-    public GameObject detectCircle;
+    public CircleCollider2D detectionCollider; //GameObject detectCircle;
+    public SpriteRenderer spr;
     public GameObject staminaBar;
+
+    public Sprite sideView;
+    public Sprite topView;
 
     [Header("Set Dynamically")]
     public Facing facing;
     private Rigidbody2D rb;
     private float moveSpeed;
     private float climbSpeed;
-    CircleCollider2D detectionCollider;
+    //CircleCollider2D detectionCollider;
     // Collider for detecting ground/Jump
     CircleCollider2D collisionCollider;
+
+    //SpriteRenderer spr;
+
     bool climbMode;
     bool onClimbable;
     bool climbing;
@@ -57,16 +64,20 @@ public class ClimbingMovement : MonoBehaviour
     public bool OnClimbable { get{ return onClimbable; } set{ onClimbable = value; } }
 
 
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         facing = Facing.Left;
+        TurnXander();
         collisionCollider = gameObject.GetComponent<CircleCollider2D>();
 
-        detectionCollider = detectCircle.GetComponent<CircleCollider2D>();
+        //detectionCollider = detectCircle.GetComponent<CircleCollider2D>();
         detectionCollider.radius = defaultRadius;
 
         stamina = GamePlayManager.GPM.XanderStamina;
+
+        spr = gameObject.GetComponent<SpriteRenderer>();
+
 
         // Set gravity here in inspector temporarily (Easier than going into settings every single time)
         Physics2D.gravity = new Vector2(0, -gravity);
@@ -190,10 +201,17 @@ public class ClimbingMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
         {
             // Place Ducking here if we want
-
+            if (onClimbable && !climbing)
+            {
+                climbing = true;
+                onGround = true;
+                rb.gravityScale = 0f;
+            }
             if (climbing)
             {
                 pVel.y -= climbSpeed * Time.deltaTime;
+                facing = Facing.Down;
+                TurnXander();
             }
         }
         else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
@@ -213,12 +231,12 @@ public class ClimbingMovement : MonoBehaviour
                 climbing = true;
                 onGround = true;
                 rb.gravityScale = 0f;
-                facing = Facing.Up;
-                TurnXander();
             }
             if (climbing)
             {
                 pVel.y = climbSpeed * Time.deltaTime;
+                facing = Facing.Up;
+                TurnXander();
             }
         }
         else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
@@ -257,26 +275,47 @@ public class ClimbingMovement : MonoBehaviour
     /// </summary>
     private void TurnXander()
     {
+        spr.flipY = false;
+        spr.flipX = false;
+
         if (climbing)
         {
-            transform.localRotation = Quaternion.Euler(0, 0, 180);
-            facing = Facing.Up;
+            switch (facing)
+            {
+                case Facing.Up:
+                    spr.sprite = topView;
+                    spr.flipY = true;
+                    break;
+                case Facing.Down:
+                    spr.sprite = topView;
+                    spr.flipY = false;
+                    break;
+                default:
+                    facing = Facing.Up;
+                    spr.sprite = topView;
+                    spr.flipY = true;
+                    break;
+            }
             return;
         }
 
         switch (facing)
         {
             case Facing.Up:
-                transform.localRotation = Quaternion.Euler(0, 0, 180);
+                spr.sprite = topView;
+                spr.flipY = true;
                 break;
             case Facing.Down:
-                transform.localRotation = Quaternion.Euler(0, 0, 0);
+                spr.sprite = topView;
+                spr.flipY = false;
                 break;
             case Facing.Left:
-                transform.localRotation = Quaternion.Euler(0, 0, -90);
+                spr.sprite = sideView;
+                spr.flipX = true;
                 break;
             case Facing.Right:
-                transform.localRotation = Quaternion.Euler(0, 0, 90);
+                spr.sprite = sideView;
+                spr.flipX = false;
                 break;
         }
     }

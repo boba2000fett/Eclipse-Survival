@@ -24,7 +24,7 @@ public class CameraFollow : MonoBehaviour
         yMax = mapBounds.bounds.max.y;
         mainCam = GetComponent<Camera>();
         camOrthsize = mainCam.orthographicSize;
-        cameraRatio = (xMax + camOrthsize) / 2.0f;
+        cameraRatio = mainCam.orthographicSize * mainCam.aspect;
     }
     // Update is called once per frame
     void FixedUpdate()

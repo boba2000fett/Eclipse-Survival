@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 204743650828012511}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -1.346, z: 0}
-  m_LocalScale: {x: 0.07, y: 0.07, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 204743651679854311}
   - {fileID: 204743650834939975}
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: c439b79231660fe40a28a6514c687a6a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 83999b1f1028e76429c83f8cb274cb87, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -156,7 +156,7 @@ MonoBehaviour:
   - {x: -0.20230006, y: 0.20230006, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 20882
+  m_InstanceId: -103464
 --- !u!50 &204743650828012497
 Rigidbody2D:
   serializedVersion: 4
@@ -190,18 +190,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64b9e3c6013d39b41a012fd801183c70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 50
-  runSpeed: 75
-  climbSpeed: 50
-  defaultRadius: 5
-  walkRadius: 10
-  runRadius: 15
-  jumpRadius: 25
+  walkSpeed: 75
+  runSpeed: 100
+  climbWalkSpeed: 75
+  climbRunSpeed: 100
+  defaultRadius: 0.5
+  walkRadius: 1
+  runRadius: 1.5
+  jumpRadius: 2
   jumpPower: 15
   jumpCooldown: 0.5
   gravity: 9.8
-  detectCircle: {fileID: 204743651679854310}
+  detectionCollider: {fileID: 204743651679854308}
+  spr: {fileID: 204743650828012508}
+  staminaBar: {fileID: 0}
+  sideView: {fileID: 21300000, guid: 83999b1f1028e76429c83f8cb274cb87, type: 3}
+  topView: {fileID: 21300000, guid: 50c718cce5dc8cd42bc5fb3f9c853258, type: 3}
   facing: 1
+  stamina: 0
+  staminaCooldown: 0
+  staminaTimer: 0
 --- !u!58 &204743650828012503
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -217,7 +225,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 0.17
 --- !u!114 &204743650828012499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,6 +241,7 @@ MonoBehaviour:
   hungerBar: {fileID: 0}
   healthBar: {fileID: 0}
   isAlive: 0
+  hungerTimer: 0
 --- !u!1 &204743650834939974
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,7 +289,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.13
 --- !u!114 &204743650834939972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,4 +348,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 0.5
