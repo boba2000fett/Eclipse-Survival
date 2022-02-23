@@ -367,11 +367,15 @@ public class EnemyRoomRoaming : Enemy
     public void RestartCycle()
     {
         roomList = GameObject.Find("RoomManager").GetComponent<RoomManager>().RegenerateRoomList();
+        //if(atHome)        
+        //    currentWaypointDestination = FindObjectOfType<Room>().homeNode;
+
         atHome = false;
         goHome = false;
         sleepTimer = 0;
         currentRoomIndex = 0;
         resetCollision = true;
+       
         currentWaypointDestination = FindObjectOfType<Room>().homeNode;
     }
 }

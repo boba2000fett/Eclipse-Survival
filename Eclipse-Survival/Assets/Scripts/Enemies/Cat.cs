@@ -17,6 +17,7 @@ public class Cat : EnemyRoomRoaming
     [Header("Set In Inspector: Cat")]
     public float pouncePrepateTimeInverval;
     public float pounceStopTimeInverval;
+    public int damage;
 
 
     [Header("Set Dynamically: Cat")]
@@ -126,6 +127,8 @@ public class Cat : EnemyRoomRoaming
         {
             case "Xander":
                 //Here we will want to damage Xander
+                Xander xander = collision.gameObject.GetComponent<Xander>();
+                xander.TakeDamage(damage);
                 return;
             case "Grandmother":
                 //If Cat Collides with Grandmother, it will chose a different path.
