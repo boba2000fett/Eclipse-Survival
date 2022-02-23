@@ -62,6 +62,7 @@ public class Xander : MonoBehaviour
             GamePlayManager.GPM.EndGame();
         }
         UpdateManager();
+        UpdateUI();
     }
 
     void UpdateManager()
