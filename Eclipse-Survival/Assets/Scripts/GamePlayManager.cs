@@ -31,6 +31,7 @@ public class GamePlayManager : MonoBehaviour
     public float XanderStamina;
     public int XanderHealth;
     public int outdoorLightIntensity;
+    public float hungerTimer;
 
     // Scene Transition Variables
     public string targetTag;
@@ -69,6 +70,7 @@ public class GamePlayManager : MonoBehaviour
         XanderHealth = STARTING_HEALTH;
         XanderHunger = STARTING_HUNGER;
         XanderStamina = STARTING_STAMINA;
+        hungerTimer = HUNGER_DECREMENT_INTERVAL;
 
         //spawnWaypoints = null;
     }

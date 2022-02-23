@@ -18,22 +18,25 @@ public class Xander : MonoBehaviour
     [Header("Set Dynamically")]
     public bool isAlive;
 
-    private float hungerTimer;
+    public float hungerTimer;
     // Start is called before the first frame update
     void Start()
     {
         Hunger = GamePlayManager.GPM.XanderHunger;
         Health = GamePlayManager.GPM.XanderHealth;
-        hungerTimer = HUNGER_DECREMENT_INTERVAL;
+        hungerTimer = GamePlayManager.GPM.hungerTimer;
         isAlive = true;
         GameObject spawnPoint = GameObject.FindGameObjectWithTag(GamePlayManager.GPM.targetTag);
         gameObject.transform.position = spawnPoint.GetComponent<PerspectiveSceneChange>().spawnPoint.transform.position;
+        UpdateUI();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         hungerTimer -= Time.deltaTime;
+
+        GamePlayManager.GPM.hungerTimer = hungerTimer;
 
         if (hungerTimer <= 0)
         {

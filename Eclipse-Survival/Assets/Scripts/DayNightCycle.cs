@@ -134,5 +134,7 @@ public class DayNightCycle : MonoBehaviour
         {
             lightIncrement = (startingBrightness - MIN_LIGHT_INTENSITY) / LIGHT_DECREASE_DURATION;
         }
+
+        GamePlayManager.GPM.NewCycle((int)roundsElapsed);
     }
 }
