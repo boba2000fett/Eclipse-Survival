@@ -18,6 +18,7 @@ TagManager:
   - Projectile
   - OutdoorLight
   - TimeAndLightController
+  - Cockroach
   layers:
   - Default
   - TransparentFX
