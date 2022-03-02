@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6202258368021614729}
   - component: {fileID: 6202258368021614728}
   m_Layer: 0
-  m_Name: RoomManager
+  m_Name: RoomManagerGrandmother
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,10 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalRoomList:
-  - {fileID: 4510574673565081041, guid: 3bc92173e4713b74c9300fb67e7d0d37, type: 3}
-  - {fileID: 4510574673565081041, guid: 6d917aebefc1b4946a641a8d33f3aa2c, type: 3}
-  - {fileID: 4510574673565081041, guid: 190084bfa4491e6438beb851eab59923, type: 3}
-  baseRoom: {fileID: 4049251928940906405, guid: d8ec9fa8cbc0ee74dae314342b252206, type: 3}
+  - {fileID: 2619627699124755209, guid: dc77eefea1950d54ebe7322b65848ff6, type: 3}
+  - {fileID: 2619627699124755209, guid: dc77eefea1950d54ebe7322b65848ff6, type: 3}
+  baseRoom: {fileID: 9216961173153096286, guid: aa6900f1f9a572a478e2c7f3e11cd895, type: 3}
   generatedRoomTest: []
   numberOfRoomsThisSequence: 0
   roomCount: 0

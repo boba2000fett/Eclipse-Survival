@@ -21,10 +21,15 @@ public class Grandmother : EnemyRoomRoaming
     [HideInInspector] public Vector2 downFacingPositionFryingPan = new Vector2(0, -18);
     [HideInInspector] public Vector2 standardPositionFryingPan = new Vector2(0, 0);
 
+    [HideInInspector] public Vector2 leftFacingRotationFryingPan = new Vector2(-15, 0);
+    [HideInInspector] public Vector2 rightFacingRotationFryingPan = new Vector2(15, 0);
+    [HideInInspector] public Vector2 upFacingRotationFryingPan = new Vector2(0, 18);
+    [HideInInspector] public Vector2 downFacingRotationFryingPan = new Vector2(0, -18);
+    [HideInInspector] public Vector2 standardFacingRotationFryingPan = new Vector2(0, 0);
 
     public override void Awake()
     {
-        base.Awake();
+        base.Awake();        
 
         #region Grandma Singleton 
         if (grandmaSingleton == null)
@@ -99,13 +104,25 @@ public class Grandmother : EnemyRoomRoaming
     public void UpdateFryingPanPosition()
     {
         if (this.direction == Facing.Down)
+        {
+            fryingPan.transform.rotation = Quaternion.Euler(0, 0, 180);
             fryingPan.transform.localPosition = downFacingPositionFryingPan;
+        }
         else if (this.direction == Facing.Up)
+        {
+            fryingPan.transform.rotation = Quaternion.Euler(0, 0, 0);
             fryingPan.transform.localPosition = upFacingPositionFryingPan;
+        }
         else if (this.direction == Facing.Right)
+        {
+            fryingPan.transform.rotation = Quaternion.Euler(0, 0, -90);
             fryingPan.transform.localPosition = rightFacingPositionFryingPan;
+        }
         else if (this.direction == Facing.Left)
+        {
+            fryingPan.transform.rotation = Quaternion.Euler(0, 0, 90);
             fryingPan.transform.localPosition = leftFacingPositionFryingPan;
+        }
     }
 
     public void CheckFryingPan()

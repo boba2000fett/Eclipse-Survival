@@ -28,20 +28,20 @@ public class RoomManager : MonoBehaviour
 
     private void Awake()
     {
-        if (roomManagerSingleton == null)
-        {
-            //Set the GPM instance
-            roomManagerSingleton = this;
-        }
-        else if (roomManagerSingleton != this)
-        {
-            //If the reference has already been set and
-            //is not the right instance reference, Destroy the GameObject
-            Destroy(gameObject);
-        }
+        //if (roomManagerSingleton == null)
+        //{
+        //    //Set the GPM instance
+        //    roomManagerSingleton = this;
+        //}
+        //else if (roomManagerSingleton != this)
+        //{
+        //    //If the reference has already been set and
+        //    //is not the right instance reference, Destroy the GameObject
+        //    Destroy(gameObject);
+        //}
 
-        //Do not Destroy this gameobject when a new scene is loaded
-        DontDestroyOnLoad(gameObject);
+        ////Do not Destroy this gameobject when a new scene is loaded
+        //DontDestroyOnLoad(gameObject);
     }
 
     private void Update()

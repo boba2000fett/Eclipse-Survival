@@ -35,6 +35,8 @@ public class EnemyRoomRoaming : Enemy
     public PathToExit pathToExit = PathToExit.North; //This will determine which direction the Grandmother should head in when traveling to the exit
     public string destinationSceneName;
     //These are supposed to be Static
+    [Header("Set Room Manager in Inspector")]
+    public RoomManager roomManager;
 
     [Header("Set Dynamically: Enemy Roaming")]
     //public int currentRoomSee; //Implement this later when doing adding in the Room change functionality
@@ -372,9 +374,12 @@ public class EnemyRoomRoaming : Enemy
     }
     public void RestartCycle()
     {
-        roomList = GameObject.Find("RoomManager").GetComponent<RoomManager>().RegenerateRoomList();
+        //roomList = GameObject.Find("RoomManager").GetComponent<RoomManager>().RegenerateRoomList();
+        
         //if(atHome)        
         //    currentWaypointDestination = FindObjectOfType<Room>().homeNode;
+
+        roomList = roomManager.RegenerateRoomList();
 
         atHome = false;
         goHome = false;
