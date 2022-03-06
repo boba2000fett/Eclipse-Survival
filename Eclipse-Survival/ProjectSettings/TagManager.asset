@@ -19,6 +19,7 @@ TagManager:
   - OutdoorLight
   - TimeAndLightController
   - Cockroach
+  - Cat
   layers:
   - Default
   - TransparentFX
@@ -29,7 +30,7 @@ TagManager:
   - Player
   - Ground
   - 
-  - 
+  - Enemy
   - Items
   - Walls
   - 

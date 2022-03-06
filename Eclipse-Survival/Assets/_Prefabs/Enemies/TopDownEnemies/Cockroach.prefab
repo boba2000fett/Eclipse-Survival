@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2862997889626436205}
   - component: {fileID: 2862997889626436204}
   - component: {fileID: 2862997889626436207}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cockroach
   m_TagString: Cockroach
   m_Icon: {fileID: 0}
@@ -121,12 +121,12 @@ MonoBehaviour:
   waypoints: []
   home: {fileID: 0}
   moveSpeed: 0.5
-  runSpeed: 4.56
+  runSpeed: 1.14
   alertTimeDuration: 8.08
   alertRange: 2.25
   attackRange: 0.76
-  strength: 2.36
-  health: 0
+  strength: 2
+  health: 50
   isAlerted: 0
   target: {fileID: 0}
   waypointIndex: 0
@@ -135,10 +135,13 @@ MonoBehaviour:
   direction: 0
   anim: {fileID: 0}
   rigid: {fileID: 0}
+  circle: {fileID: 0}
   switchDirectionTimeIntervalMin: 2
   switchDirectionTimeIntervalMax: 5
   switchDirectionTime: 0
   switchDirectionTimeInterval: 0
+  aggressor: {fileID: 0}
+  isTargeted: 0
 --- !u!50 &2862997889626436205
 Rigidbody2D:
   serializedVersion: 4
@@ -167,7 +170,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2862997889626436118}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0

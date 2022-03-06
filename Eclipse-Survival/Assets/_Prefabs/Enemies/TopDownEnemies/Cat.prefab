@@ -7,6 +7,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4033998086720353578, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4033998086720353578, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4033998086720353578, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1313248463
+      objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353579, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -17,7 +29,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353579, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.13
+      value: -4.11
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353579, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -53,7 +65,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353580, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_Name
-      value: Cat
+      value: 'Cat '
+      objectReference: {fileID: 0}
+    - target: {fileID: 4033998086720353580, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353580, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_IsActive
@@ -65,11 +81,11 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 19aa277c0e016ae418f38df058108d44, type: 2}
     - target: {fileID: 4033998086720353582, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_Size.x
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353582, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_Size.y
-      value: 25
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4033998086720353583, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
@@ -97,18 +113,22 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   home: {fileID: 0}
-  moveSpeed: 1
-  runSpeed: 2
+  moveSpeed: 1.76
+  runSpeed: 2.73
   alertTimeDuration: 10
   alertRange: 0
   attackRange: 0.75
   strength: 0
+  health: 0
   isAlerted: 0
   target: {fileID: 0}
   waypointIndex: 0
   alertTime: 0
   currentWaypointDestination: {fileID: 0}
   direction: 0
+  anim: {fileID: 0}
+  rigid: {fileID: 0}
+  circle: {fileID: 0}
   roomListSet: []
   seeRoomList: []
   setRooms: 1
@@ -120,6 +140,7 @@ MonoBehaviour:
   roomList: []
   pathToExit: 0
   destinationSceneName: 
+  roomManager: {fileID: 6202258368021614728, guid: ef89909fa174a554b85c5d3e2599031f, type: 3}
   waypointCount: 0
   isInRoom: 0
   outsideRoomTime: 0
@@ -128,10 +149,14 @@ MonoBehaviour:
   destinationSceneNameSee: 
   goHome: 0
   atHome: 0
+  resetCollision: 0
+  resetCollisionTimer: 0
+  resetCollisionTimerInterval: 2
   sleepTimerInterval: 5
   sleepTimer: 0
   pouncePrepateTimeInverval: 0.5
   pounceStopTimeInverval: 0.5
+  damage: 0
   hoppingPoint: {x: 0, y: 0, z: 0}
   isPouncing: 0
   pounceState: 3

@@ -138,6 +138,7 @@ public class Cockroach : Enemy
 
     public override void OnCollisionEnter2D(Collision2D collision)
     {
+        base.OnCollisionEnter2D(collision);
         if (collision.gameObject.tag == "Item")
         {
             Destroy(collision.gameObject);

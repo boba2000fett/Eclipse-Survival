@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour
     //Components
     public Animator anim;
     public Rigidbody2D rigid;
+    public CircleCollider2D circle;
 
     public virtual void Start()
     {
@@ -39,6 +40,9 @@ public class Enemy : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
+        //circle = GetComponent<CircleCollider2D>();
+        //circle.radius = alertRange;
+        
         DetermineDestination();
     }
 
@@ -105,6 +109,9 @@ public class Enemy : MonoBehaviour
         }
         else
         {
+            if (target == null)
+                return;
+
             anim.SetFloat("xMovement", (target.transform.position.x - transform.position.x));
             anim.SetFloat("yMovement", (target.transform.position.y - transform.position.y));
         }
@@ -143,7 +150,12 @@ public class Enemy : MonoBehaviour
     /// <param name="damage"></param>
     public void TakeDamage(float damage)
     {
-
+        health -= damage;
+        if (health <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+        //Here, we have to potential to add in some sort of Sound Effect or a Particle Effect or Something.
     }
 
     public virtual void OnTriggerEnter2D(Collider2D collider)
@@ -164,9 +176,14 @@ public class Enemy : MonoBehaviour
 
     public virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Xander" )
+        if (collision.gameObject.tag == "Xander")
         {
+             collision.gameObject.GetComponent<Xander>().Health = 500;
             collision.gameObject.GetComponent<Xander>().TakeDamage(strength);
+        }
+        else if (collision.gameObject.tag == "Cockroach")
+        {
+            collision.gameObject.GetComponent<Enemy>().TakeDamage(strength);
         }
     }
 }
