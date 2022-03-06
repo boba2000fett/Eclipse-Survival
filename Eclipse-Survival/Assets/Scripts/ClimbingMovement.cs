@@ -74,7 +74,8 @@ public class ClimbingMovement : MonoBehaviour
         //detectionCollider = detectCircle.GetComponent<CircleCollider2D>();
         detectionCollider.radius = defaultRadius;
 
-        stamina = GamePlayManager.GPM.XanderStamina;
+        if (GamePlayManager.GPM != null) stamina = GamePlayManager.GPM.XanderStamina;
+        else stamina = 100;
 
         spr = gameObject.GetComponent<SpriteRenderer>();
 
@@ -122,7 +123,8 @@ public class ClimbingMovement : MonoBehaviour
         if(climbing) pVel.y = 0f;
 
         // Adding running
-        if (Input.GetKey(KeyCode.LeftShift) && stamina > 0 && !staminaCooldown)
+        if (Input.GetKey(KeyCode.LeftShift) && stamina > 0 && !staminaCooldown 
+            && (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)))
         {
             stamina -= Constants.STAMINA_USE_INCREMENT;
             if (stamina <= 0)

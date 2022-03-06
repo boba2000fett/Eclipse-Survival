@@ -11,14 +11,14 @@ public class AIPathfinding
         Node[] groundNodes = new Node[groundArray.Length];
         for (int i = 0; i < groundArray.Length; i++)
         {
-            groundNodes[i] = new Node(i, (Vector2)groundArray[i].transform.position + new Vector2(0f, 0.2f));
+            groundNodes[i] = new Node(i, (Vector2)groundArray[i].transform.position + new Vector2(0f, 0.2f), true);
         }
 
         GameObject[] climbableArray = GameObject.FindGameObjectsWithTag("Climbable");
         Node[] climbableNodes = new Node[climbableArray.Length];
         for (int i = 0; i < climbableArray.Length; i++)
         {
-            climbableNodes[i] = new Node(groundArray.Length + i, climbableArray[i].transform.position);
+            climbableNodes[i] = new Node(groundArray.Length + i, climbableArray[i].transform.position, false);
         }
 
         // Generate Edges
@@ -291,7 +291,7 @@ public class AIPathfinding
             List<Node> successors = new List<Node>();
             foreach (Node conn in q.connections)
             {
-                Node s = new Node(conn.number, conn.position);
+                Node s = new Node(conn.number, conn.position, conn.isGround);
                 s.connections = conn.connections;
                 successors.Add(s);
             }
@@ -380,17 +380,19 @@ public class Node
     public List<Node> connections;
     public Vector2 position;
     public int number;
+    public bool isGround;
 
     [Header("Set Dynamically")]
     public float f, h, g;
 
-    public Node(int num, Vector2 pos)
+    public Node(int num, Vector2 pos, bool floor)
     {
         number = num;
         position = pos;
         connections = new List<Node>();
         f = 0;
         g = 0;
+        isGround = floor;
     }
 
 }
