@@ -20,7 +20,7 @@ public class DayNightCycle : MonoBehaviour
     public float timeRemainingInRound;
     public float timeRemainingInHour;
     public float lightIncrement;
-    public float intensity;
+    public float intensity = 0.5f;
     public float roundsElapsed = 0;
     private bool lightIncreasing;
     private float inGameHour;
@@ -52,7 +52,9 @@ public class DayNightCycle : MonoBehaviour
 
         if (timer1TimeRemaining <= 0f) // Do this code at determined increment (timer1) to conserve GPU
         {
-            intensity = outdoorLights[0].intensity;
+            // Michael's Note: Added Case for No Outdoor Lights
+            if(outdoorLights.Length != 0) intensity = outdoorLights[0].intensity;
+           
             if (lightIncreasing)
             {
                 intensity += lightIncrement;

@@ -204,7 +204,7 @@ public class ClimbingEnemy : MonoBehaviour
                     else
                     {
                         // If in range (Jump to it), else get closer
-                        if (yDiff > 0.5f && yDiff < 1.85f && Mathf.Abs(xDiff) < 1.45f)
+                        if (yDiff > 0.4f && yDiff < 1.6f && Mathf.Abs(xDiff) < 1.45f)
                         {
                             if (onGround && canJump)
                             {
@@ -340,7 +340,7 @@ public class ClimbingEnemy : MonoBehaviour
                 else
                 {
                     // If in range (Jump to it), else get closer
-                    if (yDiff > 0.5f && yDiff < 1.85f && Mathf.Abs(xDiff) < 1.45f)
+                    if (yDiff > 0.4f && yDiff < 1.6f && Mathf.Abs(xDiff) < 1.45f)
                     {
                         if (onGround && canJump)
                         {
@@ -419,13 +419,30 @@ public class ClimbingEnemy : MonoBehaviour
                 rigid.velocity = new Vector2(rigid.velocity.x, rigid.velocity.y - 0.25f);
             }
         }
+        if (collision.gameObject.tag.Contains("SpawnPoint"))
+        {
+            Physics2D.IgnoreCollision(collision.collider, collision.otherCollider);
+        }
     }
 
     void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground")
         {
-            if (!climbing && rigid.velocity.y < -0.15f)
+            if (canJump && !climbing && onGround && path[nodeNumber].isGround)
+            {
+                Vector2 pos = transform.position;
+                Vector2 target = path[nodeNumber].position;
+                float xDiff = target.x - pos.x;
+                float yDiff = target.y - pos.y;
+                if (Mathf.Abs(xDiff) > 1f && yDiff < -0.2f)
+                {
+                    rigid.AddForce(new Vector2(0f, jumpPower));
+                    onGround = false;
+                    canJump = false;
+                }
+            }
+            if (onGround && !climbing && rigid.velocity.y < -0.15f)
             {
                 onGround = false;
             }
