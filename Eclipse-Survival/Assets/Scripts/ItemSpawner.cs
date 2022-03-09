@@ -23,25 +23,25 @@ public class ItemSpawner : MonoBehaviour
         //A switch case for identifying the current room name, which is set in the inspector
         switch (roomName)
         {
-            case "Bedroom":
+            case "MasterBedroom":
                 
                 //If the room hasn't been visited yet, the room will generate new random items and not the old stored item info
-                if (!GamePlayManager.GPM.BedRoomVisited)
+                if (!GamePlayManager.GPM.MasterBedRoomVisited)
                 {
                     SpawnItems();
-                    GamePlayManager.GPM.BedRoomVisited = true;
+                    GamePlayManager.GPM.MasterBedRoomVisited = true;
                 }
                 else
                 {
                     //Verify that both the items left lists of name and positions are not length of 0
-                    if (GamePlayManager.GPM.itemsLeftInBedRoomType.Length != 0 &&
-                        GamePlayManager.GPM.itemsLeftInBedRoomLocation.Length != 0)
+                    if (GamePlayManager.GPM.itemsLeftInMasterBedRoomType.Length != 0 &&
+                        GamePlayManager.GPM.itemsLeftInMasterBedRoomLocation.Length != 0)
                     {
                         //Go through each of the array value in the room list
-                        for (int i = 0; i < GamePlayManager.GPM.itemsLeftInBedRoomType.Length; i++)
+                        for (int i = 0; i < GamePlayManager.GPM.itemsLeftInMasterBedRoomType.Length; i++)
                         {
                             //Switch statement for identifying the item name, which then sets the index value of the list of items
-                            switch (GamePlayManager.GPM.itemsLeftInBedRoomType[i])
+                            switch (GamePlayManager.GPM.itemsLeftInMasterBedRoomType[i])
                             {
                                 case "BigCheese":
                                     itemIndexValue = 0;
@@ -64,7 +64,7 @@ public class ItemSpawner : MonoBehaviour
                             //Reinstatiate the item object and place it based on the stored vector value
                             GameObject go = Instantiate<GameObject>(foodItemsIndex[itemIndexValue]);
                             go.transform.position =
-                                GamePlayManager.GPM.itemsLeftInBedRoomLocation[i];
+                                GamePlayManager.GPM.itemsLeftInMasterBedRoomLocation[i];
                         }
                     }
                 }
@@ -116,6 +116,38 @@ public class ItemSpawner : MonoBehaviour
                     }
                 }
                 break;
+
+            case "DinningRoom":
+
+                break;
+
+            case "LivingRoom":
+
+                break;
+
+            case "FirstFloorHallway":
+
+                break;
+
+            case "GrandKidsBedRoom":
+
+                break;
+
+            case "GuestBedRoom1":
+
+                break;
+
+            case "GuestBedRoom2":
+
+                break;
+
+            case "Bathroom":
+
+                break;
+
+            case "SecondFloorHallway":
+
+                break;
         }  
     }
 
@@ -128,10 +160,10 @@ public class ItemSpawner : MonoBehaviour
         {
             case "Bedroom":
 
-                if (!GamePlayManager.GPM.BedRoomVisited)
+                if (!GamePlayManager.GPM.MasterBedRoomVisited)
                 {
                     SpawnItems();
-                    GamePlayManager.GPM.BedRoomVisited = true;
+                    GamePlayManager.GPM.MasterBedRoomVisited = true;
                 }
                 break;
 
@@ -141,6 +173,70 @@ public class ItemSpawner : MonoBehaviour
                 {
                     SpawnItems();
                     GamePlayManager.GPM.KitchenRoomVisited = true;
+                }
+                break;
+
+            case "DinningRoom":
+                if (!GamePlayManager.GPM.DinningRoomVisited)
+                {
+                    SpawnItems();
+                    GamePlayManager.GPM.DinningRoomVisited = true;
+                }
+                break;
+
+            case "LivingRoom":
+                if (!GamePlayManager.GPM.LivingRoomVisited)
+                {
+                    SpawnItems();
+                    GamePlayManager.GPM.LivingRoomVisited = true;
+                }
+                break;
+
+            case "FirstFloorHallway":
+                if (!GamePlayManager.GPM.FirstFloorHallwayVisited)
+                {
+                    SpawnItems();
+                    GamePlayManager.GPM.FirstFloorHallwayVisited = true;
+                }
+                break;
+
+            case "GrandKidsBedRoom":
+                if (!GamePlayManager.GPM.GrandKidsBedroomVisited)
+                {
+                    SpawnItems();
+                    GamePlayManager.GPM.GrandKidsBedroomVisited = true;
+                }
+                break;
+
+            case "GuestBedRoom1":
+                if (!GamePlayManager.GPM.GuestBedRoom1Visited)
+                {
+                    SpawnItems();
+                    GamePlayManager.GPM.GuestBedRoom1Visited = true;
+                }
+                break;
+
+            case "GuestBedRoom2":
+                if (!GamePlayManager.GPM.GuestBedRoom2Visited)
+                {
+                    SpawnItems();
+                    GamePlayManager.GPM.GuestBedRoom2Visited = true;
+                }
+                break;
+
+            case "Bathroom":
+                if (!GamePlayManager.GPM.BathroomVisited)
+                {
+                    SpawnItems();
+                    GamePlayManager.GPM.BathroomVisited = true;
+                }
+                break;
+
+            case "SecondFloorHallway":
+                if (!GamePlayManager.GPM.SecondFloorHallwayVisited)
+                {
+                    SpawnItems();
+                    GamePlayManager.GPM.SecondFloorHallwayVisited = true;
                 }
                 break;
         }

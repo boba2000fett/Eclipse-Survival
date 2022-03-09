@@ -10,8 +10,19 @@ public class GamePlayManager : MonoBehaviour
     static public GamePlayManager GPM; //Singleton of the GamePlayManager
 
     //Static Variables being used to track if the player enter a room that has not been entered during the round
-    public bool BedRoomVisited;
+    //First Floor Rooms/Scenes
     public bool KitchenRoomVisited;
+    public bool DinningRoomVisited;
+    public bool LivingRoomVisited;
+    public bool FirstFloorHallwayVisited;
+    //Second Floor Rooms/Scenes
+    public bool MasterBedRoomVisited;
+    public bool GrandKidsBedroomVisited;
+    public bool GuestBedRoom1Visited;
+    public bool GuestBedRoom2Visited;
+    public bool BathroomVisited;
+    public bool SecondFloorHallwayVisited;
+
 
     [Header("Set in Inspector")]
     public int maxItemSpawn; //The Maximum number of items to spawn in a room or a cycle
@@ -20,10 +31,38 @@ public class GamePlayManager : MonoBehaviour
     public int currentNumberOfCycleSurvived;
 
     //These array variables are used to store the remaining item name and vector values, and are set dynamically when the perspective scene transition occurs
-    public string[] itemsLeftInBedRoomType;
-    public Vector2[] itemsLeftInBedRoomLocation;
+    //First Floor Item Management
     public string[] itemsLeftInKitchenRoomType;
     public Vector2[] itemsLeftInKitchenRoomLocation;
+
+    public string[] itemsLeftInDinningRoomType;
+    public Vector2[] itemsLeftInDinningRoomLocation;
+
+    public string[] itemsLeftInLivingRoomType;
+    public Vector2[] itemsLeftInLivingRoomLocation;
+
+    public string[] itemsLeftInFirstFloorHallwayType;
+    public Vector2[] itemsLeftInFirstFloorHallwayLocation;
+
+    //Second Floor Item Management
+    public string[] itemsLeftInMasterBedRoomType;
+    public Vector2[] itemsLeftInMasterBedRoomLocation;
+
+    public string[] itemsLeftInGrandKidsBedRoomType;
+    public Vector2[] itemsLeftInGrandKidsBedRoomLocation;
+
+    public string[] itemsLeftInGuestBedRoomOneType;
+    public Vector2[] itemsLeftInGuestBedRoomOneLocation;
+
+    public string[] itemsLeftInGuestBedRoomTwoType;
+    public Vector2[] itemsLeftInGuestBedRoomTwoLocation;
+
+    public string[] itemsLeftInBathRoomType;
+    public Vector2[] itemsLeftInBathRoomLocation;
+
+    public string[] itemsLeftInSecondFloorHallwayType;
+    public Vector2[] itemsLeftInSecondFloorHallwayLocation;
+
     //Dictionary<string, PersistingGameObject> persistingItems;
 
     //Persisting Gameplay Values
@@ -64,9 +103,19 @@ public class GamePlayManager : MonoBehaviour
     //This method will be called from the scene transition when the player clicks start new game
     public void NewGame()
     {
-        BedRoomVisited = false;
+        
         KitchenRoomVisited = false;
+        DinningRoomVisited = false;
+        LivingRoomVisited = false;
+        FirstFloorHallwayVisited = false;
+        MasterBedRoomVisited = false;
+        GrandKidsBedroomVisited = false;
+        GuestBedRoom1Visited = false;
+        GuestBedRoom2Visited = false;
+        SecondFloorHallwayVisited = false;
+        BathroomVisited = false;
         currentNumberOfCycleSurvived = 0;
+
         XanderHealth = STARTING_HEALTH;
         XanderHunger = STARTING_HUNGER;
         XanderStamina = STARTING_STAMINA;
@@ -83,8 +132,16 @@ public class GamePlayManager : MonoBehaviour
             currentNumberOfCycleSurvived = roundsPast;
         }
 
-        BedRoomVisited = false;
         KitchenRoomVisited = false;
+        DinningRoomVisited = false;
+        LivingRoomVisited = false;
+        FirstFloorHallwayVisited = false;
+        MasterBedRoomVisited = false;
+        GrandKidsBedroomVisited = false;
+        GuestBedRoom1Visited = false;
+        GuestBedRoom2Visited = false;
+        SecondFloorHallwayVisited = false;
+        BathroomVisited = false;
     }
 
     public void EndGame()

@@ -27,11 +27,11 @@ public class PerspectiveSceneChange : MonoBehaviour
             //A switch case for identifying the current room name, which is set in the inspector
             switch (temp.roomName)
             {
-                case "Bedroom":
+                case "MasterBedroom":
 
                     GameObject[] tempItemHolder = GameObject.FindGameObjectsWithTag("Item");
-                    GamePlayManager.GPM.itemsLeftInBedRoomType = new string[tempItemHolder.Length];
-                    GamePlayManager.GPM.itemsLeftInBedRoomLocation = new Vector2[tempItemHolder.Length];
+                    GamePlayManager.GPM.itemsLeftInMasterBedRoomType = new string[tempItemHolder.Length];
+                    GamePlayManager.GPM.itemsLeftInMasterBedRoomLocation = new Vector2[tempItemHolder.Length];
 
 
                     foreach (GameObject item in tempItemHolder)
@@ -42,8 +42,8 @@ public class PerspectiveSceneChange : MonoBehaviour
 
                         tempArray = nameOfItem.Split(char.Parse("("));
 
-                        GamePlayManager.GPM.itemsLeftInBedRoomType[i] = tempArray[0];
-                        GamePlayManager.GPM.itemsLeftInBedRoomLocation[i] = item.gameObject.transform.position;
+                        GamePlayManager.GPM.itemsLeftInMasterBedRoomType[i] = tempArray[0];
+                        GamePlayManager.GPM.itemsLeftInMasterBedRoomLocation[i] = item.gameObject.transform.position;
 
                         i++;
                     }
@@ -69,6 +69,38 @@ public class PerspectiveSceneChange : MonoBehaviour
 
                         i++;
                     }
+                    break;
+
+                case "DinningRoom":
+
+                    break;
+
+                case "LivingRoom":
+
+                    break;
+
+                case "FirstFloorHallway":
+
+                    break;
+
+                case "GrandKidsBedRoom":
+
+                    break;
+
+                case "GuestBedRoom1":
+
+                    break;
+
+                case "GuestBedRoom2":
+
+                    break;
+
+                case "Bathroom":
+
+                    break;
+
+                case "SecondFloorHallway":
+
                     break;
             }
 
