@@ -57,6 +57,7 @@ public class Cat : EnemyRoomRoaming
             if (target == null || (alertTime > alertTimeDuration))
             {
                 isAlerted = false;
+                return;
             }
 
             Vector2 distanceFromTarget = target.gameObject.transform.position - transform.position;
