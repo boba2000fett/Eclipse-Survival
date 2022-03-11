@@ -27,6 +27,13 @@ public class GamePlayManager : MonoBehaviour
     [Header("Set in Inspector")]
     public int maxItemSpawn; //The Maximum number of items to spawn in a room or a cycle
 
+    [Header("Set In Inspector: UI objects for in game")]
+    public GameObject PauseUI;
+    public GameObject OptionsUI;
+    public string[] Resolutions;
+    public int ResolutionIndex;
+    //public bool pauseUIActive;
+
     [Header("Set Dynamically")]
     public int currentNumberOfCycleSurvived;
 
@@ -92,12 +99,45 @@ public class GamePlayManager : MonoBehaviour
 
         //Do not Destroy this gameobject when a new scene is loaded
         DontDestroyOnLoad(gameObject);
+
+        PauseUI.SetActive(false);
+        OptionsUI.SetActive(false);
     }
 
     private void InitializeGame()
     {
         targetTag = "SpawnPoint1";
         //persistingItems = new Dictionary<string, PersistingGameObject>();
+    }
+
+    private void FixedUpdate()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            PauseGame();
+        }
+    }
+
+    public void PauseGame()
+    {
+        PauseUI.SetActive(true);
+    }
+
+    public void ResumeGame()
+    {
+        PauseUI.SetActive(false);
+    }
+
+    public void ActivateOptions()
+    {
+        PauseUI.SetActive(false);
+        OptionsUI.SetActive(true);
+    }
+
+    public void DeactivateOptions()
+    {
+        OptionsUI.SetActive(false);
+        PauseUI.SetActive(true);
     }
 
     //This method will be called from the scene transition when the player clicks start new game
