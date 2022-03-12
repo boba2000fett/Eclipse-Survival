@@ -20,6 +20,8 @@ TagManager:
   - TimeAndLightController
   - Cockroach
   - Cat
+  - Waypoint
+  - EnemyWaypoint
   layers:
   - Default
   - TransparentFX

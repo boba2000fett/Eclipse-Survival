@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WolfSpiderTopDown : EnemyRoomRoaming
+public class WolfSpiderTopDown : Enemy
 {
     [Header("Wolf Spider: Set In Inspector")]
     public float webCooldown;

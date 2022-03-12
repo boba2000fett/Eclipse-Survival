@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7216487051514570710
 Transform:
   m_ObjectHideFlags: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 6594481961122364496}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.34, y: 1.91, z: 1}
+  m_LocalScale: {x: 1.26, y: 1.07, z: 1}
   m_Children: []
   m_Father: {fileID: 1695650865346061927}
   m_RootOrder: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1313248463
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 6eb19ecbf24266044abfb6befd45b033, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -139,18 +139,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 2}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 32, y: 32}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 8, y: 7}
+  m_Size: {x: 0.25, y: 0.25}
   m_EdgeRadius: 0
 --- !u!114 &8821415555027619273
 MonoBehaviour:
@@ -172,6 +172,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4033998086720353576, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
+      propertyPath: m_Radius
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353578, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -194,19 +198,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353579, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_LocalScale.x
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353579, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_LocalScale.y
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353579, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.98
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353579, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.08
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353579, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -262,11 +266,11 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 752ed62e06fa2c84eb5dc0120af45ad0, type: 2}
     - target: {fileID: 4033998086720353582, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_Size.x
-      value: 20
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353582, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_Size.y
-      value: 20
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353582, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
@@ -371,23 +375,13 @@ MonoBehaviour:
   sleepTimer: 0
   hittingDuration: 2.3
   fryingPanStrength: 3
-  strikeTimeInterval: 0.25
-  holdTimeInterval: 0.5
-  pullBackTimeInterval: 0.25
+  strikeTimeInterval: 0.65
+  holdTimeInterval: 0.6
+  pullBackTimeInterval: 0.3
   fryingPan: {fileID: 0}
   isHitting: 0
-  hittingTime: 0
-  strikeTime: 0
-  holdTime: 0
+  hittingTime: 0.6
+  strikeTime: 0.4
+  holdTime: 0.2
   pullBackTime: 0
   strikeState: 3
-  leftFacingPositionFryingPan: {x: -15, y: 0}
-  rightFacingPositionFryingPan: {x: 15, y: 0}
-  upFacingPositionFryingPan: {x: 0, y: 18}
-  downFacingPositionFryingPan: {x: 0, y: -18}
-  standardPositionFryingPan: {x: 0, y: 0}
-  leftFacingRotationFryingPan: {x: -15, y: 0}
-  rightFacingRotationFryingPan: {x: 15, y: 0}
-  upFacingRotationFryingPan: {x: 0, y: 18}
-  downFacingRotationFryingPan: {x: 0, y: -18}
-  standardFacingRotationFryingPan: {x: 0, y: 0}

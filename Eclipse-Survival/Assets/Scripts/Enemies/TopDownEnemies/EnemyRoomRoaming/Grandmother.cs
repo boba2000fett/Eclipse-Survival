@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -126,6 +127,11 @@ public class Grandmother : EnemyRoomRoaming
         //UpdateFryingPanPosition();
         //fryingPan.SetActive(true);
         //isHitting = true;
+        var ts = TimeSpan.FromSeconds(strikeTimeInterval);
+        Debug.Log($"strikeTimeInterval {string.Format("{0:00}:{1:00}", ts.TotalMinutes, ts.Seconds)}");
+
+        SwitchAttackingAnimation(true);
+
 
         if (strikeState == StrikeState.Strike)
         {
@@ -165,6 +171,47 @@ public class Grandmother : EnemyRoomRoaming
                 pullBackTime = 0f;
 
                 //Possibly Check if Target is Null here, and then if it is, make isAlerted False
+                SwitchAttackingAnimation(false);
+            }
+        }
+    }
+
+    public void SwitchAttackingAnimation(bool setBool)
+    {
+        if (setBool)
+        {
+            switch (direction)
+            {
+                case Facing.Down:
+                    anim.SetBool("isAttackingDown", true);
+                    break;
+                case Facing.Right:
+                    anim.SetBool("isAttackingRight", true);
+                    break;
+                case Facing.Left:
+                    anim.SetBool("isAttackingLeft", true);
+                    break;
+                case Facing.Up:
+                    anim.SetBool("isAttackingUp", true);
+                    break;
+            }
+        }
+        else
+        {
+            switch (direction)
+            {
+                case Facing.Down:
+                    anim.SetBool("isAttackingDown", false);
+                    break;
+                case Facing.Right:
+                    anim.SetBool("isAttackingRight", false);
+                    break;
+                case Facing.Left:
+                    anim.SetBool("isAttackingLeft", false);
+                    break;
+                case Facing.Up:
+                    anim.SetBool("isAttackingUp", false);
+                    break;
             }
         }
     }

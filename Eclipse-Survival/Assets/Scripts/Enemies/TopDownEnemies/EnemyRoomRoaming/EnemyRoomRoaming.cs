@@ -123,6 +123,7 @@ public class EnemyRoomRoaming : Enemy
             resetCollision = false;
             GetComponent<BoxCollider2D>().enabled = true;
             GetComponent<CircleCollider2D>().enabled = true;
+            GetComponent<SpriteRenderer>().enabled = true;
         }
     }
 
@@ -164,10 +165,11 @@ public class EnemyRoomRoaming : Enemy
             {
                 currentWaypointDestination = currentWaypointDestination.nextNodeHome;
             }
-            if (currentWaypointDestination.isHomeNode)
+            if (currentWaypointDestination.isHomeNode) ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             {
                 GetComponent<BoxCollider2D>().enabled = false;
                 GetComponent<CircleCollider2D>().enabled = false;
+                GetComponent<SpriteRenderer>().enabled = false;
             }
             return;
         }
