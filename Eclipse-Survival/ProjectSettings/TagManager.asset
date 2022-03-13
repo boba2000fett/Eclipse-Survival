@@ -22,6 +22,7 @@ TagManager:
   - Cat
   - Waypoint
   - EnemyWaypoint
+  - Wall
   layers:
   - Default
   - TransparentFX

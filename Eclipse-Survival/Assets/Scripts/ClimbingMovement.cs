@@ -123,8 +123,9 @@ public class ClimbingMovement : MonoBehaviour
         if(climbing) pVel.y = 0f;
 
         // Adding running
-        if (Input.GetKey(KeyCode.LeftShift) && stamina > 0 && !staminaCooldown 
-            && (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)))
+        if (Input.GetKey(KeyCode.LeftShift) && stamina > 0 && !staminaCooldown && onGround
+            && ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+            || (climbing && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)))))
         {
             stamina -= Constants.STAMINA_USE_INCREMENT;
             if (stamina <= 0)

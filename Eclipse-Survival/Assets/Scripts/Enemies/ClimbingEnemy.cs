@@ -429,7 +429,7 @@ public class ClimbingEnemy : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground")
         {
-            if (canJump && !climbing && onGround && path[nodeNumber].isGround)
+            if (canJump && !climbing && onGround && path.Count > nodeNumber && path[nodeNumber].isGround)
             {
                 Vector2 pos = transform.position;
                 Vector2 target = path[nodeNumber].position;
