@@ -75,7 +75,7 @@ public class SceneTransitionScriptBasic : MonoBehaviour
                 if (nextScene == Constants.ALPHA_CAMERON_TEST_SCENE)
                 {
                     GamePlayManager.GPM.NewGame();
-                    SceneManager.LoadScene("Bedroom1");  
+                    SceneManager.LoadScene("DownstairsTopLeftKitchen");  
                 }
                 else if(nextScene == Constants.OPTION_SCENE)
                 {

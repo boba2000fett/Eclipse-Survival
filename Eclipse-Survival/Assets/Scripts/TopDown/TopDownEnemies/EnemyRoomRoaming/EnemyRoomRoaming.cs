@@ -13,7 +13,8 @@ public class EnemyRoomRoaming : Enemy
         North,
         South,
         West,
-        East
+        East,
+        Stairs
     }
 
     [Header("Enemy Roaming : Set in Inspector")]    
@@ -223,6 +224,11 @@ public class EnemyRoomRoaming : Enemy
         {
             pathToExit = PathToExit.East;
             currentWaypointDestination = currentWaypointDestination.nextNodeEastExit;
+        }
+        else if (roomList[currentRoomIndex + 1].sceneName == roomList[currentRoomIndex].stairSceneName)
+        {
+            pathToExit = PathToExit.Stairs;
+            currentWaypointDestination = currentWaypointDestination.nextNodeStairsExit;
         }
     }
 

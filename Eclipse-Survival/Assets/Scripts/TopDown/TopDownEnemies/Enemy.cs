@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [Header("Set in Inspector: Enemy Base Class")]
-    public Waypoint[] waypoints;
+    public EnemyWaypoint[] waypoints;
     public GameObject home;
     public float moveSpeed;
     public float runSpeed;
@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
     public GameObject target; //This will be set when the object is alerted
     public int waypointIndex;
     public float alertTime;
-    public Waypoint currentWaypointDestination;
+    public EnemyWaypoint currentWaypointDestination;
     public Facing direction;
 
     //Components

@@ -5,19 +5,23 @@ using UnityEngine;
 
 public class EnemyWaypoint : MonoBehaviour
 {
-    [Header("Set in Inspector: Waypoint")]
+    [Header("Set in Inspector: EnemyWaypoint")]
     public EnemyWaypoint[] possibleTravelPoints;
     public EnemyWaypoint[] pathToExit;
     public EnemyWaypoint nextNodeSouthExit;
     public EnemyWaypoint nextNodeNorthExit;
     public EnemyWaypoint nextNodeWestExit;
     public EnemyWaypoint nextNodeEastExit;
+    public EnemyWaypoint nextNodeStairsExit;
     [Header("This will only be used in the scene where the home is.")]
     public EnemyWaypoint nextNodeHome;
     //public Waypoint nextNodeSouthExit;
 
     public bool isExitNode;
     public bool isHomeNode = false;
+
+    [Header("Set Dynamically: EnemyWaypoint")]
+    public bool completedWaypoint = false;
     /*
     When arriving at node 1, the grandmother would then travel to either 2 or 4 (it would pick randomly)
     _______________
@@ -41,7 +45,7 @@ pathToExit: Node 4, Node 3, Node 10
     public void FindPotentialWaypoints()
     {
         Camera.main.GetComponent<CameraFollow>().enabled = false;
-        GameObject.Find("Main Camera/MapBounds").gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        GameObject.Find("MapBounds").gameObject.GetComponent<BoxCollider2D>().enabled = false;
 
         //GameObject.FindGameObjectWithTag("MainCamera").GetComponent
         GameObject[] waypointsInScene = GameObject.FindGameObjectsWithTag("EnemyWaypoint");
@@ -79,9 +83,12 @@ pathToExit: Node 4, Node 3, Node 10
         this.GetComponent<BoxCollider2D>().enabled = true;
 
         possibleTravelPoints = availableNodes.ToArray();
-
-        GameObject.Find("Main Camera/MapBounds").gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        //Main Camera/MapBounds
+        GameObject.Find("MapBounds").gameObject.GetComponent<BoxCollider2D>().enabled = true;
         Camera.main.GetComponent<CameraFollow>().enabled = true;
 
+        completedWaypoint = true;
     }
+
+        
 }

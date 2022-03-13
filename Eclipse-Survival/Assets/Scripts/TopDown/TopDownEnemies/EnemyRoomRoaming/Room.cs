@@ -16,30 +16,33 @@ public class Room : MonoBehaviour
     public string westSceneName; //The name of the scene that is to the West of the current room
     [Tooltip("The name of the scene that is to the South of the current room")] 
     public string southSceneName; //The name of the scene that is to the South of the current room    
+    public string stairSceneName;
     [Tooltip("The number of available exits that room has")]
     public int availableExits; //The number of available exits that room has
     [Header("")]
     [Tooltip("This the list of waypoints in that room")]
     //This is useful because if switched to a scene where the enemy is supposed to be in that scene, the enemy can be moved
     //To a random variable 
-    public Waypoint[] waypointsInRoom;
-    public Waypoint southExit;
-    public Waypoint northExit;
-    public Waypoint eastExit;
-    public Waypoint westExit;
-    public Waypoint homeNode;
+    public EnemyWaypoint[] waypointsInRoom;
+    public EnemyWaypoint southExit;
+    public EnemyWaypoint northExit;
+    public EnemyWaypoint eastExit;
+    public EnemyWaypoint westExit;
+    public EnemyWaypoint stairsExit;
+    public EnemyWaypoint homeNode;
+
+    //public int[] nodeIntList;
+    //public int northExitInt;
+    //public int southExitInt;
+    //public int westExitInt;
+    //public int eastExitInt;
+    //public int startsExitInt;
 
     public bool isWallCrawlingStage;
 
-    [Header("Potentially Delete Later: Room")]
-    [Tooltip("This will be the name of the build index that this 'Room' is in (POTENTIALLY DELETE THIS LATER)")]
-    public int roomID; //This will be the build index of the Scene that this "Room" is in
-    
-
     private void Start()
     {
-        //roomID = SceneManager.GetActiveScene().buildIndex;
-        //sceneName = SceneManager.GetActiveScene().name;
+        FindNodes();
     }
 
     /// <summary>
@@ -111,4 +114,63 @@ public class Room : MonoBehaviour
         //    }
         //}
     }
+
+    public void FindNodes()
+    {
+        GameObject[] tempArray = GameObject.FindGameObjectsWithTag("EnemyWaypoint");
+        EnemyWaypoint[] waypointList = new EnemyWaypoint[tempArray.Length];
+
+        for (int i = 0; i < tempArray.Length; i++)
+        {
+            waypointList[i] = tempArray[i].GetComponent<EnemyWaypoint>();
+            if (waypointList[i].gameObject.name == "SouthExit")
+            {
+                southExit = waypointList[i];
+            }
+            else if (waypointList[i].gameObject.name == "EastExit")
+            {
+                eastExit = waypointList[i];
+            }
+            else if (waypointList[i].gameObject.name == "NorthExit")
+            {
+                northExit = waypointList[i];
+            }
+            else if (waypointList[i].gameObject.name == "WestExit")
+            {
+                westExit = waypointList[i];
+            }
+            else if (waypointList[i].gameObject.name == "StairsExit")
+            {
+                stairsExit = waypointList[i];
+            }
+            else if (waypointList[i].gameObject.name == "HomeNode")
+            {
+                homeNode = waypointList[i];
+            }
+
+        }
+
+        waypointsInRoom = waypointList;
+    }
+
+
+    //public void GeneratePathsToExit()
+    //{
+    //    QPathFinder.PathFinder finder = GetComponent<QPathFinder.PathFinder>();
+
+    //    for (int i = 0; i < waypointsInRoom.Length; i++)
+    //    {
+    //        if (waypointsInRoom[i].nextNodeEastExit)
+    //        {
+
+    //        }
+
+    //        if (eastExit != null)
+    //        {
+    //            //finder.FindShortestPathOfNodes(nodeIntList[i], )
+    //        }            
+    //    }
+
+
+    //}
 }

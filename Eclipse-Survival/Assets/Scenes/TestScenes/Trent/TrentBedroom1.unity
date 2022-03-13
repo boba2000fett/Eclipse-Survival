@@ -412,6 +412,7 @@ MonoBehaviour:
   nextNodeHome: {fileID: 0}
   isExitNode: 0
   isHomeNode: 0
+  completedWaypoint: 0
 --- !u!61 &13001442
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4065,6 +4066,7 @@ MonoBehaviour:
   nextNodeHome: {fileID: 0}
   isExitNode: 0
   isHomeNode: 0
+  completedWaypoint: 0
 --- !u!61 &164012703
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10073,9 +10075,6 @@ Transform:
   - {fileID: 915480108}
   - {fileID: 1735813387}
   - {fileID: 1077110424}
-  - {fileID: 1158397231}
-  - {fileID: 1813801304}
-  - {fileID: 2049477742}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -21043,6 +21042,7 @@ MonoBehaviour:
   nextNodeHome: {fileID: 0}
   isExitNode: 0
   isHomeNode: 0
+  completedWaypoint: 0
 --- !u!61 &915480110
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -24637,6 +24637,7 @@ MonoBehaviour:
   nextNodeHome: {fileID: 0}
   isExitNode: 0
   isHomeNode: 0
+  completedWaypoint: 0
 --- !u!61 &1077110426
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -25485,7 +25486,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1122302181}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.56, y: -2.44, z: 0}
+  m_LocalPosition: {x: -8.56, y: -3.34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 423262335}
@@ -25512,6 +25513,7 @@ MonoBehaviour:
   nextNodeHome: {fileID: 0}
   isExitNode: 0
   isHomeNode: 0
+  completedWaypoint: 0
 --- !u!61 &1122302184
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -26569,85 +26571,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1158397230
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1158397231}
-  - component: {fileID: 1158397233}
-  - component: {fileID: 1158397232}
-  m_Layer: 0
-  m_Name: Test
-  m_TagString: EnemyWaypoint
-  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1158397231
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1158397230}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.32, y: -3.24, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 423262335}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1158397232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1158397230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f8cbb8d9426cad48b121fb6e0b075bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  possibleTravelPoints: []
-  pathToExit: []
-  nextNodeSouthExit: {fileID: 0}
-  nextNodeNorthExit: {fileID: 0}
-  nextNodeWestExit: {fileID: 0}
-  nextNodeEastExit: {fileID: 0}
-  nextNodeHome: {fileID: 0}
-  isExitNode: 0
-  isHomeNode: 0
---- !u!61 &1158397233
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1158397230}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!1 &1158994274
 GameObject:
   m_ObjectHideFlags: 0
@@ -27111,6 +27034,7 @@ MonoBehaviour:
   nextNodeHome: {fileID: 0}
   isExitNode: 0
   isHomeNode: 0
+  completedWaypoint: 0
 --- !u!61 &1184423775
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -33784,6 +33708,7 @@ MonoBehaviour:
   nextNodeHome: {fileID: 0}
   isExitNode: 0
   isHomeNode: 0
+  completedWaypoint: 0
 --- !u!61 &1386711680
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -41142,6 +41067,7 @@ MonoBehaviour:
   nextNodeHome: {fileID: 0}
   isExitNode: 0
   isHomeNode: 0
+  completedWaypoint: 0
 --- !u!61 &1735813389
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -42590,85 +42516,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1813223399}
   m_CullTransparentMesh: 1
---- !u!1 &1813801303
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1813801304}
-  - component: {fileID: 1813801306}
-  - component: {fileID: 1813801305}
-  m_Layer: 0
-  m_Name: Test (1)
-  m_TagString: EnemyWaypoint
-  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1813801304
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1813801303}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.82, y: 0.51, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 423262335}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1813801305
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1813801303}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f8cbb8d9426cad48b121fb6e0b075bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  possibleTravelPoints: []
-  pathToExit: []
-  nextNodeSouthExit: {fileID: 0}
-  nextNodeNorthExit: {fileID: 0}
-  nextNodeWestExit: {fileID: 0}
-  nextNodeEastExit: {fileID: 0}
-  nextNodeHome: {fileID: 0}
-  isExitNode: 0
-  isHomeNode: 0
---- !u!61 &1813801306
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1813801303}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!1 &1815665065
 GameObject:
   m_ObjectHideFlags: 0
@@ -49191,85 +49038,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &2049477741
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2049477742}
-  - component: {fileID: 2049477744}
-  - component: {fileID: 2049477743}
-  m_Layer: 0
-  m_Name: Test (2)
-  m_TagString: EnemyWaypoint
-  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2049477742
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2049477741}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.32, y: -3.24, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 423262335}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2049477743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2049477741}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f8cbb8d9426cad48b121fb6e0b075bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  possibleTravelPoints: []
-  pathToExit: []
-  nextNodeSouthExit: {fileID: 0}
-  nextNodeNorthExit: {fileID: 0}
-  nextNodeWestExit: {fileID: 0}
-  nextNodeEastExit: {fileID: 0}
-  nextNodeHome: {fileID: 0}
-  isExitNode: 0
-  isHomeNode: 0
---- !u!61 &2049477744
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2049477741}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!1 &2051608693
 GameObject:
   m_ObjectHideFlags: 0
@@ -52124,6 +51892,7 @@ MonoBehaviour:
   nextNodeHome: {fileID: 0}
   isExitNode: 0
   isHomeNode: 0
+  completedWaypoint: 0
 --- !u!61 &2141345589
 BoxCollider2D:
   m_ObjectHideFlags: 0
