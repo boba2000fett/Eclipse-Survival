@@ -72,7 +72,14 @@ public class Grandmother : EnemyRoomRoaming
 
     public override void Update()
     {
-        base.Update();
+        if (!isHitting)
+        {
+            base.Update();
+        }
+        else
+        {
+            StrikeFryingPan();
+        }
 
         //if (target == null)
         //{
@@ -90,8 +97,8 @@ public class Grandmother : EnemyRoomRoaming
 
     public override void AlertMoveTowards()
     {
-        if (!isHitting)
-        {
+        //if (!isHitting)
+        //{
 
             //Possibly add in more conditions to make the object leave alert phase, like checking if the target left the room
             if (target == null || (alertTime > alertTimeDuration))
@@ -113,12 +120,12 @@ public class Grandmother : EnemyRoomRoaming
                 isHitting = true;
                 strikeState = StrikeState.Strike;
             }
-        }
-        else
-        {
-            StrikeFryingPan();
+        //}
+        //else
+        //{
+        //    StrikeFryingPan();
 
-        }
+        //}
     }
 
     #region Frying Pan Methods

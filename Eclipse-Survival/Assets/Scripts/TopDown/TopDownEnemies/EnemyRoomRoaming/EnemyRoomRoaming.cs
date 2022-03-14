@@ -25,9 +25,9 @@ public class EnemyRoomRoaming : Enemy
     public bool setRooms = true;
     public int requiredWaypointsCount = 4;
     [Tooltip("This variable is to set current Room Index")]
-    public int currentRoomIndexSet;
+    private int currentRoomIndexSet;
     [Tooltip("This variable is here to see the currentRoomIndex variable (which cannot be directly seen in the inspector because it is static)")]
-    public int seeCurrentRoomIndex;
+    private int seeCurrentRoomIndex;
     public float outsideRoomTimeInterval;
 
     //These are supposed to be Static
@@ -84,6 +84,13 @@ public class EnemyRoomRoaming : Enemy
         //DontDestroyOnLoad(gameObject);
         #endregion
 
+        Debug.Log(this.gameObject.name);
+        if (this.gameObject.name == "Cat")
+        {
+            roomList = roomListSet;
+            return;
+        }
+
         RestartCycle();
         Debug.LogWarning("Found");
     }
@@ -124,7 +131,6 @@ public class EnemyRoomRoaming : Enemy
             resetCollision = false;
             GetComponent<BoxCollider2D>().enabled = true;
             GetComponent<CircleCollider2D>().enabled = true;
-            GetComponent<SpriteRenderer>().enabled = true;
         }
     }
 
@@ -168,9 +174,7 @@ public class EnemyRoomRoaming : Enemy
             }
             if (currentWaypointDestination.isHomeNode) ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             {
-                GetComponent<BoxCollider2D>().enabled = false;
-                GetComponent<CircleCollider2D>().enabled = false;
-                GetComponent<SpriteRenderer>().enabled = false;
+                DisableCollision();
             }
             return;
         }
@@ -326,6 +330,8 @@ public class EnemyRoomRoaming : Enemy
 
         if (atHome || goHome)
         {
+            //Disable Collision and Sprite Renderer
+            DisableCollision();
             transform.position = room.homeNode.transform.position;
             currentRoomIndex = 0;
             return;
@@ -394,9 +400,19 @@ public class EnemyRoomRoaming : Enemy
         sleepTimer = 0;
         currentRoomIndex = 0;
         resetCollision = true;
-       
+
+        GetComponent<SpriteRenderer>().enabled = true;
+
         currentWaypointDestination = FindObjectOfType<Room>().homeNode;
     }
+
+    public void DisableCollision()
+    {
+        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<CircleCollider2D>().enabled = false;
+        GetComponent<SpriteRenderer>().enabled = false;
+    }
+
 
 }
 

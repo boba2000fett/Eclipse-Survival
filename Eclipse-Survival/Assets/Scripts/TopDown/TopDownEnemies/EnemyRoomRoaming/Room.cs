@@ -50,49 +50,9 @@ public class Room : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            if (SceneManager.GetActiveScene().name != "TrentBedroom1")
-            {
-                SceneManager.LoadScene("TrentBedroom1");
-            }           
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            if (SceneManager.GetActiveScene().name != "TrentKitchen")
-            {
-                SceneManager.LoadScene("TrentKitchen");
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            if (SceneManager.GetActiveScene().name != "TrentWall1")
-            {
-                SceneManager.LoadScene("TrentWall1");
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha8))
-        {
-            if (SceneManager.GetActiveScene().name != "Bedroom1")
-            {
-                SceneManager.LoadScene("Bedroom1");
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha9))
-        {
-            if (SceneManager.GetActiveScene().name != "Kitchen")
-            {
-                SceneManager.LoadScene("Kitchen");
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            if (SceneManager.GetActiveScene().name != "Wall1")
-            {
-                SceneManager.LoadScene("Wall1");
-            }
-        }
-
+#if UNITY_EDITOR
+        TestingRooms();
+#endif
 
         //if (Input.GetKeyDown(KeyCode.P))
         //{
@@ -115,8 +75,82 @@ public class Room : MonoBehaviour
         //}
     }
 
-    public void FindNodes()
+    public void TestingRooms()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (SceneManager.GetActiveScene().name != "UpstairsTopLeftBedroom")
+            {
+                SceneManager.LoadScene("UpstairsTopLeftBedroom");
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if (SceneManager.GetActiveScene().name != "UpstairsTopRightBedroom")
+            {
+                SceneManager.LoadScene("UpstairsTopRightBedroom");
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if (SceneManager.GetActiveScene().name != "UpstairsBottomRightBedroom")
+            {
+                SceneManager.LoadScene("UpstairsBottomRightBedroom");
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            if (SceneManager.GetActiveScene().name != "UpstairsBottomLeftBedroom")
+            {
+                SceneManager.LoadScene("UpstairsBottomLeftBedroom");
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            if (SceneManager.GetActiveScene().name != "UpstairsCenterHallway")
+            {
+                SceneManager.LoadScene("UpstairsCenterHallway");
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            if (SceneManager.GetActiveScene().name != "UpstairsCenterRightBathroom")
+            {
+                SceneManager.LoadScene("UpstairsCenterRightBathroom");
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            if (SceneManager.GetActiveScene().name != "DownstairsTopLeftKitchen")
+            {
+                SceneManager.LoadScene("DownstairsTopLeftKitchen");
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            if (SceneManager.GetActiveScene().name != "DownstairsTopRightDiningRoom")
+            {
+                SceneManager.LoadScene("DownstairsTopRightDiningRoom");
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            if (SceneManager.GetActiveScene().name != "DownstairsBottomLeftHallway")
+            {
+                SceneManager.LoadScene("DownstairsBottomLeftHallway");
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            if (SceneManager.GetActiveScene().name != "DownstairsBottomRightLivingRoom")
+            {
+                SceneManager.LoadScene("DownstairsBottomRightLivingRoom");
+            }
+        }
+    }
+
+    public void FindNodes()
+    {       
         GameObject[] tempArray = GameObject.FindGameObjectsWithTag("EnemyWaypoint");
         EnemyWaypoint[] waypointList = new EnemyWaypoint[tempArray.Length];
 

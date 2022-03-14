@@ -79,7 +79,8 @@ public class RoomManager : MonoBehaviour
                 if (totalRoomList[roomIndex].sceneName == roomList.Last.Value.southSceneName ||
                     totalRoomList[roomIndex].sceneName == roomList.Last.Value.westSceneName ||
                     totalRoomList[roomIndex].sceneName == roomList.Last.Value.northSceneName ||
-                    totalRoomList[roomIndex].sceneName == roomList.Last.Value.eastSceneName)
+                    totalRoomList[roomIndex].sceneName == roomList.Last.Value.eastSceneName ||
+                    totalRoomList[roomIndex].sceneName == roomList.Last.Value.stairSceneName)
                 {
                     roomList.AddLast(totalRoomList[roomIndex]);
                     roomCount++;

@@ -44,9 +44,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalRoomList:
-  - {fileID: 9216961173153096286, guid: aa6900f1f9a572a478e2c7f3e11cd895, type: 3}
-  - {fileID: 9216961173153096286, guid: aa6900f1f9a572a478e2c7f3e11cd895, type: 3}
-  baseRoom: {fileID: 2619627699124755209, guid: dc77eefea1950d54ebe7322b65848ff6, type: 3}
+  - {fileID: 3162683669028837503, guid: a8f504fd4fdea61478132541c82bddbf, type: 3}
+  - {fileID: 6558327903196666450, guid: 11fcf71e8b6ba7d4b87add428ae1f770, type: 3}
+  - {fileID: 3507768772690859300, guid: 89064a2297b942d46b5df99cb7c69b4e, type: 3}
+  - {fileID: 2213347441385769717, guid: d2c1b254562c98a43b494c810fb7602f, type: 3}
+  - {fileID: 1735986851574280029, guid: 28210aa42913ad64e8b29140e3293ad1, type: 3}
+  - {fileID: 5116355836158295316, guid: 8d6ff564b4090a948a666d0e5fadc831, type: 3}
+  - {fileID: 5610223063401652148, guid: 5d7a6fafc71d0ad43bf83454e4b7144b, type: 3}
+  - {fileID: 7342646730700748182, guid: 372f3ee3c75064d43b142a2d3736029e, type: 3}
+  baseRoom: {fileID: 414688176703143036, guid: 627eb93a581df3148904d4e7d23440e7, type: 3}
   generatedRoomTest: []
   numberOfRoomsThisSequence: 0
   roomCount: 0

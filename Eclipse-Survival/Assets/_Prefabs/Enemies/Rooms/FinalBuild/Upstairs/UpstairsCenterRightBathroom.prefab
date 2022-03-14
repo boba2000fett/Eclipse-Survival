@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1816360743771249666
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1816360743771249668}
+  - component: {fileID: 1816360743771249669}
+  m_Layer: 0
+  m_Name: UpstairsCenterRightBathroom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1816360743771249668
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816360743771249666}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.57150096, y: 0.08677322, z: -21.404446}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1816360743771249669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816360743771249666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1bc3c0b377b82e4c92b67557c3e6e23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: UpstairsCenterRightBathroom
+  northSceneName: 
+  eastSceneName: 
+  westSceneName: 
+  southSceneName: 
+  stairSceneName: 
+  availableExits: 0
+  waypointsInRoom: []
+  southExit: {fileID: 0}
+  northExit: {fileID: 0}
+  eastExit: {fileID: 0}
+  westExit: {fileID: 0}
+  stairsExit: {fileID: 0}
+  homeNode: {fileID: 0}
+  isWallCrawlingStage: 0

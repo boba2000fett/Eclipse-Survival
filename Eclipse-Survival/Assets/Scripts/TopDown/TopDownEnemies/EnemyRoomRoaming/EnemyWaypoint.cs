@@ -44,6 +44,9 @@ pathToExit: Node 4, Node 3, Node 10
 
     public void FindPotentialWaypoints()
     {
+        if (isHomeNode)
+            return;
+
         Camera.main.GetComponent<CameraFollow>().enabled = false;
         GameObject.Find("MapBounds").gameObject.GetComponent<BoxCollider2D>().enabled = false;
 
