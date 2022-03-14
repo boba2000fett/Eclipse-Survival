@@ -112,20 +112,32 @@ public class GamePlayManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Scene activeScene = SceneManager.GetActiveScene();
+
         if (Input.GetKey(KeyCode.Escape))
         {
-            PauseGame();
+            if (activeScene.buildIndex != SPLASH_SCENE &&
+                activeScene.buildIndex != STUDIO_SCENE &&
+                activeScene.buildIndex != MAIN_MENU_SCENE &&
+                activeScene.buildIndex != OPTION_SCENE &&
+                activeScene.buildIndex != CREDIT_SCENE &&
+                activeScene.buildIndex != GAME_OVER_SCENE)
+            {
+                PauseGame();
+            }         
         }
     }
 
     public void PauseGame()
     {
         PauseUI.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     public void ResumeGame()
     {
         PauseUI.SetActive(false);
+        Time.timeScale = 1f;
     }
 
     public void ActivateOptions()

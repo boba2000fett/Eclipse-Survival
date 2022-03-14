@@ -30,10 +30,11 @@ public class Constants : MonoBehaviour
     public const int MAIN_MENU_SCENE = 2;
     public const int OPTION_SCENE = 3;
     public const int CREDIT_SCENE = 4;
+    public const int GAME_OVER_SCENE = 5;
     //public const int DownstairsTopLeftKitchen = 5;
     //public const int PLAY_SCENE_WALL_VIEW = 6;
     //public const int PAUSE_SCENE = 7;
-    //public const int GAME_OVER_SCENE = 8;
+    
 
 
     //Test Constant Scene for transition between two scenes

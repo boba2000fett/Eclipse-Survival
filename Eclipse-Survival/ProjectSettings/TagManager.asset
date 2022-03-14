@@ -23,6 +23,10 @@ TagManager:
   - Waypoint
   - EnemyWaypoint
   - Wall
+  - SpawnPoint3
+  - SpawnPoint4
+  - SpawnPoint5
+  - SpawnPoint6
   layers:
   - Default
   - TransparentFX

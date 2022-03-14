@@ -71,36 +71,172 @@ public class PerspectiveSceneChange : MonoBehaviour
                     }
                     break;
 
-                case "DinningRoom":
+                case "DiningRoom":
+                    tempItemHolder = GameObject.FindGameObjectsWithTag("Item");
+                    GamePlayManager.GPM.itemsLeftInDinningRoomType = new string[tempItemHolder.Length];
+                    GamePlayManager.GPM.itemsLeftInDinningRoomLocation = new Vector2[tempItemHolder.Length];
 
+
+                    foreach (GameObject item in tempItemHolder)
+                    {
+
+
+                        nameOfItem = item.gameObject.name;
+
+                        tempArray = nameOfItem.Split(char.Parse("("));
+
+                        GamePlayManager.GPM.itemsLeftInDinningRoomType[i] = tempArray[0];
+                        GamePlayManager.GPM.itemsLeftInDinningRoomLocation[i] = item.gameObject.transform.position;
+
+                        i++;
+                    }
                     break;
 
                 case "LivingRoom":
+                    tempItemHolder = GameObject.FindGameObjectsWithTag("Item");
+                    GamePlayManager.GPM.itemsLeftInLivingRoomType = new string[tempItemHolder.Length];
+                    GamePlayManager.GPM.itemsLeftInLivingRoomLocation = new Vector2[tempItemHolder.Length];
 
+
+                    foreach (GameObject item in tempItemHolder)
+                    {
+
+
+                        nameOfItem = item.gameObject.name;
+
+                        tempArray = nameOfItem.Split(char.Parse("("));
+
+                        GamePlayManager.GPM.itemsLeftInLivingRoomType[i] = tempArray[0];
+                        GamePlayManager.GPM.itemsLeftInLivingRoomLocation[i] = item.gameObject.transform.position;
+
+                        i++;
+                    }
                     break;
 
                 case "FirstFloorHallway":
+                    tempItemHolder = GameObject.FindGameObjectsWithTag("Item");
+                    GamePlayManager.GPM.itemsLeftInFirstFloorHallwayType = new string[tempItemHolder.Length];
+                    GamePlayManager.GPM.itemsLeftInFirstFloorHallwayLocation = new Vector2[tempItemHolder.Length];
 
+
+                    foreach (GameObject item in tempItemHolder)
+                    {
+
+
+                        nameOfItem = item.gameObject.name;
+
+                        tempArray = nameOfItem.Split(char.Parse("("));
+
+                        GamePlayManager.GPM.itemsLeftInFirstFloorHallwayType[i] = tempArray[0];
+                        GamePlayManager.GPM.itemsLeftInFirstFloorHallwayLocation[i] = item.gameObject.transform.position;
+
+                        i++;
+                    }
                     break;
 
                 case "GrandKidsBedRoom":
+                    tempItemHolder = GameObject.FindGameObjectsWithTag("Item");
+                    GamePlayManager.GPM.itemsLeftInGrandKidsBedRoomType = new string[tempItemHolder.Length];
+                    GamePlayManager.GPM.itemsLeftInGrandKidsBedRoomLocation = new Vector2[tempItemHolder.Length];
 
+
+                    foreach (GameObject item in tempItemHolder)
+                    {
+
+
+                        nameOfItem = item.gameObject.name;
+
+                        tempArray = nameOfItem.Split(char.Parse("("));
+
+                        GamePlayManager.GPM.itemsLeftInGrandKidsBedRoomType[i] = tempArray[0];
+                        GamePlayManager.GPM.itemsLeftInGrandKidsBedRoomLocation[i] = item.gameObject.transform.position;
+
+                        i++;
+                    }
                     break;
 
                 case "GuestBedRoom1":
+                    tempItemHolder = GameObject.FindGameObjectsWithTag("Item");
+                    GamePlayManager.GPM.itemsLeftInGuestBedRoomOneType = new string[tempItemHolder.Length];
+                    GamePlayManager.GPM.itemsLeftInGuestBedRoomOneLocation = new Vector2[tempItemHolder.Length];
 
+
+                    foreach (GameObject item in tempItemHolder)
+                    {
+
+
+                        nameOfItem = item.gameObject.name;
+
+                        tempArray = nameOfItem.Split(char.Parse("("));
+
+                        GamePlayManager.GPM.itemsLeftInGuestBedRoomOneType[i] = tempArray[0];
+                        GamePlayManager.GPM.itemsLeftInGuestBedRoomOneLocation[i] = item.gameObject.transform.position;
+
+                        i++;
+                    }
                     break;
 
                 case "GuestBedRoom2":
+                    tempItemHolder = GameObject.FindGameObjectsWithTag("Item");
+                    GamePlayManager.GPM.itemsLeftInGuestBedRoomTwoType = new string[tempItemHolder.Length];
+                    GamePlayManager.GPM.itemsLeftInGuestBedRoomTwoLocation = new Vector2[tempItemHolder.Length];
 
+
+                    foreach (GameObject item in tempItemHolder)
+                    {
+
+
+                        nameOfItem = item.gameObject.name;
+
+                        tempArray = nameOfItem.Split(char.Parse("("));
+
+                        GamePlayManager.GPM.itemsLeftInGuestBedRoomTwoType[i] = tempArray[0];
+                        GamePlayManager.GPM.itemsLeftInGuestBedRoomTwoLocation[i] = item.gameObject.transform.position;
+
+                        i++;
+                    }
                     break;
 
                 case "Bathroom":
+                    tempItemHolder = GameObject.FindGameObjectsWithTag("Item");
+                    GamePlayManager.GPM.itemsLeftInBathRoomType = new string[tempItemHolder.Length];
+                    GamePlayManager.GPM.itemsLeftInBathRoomLocation = new Vector2[tempItemHolder.Length];
 
+
+                    foreach (GameObject item in tempItemHolder)
+                    {
+
+
+                        nameOfItem = item.gameObject.name;
+
+                        tempArray = nameOfItem.Split(char.Parse("("));
+
+                        GamePlayManager.GPM.itemsLeftInBathRoomType[i] = tempArray[0];
+                        GamePlayManager.GPM.itemsLeftInBathRoomLocation[i] = item.gameObject.transform.position;
+
+                        i++;
+                    }
                     break;
 
                 case "SecondFloorHallway":
+                    tempItemHolder = GameObject.FindGameObjectsWithTag("Item");
+                    GamePlayManager.GPM.itemsLeftInSecondFloorHallwayType = new string[tempItemHolder.Length];
+                    GamePlayManager.GPM.itemsLeftInSecondFloorHallwayLocation = new Vector2[tempItemHolder.Length];
 
+
+                    foreach (GameObject item in tempItemHolder)
+                    {
+
+
+                        nameOfItem = item.gameObject.name;
+
+                        tempArray = nameOfItem.Split(char.Parse("("));
+
+                        GamePlayManager.GPM.itemsLeftInSecondFloorHallwayType[i] = tempArray[0];
+                        GamePlayManager.GPM.itemsLeftInSecondFloorHallwayLocation[i] = item.gameObject.transform.position;
+
+                        i++;
+                    }
                     break;
             }
 

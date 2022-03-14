@@ -92,7 +92,7 @@ public class SceneTransitionScriptBasic : MonoBehaviour
             case Constants.CREDIT_SCENE:
                 SceneManager.LoadScene(Constants.MAIN_MENU_SCENE);
                 break;
-            case 8:
+            case Constants.GAME_OVER_SCENE:
                 SceneManager.LoadScene(Constants.MAIN_MENU_SCENE);
                 break;
         }
