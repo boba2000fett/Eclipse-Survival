@@ -7,16 +7,20 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransitionScriptBasic : MonoBehaviour
 {
-    [Header("Set In Inspecotr")]
+    [Header("Set In Inspector")]
     public float delayBetweenAutoTransition;
 
     [Header("Set Dynamically")]
     Scene currentScene;
+    AudioManagement audioManager;
     
     void Start()
     {
         //Indetify the current scene that is being shown
         currentScene = SceneManager.GetActiveScene();
+
+        //Load in the audio manager
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManagement>();
 
         //If the current scene is the splash or studio sceen activate a
         //delay time for progressing to the next scene
@@ -75,7 +79,8 @@ public class SceneTransitionScriptBasic : MonoBehaviour
                 if (nextScene == Constants.ALPHA_CAMERON_TEST_SCENE)
                 {
                     GamePlayManager.GPM.NewGame();
-                    SceneManager.LoadScene("DownstairsTopLeftKitchen");  
+                    SceneManager.LoadScene("DownstairsTopLeftKitchen");
+                    audioManager.PlayDefaultBackgroundMusic();
                 }
                 else if(nextScene == Constants.OPTION_SCENE)
                 {
