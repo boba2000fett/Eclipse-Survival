@@ -9,13 +9,42 @@ public class AudioManagement : MonoBehaviour
     private static AudioManagement instance;
     public static AudioManagement Instance { get { return instance; } }
 
+    // Private controls
+    private float backgroundMusicVolume;
+    private float ambientSFXVolume;
+
+    // Public Controls
+    public float BackgroundMusicVolume
+    {
+        get { return backgroundMusicVolume; }
+        set
+        {
+            backgroundMusicVolume = value;
+            backgroundMusicChannel1.volume = backgroundMusicVolume;
+            backgroundMusicChannel2.volume = backgroundMusicVolume;
+        }
+    }
+
+    public float AmbientSFXVolume
+    {
+        get { return ambientSFXVolume; }
+        set
+        {
+            ambientSFXVolume = value;
+            ambienceChannel.volume = ambientSFXVolume;
+        }
+    }
+
     // Audio Source (Registered by Start method)
-    public AudioSource backgroundTrack1;
-    public AudioSource backgroundTrack2;
+    public AudioSource backgroundMusicChannel1;
+    public AudioSource backgroundMusicChannel2;
+    public AudioSource ambienceChannel;
+    public AudioSource xanderFootsteps;
+
     private bool isPlayingTrack1;
 
-    public AudioSource chaseBackgroundMusic;
-    public AudioSource xanderFootsteps;
+    private float timeBetweenAmbientSounds; // randomized
+    private float timeRemaining;
 
     [Space]
 
@@ -23,12 +52,8 @@ public class AudioManagement : MonoBehaviour
     public AudioClip menuHoldBGM;
     public AudioClip primaryBGM;
     public AudioClip chaseBGM;   
-
-    [Header("Footsteps")]
     public AudioClip[] xanderFootstepsWood;
-
-    [Header("Ambiance")]
-    public AudioClip[] ambiance;
+    public AudioClip[] ambientSoundClips;
 
 
     // Awake is called before Start()
@@ -44,7 +69,7 @@ public class AudioManagement : MonoBehaviour
         {
             instance = this;            
         }
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(this);      
     }
 
     // Start is called before the first frame update
@@ -53,24 +78,51 @@ public class AudioManagement : MonoBehaviour
         isPlayingTrack1 = true;
 
         // Register Audio Sources
-        backgroundTrack1 = gameObject.AddComponent<AudioSource>();
-        backgroundTrack2 = gameObject.AddComponent<AudioSource>();
+        backgroundMusicChannel1 = gameObject.AddComponent<AudioSource>();
+        backgroundMusicChannel2 = gameObject.AddComponent<AudioSource>();
+        ambienceChannel = gameObject.AddComponent<AudioSource>();
+        xanderFootsteps = gameObject.AddComponent<AudioSource>();
 
         // Set to loop
-        backgroundTrack1.loop = true;
-        backgroundTrack2.loop = true;
+        backgroundMusicChannel1.loop = true;
+        backgroundMusicChannel2.loop = true;
+        ambienceChannel.loop = false;
+        xanderFootsteps.loop = false;
 
-        //
-        backgroundTrack1.playOnAwake = false;
-        backgroundTrack2.playOnAwake = false;
+        // Set play on awake to false
+        backgroundMusicChannel1.playOnAwake = false;
+        backgroundMusicChannel2.playOnAwake = false;
+        ambienceChannel.playOnAwake = false;
+        xanderFootsteps.playOnAwake = false;
+
+        // ------- Initial Mix ----------
+        AmbientSFXVolume = 0.5f;
 
         SwitchBackgroundMusic(BackgroundMusicType.Menu);
+        StartCoroutine(PlayAmbientSounds());
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    private IEnumerator PlayAmbientSounds()
+    {
+        timeBetweenAmbientSounds = Random.Range(10f, 25f);
+        timeRemaining = timeBetweenAmbientSounds;
+
+        yield return new WaitForSeconds(timeBetweenAmbientSounds);
+
+        int clipToPlay = (int)Random.Range(0, ambientSoundClips.Length - 1);
+        float volume = Random.Range(0.3f, 0.6f);
+        float pan = Random.Range(-1.0f, 1.0f);
+        ambienceChannel.panStereo = pan;
+        ambienceChannel.PlayOneShot(ambientSoundClips[clipToPlay], volume);
+
+        StopAllCoroutines();
+        StartCoroutine(PlayAmbientSounds()); // kick of next iteration
     }
 
     private void SwapTrack(AudioClip newClip, float fadeDuration)
@@ -85,33 +137,33 @@ public class AudioManagement : MonoBehaviour
 
         if (!isPlayingTrack1)
         {
-            backgroundTrack2.clip = newClip;
-            backgroundTrack2.Play();
+            backgroundMusicChannel2.clip = newClip;
+            backgroundMusicChannel2.Play();
 
             while (timeElapsed < fadeDuration)
             {
-                backgroundTrack2.volume = Mathf.Lerp(0, 1, timeElapsed / fadeDuration);
-                backgroundTrack1.volume = Mathf.Lerp(1, 0, timeElapsed / fadeDuration);
+                backgroundMusicChannel2.volume = Mathf.Lerp(0, 1, timeElapsed / fadeDuration);
+                backgroundMusicChannel1.volume = Mathf.Lerp(1, 0, timeElapsed / fadeDuration);
                 timeElapsed += Time.deltaTime;
                 yield return null;
             }
 
-            backgroundTrack1.Stop();
+            backgroundMusicChannel1.Stop();
         }
         else
         {
-            backgroundTrack1.clip = newClip;
-            backgroundTrack1.Play();
+            backgroundMusicChannel1.clip = newClip;
+            backgroundMusicChannel1.Play();
 
             while (timeElapsed < fadeDuration)
             {
-                backgroundTrack1.volume = Mathf.Lerp(0, 1, timeElapsed / fadeDuration);
-                backgroundTrack2.volume = Mathf.Lerp(1, 0, timeElapsed / fadeDuration);
+                backgroundMusicChannel1.volume = Mathf.Lerp(0, 1, timeElapsed / fadeDuration);
+                backgroundMusicChannel2.volume = Mathf.Lerp(1, 0, timeElapsed / fadeDuration);
                 timeElapsed += Time.deltaTime;
                 yield return null;
             }
 
-            backgroundTrack2.Stop();
+            backgroundMusicChannel2.Stop();
         }
 
         isPlayingTrack1 = !isPlayingTrack1;

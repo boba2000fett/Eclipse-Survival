@@ -166,15 +166,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46c98984abb09454294b851206e7cba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundTrack1: {fileID: 0}
-  backgroundTrack2: {fileID: 0}
-  chaseBackgroundMusic: {fileID: 0}
+  backgroundMusicChannel1: {fileID: 0}
+  backgroundMusicChannel2: {fileID: 0}
+  ambienceChannel: {fileID: 0}
   xanderFootsteps: {fileID: 0}
   menuHoldBGM: {fileID: 8300000, guid: 5b61d8c4cf5332d4f86f784c0ed00f43, type: 3}
   primaryBGM: {fileID: 8300000, guid: 84f4f690e82951042aa78a5db47a8e73, type: 3}
   chaseBGM: {fileID: 0}
-  xanderFootstepsWood: []
-  ambiance: []
+  xanderFootstepsWood:
+  - {fileID: 8300000, guid: 15b66f7437d379a4980ad44785ca4cf2, type: 3}
+  - {fileID: 8300000, guid: 80deb008120c21a49bf48714aba41943, type: 3}
+  - {fileID: 8300000, guid: 61cca759cee78ef449aa1685941feb12, type: 3}
+  - {fileID: 8300000, guid: e6cafd52a412c44479337596d39cc289, type: 3}
+  - {fileID: 8300000, guid: a855a347cbbdf154b96f3de096620696, type: 3}
+  - {fileID: 8300000, guid: c63726f32506f424a8d41b1897eac072, type: 3}
+  - {fileID: 8300000, guid: e45bf6132b9cf77489deb393d992728a, type: 3}
+  - {fileID: 8300000, guid: 001d2e78217ad7748b4a896de4df56fd, type: 3}
+  - {fileID: 8300000, guid: d939a937356bbce468552b68f18eae2d, type: 3}
+  - {fileID: 8300000, guid: 0c3f00aef30f49b4e8a3ad0b3a4d16c8, type: 3}
+  - {fileID: 8300000, guid: 08ffcf315f3a2814f9dcb2206e419dbf, type: 3}
+  - {fileID: 8300000, guid: 2504ccc02e79eee44bdc441f3b9e3f42, type: 3}
+  - {fileID: 8300000, guid: a3a32cdb71f4775419295bd56f0b3094, type: 3}
+  - {fileID: 8300000, guid: 7a1ecd76baf5e594cafb9e0e46846072, type: 3}
+  - {fileID: 8300000, guid: e1dcef1a0c4c7cf4f9c8326b2b070137, type: 3}
+  - {fileID: 8300000, guid: 314596121bd1efd449c8579d7c8d0099, type: 3}
+  - {fileID: 8300000, guid: fd06fa279006e1b4e94622013fcf78f0, type: 3}
+  - {fileID: 8300000, guid: 6817208455bc5ed43959fa7ce1020348, type: 3}
+  - {fileID: 8300000, guid: 09fd79a4ecef05d4bb19e6c3250e2a1e, type: 3}
+  - {fileID: 8300000, guid: 3b491f75b241d0847a576ae38a4a26fe, type: 3}
+  ambientSoundClips:
+  - {fileID: 8300000, guid: 1f45f0e742419d242b7032d1e7a4d136, type: 3}
+  - {fileID: 8300000, guid: 8745dec5705d5904fbba8778586d2313, type: 3}
+  - {fileID: 8300000, guid: 4a0937e53601cd241a3b24ddb513d16a, type: 3}
+  - {fileID: 8300000, guid: 39ebb5de5a4a76048a7f56145e3f7430, type: 3}
+  - {fileID: 8300000, guid: a0ba49fe3612a5c4ebc876ad68bb978d, type: 3}
 --- !u!1 &373127576
 GameObject:
   m_ObjectHideFlags: 0
