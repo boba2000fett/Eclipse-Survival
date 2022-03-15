@@ -38,22 +38,33 @@ public class AudioManagement : MonoBehaviour
         if (instance != null && instance != this)
         {
             Destroy(this.gameObject);
+            return;
         }
         else
         {
-            instance = this;
-            DontDestroyOnLoad(this);
-        }  
+            instance = this;            
+        }
+        DontDestroyOnLoad(this);
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        isPlayingTrack1 = true;
+
         // Register Audio Sources
         backgroundTrack1 = gameObject.AddComponent<AudioSource>();
         backgroundTrack2 = gameObject.AddComponent<AudioSource>();
 
-        PlayMenuBackgroundMusic();
+        // Set to loop
+        backgroundTrack1.loop = true;
+        backgroundTrack2.loop = true;
+
+        //
+        backgroundTrack1.playOnAwake = false;
+        backgroundTrack2.playOnAwake = false;
+
+        SwitchBackgroundMusic(BackgroundMusicType.Menu);
     }
 
     // Update is called once per frame
@@ -102,17 +113,30 @@ public class AudioManagement : MonoBehaviour
 
             backgroundTrack2.Stop();
         }
+
+        isPlayingTrack1 = !isPlayingTrack1;
     }
 
     #region Public Methods
-    public void PlayMenuBackgroundMusic()
+    public void SwitchBackgroundMusic(BackgroundMusicType type)
     {
-        SwapTrack(menuHoldBGM, 3.0f);
-    }
-    public void PlayDefaultBackgroundMusic()
-    {
-        SwapTrack(primaryBGM, 3.0f);
+        switch (type)
+        {
+            case BackgroundMusicType.Menu:
+                SwapTrack(menuHoldBGM, 5.0f);
+                break;
+            case BackgroundMusicType.Normal:
+                SwapTrack(primaryBGM, 3.0f);
+                break;
+        }
     }
 
     #endregion
+}
+
+public enum BackgroundMusicType
+{
+    Menu,
+    Normal,
+    UnderAttack
 }

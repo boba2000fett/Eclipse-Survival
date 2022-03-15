@@ -12,7 +12,6 @@ public class SceneTransitionScriptBasic : MonoBehaviour
 
     [Header("Set Dynamically")]
     Scene currentScene;
-    AudioManagement audioManager;
     
     void Start()
     {
@@ -20,7 +19,6 @@ public class SceneTransitionScriptBasic : MonoBehaviour
         currentScene = SceneManager.GetActiveScene();
 
         //Load in the audio manager
-        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManagement>();
 
         //If the current scene is the splash or studio sceen activate a
         //delay time for progressing to the next scene
@@ -79,8 +77,8 @@ public class SceneTransitionScriptBasic : MonoBehaviour
                 if (nextScene == Constants.ALPHA_CAMERON_TEST_SCENE)
                 {
                     GamePlayManager.GPM.NewGame();
-                    SceneManager.LoadScene("DownstairsTopLeftKitchen");
-                    audioManager.PlayDefaultBackgroundMusic();
+                    SceneManager.LoadSceneAsync("DownstairsTopLeftKitchen");
+                    AudioManagement.Instance.SwitchBackgroundMusic(BackgroundMusicType.Normal);
                 }
                 else if(nextScene == Constants.OPTION_SCENE)
                 {
