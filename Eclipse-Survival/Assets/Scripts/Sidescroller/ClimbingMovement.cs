@@ -327,14 +327,30 @@ public class ClimbingMovement : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground")
         {
-            if (collision.gameObject.transform.position.y - this.transform.position.y < 0.15f)
+            if (collision.gameObject.transform.position.y - this.transform.position.y < -0.125 
+                && collision.gameObject.transform.position.y - this.transform.position.y >= -0.625)
             {
                 onGround = true;
             }
-            else
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            if (collision.gameObject.transform.position.y - this.transform.position.y >= -0.125)
             {
-                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y - 0.25f);
+                float push = 1f;
+                if (collision.gameObject.transform.position.x - this.transform.position.x >= 0) push = -1f;
+                rb.AddForce(new Vector2(push, -1f));
             }
+        }
+        else if (collision.gameObject.tag == "Wall")
+        {
+            float push = 1f;
+            if (collision.gameObject.transform.position.x - this.transform.position.x >= 0) push = -1f;
+            rb.AddForce(new Vector2(push, -1f));
         }
     }
 
