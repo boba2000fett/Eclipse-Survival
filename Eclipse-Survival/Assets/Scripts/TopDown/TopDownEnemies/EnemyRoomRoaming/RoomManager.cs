@@ -106,14 +106,8 @@ public class RoomManager : MonoBehaviour
                         break;
                     }
                 }
-
             }
-
-
-
-
         }
-
 
         return roomList.ToArray();
     }
