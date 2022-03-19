@@ -25,7 +25,8 @@ public class ClimbingEnemy : MonoBehaviour
     {
         Alerted,
         Roaming,
-        Stationary
+        Stationary,
+        Exiting
     }
 
     [Header("Set in Inspector: Climbing Enemy")]
@@ -73,6 +74,14 @@ public class ClimbingEnemy : MonoBehaviour
 
     [HideInInspector]
     public bool OnClimbable { get { return onClimbable; } set { onClimbable = value; } }
+    public bool ReachedExit
+    {
+        get
+        {
+            if (moveState == EnemyMovementState.Exiting && atEndOfPath) return true;
+            else return false;
+        }
+    }
 
     public virtual void Start()
     {
@@ -119,6 +128,21 @@ public class ClimbingEnemy : MonoBehaviour
         // All enemy move states
         if (moveState == EnemyMovementState.Alerted)
         {
+            if (canAttack)
+            {
+                float dist = Vector2.Distance(target.transform.position, transform.position);
+                if (dist < attackRange)
+                {
+                    Attack(dist);
+                }
+            }
+            else if (attackTimer >= attackCooldown)
+            {
+                canAttack = true;
+                attackTimer = 0f;
+            }
+            else attackTimer += Time.deltaTime;
+
             // Alert Timer
             alertTime += Time.deltaTime;
             if (alertTime >= attentionSpan)
@@ -134,7 +158,7 @@ public class ClimbingEnemy : MonoBehaviour
 
                 // Find a target, generate a path, keep on that path until end of path OR Target Significantly Moves
 
-                if ((atEndOfPath || pathTimer >= pathResetTime) && 
+                if ((atEndOfPath || pathTimer >= pathResetTime) &&
                     (Vector2.Distance(target.transform.position, transform.position) > 0.2f && Mathf.Abs(target.transform.position.y - transform.position.y) > 0.5f))
                 {
                     path = AIPathfinding.AStar(Node.GetClosestNode(transform.position, graph), Node.GetClosestNode(target.transform.position, graph));
@@ -143,8 +167,6 @@ public class ClimbingEnemy : MonoBehaviour
                     pathTimer = 0f;
                 }
                 else if (pathTimer < pathResetTime) pathTimer += Time.deltaTime;
-
-
                 else if (atEndOfPath)
                 {
                     Vector2 pos = transform.position;
@@ -159,106 +181,11 @@ public class ClimbingEnemy : MonoBehaviour
                     // Attack Range
                 }
 
+
                 if (nodeNumber < path.Count)
                 {
-                    Vector2 pos = transform.position;
-                    Vector2 targetPos = path[nodeNumber].position;
-
-                    if (Vector2.Distance(targetPos, pos) < 0.35f)
-                    {
-                        nodeNumber++;
-                        if (nodeNumber != path.Count) targetPos = path[nodeNumber].position;
-                        else atEndOfPath = true;
-                    }
-
-                    // Replaced with x&y diff to make pathfinding easier
-                    float xDiff = targetPos.x - pos.x;
-                    float yDiff = targetPos.y - pos.y;
-
-                    if (onClimbable)
-                    {
-                        if (!climbing)
-                        {
-
-                            // Start climbing
-                            climbing = true;
-                            onGround = true;
-                            rigid.gravityScale = 0f;
-                            facing = Facing.Up;
-                        }
-
-                        if (yDiff > 0.1f)
-                        {
-                            eVel.y = climbSpeed * Time.deltaTime;
-                            facing = Facing.Up;
-                        }
-                        else if (yDiff < -0.1f)
-                        {
-                            eVel.y = -climbSpeed * Time.deltaTime;
-                            facing = Facing.Down;
-                        }
-
-                        if(xDiff > 0.1f) eVel.x = moveSpeed * Time.deltaTime;
-                        else if (xDiff < -0.1f) eVel.x = -moveSpeed * Time.deltaTime;
-                    }
-                    else
-                    {
-                        // If in range (Jump to it), else get closer
-                        if (yDiff > 0.4f && yDiff < 1.6f && Mathf.Abs(xDiff) < 1.45f)
-                        {
-                            if (onGround && canJump)
-                            {
-                                rigid.AddForce(new Vector2(0f, jumpPower));
-                                onGround = false;
-                                canJump = false;
-                            }
-                            if (xDiff > 0.1f)
-                            {
-                                // Move Right
-                                eVel.x = runSpeed * Time.deltaTime;
-                                facing = Facing.Right;
-                            }
-                            else if (xDiff < -0.1f)
-                            {
-                                // Move Left
-                                eVel.x = -runSpeed * Time.deltaTime;
-                                facing = Facing.Left;
-                            }
-                        }
-
-                        // Get closer to move target
-                        if (xDiff > 0.1f)
-                        {
-                            // Move Right
-                            eVel.x = runSpeed * Time.deltaTime;
-                            facing = Facing.Right;
-                        }
-                        else if (xDiff < -0.1f)
-                        {
-                            // Move Left
-                            eVel.x = -runSpeed * Time.deltaTime;
-                            facing = Facing.Left;
-                        }
-                        // Return statement to avoid xander chasing movement
-                        rigid.velocity = eVel;
-                        return;
-                    }
+                    if (MoveTowardTargetNode()) return;
                 }
-
-                if (canAttack)
-                {
-                    float dist = Vector2.Distance(target.transform.position, transform.position);
-                    if (dist < attackRange)
-                    {
-                        Attack(dist);
-                    }
-                }
-                else if (attackTimer >= attackCooldown)
-                {
-                    canAttack = true;
-                    attackTimer = 0f;
-                }
-                else attackTimer += Time.deltaTime;
 
                 #region Old Plan
                 // Based on Target position
@@ -297,96 +224,125 @@ public class ClimbingEnemy : MonoBehaviour
 
             if (nodeNumber < path.Count)
             {
-                Vector2 pos = transform.position;
-                Vector2 targetPos = path[nodeNumber].position;
-
-                if (Vector2.Distance(targetPos, pos) < 0.35f)
-                {
-                    nodeNumber++;
-                    if (nodeNumber != path.Count) targetPos = path[nodeNumber].position;
-                    else atEndOfPath = true;
-                }
-
-                // Replaced with x&y diff to make pathfinding easier
-                float xDiff = targetPos.x - pos.x;
-                float yDiff = targetPos.y - pos.y;
-
-                if (onClimbable)
-                {
-                    if (!climbing)
-                    {
-
-                        // Start climbing
-                        climbing = true;
-                        onGround = true;
-                        rigid.gravityScale = 0f;
-                        facing = Facing.Up;
-                    }
-
-                    if (yDiff > 0.1f)
-                    {
-                        eVel.y = (climbSpeed / 2) * Time.deltaTime;
-                        facing = Facing.Up;
-                    }
-                    else if (yDiff < -0.1f)
-                    {
-                        eVel.y = -(climbSpeed / 2) * Time.deltaTime;
-                        facing = Facing.Down;
-                    }
-
-                    if (xDiff > 0.1f) eVel.x = (moveSpeed / 2) * Time.deltaTime;
-                    else if (xDiff < -0.1f) eVel.x = -(moveSpeed / 2) * Time.deltaTime;
-                }
-                else
-                {
-                    // If in range (Jump to it), else get closer
-                    if (yDiff > 0.4f && yDiff < 1.6f && Mathf.Abs(xDiff) < 1.45f)
-                    {
-                        if (onGround && canJump)
-                        {
-                            rigid.AddForce(new Vector2(0f, jumpPower));
-                            onGround = false;
-                            canJump = false;
-                        }
-                        if (xDiff > 0.1f)
-                        {
-                            // Move Right
-                            eVel.x = runSpeed * Time.deltaTime;
-                            facing = Facing.Right;
-                        }
-                        else if (xDiff < -0.1f)
-                        {
-                            // Move Left
-                            eVel.x = -runSpeed * Time.deltaTime;
-                            facing = Facing.Left;
-                        }
-                    }
-
-                    // Get closer to move target
-                    if (xDiff > 0.1f)
-                    {
-                        // Move Right
-                        eVel.x = (moveSpeed / 2) * Time.deltaTime;
-                        facing = Facing.Right;
-                    }
-                    else if (xDiff < -0.1f)
-                    {
-                        // Move Left
-                        eVel.x = -(moveSpeed / 2) * Time.deltaTime;
-                        facing = Facing.Left;
-                    }
-                    // Return statement to avoid xander chasing movement
-                    rigid.velocity = eVel;
-                    return;
-                }
+                if (MoveTowardTargetNode()) return;
             }
         }
-        else
+        else if (moveState == EnemyMovementState.Exiting)
         {
+            if (!atEndOfPath && pathTimer >= pathResetTime + 30f)
+            {
+                Node target = path[path.Count - 1];
+                path = AIPathfinding.AStar(Node.GetClosestNode(transform.position, graph), target);
+                nodeNumber = 1;
+                pathTimer = 0f;
+            }
+            else if (pathTimer < pathResetTime + 30f) pathTimer += Time.deltaTime;
 
+            if (nodeNumber < path.Count)
+            {
+                if (MoveTowardTargetNode()) return;
+            }
         }
 
         rigid.velocity = eVel;
+    }
+
+    public void ExitRoom(Vector2 exitPos)
+    {
+        moveState = EnemyMovementState.Exiting;
+        path = AIPathfinding.AStar(Node.GetClosestNode(transform.position, graph), Node.GetClosestNode(exitPos, graph));
+        nodeNumber = 1;
+        atEndOfPath = false;
+        pathTimer = 0f;
+    }
+
+    private bool MoveTowardTargetNode()
+    {
+        Vector2 eVel = rigid.velocity;
+        Vector2 pos = transform.position;
+        Vector2 targetPos = path[nodeNumber].position;
+
+        if (Vector2.Distance(targetPos, pos) < 0.3f)
+        {
+            nodeNumber++;
+            if (nodeNumber != path.Count) targetPos = path[nodeNumber].position;
+            else atEndOfPath = true;
+        }
+
+        // Replaced with x&y diff to make pathfinding easier
+        float xDiff = targetPos.x - pos.x;
+        float yDiff = targetPos.y - pos.y;
+
+        if (onClimbable)
+        {
+            if (!climbing)
+            {
+
+                // Start climbing
+                climbing = true;
+                onGround = true;
+                rigid.gravityScale = 0f;
+                facing = Facing.Up;
+            }
+
+            if (yDiff > 0.1f)
+            {
+                eVel.y = (climbSpeed / 2) * Time.deltaTime;
+                facing = Facing.Up;
+            }
+            else if (yDiff < -0.1f)
+            {
+                eVel.y = -(climbSpeed / 2) * Time.deltaTime;
+                facing = Facing.Down;
+            }
+
+            if (xDiff > 0.1f) eVel.x = (moveSpeed / 2) * Time.deltaTime;
+            else if (xDiff < -0.1f) eVel.x = -(moveSpeed / 2) * Time.deltaTime;
+
+            return false;
+        }
+        else
+        {
+            // If in range (Jump to it), else get closer
+            if (yDiff > 0.4f && yDiff < 1.6f && Mathf.Abs(xDiff) < 1.45f)
+            {
+                if (onGround && canJump)
+                {
+                    rigid.AddForce(new Vector2(0f, jumpPower));
+                    onGround = false;
+                    canJump = false;
+                }
+                if (xDiff > 0.1f)
+                {
+                    // Move Right
+                    eVel.x = runSpeed * Time.deltaTime;
+                    facing = Facing.Right;
+                }
+                else if (xDiff < -0.1f)
+                {
+                    // Move Left
+                    eVel.x = -runSpeed * Time.deltaTime;
+                    facing = Facing.Left;
+                }
+            }
+
+            // Get closer to move target
+            if (xDiff > 0.1f)
+            {
+                // Move Right
+                eVel.x = (moveSpeed / 2) * Time.deltaTime;
+                facing = Facing.Right;
+            }
+            else if (xDiff < -0.1f)
+            {
+                // Move Left
+                eVel.x = -(moveSpeed / 2) * Time.deltaTime;
+                facing = Facing.Left;
+            }
+            // Return statement to avoid xander chasing movement
+            rigid.velocity = eVel;
+            return true;
+        }
     }
 
     public virtual void Attack(float distance)

@@ -11,7 +11,7 @@ public class AIPathfinding
         Node[] groundNodes = new Node[groundArray.Length];
         for (int i = 0; i < groundArray.Length; i++)
         {
-            groundNodes[i] = new Node(i, (Vector2)groundArray[i].transform.position + new Vector2(0f, 0.2f), true);
+            groundNodes[i] = new Node(i, (Vector2)groundArray[i].transform.position + new Vector2(0f, 0.5f), true);
         }
 
         GameObject[] climbableArray = GameObject.FindGameObjectsWithTag("Climbable");
@@ -94,9 +94,15 @@ public class AIPathfinding
                     {
                         // Check if it's directly below, cannot go through ground
                         float angle = Vector2.SignedAngle(pos2 - pos1, Vector2.right);
-                        if (angle < 45 || angle > 135)
+
+                        RaycastHit2D ray = Physics2D.Raycast(pos2, (pos1 - pos2).normalized, Constants.AI_CONNECTION_DISTANCE);
+                        List<Node> find = new List<Node>(groundNodes);
+                        if (Node.GetClosestNode(ray.collider.transform.position, find).number == groundNodes[i].number)
                         {
-                            climbNodeDirs.Add(climbableNodes[c].number, angle);
+                            if (angle < 45 || angle > 135)
+                            {
+                                climbNodeDirs.Add(climbableNodes[c].number, angle);
+                            }
                         }
                     }
                 }
@@ -246,7 +252,9 @@ public class AIPathfinding
                     edges.Add(new Vector2Int(n.number, con.number));
                 }
             }
-        }*/
+        }
+        return graph;
+         */
         #endregion
     }
 
