@@ -201,8 +201,6 @@ public class GamePlayManager : MonoBehaviour
         //The Player is dead, switch to the Game Over Scene
         SceneManager.LoadScene("GameOver_Scene");
     }
-
-   
 }
 
 //public class PersistingGameObject

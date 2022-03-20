@@ -7,9 +7,42 @@ using static Constants;
 
 public class Xander : MonoBehaviour
 {
-    public int Hunger { get; set; }
+    private int hunger;
+    private int health;
+    public int Hunger
+    {
+        get { return hunger; }
+        set
+        {
+            hunger = value;
+            if (hunger > STARTING_HUNGER)
+            {
+                hunger = STARTING_HUNGER;
+            }
+            else if (hunger < 0)
+            {
+                hunger = 0;
+            }
+        }
+    }
 
-    public int Health { get; set; }
+    public int Health
+    {
+        get { return health; }
+        set
+        {
+            health = value;
+            if (health > STARTING_HEALTH)
+            {
+                health = STARTING_HEALTH;
+            }
+            else if (health <= 0)
+            {
+                isAlive = false;
+                GamePlayManager.GPM.EndGame();
+            }
+        }
+    }
 
     [Header("Set in Inspector")]   
     public GameObject hungerBar;
@@ -56,11 +89,7 @@ public class Xander : MonoBehaviour
     public void TakeDamage(int damage)
     {
         Health -= damage;
-        if (Health <= 0)
-        {
-            isAlive = false;
-            GamePlayManager.GPM.EndGame();
-        }
+        
         UpdateManager();
         UpdateUI();
     }
@@ -92,7 +121,7 @@ public class Xander : MonoBehaviour
             {
                 Health += itemValue.healthValue;
             }
-            Hunger += itemValue.hungerValue;
+            Hunger += itemValue.hungerValue;           
 
             UpdateManager();
             //Update the UI with changed values
