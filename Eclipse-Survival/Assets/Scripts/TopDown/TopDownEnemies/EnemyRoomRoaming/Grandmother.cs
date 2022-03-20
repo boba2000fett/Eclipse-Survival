@@ -117,6 +117,10 @@ public class Grandmother : EnemyRoomRoaming
             }
             else
             {
+                if (!isHitting)
+                {
+                    AudioManagement.Instance.PlayFryingPanSFX();
+                }
                 isHitting = true;
                 strikeState = StrikeState.Strike;
             }
@@ -138,7 +142,6 @@ public class Grandmother : EnemyRoomRoaming
         Debug.Log($"strikeTimeInterval {string.Format("{0:00}:{1:00}", ts.TotalMinutes, ts.Seconds)}");
 
         SwitchAttackingAnimation(true);
-
 
         if (strikeState == StrikeState.Strike)
         {

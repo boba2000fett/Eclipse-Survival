@@ -216,7 +216,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Trigger Xander Sound Effects
-        AudioManagement.Instance.PlayXanderFootsteps(state);        
+        AudioManagement.Instance.PlayXanderFootstepsSFX(state);        
     }
 
 

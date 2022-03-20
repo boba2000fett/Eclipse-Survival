@@ -10,6 +10,7 @@ public class GameOver : MonoBehaviour
 
     void Start()
     {
+        AudioManagement.Instance.SwitchBackgroundMusic(BackgroundMusicType.Menu);
         int r = GamePlayManager.GPM.CurrentHoursSurvived;
         scoreText.text = "Score: "+r+" Hours\nHigh Score: "+r+" Hours";
     }

@@ -18,6 +18,7 @@ public class AudioManagement : MonoBehaviour
     private float backgroundMusicVolume;
     private float ambientSFXVolume;
     private float xanderFootstepsVolume;
+    private float fryingPanVolume;
     private bool isPlayingAmbiantSound;
 
     // Public Controls
@@ -52,11 +53,22 @@ public class AudioManagement : MonoBehaviour
         }
     }
 
+    public float FryingPanVolume
+    {
+        get { return fryingPanVolume; }
+        set
+        {
+            fryingPanVolume = value;
+            fryingPanChannel.volume = fryingPanVolume;
+        }
+    }
+
     // Audio Source (Registered by Start method)
     public AudioSource backgroundMusicChannel1;
     public AudioSource backgroundMusicChannel2;
     public AudioSource ambienceChannel;
     public AudioSource xanderFootstepsChannel;
+    public AudioSource fryingPanChannel;
 
     private bool isPlayingTrack1;
 
@@ -69,8 +81,9 @@ public class AudioManagement : MonoBehaviour
     public AudioClip menuHoldBGM;
     public AudioClip primaryBGM;
     public AudioClip chaseBGM;   
-    public AudioClip[] xanderFootstepsWood;
+    public AudioClip[] xanderFootstepsWoodClips;
     public AudioClip[] ambientSoundClips;
+    public AudioClip[] fryingPanClips;
 
 
     // Awake is called before Start()
@@ -99,22 +112,26 @@ public class AudioManagement : MonoBehaviour
         backgroundMusicChannel2 = gameObject.AddComponent<AudioSource>();
         ambienceChannel = gameObject.AddComponent<AudioSource>();
         xanderFootstepsChannel = gameObject.AddComponent<AudioSource>();
+        fryingPanChannel = gameObject.AddComponent<AudioSource>();
 
         // Set to loop
         backgroundMusicChannel1.loop = true;
         backgroundMusicChannel2.loop = true;
         ambienceChannel.loop = false;
         xanderFootstepsChannel.loop = false;
+        fryingPanChannel.loop = false;
 
         // Set play on awake to false
         backgroundMusicChannel1.playOnAwake = false;
         backgroundMusicChannel2.playOnAwake = false;
         ambienceChannel.playOnAwake = false;
         xanderFootstepsChannel.playOnAwake = false;
+        fryingPanChannel.playOnAwake = false;
 
         // ------- Initialize Voume Mix Properties ----------
         AmbientSFXVolume = 0.5f;
         XanderFootstepsVolume = 0.3f;
+        FryingPanVolume = 0.4f;
 
         // -------- Fine Tune other AudioSource Attributes ----------
         xanderFootstepsChannel.pitch = 1.8f;
@@ -215,7 +232,7 @@ public class AudioManagement : MonoBehaviour
     // --------------------------------XANDER FOOTSTEPS-------------------------------------
     bool canPlayXanderFootstep;
     float xanderFootstepTimer;
-    public void PlayXanderFootsteps(ActionState state)
+    public void PlayXanderFootstepsSFX(ActionState state)
     {
         xanderFootstepTimer -= Time.deltaTime;
         if (xanderFootstepTimer <= 0)
@@ -223,25 +240,32 @@ public class AudioManagement : MonoBehaviour
             canPlayXanderFootstep = true;
         }
 
-        if (canPlayXanderFootstep) // play a footstep
+        if (canPlayXanderFootstep) // play a footstep sfx
         {
             canPlayXanderFootstep = false;
 
             if (state == ActionState.Walking)
             {
                 xanderFootstepTimer = timeBetweenXanderFootstepsWalking;
-                int clipToPlay = (int)Random.Range(0, xanderFootstepsWood.Length - 1);
-                xanderFootstepsChannel.PlayOneShot(xanderFootstepsWood[clipToPlay]);
+                int clipToPlay = (int)Random.Range(0, xanderFootstepsWoodClips.Length - 1);
+                xanderFootstepsChannel.PlayOneShot(xanderFootstepsWoodClips[clipToPlay]);
             }
             if (state == ActionState.Running)
             {
                 xanderFootstepTimer = timeBetweenXanderFootstepsRunning;
-                int clipToPlay = (int)Random.Range(0, xanderFootstepsWood.Length - 1);
-                xanderFootstepsChannel.PlayOneShot(xanderFootstepsWood[clipToPlay]);
+                int clipToPlay = (int)Random.Range(0, xanderFootstepsWoodClips.Length - 1);
+                xanderFootstepsChannel.PlayOneShot(xanderFootstepsWoodClips[clipToPlay]);
             }           
             
             
         }
+    }
+
+    //------------------------------FRYING PAN --------------------------------------------
+    public void PlayFryingPanSFX() // Does not need a timer control here because the calling method is already timer controlled
+    {
+            int clipToPlay = (int)Random.Range(0, fryingPanClips.Length - 1);
+            fryingPanChannel.PlayOneShot(fryingPanClips[clipToPlay]);       
     }
 
     #endregion

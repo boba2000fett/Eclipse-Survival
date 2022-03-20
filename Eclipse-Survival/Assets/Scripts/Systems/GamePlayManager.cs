@@ -180,11 +180,6 @@ public class GamePlayManager : MonoBehaviour
     //This method is in charge of intitiating the spawn items procedure for new rounds
     public void NewCycle(int roundsPast)
     {
-        //if (currentNumberOfHoursSurvived < roundsPast)
-        //{
-        //    currentNumberOfHoursSurvived = roundsPast;
-        //}
-
         KitchenRoomVisited = false;
         DinningRoomVisited = false;
         LivingRoomVisited = false;
