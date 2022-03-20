@@ -156,3 +156,32 @@ MonoBehaviour:
   pounceState: 3
   pouncePrepareTime: 0
   pounceStopTime: 0
+--- !u!114 &1942783862328796363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333271725253128668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000c3eb520d316bb9b1
+  m_ShapePath:
+  - {x: -0.23723078, y: -0.5, z: 0}
+  - {x: 0.31981564, y: -0.46996927, z: 0}
+  - {x: 0.44744635, y: 0.31981552, z: 0}
+  - {x: 0.3132639, y: 0.24304104, z: 0}
+  - {x: 0.17061758, y: 0.31811798, z: 0}
+  - {x: 0.15560198, y: 0.0853796, z: 0}
+  - {x: -0.20720053, y: 0.13212347, z: 0}
+  m_ShapePathHash: 1457734999
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -154678

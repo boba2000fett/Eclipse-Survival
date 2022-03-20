@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 339541085}
   - component: {fileID: 339541087}
   - component: {fileID: 8821415555027619273}
+  - component: {fileID: 1748985362347649936}
   m_Layer: 0
   m_Name: FryingPan
   m_TagString: Untagged
@@ -165,6 +166,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   strength: 1
+--- !u!114 &1748985362347649936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6594481961122364496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000c3eb520d316bb9b1
+  m_ShapePath:
+  - {x: -0.08552886, y: -0.10507712, z: 0}
+  - {x: 0.095178045, y: -0.05962488, z: 0}
+  - {x: 0.11447734, y: 0.16189212, z: 0}
+  - {x: -0.11021313, y: 0.1437683, z: 0}
+  m_ShapePathHash: 1620488079
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -160290
 --- !u!1001 &2338365022941172556
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -210,11 +237,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353579, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -16.2
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353579, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.7
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353579, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -270,11 +297,15 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 752ed62e06fa2c84eb5dc0120af45ad0, type: 2}
     - target: {fileID: 4033998086720353582, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_Size.x
-      value: 0.1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353582, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_Size.y
-      value: 0.1
+      value: 0.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 4033998086720353582, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353582, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
@@ -361,7 +392,7 @@ MonoBehaviour:
   roomList: []
   pathToExit: 0
   destinationSceneName: 
-  roomManager: {fileID: 6202258368021614728, guid: c688de36284f1c5498cac9f6e66374aa, type: 3}
+  roomManager: {fileID: 6202258368021614728, guid: ac56527bd4cef904993be7ebafb83251, type: 3}
   waypointCount: 0
   isInRoom: 0
   outsideRoomTime: 0
@@ -377,13 +408,39 @@ MonoBehaviour:
   sleepTimer: 0
   hittingDuration: 2.3
   fryingPanStrength: 3
-  strikeTimeInterval: 0.65
-  holdTimeInterval: 0.6
-  pullBackTimeInterval: 0.3
+  strikeTimeInterval: 0.3
+  holdTimeInterval: 0.2
+  pullBackTimeInterval: 0.2
   fryingPan: {fileID: 0}
   isHitting: 0
-  hittingTime: 0.6
-  strikeTime: 0.4
+  hittingTime: 0.3
+  strikeTime: 0.2
   holdTime: 0.2
   pullBackTime: 0
   strikeState: 3
+--- !u!114 &7802919155815681985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695650865346061920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000c3eb520d316bb9b1
+  m_ShapePath:
+  - {x: -0.12320224, y: -0.4413787, z: 0}
+  - {x: 0.119861774, y: -0.4328514, z: 0}
+  - {x: 0.1305895, y: 0.13436277, z: 0}
+  - {x: -0.13392957, y: 0.14324386, z: 0}
+  m_ShapePathHash: 859679023
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -158644
