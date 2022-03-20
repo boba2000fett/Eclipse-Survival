@@ -10,6 +10,7 @@ public class Constants : MonoBehaviour
     public const int STARTING_HUNGER = 100;
     public const int STARTING_HEALTH = 10;
     public const float HUNGER_DECREMENT_INTERVAL = 5f;
+    public const float DAYTIME_RADIUS_DETECTION_ADDITION = 2f;
 
     // Stamina
     public const float STARTING_STAMINA = 100f;
@@ -20,8 +21,8 @@ public class Constants : MonoBehaviour
     //Constant Values for the Day/Night light cycle script
     public const float MAX_LIGHT_INTENSITY = 0.9f;
     public const float MIN_LIGHT_INTENSITY = 0.05f;
-    public const float LIGHT_DECREASE_DURATION = 45f; // in seconds
-    public const float LIGHT_INCREASE_DURATION = 45f; // in seconds
+    public const float LIGHT_DECREASE_DURATION = 450f; // in seconds
+    public const float LIGHT_INCREASE_DURATION = 450f; // in seconds
     public const float DAY_NIGHT_CUTOFF = 0.3f; // light intensity at which IsDaytime is toggled
 
     //Constant Int Value for the Scene Index Value

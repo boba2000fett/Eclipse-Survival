@@ -9,9 +9,15 @@ public class AudioManagement : MonoBehaviour
     private static AudioManagement instance;
     public static AudioManagement Instance { get { return instance; } }
 
+    // Public Controls
+    [Header("Set in Inspector")]
+    public float timeBetweenXanderFootsteps;
+
     // Private controls
     private float backgroundMusicVolume;
     private float ambientSFXVolume;
+    private float xanderFootstepsVolume;
+    private bool isPlayingAmbiantSound;
 
     // Public Controls
     public float BackgroundMusicVolume
@@ -35,11 +41,21 @@ public class AudioManagement : MonoBehaviour
         }
     }
 
+    public float XanderFootstepsVolume
+    {
+        get { return xanderFootstepsVolume; }
+        set
+        {
+            xanderFootstepsVolume = value;
+            xanderFootstepsChannel.volume = xanderFootstepsVolume;
+        }
+    }
+
     // Audio Source (Registered by Start method)
     public AudioSource backgroundMusicChannel1;
     public AudioSource backgroundMusicChannel2;
     public AudioSource ambienceChannel;
-    public AudioSource xanderFootsteps;
+    public AudioSource xanderFootstepsChannel;
 
     private bool isPlayingTrack1;
 
@@ -81,22 +97,26 @@ public class AudioManagement : MonoBehaviour
         backgroundMusicChannel1 = gameObject.AddComponent<AudioSource>();
         backgroundMusicChannel2 = gameObject.AddComponent<AudioSource>();
         ambienceChannel = gameObject.AddComponent<AudioSource>();
-        xanderFootsteps = gameObject.AddComponent<AudioSource>();
+        xanderFootstepsChannel = gameObject.AddComponent<AudioSource>();
 
         // Set to loop
         backgroundMusicChannel1.loop = true;
         backgroundMusicChannel2.loop = true;
         ambienceChannel.loop = false;
-        xanderFootsteps.loop = false;
+        xanderFootstepsChannel.loop = false;
 
         // Set play on awake to false
         backgroundMusicChannel1.playOnAwake = false;
         backgroundMusicChannel2.playOnAwake = false;
         ambienceChannel.playOnAwake = false;
-        xanderFootsteps.playOnAwake = false;
+        xanderFootstepsChannel.playOnAwake = false;
 
-        // ------- Initial Mix ----------
+        // ------- Initialize Voume Mix Properties ----------
         AmbientSFXVolume = 0.5f;
+        XanderFootstepsVolume = 0.5f;
+
+        // -------- Fine Tune other AudioSource Attributes ----------
+        xanderFootstepsChannel.pitch = 1.8f;
 
         SwitchBackgroundMusic(BackgroundMusicType.Menu);
         StartCoroutine(PlayAmbientSounds());
@@ -105,11 +125,19 @@ public class AudioManagement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Application.isLoadingLevel && isPlayingAmbiantSound)
+        {
+            isPlayingAmbiantSound = false;
+        }
+        else if (!isPlayingAmbiantSound)
+        {
+            StartCoroutine(PlayAmbientSounds());
+        }
     }
 
     private IEnumerator PlayAmbientSounds()
     {
+        isPlayingAmbiantSound = true;
         timeBetweenAmbientSounds = Random.Range(10f, 25f);
         timeRemaining = timeBetweenAmbientSounds;
 
@@ -180,6 +208,26 @@ public class AudioManagement : MonoBehaviour
             case BackgroundMusicType.Normal:
                 SwapTrack(primaryBGM, 3.0f);
                 break;
+        }
+    }
+
+    // --------------------------------XANDER FOOTSTEPS-------------------------------------
+    bool canPlayXanderFootstep;
+    float xanderFootstepTimer;
+    public void PlayXanderFootsteps()
+    {
+        xanderFootstepTimer -= Time.deltaTime;
+        if (xanderFootstepTimer <= 0)
+        {
+            canPlayXanderFootstep = true;
+        }
+
+        if (canPlayXanderFootstep) // play a footstep
+        {
+            xanderFootstepTimer = timeBetweenXanderFootsteps;
+            canPlayXanderFootstep = false;
+            int clipToPlay = (int)Random.Range(0, xanderFootstepsWood.Length - 1);
+            xanderFootstepsChannel.PlayOneShot(xanderFootstepsWood[clipToPlay]);
         }
     }
 

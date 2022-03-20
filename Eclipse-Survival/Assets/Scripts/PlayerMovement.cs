@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
     public ActionState state;
     public bool staminaIsInCooldownPeriod;
     private float timeLeftInStaminaCoolDown;
-    
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -191,21 +191,34 @@ public class PlayerMovement : MonoBehaviour
         staminaBar.GetComponent<Slider>().value = stamina / 100f;
 
         // Set detection radius
+        bool isDay = DayNightCycle.DNC.IsDaytime;
+        float radiusAdd = 0;
+        if (isDay)
+        {
+            radiusAdd = DAYTIME_RADIUS_DETECTION_ADDITION;
+        }
+
         if (state == ActionState.Idle)
         {
-            detectionCollider.radius = idleDetectionRadius;
+            detectionCollider.radius = idleDetectionRadius + radiusAdd;
         }
         else if (state == ActionState.Walking)
         {
-            detectionCollider.radius = walkingDetectionRadius;
+            detectionCollider.radius = walkingDetectionRadius + radiusAdd;
         }
         else if (state == ActionState.Running)
         {
-            detectionCollider.radius = runningDetectionRadius;
+            detectionCollider.radius = runningDetectionRadius + radiusAdd;
         }
         else if (state == ActionState.Scratching)
         {
-            detectionCollider.radius = scratchingDetectionRadius;
+            detectionCollider.radius = scratchingDetectionRadius + radiusAdd;
+        }
+
+        // Trigger Xander Sound Effects
+        if (state == ActionState.Walking)
+        {
+            AudioManagement.Instance.PlayXanderFootsteps();
         }
     }
 
