@@ -35,6 +35,10 @@ public class AIPathfinding
 
                     if (Vector2.Distance(pos1, pos2) < Constants.AI_CONNECTION_DISTANCE)
                     {
+                        // Angles are based as such
+                        // Left is +/-180, Left is 0, down is 90, up is -90
+
+
                         // Check if it's directly above or below, cannot go through ground
                         float angle = Vector2.SignedAngle(pos2 - pos1, Vector2.right);
                         if ((angle < -145 || angle > 145) || (angle > -45 && angle < 45))
@@ -95,14 +99,9 @@ public class AIPathfinding
                         // Check if it's directly below, cannot go through ground
                         float angle = Vector2.SignedAngle(pos2 - pos1, Vector2.right);
 
-                        RaycastHit2D ray = Physics2D.Raycast(pos2, (pos1 - pos2).normalized, Constants.AI_CONNECTION_DISTANCE);
-                        List<Node> find = new List<Node>(groundNodes);
-                        if (Node.GetClosestNode(ray.collider.transform.position, find).number == groundNodes[i].number)
+                        if ((angle > -45 && angle < 30) || (angle > 140 || angle < -135))
                         {
-                            if (angle < 45 || angle > 135)
-                            {
-                                climbNodeDirs.Add(climbableNodes[c].number, angle);
-                            }
+                            climbNodeDirs.Add(climbableNodes[c].number, angle);
                         }
                     }
                 }
@@ -228,7 +227,7 @@ public class AIPathfinding
                 {
                     GameObject Edge = new GameObject("Edge" + n.number + "To" + con.number);
 
-                    Edge.transform.rotation = Quaternion.Euler(Vector2.SignedAngle(n.position - con.position, Vector2.right), 0f, 0f);
+                    Edge.transform.rotation = Quaternion.Euler(Vector2.SignedAngle(con.position - n.position, Vector2.right), 0f, 0f);
                     Edge.transform.position = Vector2.Lerp(n.position, con.position, Vector2.Distance(n.position, con.position) / 2);
                     edges.Add(new Vector2Int(n.number, con.number));
                 }
@@ -247,14 +246,14 @@ public class AIPathfinding
                 {
                     GameObject Edge = new GameObject("Edge" + n.number + "To" + con.number);
 
-                    Edge.transform.rotation = Quaternion.Euler(Vector2.SignedAngle(n.position - con.position, Vector2.right), 0f, 0f);
+                    Edge.transform.rotation = Quaternion.Euler(Vector2.SignedAngle(con.position - n.position, Vector2.right), 0f, 0f);
                     Edge.transform.position = Vector2.Lerp(n.position, con.position, Vector2.Distance(n.position, con.position) / 2);
                     edges.Add(new Vector2Int(n.number, con.number));
                 }
             }
         }
         return graph;
-         */
+        */
         #endregion
     }
 

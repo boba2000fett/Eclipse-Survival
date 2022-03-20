@@ -32,7 +32,6 @@ public class ClimbingEnemy : MonoBehaviour
     [Header("Set in Inspector: Climbing Enemy")]
     public float walkSpeed;
     public float runSpeed;
-    public float climbSpeed;
     public float jumpPower;
     public float jumpCooldown;
     public float attentionSpan;
@@ -73,6 +72,7 @@ public class ClimbingEnemy : MonoBehaviour
     protected float pathTimer = 0f;
 
     [HideInInspector]
+    protected Vector2 eVel;
     public bool OnClimbable { get { return onClimbable; } set { onClimbable = value; } }
     public bool ReachedExit
     {
@@ -86,7 +86,7 @@ public class ClimbingEnemy : MonoBehaviour
     public virtual void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
-        moveSpeed = walkSpeed;
+        moveSpeed = runSpeed;
         graph = AIPathfinding.GenerateNodesForLevel();
     }
 
@@ -95,7 +95,7 @@ public class ClimbingEnemy : MonoBehaviour
         // Enemy AI Functionality
 
         // Get the Enemy Velocity
-        Vector2 eVel = rigid.velocity;
+        eVel = rigid.velocity;
 
         // Reset Vel.x, and reset vel.y if climbing
         eVel.x = 0f;
@@ -175,8 +175,8 @@ public class ClimbingEnemy : MonoBehaviour
                     float xDiff = targetPos.x - pos.x;
                     float yDiff = targetPos.y - pos.y;
 
-                    if (xDiff > 0.1f) eVel.x = moveSpeed * Time.deltaTime;
-                    else if (xDiff < -0.1f) eVel.x = -moveSpeed * Time.deltaTime;
+                    if (xDiff > 0.1f) eVel.x = runSpeed * Time.deltaTime;
+                    else if (xDiff < -0.1f) eVel.x = -runSpeed * Time.deltaTime;
 
                     // Attack Range
                 }
@@ -184,7 +184,7 @@ public class ClimbingEnemy : MonoBehaviour
 
                 if (nodeNumber < path.Count)
                 {
-                    if (MoveTowardTargetNode()) return;
+                    if (MoveTowardTargetNode(true)) return;
                 }
 
                 #region Old Plan
@@ -224,7 +224,7 @@ public class ClimbingEnemy : MonoBehaviour
 
             if (nodeNumber < path.Count)
             {
-                if (MoveTowardTargetNode()) return;
+                if (MoveTowardTargetNode(false)) return;
             }
         }
         else if (moveState == EnemyMovementState.Exiting)
@@ -240,7 +240,7 @@ public class ClimbingEnemy : MonoBehaviour
 
             if (nodeNumber < path.Count)
             {
-                if (MoveTowardTargetNode()) return;
+                if (MoveTowardTargetNode(true)) return;
             }
         }
 
@@ -256,9 +256,11 @@ public class ClimbingEnemy : MonoBehaviour
         pathTimer = 0f;
     }
 
-    private bool MoveTowardTargetNode()
+    private bool MoveTowardTargetNode(bool running)
     {
-        Vector2 eVel = rigid.velocity;
+        if (running) moveSpeed = runSpeed;
+        else moveSpeed = walkSpeed;
+
         Vector2 pos = transform.position;
         Vector2 targetPos = path[nodeNumber].position;
 
@@ -277,7 +279,6 @@ public class ClimbingEnemy : MonoBehaviour
         {
             if (!climbing)
             {
-
                 // Start climbing
                 climbing = true;
                 onGround = true;
@@ -287,18 +288,19 @@ public class ClimbingEnemy : MonoBehaviour
 
             if (yDiff > 0.1f)
             {
-                eVel.y = (climbSpeed / 2) * Time.deltaTime;
+                eVel.y = moveSpeed * Time.deltaTime;
                 facing = Facing.Up;
             }
             else if (yDiff < -0.1f)
             {
-                eVel.y = -(climbSpeed / 2) * Time.deltaTime;
+                eVel.y = (-moveSpeed) * Time.deltaTime;
                 facing = Facing.Down;
             }
 
-            if (xDiff > 0.1f) eVel.x = (moveSpeed / 2) * Time.deltaTime;
-            else if (xDiff < -0.1f) eVel.x = -(moveSpeed / 2) * Time.deltaTime;
+            if (xDiff > 0.1f) eVel.x = moveSpeed * Time.deltaTime;
+            else if (xDiff < -0.1f) eVel.x = (-moveSpeed) * Time.deltaTime;
 
+            rigid.velocity = eVel;
             return false;
         }
         else
@@ -315,13 +317,13 @@ public class ClimbingEnemy : MonoBehaviour
                 if (xDiff > 0.1f)
                 {
                     // Move Right
-                    eVel.x = runSpeed * Time.deltaTime;
+                    eVel.x = runSpeed * Time.deltaTime * 1.25f;
                     facing = Facing.Right;
                 }
                 else if (xDiff < -0.1f)
                 {
                     // Move Left
-                    eVel.x = -runSpeed * Time.deltaTime;
+                    eVel.x = (-runSpeed) * Time.deltaTime * 1.25f;
                     facing = Facing.Left;
                 }
             }
@@ -330,13 +332,13 @@ public class ClimbingEnemy : MonoBehaviour
             if (xDiff > 0.1f)
             {
                 // Move Right
-                eVel.x = (moveSpeed / 2) * Time.deltaTime;
+                eVel.x = moveSpeed * Time.deltaTime;
                 facing = Facing.Right;
             }
             else if (xDiff < -0.1f)
             {
                 // Move Left
-                eVel.x = -(moveSpeed / 2) * Time.deltaTime;
+                eVel.x = -moveSpeed * Time.deltaTime;
                 facing = Facing.Left;
             }
             // Return statement to avoid xander chasing movement
@@ -378,6 +380,25 @@ public class ClimbingEnemy : MonoBehaviour
         if (collision.gameObject.tag.Contains("SpawnPoint"))
         {
             Physics2D.IgnoreCollision(collision.collider, collision.otherCollider);
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            if (collision.gameObject.transform.position.y - this.transform.position.y >= -0.125)
+            {
+                float push = 1f;
+                if (collision.gameObject.transform.position.x - this.transform.position.x >= 0) push = -1f;
+                rigid.AddForce(new Vector2(push, -1f));
+            }
+        }
+        else if (collision.gameObject.tag == "Wall")
+        {
+            float push = 1f;
+            if (collision.gameObject.transform.position.x - this.transform.position.x >= 0) push = -1f;
+            rigid.AddForce(new Vector2(push, -1f));
         }
     }
 
