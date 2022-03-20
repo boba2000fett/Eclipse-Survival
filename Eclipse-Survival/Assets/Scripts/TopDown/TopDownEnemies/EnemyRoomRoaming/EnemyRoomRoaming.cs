@@ -3,19 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum PathToExit
+{
+    North,
+    South,
+    West,
+    East,
+    Stairs,
+    Wall1,
+    Wall2,
+    Wall3,
+    Wall4,
+    Wall5
+}
+
 public class EnemyRoomRoaming : Enemy
 {
     #region Variables
     static public EnemyRoomRoaming enemySingleton;
 
-    public enum PathToExit
-    {
-        North,
-        South,
-        West,
-        East,
-        Stairs
-    }
+    
 
     [Header("Enemy Roaming : Set in Inspector")]    
     [Tooltip("This variable is to set the roomList.")]    
@@ -353,6 +360,9 @@ public class EnemyRoomRoaming : Enemy
                     break;
                 case PathToExit.South:
                     currentWaypointDestination = room.northExit;
+                    break;
+                case PathToExit.Stairs:
+                    currentWaypointDestination = room.stairsExit;
                     break;
 
             }

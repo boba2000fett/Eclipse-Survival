@@ -176,6 +176,10 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4033998086720353577, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353578, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -352,8 +356,6 @@ MonoBehaviour:
   seeRoomList: []
   setRooms: 0
   requiredWaypointsCount: 5
-  currentRoomIndexSet: 0
-  seeCurrentRoomIndex: 0
   outsideRoomTimeInterval: 7.79
   currentRoomIndex: 0
   roomList: []

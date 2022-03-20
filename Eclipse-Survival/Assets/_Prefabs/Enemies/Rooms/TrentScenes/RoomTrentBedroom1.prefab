@@ -48,6 +48,12 @@ MonoBehaviour:
   eastSceneName: TrentKitchen
   westSceneName: 
   southSceneName: 
+  stairSceneName: 
+  wall1SceneName: TrentWall1
+  wall2SceneName: 
+  wall3SceneName: 
+  wall4SceneName: 
+  wall5SceneName: 
   availableExits: 0
   waypointsInRoom:
   - {fileID: 0}
@@ -63,5 +69,11 @@ MonoBehaviour:
   northExit: {fileID: 0}
   eastExit: {fileID: 0}
   westExit: {fileID: 0}
+  stairsExit: {fileID: 0}
   homeNode: {fileID: 0}
-  roomID: 0
+  wall1Exit: {fileID: 0}
+  wall2Exit: {fileID: 0}
+  wall3Exit: {fileID: 0}
+  wall4Exit: {fileID: 0}
+  wall5Exit: {fileID: 0}
+  isWallCrawlingStage: 0

@@ -178,7 +178,6 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.tag == "Xander")
         {
-             collision.gameObject.GetComponent<Xander>().Health = 500;
             collision.gameObject.GetComponent<Xander>().TakeDamage(strength);
         }
         else if (collision.gameObject.tag == "Cockroach")

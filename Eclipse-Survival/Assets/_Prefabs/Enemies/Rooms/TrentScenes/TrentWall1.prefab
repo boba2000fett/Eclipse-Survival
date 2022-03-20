@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2619627699124755208}
   - component: {fileID: 2619627699124755209}
   m_Layer: 0
-  m_Name: RoomTrentKitchen
+  m_Name: TrentWall1
   m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,20 +43,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1bc3c0b377b82e4c92b67557c3e6e23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: TrentKitchen
+  sceneName: TrentWall1
   northSceneName: 
   eastSceneName: 
-  westSceneName: TrentBedroom1
+  westSceneName: 
   southSceneName: 
   stairSceneName: 
-  wall1SceneName: TrentWall1
-  wall2SceneName: 
+  wall1SceneName: TrentBedroom1
+  wall2SceneName: TrentKitchen
   wall3SceneName: 
   wall4SceneName: 
   wall5SceneName: 
   availableExits: 0
   waypointsInRoom:
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -76,4 +75,4 @@ MonoBehaviour:
   wall3Exit: {fileID: 0}
   wall4Exit: {fileID: 0}
   wall5Exit: {fileID: 0}
-  isWallCrawlingStage: 0
+  isWallCrawlingStage: 1

@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6202258368021614731
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6202258368021614729}
+  - component: {fileID: 6202258368021614728}
+  m_Layer: 0
+  m_Name: WolfSpiderTESTRoomManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6202258368021614729
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6202258368021614731}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6202258368021614728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6202258368021614731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8c99e5c230f9a748a92adf0852501a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalRoomList: []
+  baseRoom: {fileID: 0}
+  generatedRoomTest: []
+  spiderRoomList:
+  - {fileID: 9216961173153096286, guid: aa6900f1f9a572a478e2c7f3e11cd895, type: 3}
+  - {fileID: 2619627699124755209, guid: 88f780d33fdfe2f4392cf21b51d028da, type: 3}
+  - {fileID: 2619627699124755209, guid: dc77eefea1950d54ebe7322b65848ff6, type: 3}
+  numberOfRoomsThisSequence: 0
+  roomCount: 0
+  headBackToMainRoom: 0
+  roomIndex: 0
+  completed: 0

@@ -28,6 +28,7 @@ TagManager:
   - SpawnPoint5
   - SpawnPoint6
   - AudioManager
+  - WolfSpiderTopDown
   layers:
   - Default
   - TransparentFX
