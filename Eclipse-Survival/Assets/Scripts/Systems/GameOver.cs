@@ -5,15 +5,13 @@ using UnityEngine.UI;
 
 public class GameOver : MonoBehaviour
 {
+    [Header("Set in Inspector")]
+    public Text scoreText;
+
     void Start()
     {
-        GameObject score = GameObject.Find("Final Score");
-
-        int r = GamePlayManager.GPM.currentNumberOfCycleSurvived;
-
-        Text txtScore = score.GetComponent<Text>();
-
-        txtScore.text = "Score: "+r+" Days\nHigh Score: "+r+" Days";
+        int r = GamePlayManager.GPM.CurrentHoursSurvived;
+        scoreText.text = "Score: "+r+" Hours\nHigh Score: "+r+" Hours";
     }
 
 }

@@ -35,7 +35,7 @@ public class GamePlayManager : MonoBehaviour
     //public bool pauseUIActive;
 
     [Header("Set Dynamically")]
-    public int currentNumberOfCycleSurvived;
+    public int currentNumberOfHoursSurvived;
 
     //These array variables are used to store the remaining item name and vector values, and are set dynamically when the perspective scene transition occurs
     //First Floor Item Management
@@ -76,6 +76,7 @@ public class GamePlayManager : MonoBehaviour
     public int XanderHunger;
     public float XanderStamina;
     public int XanderHealth;
+    public int CurrentHoursSurvived { get; set; }
     public int outdoorLightIntensity;
     public float hungerTimer;
 
@@ -166,7 +167,7 @@ public class GamePlayManager : MonoBehaviour
         GuestBedRoom2Visited = false;
         SecondFloorHallwayVisited = false;
         BathroomVisited = false;
-        currentNumberOfCycleSurvived = 0;
+        CurrentHoursSurvived = 0;
 
         XanderHealth = STARTING_HEALTH;
         XanderHunger = STARTING_HUNGER;
@@ -179,10 +180,10 @@ public class GamePlayManager : MonoBehaviour
     //This method is in charge of intitiating the spawn items procedure for new rounds
     public void NewCycle(int roundsPast)
     {
-        if (currentNumberOfCycleSurvived < roundsPast)
-        {
-            currentNumberOfCycleSurvived = roundsPast;
-        }
+        //if (currentNumberOfHoursSurvived < roundsPast)
+        //{
+        //    currentNumberOfHoursSurvived = roundsPast;
+        //}
 
         KitchenRoomVisited = false;
         DinningRoomVisited = false;

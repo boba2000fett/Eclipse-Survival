@@ -26,6 +26,7 @@ public class HUDClockUpdate : MonoBehaviour
         if (hour != cycle.Hour) // if display is out of sync with the Day/Night Cycle
         {
             hour = cycle.Hour;
+            GamePlayManager.GPM.CurrentHoursSurvived++;
             UpdateHUDClock();
         }
     }
