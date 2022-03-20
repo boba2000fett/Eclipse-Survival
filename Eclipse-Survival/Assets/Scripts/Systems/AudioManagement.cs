@@ -11,7 +11,8 @@ public class AudioManagement : MonoBehaviour
 
     // Public Controls
     [Header("Set in Inspector")]
-    public float timeBetweenXanderFootsteps;
+    public float timeBetweenXanderFootstepsWalking;
+    public float timeBetweenXanderFootstepsRunning;
 
     // Private controls
     private float backgroundMusicVolume;
@@ -113,7 +114,7 @@ public class AudioManagement : MonoBehaviour
 
         // ------- Initialize Voume Mix Properties ----------
         AmbientSFXVolume = 0.5f;
-        XanderFootstepsVolume = 0.5f;
+        XanderFootstepsVolume = 0.3f;
 
         // -------- Fine Tune other AudioSource Attributes ----------
         xanderFootstepsChannel.pitch = 1.8f;
@@ -214,7 +215,7 @@ public class AudioManagement : MonoBehaviour
     // --------------------------------XANDER FOOTSTEPS-------------------------------------
     bool canPlayXanderFootstep;
     float xanderFootstepTimer;
-    public void PlayXanderFootsteps()
+    public void PlayXanderFootsteps(ActionState state)
     {
         xanderFootstepTimer -= Time.deltaTime;
         if (xanderFootstepTimer <= 0)
@@ -224,10 +225,22 @@ public class AudioManagement : MonoBehaviour
 
         if (canPlayXanderFootstep) // play a footstep
         {
-            xanderFootstepTimer = timeBetweenXanderFootsteps;
             canPlayXanderFootstep = false;
-            int clipToPlay = (int)Random.Range(0, xanderFootstepsWood.Length - 1);
-            xanderFootstepsChannel.PlayOneShot(xanderFootstepsWood[clipToPlay]);
+
+            if (state == ActionState.Walking)
+            {
+                xanderFootstepTimer = timeBetweenXanderFootstepsWalking;
+                int clipToPlay = (int)Random.Range(0, xanderFootstepsWood.Length - 1);
+                xanderFootstepsChannel.PlayOneShot(xanderFootstepsWood[clipToPlay]);
+            }
+            if (state == ActionState.Running)
+            {
+                xanderFootstepTimer = timeBetweenXanderFootstepsRunning;
+                int clipToPlay = (int)Random.Range(0, xanderFootstepsWood.Length - 1);
+                xanderFootstepsChannel.PlayOneShot(xanderFootstepsWood[clipToPlay]);
+            }           
+            
+            
         }
     }
 

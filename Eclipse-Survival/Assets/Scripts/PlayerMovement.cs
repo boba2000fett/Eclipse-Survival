@@ -216,10 +216,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Trigger Xander Sound Effects
-        if (state == ActionState.Walking)
-        {
-            AudioManagement.Instance.PlayXanderFootsteps();
-        }
+        AudioManagement.Instance.PlayXanderFootsteps(state);        
     }
 
 
