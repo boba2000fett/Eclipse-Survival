@@ -10,6 +10,7 @@ public class DayNightCycle : MonoBehaviour
     static public DayNightCycle DNC;
     public bool IsDaytime {get; set;}
     public int Hour { get; set; }
+    public bool NeedToUpdateClockUI { get; set; }
 
     [Header("Set in Inspector")]
     public Light2D[] outdoorLights;
@@ -97,6 +98,7 @@ public class DayNightCycle : MonoBehaviour
             {
                 timeRemainingInHour = inGameHour;
                 Hour++;
+                NeedToUpdateClockUI = true;
             }
 
             // Reset Timer

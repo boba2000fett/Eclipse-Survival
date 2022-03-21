@@ -11,23 +11,27 @@ public class HUDClockUpdate : MonoBehaviour
     public Text hoursSurvivedText;
 
     [Header("Set Dynamically")]
-    DayNightCycle cycle;
     private int hour;
 
     // Start is called before the first frame update
     void Start()
     {
-        cycle = GameObject.Find("TimeAndLightController").GetComponent<DayNightCycle>();
         hour = 0;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if (hour != cycle.Hour) // if display is out of sync with the Day/Night Cycle
+        if (hour != DayNightCycle.DNC.Hour) // if display is out of sync with the Day/Night Cycle
         {
-            hour = cycle.Hour;
-            GamePlayManager.GPM.CurrentHoursSurvived++;
+            hour = DayNightCycle.DNC.Hour;
+
+            if (DayNightCycle.DNC.NeedToUpdateClockUI)
+            {
+                GamePlayManager.GPM.CurrentHoursSurvived++;
+                DayNightCycle.DNC.NeedToUpdateClockUI = false;
+            }
+
             hoursSurvivedText.text = $"Hours Survived: {GamePlayManager.GPM.CurrentHoursSurvived}";
             UpdateHUDClock();
         }
