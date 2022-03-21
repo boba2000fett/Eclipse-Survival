@@ -54,7 +54,7 @@ public class Room : MonoBehaviour
 
     public bool isWallCrawlingStage;
 
-    private void Start()
+    public void Start()
     {
         if (!isWallCrawlingStage)
         {

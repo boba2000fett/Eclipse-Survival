@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 2862997889626436118}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.38, y: 0, z: -1}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 1}
+  m_LocalScale: {x: 0.02, y: 0.02, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -121,12 +121,12 @@ MonoBehaviour:
   waypoints: []
   home: {fileID: 0}
   moveSpeed: 0.5
-  runSpeed: 1.14
+  runSpeed: 1
   alertTimeDuration: 8.08
-  alertRange: 2.25
+  alertRange: 4.14
   attackRange: 0.76
   strength: 2
-  health: 50
+  health: 3
   isAlerted: 0
   target: {fileID: 0}
   waypointIndex: 0
@@ -204,4 +204,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 50
+  m_Radius: 150

@@ -5,6 +5,13 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum GameState 
+{ 
+    InMenuScene,
+    InPlayScene,
+}
+
+
 public class WolfSpiderRoaming : MonoBehaviour
 {
     [SerializeField] public LinkedList<Room> travelList = new LinkedList<Room>();
@@ -17,6 +24,9 @@ public class WolfSpiderRoaming : MonoBehaviour
     public float roomTimeIntervalLeftBound;
     public float roomTimeIntervalRightBound;
 
+    [Header("Game Over Scene Name: Set in Inspector")]
+    public string gameOverSceneName;
+    public string firstSceneName;
 
     [Header("Set Room Manager in Inspector")]
     public RoomManager roomManager;
@@ -39,22 +49,52 @@ public class WolfSpiderRoaming : MonoBehaviour
 
     public bool spiderTravelingToExit = false;
 
+    public bool exitedMenuScene = false;
+    public bool awakeFunctionalityCompleted = false;
+
     public void Awake()
     {
         ArrivedInNewRoom();
-        
+
         roomTime = 0;
         roomTimeInterval = UnityEngine.Random.Range(roomTimeIntervalLeftBound, roomTimeIntervalRightBound);
 
-        SceneManager.sceneLoaded += OnSceneLoaded;
-
         travelList = new LinkedList<Room>();
 
+        SceneManager.sceneLoaded += OnSceneLoaded;
         DontDestroyOnLoad(gameObject);
+    }
+
+    //public void AwakeFunctionality()
+    //{
+    //    ArrivedInNewRoom();
+
+    //    roomTime = 0;
+    //    roomTimeInterval = UnityEngine.Random.Range(roomTimeIntervalLeftBound, roomTimeIntervalRightBound);
+
+    //    travelList = new LinkedList<Room>();
+    //}
+
+    public void CheckingIfNotInLevelScenes()
+    {
+        
     }
 
     private void Update()
     {
+        #region If Not in Menu Scene
+        //if (!exitedMenuScene)
+        //{
+        //    return;
+        //}
+        //if (exitedMenuScene && !awakeFunctionalityCompleted)
+        //{
+        //    AwakeFunctionality();
+        //    awakeFunctionalityCompleted = true;
+        //    return;
+        //}
+        #endregion
+
         #region Debug Testing
         travelListSee = travelList.ToArray();
         #endregion
@@ -83,9 +123,15 @@ public class WolfSpiderRoaming : MonoBehaviour
 
             //Will use a property on the WolfSpider (use this for when determining if the Spider has retrieved
             //the end of path)
+            if (SceneManager.GetActiveScene().name != currentRoom.sceneName)
+            {
+                SwitchRoom();
+                return;
+            }
+
             if (wolfSpiderSideInstance.ReachedExit)
             {
-                Destroy(wolfSpiderTopDownInstance.gameObject);
+                Destroy(wolfSpiderSideInstance.gameObject);
                 spiderTravelingToExit = false;
                 SwitchRoom();
             }
@@ -94,6 +140,13 @@ public class WolfSpiderRoaming : MonoBehaviour
         {
             //See if the Top-Down spider instance has reached the exit node
             //If so, call SwitchRoom(), and set spiderTravelingToExit to false;
+
+            if (SceneManager.GetActiveScene().name != currentRoom.sceneName)
+            {
+                SwitchRoom();
+                return;
+            }
+
             if (wolfSpiderTopDownInstance.reachedExit)
             {
                 Destroy(wolfSpiderTopDownInstance.gameObject);
@@ -229,7 +282,7 @@ If spider is currently in the same Room as player
     public void FindExitNode()
     {
         Room currentRoomInstance = GameObject.FindGameObjectWithTag("Room").GetComponent<Room>();
-
+        currentRoomInstance.Start();
         Debug.LogWarning($"FindExitNode: Found Exit Node");
         switch (pathToExit) 
         {
@@ -468,6 +521,8 @@ If spider is currently in the same Room as player
         }
         else if (isTopDownScene && isAlreadyInScene)
         {
+            FindExitNode();
+
             GameObject go = GameObject.Instantiate(wolfSpiderTopDownPrefab.gameObject);
             wolfSpiderTopDownInstance = go.GetComponent<WolfSpiderTopDown>();
 
@@ -511,6 +566,8 @@ If spider is currently in the same Room as player
         }
         else if (!isTopDownScene && isAlreadyInScene)
         {
+            FindExitNode();
+
             GameObject go = GameObject.Instantiate(wolfSpiderSidePrefab.gameObject);
             wolfSpiderSideInstance = go.GetComponent<WolfSpider>();
 
@@ -526,9 +583,14 @@ If spider is currently in the same Room as player
         #endregion
     }
 
+    public void RefreshVariables()
+    {
+
+    }
+
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
-        Debug.LogWarning($"Scene Changed To {SceneManager.GetActiveScene().name}");
+        #region Planning
         /*         
 If Scene Changes
 -    If (GetActiveScene().name != currentRoom.sceneName)
@@ -546,6 +608,14 @@ If Scene Changes
             //you will now find the node
                 Find Node based on the Spider's exit
          */
+        #endregion
+
+        //if (SceneManager.GetActiveScene().name == firstSceneName && !exitedMenuScene)
+        //{
+        //    exitedMenuScene = true;
+        //    return;
+        //}
+
         if (SceneManager.GetActiveScene().name != currentRoom.sceneName)
         {
             Debug.LogWarning("Spider is no longer in scene");

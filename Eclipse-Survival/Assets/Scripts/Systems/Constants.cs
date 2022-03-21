@@ -47,7 +47,8 @@ public class Constants : MonoBehaviour
     public const float AI_CONNECTION_DISTANCE = 2.2f;
 
 
-
+    public const string STARTING_PLAY_SCENE_NAME = "DownstairsTopLeftKitchen";
+    public const string GAME_OVER_SCENE_NAME = "GameOver_Scene";
     //Constants For the max number of items that can spawn in the different rooms
 
 

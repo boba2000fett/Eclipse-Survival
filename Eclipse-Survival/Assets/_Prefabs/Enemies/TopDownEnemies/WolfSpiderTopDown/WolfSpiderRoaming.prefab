@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8509967476707215605
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8509967476707215606}
+  - component: {fileID: 8509967476707215607}
+  m_Layer: 0
+  m_Name: WolfSpiderRoaming
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8509967476707215606
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8509967476707215605}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.2879709, y: -1.7250876, z: -3.6997714}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8509967476707215607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8509967476707215605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 704717bf1eb06cf40b73f1bfdc33b7fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  travelListSee: []
+  wolfSpiderTopDownPrefab: {fileID: 8655196720532275969, guid: 5b86554ec1da48c438babc9aa86a277d, type: 3}
+  wolfSpiderSidePrefab: {fileID: 8860836230694857072, guid: fbee7adfbf3fcc74e84e06bbeafcb50b, type: 3}
+  roomTimeIntervalLeftBound: 6.48
+  roomTimeIntervalRightBound: 7.54
+  roomManager: {fileID: 6202258368021614728, guid: 88c5413f1ac09d64e9a60325f6aa3d35, type: 3}
+  roomTime: 0
+  roomTimeInterval: 0
+  currentRoom: {fileID: 2619627699124755209, guid: 88f780d33fdfe2f4392cf21b51d028da, type: 3}
+  wolfSpiderTopDownInstance: {fileID: 0}
+  wolfSpiderSideInstance: {fileID: 0}
+  nextRoom: {fileID: 0}
+  exitWaypoint: {fileID: 0}
+  pathToExit: 5
+  spawnEntrance: 2
+  spiderTravelingToExit: 0

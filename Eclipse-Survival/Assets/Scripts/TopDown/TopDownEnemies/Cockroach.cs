@@ -21,6 +21,15 @@ public class Cockroach : Enemy
     public override void Awake()
     {
         base.Awake();
+
+        Room currentRoomInstance = GameObject.FindGameObjectWithTag("Room").GetComponent<Room>();
+        currentRoomInstance.Start();
+                
+        int index = UnityEngine.Random.Range(1, currentRoomInstance.waypointsInRoom.Length);
+
+        transform.position = currentRoomInstance.waypointsInRoom[index].gameObject.transform.position;
+
+
         boxCollider = GetComponent<BoxCollider2D>();
     }
 
