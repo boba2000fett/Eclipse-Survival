@@ -244,7 +244,7 @@ public class AudioManagement : MonoBehaviour
         {
             canPlayXanderFootstep = false;
 
-            if (state == ActionState.Walking)
+            if (state == ActionState.Walking || state == ActionState.Climbing)
             {
                 xanderFootstepTimer = timeBetweenXanderFootstepsWalking;
                 int clipToPlay = (int)Random.Range(0, xanderFootstepsWoodClips.Length - 1);

@@ -41,6 +41,7 @@ public class ClimbingMovement : MonoBehaviour
     //CircleCollider2D detectionCollider;
     // Collider for detecting ground/Jump
     CircleCollider2D collisionCollider;
+    ActionState state;
 
     //SpriteRenderer spr;
 
@@ -79,6 +80,7 @@ public class ClimbingMovement : MonoBehaviour
 
         spr = gameObject.GetComponent<SpriteRenderer>();
 
+        state = ActionState.Idle;
 
         // Set gravity here in inspector temporarily (Easier than going into settings every single time)
         Physics2D.gravity = new Vector2(0, -gravity);
@@ -97,6 +99,7 @@ public class ClimbingMovement : MonoBehaviour
             rb.AddForce(new Vector2(0f, jumpPower));
             onGround = false;
             canJump = false;
+            state = ActionState.Idle;
             detectionCollider.radius = jumpRadius;
             if (climbing)
             {
@@ -127,6 +130,7 @@ public class ClimbingMovement : MonoBehaviour
             && ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
             || (climbing && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)))))
         {
+            state = ActionState.Running;
             stamina -= Constants.STAMINA_USE_INCREMENT;
             if (stamina <= 0)
             {
@@ -199,6 +203,7 @@ public class ClimbingMovement : MonoBehaviour
             rb.gravityScale = 1f;
             climbing = false;
             onGround = false;
+            state = ActionState.Idle;
         }
 
         if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
@@ -212,6 +217,7 @@ public class ClimbingMovement : MonoBehaviour
             }
             if (climbing)
             {
+                state = ActionState.Climbing;
                 pVel.y -= climbSpeed * Time.deltaTime;
                 facing = Facing.Down;
                 TurnXander();
@@ -219,24 +225,27 @@ public class ClimbingMovement : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
+            state = ActionState.Walking;
             pVel.x = moveSpeed * Time.deltaTime;
 
             if (facing != Facing.Right)
             {
                 facing = Facing.Right;
                 TurnXander();
-            }
+            }           
         }
         else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
         {
             if (onClimbable && !climbing)
             {
+                state = ActionState.Climbing;
                 climbing = true;
                 onGround = true;
                 rb.gravityScale = 0f;
             }
             if (climbing)
             {
+                state = ActionState.Climbing;
                 pVel.y = climbSpeed * Time.deltaTime;
                 facing = Facing.Up;
                 TurnXander();
@@ -244,6 +253,7 @@ public class ClimbingMovement : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
+            state = ActionState.Walking;
             pVel.x = -moveSpeed * Time.deltaTime;
 
             if (facing != Facing.Left)
@@ -256,8 +266,16 @@ public class ClimbingMovement : MonoBehaviour
         {
             if(canJump) detectionCollider.radius = defaultRadius;
             moveSpeed = 0f;
+            state = ActionState.Idle;
         }
 
+        if (onGround == false)
+        {
+            state = ActionState.Idle;
+        }
+
+        // Sound Effects
+        AudioManagement.Instance.PlayXanderFootstepsSFX(state);
 
         // To Do: Cap speed so that nothing is crazy/either that or long falls kill/damage Xander
 
@@ -358,7 +376,11 @@ public class ClimbingMovement : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground")
         {
-            if(!climbing && rb.velocity.y < -0.05f) onGround = false;
+            if (!climbing && rb.velocity.y < -0.05f)
+            {
+                onGround = false;
+                state = ActionState.Idle;
+            } 
         }
     }
 

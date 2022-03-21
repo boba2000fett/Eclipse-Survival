@@ -54,15 +54,21 @@ EditorBuildSettings:
     path: Assets/Scenes/FinalBuildScenes/Upstairs/UpstairsTopRightBedroom.unity
     guid: ea05eafce86ad59488a2e01d7c467659
   - enabled: 1
-    path: Assets/Scenes/FinalBuildScenes/SidescrollerScenes/Wall1.unity
+    path: Assets/Scenes/TestScenes/Michael/Wall1.unity
     guid: b48ab5e4780510a42ba595fd7f5d4a3b
-  - enabled: 1
-    path: Assets/Scenes/TestScenes/Trent/TrentWall1.unity
-    guid: 1dd666d7fab781049b5d08c80b936daf
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/TestScenes/Trent/TrentBedroom1.unity
     guid: bfa3fb61be0384b419afb31c621fb37f
   - enabled: 1
     path: Assets/Scenes/TestScenes/Trent/TrentKitchen.unity
     guid: 59bd871dbb1102a4599970bc0e709b35
+  - enabled: 1
+    path: Assets/Scenes/FinalBuildScenes/SidescrollerScenes/Kitchen-BedroomWall.unity
+    guid: 37f336e9a30721444840d73cd054f11b
+  - enabled: 1
+    path: Assets/Scenes/FinalBuildScenes/SidescrollerScenes/Bathroom-Bedroom-DiningroomWall.unity
+    guid: 227417017bd911849860445887ce08c5
   m_configObjects: {}

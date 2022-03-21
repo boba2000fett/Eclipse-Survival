@@ -18,7 +18,9 @@ public enum ActionState
     Idle,
     Walking,
     Running,
-    Scratching
+    Scratching,
+    Climbing,
+    Jumping
 }
 
 public class PlayerMovement : MonoBehaviour
