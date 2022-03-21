@@ -8,6 +8,7 @@ public class HUDClockUpdate : MonoBehaviour
     [Header("Set in Inspector")]
     public Image HUDClock;
     public Sprite[] clockFaces;
+    public Text hoursSurvivedText;
 
     [Header("Set Dynamically")]
     DayNightCycle cycle;
@@ -27,6 +28,7 @@ public class HUDClockUpdate : MonoBehaviour
         {
             hour = cycle.Hour;
             GamePlayManager.GPM.CurrentHoursSurvived++;
+            hoursSurvivedText.text = $"Hours Survived: {GamePlayManager.GPM.CurrentHoursSurvived}";
             UpdateHUDClock();
         }
     }

@@ -28,12 +28,12 @@ public class ClimbingMovement : MonoBehaviour
     // For distinguishing circle colliders
     public CircleCollider2D detectionCollider; //GameObject detectCircle;
     public SpriteRenderer spr;
-    public GameObject staminaBar;
-
+   
     public Sprite sideView;
     public Sprite topView;
 
     [Header("Set Dynamically")]
+    public GameObject staminaBar;
     public Facing facing;
     private Rigidbody2D rb;
     private float moveSpeed;
@@ -68,6 +68,7 @@ public class ClimbingMovement : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        staminaBar = GameObject.FindGameObjectWithTag("HUDStaminaBar");
         facing = Facing.Left;
         TurnXander();
         collisionCollider = gameObject.GetComponent<CircleCollider2D>();

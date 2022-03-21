@@ -44,14 +44,18 @@ public class Xander : MonoBehaviour
         }
     }
 
-    [Header("Set in Inspector")]   
+    [Header("Set Dynamically")]
     public GameObject hungerBar;
     public GameObject healthBar;
-
-    [Header("Set Dynamically")]
     public bool isAlive;
 
     public float hungerTimer;
+
+    private void Awake()
+    {
+        hungerBar = GameObject.FindGameObjectWithTag("HUDHungerBar");
+        healthBar = GameObject.FindGameObjectWithTag("HUDHealthBar");
+    }
     // Start is called before the first frame update
     void Start()
     {

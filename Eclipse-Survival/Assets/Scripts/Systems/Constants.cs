@@ -9,7 +9,7 @@ public class Constants : MonoBehaviour
     public const float RUN_SPEED = 250f;
     public const int STARTING_HUNGER = 100;
     public const int STARTING_HEALTH = 100;
-    public const float HUNGER_DECREMENT_INTERVAL = 5f;
+    public const float HUNGER_DECREMENT_INTERVAL = 2f;
     public const float DAYTIME_RADIUS_DETECTION_ADDITION = 2f;
 
     // Stamina

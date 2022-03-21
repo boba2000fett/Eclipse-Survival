@@ -30,9 +30,9 @@ public class PlayerMovement : MonoBehaviour
     public float walkingDetectionRadius;
     public float runningDetectionRadius;
     public float scratchingDetectionRadius;
-    public GameObject staminaBar;
-
+    
     [Header("Set Dynamically")]
+    public GameObject staminaBar;
     public Facing facing;
     private Rigidbody2D rb;
     private float moveSpeed;
@@ -42,11 +42,16 @@ public class PlayerMovement : MonoBehaviour
     public bool staminaIsInCooldownPeriod;
     private float timeLeftInStaminaCoolDown;
 
+    private void Awake()
+    {
+        detectionCollider = gameObject.GetComponent<CircleCollider2D>();
+        staminaBar = GameObject.FindGameObjectWithTag("HUDStaminaBar");
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        facing = Facing.Left;
-        detectionCollider = gameObject.GetComponent<CircleCollider2D>();
+        facing = Facing.Left;       
         stamina = GamePlayManager.GPM.XanderStamina;
         //Physics2D.gravity = new Vector2(0, 0);
     }

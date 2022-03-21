@@ -29,6 +29,10 @@ TagManager:
   - SpawnPoint6
   - AudioManager
   - WolfSpiderTopDown
+  - HUD
+  - HUDHealthBar
+  - HUDHungerBar
+  - HUDStaminaBar
   layers:
   - Default
   - TransparentFX
