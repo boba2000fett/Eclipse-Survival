@@ -13,12 +13,14 @@ public class AudioManagement : MonoBehaviour
     [Header("Set in Inspector")]
     public float timeBetweenXanderFootstepsWalking;
     public float timeBetweenXanderFootstepsRunning;
+    public float timeBetweenXanderSqueaks;
 
     // Private controls
     private float backgroundMusicVolume;
     private float ambientSFXVolume;
     private float xanderFootstepsVolume;
     private float fryingPanVolume;
+    private float xanderSqueaksVolume;
     private bool isPlayingAmbiantSound;
 
     // Public Controls
@@ -63,12 +65,23 @@ public class AudioManagement : MonoBehaviour
         }
     }
 
+    public float XanderSqueaksVolume
+    {
+        get { return xanderSqueaksVolume; }
+        set
+        {
+            xanderSqueaksVolume = value;
+            xanderSqueaksChannel.volume = xanderSqueaksVolume;
+        }
+    }
+
     // Audio Source (Registered by Start method)
     public AudioSource backgroundMusicChannel1;
     public AudioSource backgroundMusicChannel2;
     public AudioSource ambienceChannel;
     public AudioSource xanderFootstepsChannel;
     public AudioSource fryingPanChannel;
+    public AudioSource xanderSqueaksChannel;
 
     private bool isPlayingTrack1;
 
@@ -84,6 +97,7 @@ public class AudioManagement : MonoBehaviour
     public AudioClip[] xanderFootstepsWoodClips;
     public AudioClip[] ambientSoundClips;
     public AudioClip[] fryingPanClips;
+    public AudioClip[] xanderSqueaksClips;
 
 
     // Awake is called before Start()
@@ -113,6 +127,7 @@ public class AudioManagement : MonoBehaviour
         ambienceChannel = gameObject.AddComponent<AudioSource>();
         xanderFootstepsChannel = gameObject.AddComponent<AudioSource>();
         fryingPanChannel = gameObject.AddComponent<AudioSource>();
+        xanderSqueaksChannel = gameObject.AddComponent<AudioSource>();
 
         // Set to loop
         backgroundMusicChannel1.loop = true;
@@ -120,6 +135,7 @@ public class AudioManagement : MonoBehaviour
         ambienceChannel.loop = false;
         xanderFootstepsChannel.loop = false;
         fryingPanChannel.loop = false;
+        xanderSqueaksChannel.loop = false;
 
         // Set play on awake to false
         backgroundMusicChannel1.playOnAwake = false;
@@ -127,11 +143,13 @@ public class AudioManagement : MonoBehaviour
         ambienceChannel.playOnAwake = false;
         xanderFootstepsChannel.playOnAwake = false;
         fryingPanChannel.playOnAwake = false;
+        xanderSqueaksChannel.playOnAwake = false;
 
         // ------- Initialize Voume Mix Properties ----------
         AmbientSFXVolume = 0.5f;
         XanderFootstepsVolume = 0.3f;
         FryingPanVolume = 0.4f;
+        XanderSqueaksVolume = 0.01f;
 
         // -------- Fine Tune other AudioSource Attributes ----------
         xanderFootstepsChannel.pitch = 1.8f;
@@ -231,13 +249,22 @@ public class AudioManagement : MonoBehaviour
 
     // --------------------------------XANDER FOOTSTEPS-------------------------------------
     bool canPlayXanderFootstep;
+    bool canPlayXanderSqueak;
     float xanderFootstepTimer;
-    public void PlayXanderFootstepsSFX(ActionState state)
+    float xanderSqueakTimer;
+    public void PlayXanderSFX(ActionState state)
     {
         xanderFootstepTimer -= Time.deltaTime;
+        xanderSqueakTimer -= Time.deltaTime;
+
         if (xanderFootstepTimer <= 0)
         {
             canPlayXanderFootstep = true;
+        }
+
+        if (xanderSqueakTimer <= 0)
+        {
+            canPlayXanderSqueak = true;
         }
 
         if (canPlayXanderFootstep) // play a footstep sfx
@@ -255,9 +282,19 @@ public class AudioManagement : MonoBehaviour
                 xanderFootstepTimer = timeBetweenXanderFootstepsRunning;
                 int clipToPlay = (int)Random.Range(0, xanderFootstepsWoodClips.Length - 1);
                 xanderFootstepsChannel.PlayOneShot(xanderFootstepsWoodClips[clipToPlay]);
-            }           
-            
-            
+            }                 
+        }
+
+        // ------------------------XANDER SQUEAKS ------------------------------------------ (not triggered when Xander is Idle)
+        if (state != ActionState.Idle)
+        {
+            if (canPlayXanderSqueak) // play a squeak sfx
+            {
+                canPlayXanderSqueak = false;
+                xanderSqueakTimer = timeBetweenXanderSqueaks;
+                int clipToPlay = (int)Random.Range(0, xanderSqueaksClips.Length - 1);
+                xanderSqueaksChannel.PlayOneShot(xanderSqueaksClips[clipToPlay]);
+            }
         }
     }
 

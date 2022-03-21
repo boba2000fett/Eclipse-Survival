@@ -168,11 +168,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeBetweenXanderFootstepsWalking: 0.12
   timeBetweenXanderFootstepsRunning: 0.05
+  timeBetweenXanderSqueaks: 10
   backgroundMusicChannel1: {fileID: 0}
   backgroundMusicChannel2: {fileID: 0}
   ambienceChannel: {fileID: 0}
   xanderFootstepsChannel: {fileID: 0}
   fryingPanChannel: {fileID: 0}
+  xanderSqueaksChannel: {fileID: 0}
   menuHoldBGM: {fileID: 8300000, guid: 5b61d8c4cf5332d4f86f784c0ed00f43, type: 3}
   primaryBGM: {fileID: 8300000, guid: 84f4f690e82951042aa78a5db47a8e73, type: 3}
   chaseBGM: {fileID: 0}
@@ -212,6 +214,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 821f0302d27212e4088f950bc1ca47b4, type: 3}
   - {fileID: 8300000, guid: 7902854622803e5428b1f79f2e8f8308, type: 3}
   - {fileID: 8300000, guid: 46a8bb609fbe9e6499626aa8bb6b5d1a, type: 3}
+  xanderSqueaksClips:
+  - {fileID: 8300000, guid: c51226bf2bbc33c41baecbbdddcfa88a, type: 3}
+  - {fileID: 8300000, guid: cff3b07bc5e38e64fb6fdbcc7c7676f5, type: 3}
+  - {fileID: 8300000, guid: cace3e45368175d4daae9375f1003e24, type: 3}
+  - {fileID: 8300000, guid: f55f8f96ffc9b6847b28ba104e96dc59, type: 3}
 --- !u!1 &373127576
 GameObject:
   m_ObjectHideFlags: 0

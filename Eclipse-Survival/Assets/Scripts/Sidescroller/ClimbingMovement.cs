@@ -275,7 +275,7 @@ public class ClimbingMovement : MonoBehaviour
         }
 
         // Sound Effects
-        AudioManagement.Instance.PlayXanderFootstepsSFX(state);
+        AudioManagement.Instance.PlayXanderSFX(state);
 
         // To Do: Cap speed so that nothing is crazy/either that or long falls kill/damage Xander
 
