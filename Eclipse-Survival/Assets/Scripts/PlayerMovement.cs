@@ -20,7 +20,8 @@ public enum ActionState
     Running,
     Scratching,
     Climbing,
-    Jumping
+    Jumping,
+    Knockback
 }
 
 public class PlayerMovement : MonoBehaviour
@@ -30,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     public float walkingDetectionRadius;
     public float runningDetectionRadius;
     public float scratchingDetectionRadius;
+    public float knockbackTimeInterval = .5f;
     
     [Header("Set Dynamically")]
     public GameObject staminaBar;
@@ -41,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
     public ActionState state;
     public bool staminaIsInCooldownPeriod;
     private float timeLeftInStaminaCoolDown;
+    private float knockbackTime;
 
     private void Awake()
     {
@@ -56,8 +59,7 @@ public class PlayerMovement : MonoBehaviour
         //Physics2D.gravity = new Vector2(0, 0);
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    public void ReadInput()
     {
         rb.velocity = Vector2.zero;
         bool dirSwitch = false;
@@ -68,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
             detectionCollider.radius = runningDetectionRadius;
 
             state = ActionState.Running;
-                      
+
         }
         else
         {
@@ -80,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
                 GamePlayManager.GPM.XanderStamina = stamina;
             }
         }
-        
+
 
         if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) && state != ActionState.Scratching)
         {
@@ -170,6 +172,29 @@ public class PlayerMovement : MonoBehaviour
         {
             state = ActionState.Idle;
         }
+    }
+
+    public void KnockbackCheck()
+    {
+        knockbackTime += Time.deltaTime;
+        if (knockbackTime >= knockbackTimeInterval)
+        {
+            state = ActionState.Idle;
+            knockbackTime = 0;
+        }
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        if (state != ActionState.Knockback)
+        {
+            ReadInput();
+        }
+        else
+        {
+            KnockbackCheck();
+        }
 
         // Update stamina
         if (state == ActionState.Running && !staminaIsInCooldownPeriod)
@@ -230,5 +255,24 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log($"{collision.gameObject.name}");
+        if (collision.gameObject.tag == "Cockroach" ||
+            collision.gameObject.tag == "Grandmother" ||
+            collision.gameObject.tag == "Cat" ||
+            collision.gameObject.tag == "WolfSpiderTopDown")
+        {
+            
+            Vector2 pushDirection = ((Vector2)collision.gameObject.transform.position - 
+                (Vector2)this.transform.position).normalized;
+
+            pushDirection *= -1;
+            pushDirection *= 5;
+            Debug.LogWarning($"pushDirection.x {pushDirection.x} pushDirection.y {pushDirection.y}");
+
+            rb.velocity = Vector2.zero;
+            rb.AddForce(pushDirection, ForceMode2D.Impulse);
+
+            state = ActionState.Knockback;
+            //rigidXander.velocity = pushDirection;
+        }
     }
 }

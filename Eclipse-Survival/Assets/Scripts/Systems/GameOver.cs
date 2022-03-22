@@ -15,4 +15,8 @@ public class GameOver : MonoBehaviour
         scoreText.text = "Score: "+r+" Hours\nHigh Score: "+r+" Hours";
     }
 
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }

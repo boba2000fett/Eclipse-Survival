@@ -5,7 +5,7 @@ using UnityEngine;
 public class TopDownSpiderShot : MonoBehaviour
 {
     [Header("Set in Inspector: TopDownSpiderShot")]
-    public int webDamage;
+    public float webDamage = 0;
     public float webExpireInterval;
     public float speed;
     public float collisionRadius = .5f;
@@ -18,6 +18,7 @@ public class TopDownSpiderShot : MonoBehaviour
 
     private void Update()
     {
+        //webDamage += .5f;
         transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
 
         if (expireTimer >= webExpireInterval)
@@ -36,7 +37,7 @@ public class TopDownSpiderShot : MonoBehaviour
             ((Vector2)transform.position - (Vector2)targetGameObject.transform.position).magnitude <= collisionRadius)
         {
             Xander x = targetGameObject.GetComponent<Xander>();
-            x.TakeDamage(webDamage);
+            x.TakeDamage((int)webDamage);
         }
     }
 

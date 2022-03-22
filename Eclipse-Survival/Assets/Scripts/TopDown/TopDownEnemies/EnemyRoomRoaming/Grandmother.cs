@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Grandmother : EnemyRoomRoaming
 {
@@ -72,6 +73,16 @@ public class Grandmother : EnemyRoomRoaming
 
     public override void Update()
     {
+        if (atHome && SceneManager.GetActiveScene().name == roomList[currentRoomIndex].sceneName)
+        {
+            Debug.LogWarning("Grandmother is Sleep");
+            GameObject.FindObjectOfType<Bed>().GrandmaInBed();
+        }
+        else if(!atHome && SceneManager.GetActiveScene().name == roomList[currentRoomIndex].sceneName)
+        {
+            GameObject.FindObjectOfType<Bed>().RegularBed();
+        }
+
         if (!isHitting)
         {
             base.Update();

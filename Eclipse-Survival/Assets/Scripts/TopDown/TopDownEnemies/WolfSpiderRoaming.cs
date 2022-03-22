@@ -24,9 +24,9 @@ public class WolfSpiderRoaming : MonoBehaviour
     public float roomTimeIntervalLeftBound;
     public float roomTimeIntervalRightBound;
 
-    [Header("Game Over Scene Name: Set in Inspector")]
-    public string gameOverSceneName;
-    public string firstSceneName;
+    //[Header("Game Over Scene Name: Set in Inspector")]
+    //public string gameOverSceneName;
+    //public string firstSceneName;
 
     [Header("Set Room Manager in Inspector")]
     public RoomManager roomManager;
@@ -282,7 +282,12 @@ If spider is currently in the same Room as player
     public void FindExitNode()
     {
         Room currentRoomInstance = GameObject.FindGameObjectWithTag("Room").GetComponent<Room>();
-        currentRoomInstance.Start();
+        
+        if (currentRoomInstance.waypointsInRoom.Length == 0)
+        {
+            currentRoomInstance.Start();
+        }
+        
         Debug.LogWarning($"FindExitNode: Found Exit Node");
         switch (pathToExit) 
         {
@@ -501,6 +506,9 @@ If spider is currently in the same Room as player
                     break;
                 case PathToExit.Stairs:
                     wolfSpiderTopDownInstance.transform.position = currentRoomInstance.stairsExit.gameObject.transform.position;
+                    break;
+                case PathToExit.Bathroom:
+                    wolfSpiderTopDownInstance.transform.position = currentRoomInstance.bathroomExit.gameObject.transform.position;
                     break;
                 case PathToExit.Wall1:
                     wolfSpiderTopDownInstance.transform.position = currentRoomInstance.wall1Exit.gameObject.transform.position;

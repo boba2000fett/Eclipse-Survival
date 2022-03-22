@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8509967476707215606}
   - component: {fileID: 8509967476707215607}
   m_Layer: 0
-  m_Name: WolfSpiderRoaming
+  m_Name: WolfSpiderRoamingTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -10,6 +10,7 @@ public enum PathToExit
     West,
     East,
     Stairs,
+    Bathroom,
     Wall1,
     Wall2,
     Wall3,
@@ -363,6 +364,9 @@ public class EnemyRoomRoaming : Enemy
                     break;
                 case PathToExit.Stairs:
                     currentWaypointDestination = room.stairsExit;
+                    break;
+                case PathToExit.Bathroom:
+                    currentWaypointDestination = room.bathroomExit;
                     break;
 
             }

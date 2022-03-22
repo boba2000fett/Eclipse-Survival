@@ -44,12 +44,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: UpstairsCenterRightBathroom
-  northSceneName: 
+  northSceneName: UpstairsCenterRightBathroom
   eastSceneName: 
   westSceneName: 
   southSceneName: 
   stairSceneName: 
+  wall1SceneName: Bathroom-Bedroom-DiningroomWall
+  wall2SceneName: 
+  wall3SceneName: 
+  wall4SceneName: 
+  wall5SceneName: 
+  bathroomScene: UpstairsCenterHallway
   availableExits: 0
+  enemyWaypointExitPrefab: {fileID: 0}
   waypointsInRoom: []
   southExit: {fileID: 0}
   northExit: {fileID: 0}
@@ -57,4 +64,10 @@ MonoBehaviour:
   westExit: {fileID: 0}
   stairsExit: {fileID: 0}
   homeNode: {fileID: 0}
+  wall1Exit: {fileID: 0}
+  wall2Exit: {fileID: 0}
+  wall3Exit: {fileID: 0}
+  wall4Exit: {fileID: 0}
+  wall5Exit: {fileID: 0}
+  bathroomExit: {fileID: 0}
   isWallCrawlingStage: 0

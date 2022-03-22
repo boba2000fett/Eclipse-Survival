@@ -48,12 +48,10 @@ MonoBehaviour:
   wolfSpiderSidePrefab: {fileID: 8860836230694857072, guid: fbee7adfbf3fcc74e84e06bbeafcb50b, type: 3}
   roomTimeIntervalLeftBound: 6.48
   roomTimeIntervalRightBound: 7.54
-  gameOverSceneName: 
-  firstSceneName: 
-  roomManager: {fileID: 6202258368021614728, guid: 88c5413f1ac09d64e9a60325f6aa3d35, type: 3}
+  roomManager: {fileID: 1524003704404103227, guid: 25ebfeb9e8dd4e148bc39bdc1c83cd17, type: 3}
   roomTime: 0
   roomTimeInterval: 0
-  currentRoom: {fileID: 2619627699124755209, guid: dc77eefea1950d54ebe7322b65848ff6, type: 3}
+  currentRoom: {fileID: 1735986851574280029, guid: 28210aa42913ad64e8b29140e3293ad1, type: 3}
   wolfSpiderTopDownInstance: {fileID: 0}
   wolfSpiderSideInstance: {fileID: 0}
   nextRoom: {fileID: 0}

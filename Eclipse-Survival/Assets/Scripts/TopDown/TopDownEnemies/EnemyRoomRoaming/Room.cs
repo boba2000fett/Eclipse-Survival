@@ -22,6 +22,7 @@ public class Room : MonoBehaviour
     public string wall3SceneName;
     public string wall4SceneName;
     public string wall5SceneName;
+    public string bathroomScene;
     [Tooltip("The number of available exits that room has")]
     public int availableExits; //The number of available exits that room has
     
@@ -44,6 +45,7 @@ public class Room : MonoBehaviour
     public EnemyWaypoint wall3Exit;
     public EnemyWaypoint wall4Exit;
     public EnemyWaypoint wall5Exit;
+    public EnemyWaypoint bathroomExit;
 
     //public int[] nodeIntList;
     //public int northExitInt;
@@ -149,6 +151,23 @@ public class Room : MonoBehaviour
                 SceneManager.LoadScene("DownstairsBottomRightLivingRoom");
             }
         }
+        else if (Input.GetKeyDown(KeyCode.Underscore))
+        {
+            if (SceneManager.GetActiveScene().name != "Bathroom-Bedroom-DiningroomWall")
+            {
+                SceneManager.LoadScene("Bathroom-Bedroom-DiningroomWall");
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Equals))
+        {
+            if (SceneManager.GetActiveScene().name != "Kitchen-BedroomWall")
+            {
+                SceneManager.LoadScene("Kitchen-BedroomWall");
+            }
+        }
+
+
+
         else if (Input.GetKeyDown(KeyCode.Keypad0))
         {
             if (SceneManager.GetActiveScene().name != "TrentBedroom1")
@@ -200,6 +219,10 @@ public class Room : MonoBehaviour
             else if (waypointList[i].gameObject.name == "StairsExit")
             {
                 stairsExit = waypointList[i];
+            }
+            else if (waypointList[i].gameObject.name == "BathroomExit")
+            {
+                bathroomExit = waypointList[i];
             }
             else if (waypointList[i].gameObject.name == "HomeNode")
             {

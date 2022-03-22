@@ -7,8 +7,8 @@ public class Enemy : MonoBehaviour
     [Header("Set in Inspector: Enemy Base Class")]
     public EnemyWaypoint[] waypoints;
     public GameObject home;
-    public float moveSpeed;
-    public float runSpeed;
+    public float moveSpeed = 2;
+    public float runSpeed = 3;
     public float alertTimeDuration;
     public float alertRange;
     public float attackRange;
@@ -179,6 +179,25 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.tag == "Xander")
         {
             collision.gameObject.GetComponent<Xander>().TakeDamage(strength);
+
+            //Facing xanderDirection = collision.gameObject.GetComponent<PlayerMovement>().facing;
+            ////Rigidbody2D rigidXander = collision.gameObject.GetComponent<Rigidbody2D>();
+            //Rigidbody2D rigidXander = GameObject.Find("Xander").GetComponent<Rigidbody2D>();
+
+
+            //Vector2 xanderPosition = collision.gameObject.transform.position;
+
+            //Vector2 pushDirection = (xanderPosition - (Vector2)this.transform.position).normalized;
+
+            //pushDirection *= -1;
+            //pushDirection *= 100;
+            //Debug.LogWarning($"pushDirection.x {pushDirection.x} pushDirection.y {pushDirection.y}");
+
+            //rigidXander.AddForce(pushDirection, ForceMode2D.Impulse);
+            //rigidXander.velocity = pushDirection;
+
+
+
         }
         else if (collision.gameObject.tag == "Cockroach")
         {

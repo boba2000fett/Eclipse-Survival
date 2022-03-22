@@ -43,8 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3712d1f79b3f1441928309597a71ff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wolfSpider1Prefab: {fileID: 0}
-  wolfSpider2Prefab: {fileID: 0}
+  wolfSpider1Prefab: {fileID: 8509967476707215607, guid: 5f11e47fd2adc0a458d2d218ac8f5735, type: 3}
+  wolfSpider2Prefab: {fileID: 8509967476707215607, guid: ace998eed907d1243953709a532bfcb1, type: 3}
   exitedMenuScene: 0
   awakeFunctionalityCompleted: 0
   wolfSpider1Instance: {fileID: 0}

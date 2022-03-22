@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1524003704404103226
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1524003704404103224}
+  - component: {fileID: 1524003704404103227}
+  m_Layer: 0
+  m_Name: RoomManagerWolfSpider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1524003704404103224
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524003704404103226}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1524003704404103227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524003704404103226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8c99e5c230f9a748a92adf0852501a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalRoomList: []
+  baseRoom: {fileID: 0}
+  generatedRoomTest: []
+  spiderRoomList:
+  - {fileID: 3162683669028837503, guid: a8f504fd4fdea61478132541c82bddbf, type: 3}
+  - {fileID: 414688176703143036, guid: 627eb93a581df3148904d4e7d23440e7, type: 3}
+  - {fileID: 6558327903196666450, guid: 11fcf71e8b6ba7d4b87add428ae1f770, type: 3}
+  - {fileID: 3507768772690859300, guid: 89064a2297b942d46b5df99cb7c69b4e, type: 3}
+  - {fileID: 2213347441385769717, guid: d2c1b254562c98a43b494c810fb7602f, type: 3}
+  - {fileID: 1735986851574280029, guid: 28210aa42913ad64e8b29140e3293ad1, type: 3}
+  - {fileID: 5116355836158295316, guid: 8d6ff564b4090a948a666d0e5fadc831, type: 3}
+  - {fileID: 5610223063401652148, guid: 5d7a6fafc71d0ad43bf83454e4b7144b, type: 3}
+  - {fileID: 1816360743771249669, guid: 2627d7b02c40abf40876f6f991e1109e, type: 3}
+  - {fileID: 7342646730700748182, guid: 372f3ee3c75064d43b142a2d3736029e, type: 3}
+  - {fileID: 3809618161607217121, guid: 435774f38f18a3045932aec22bd66e66, type: 3}
+  - {fileID: 4782523042801422633, guid: 649273c3da853e74387dba35b0bdfe61, type: 3}
+  numberOfRoomsThisSequence: 0
+  roomCount: 0
+  headBackToMainRoom: 0
+  roomIndex: 0
+  completed: 0

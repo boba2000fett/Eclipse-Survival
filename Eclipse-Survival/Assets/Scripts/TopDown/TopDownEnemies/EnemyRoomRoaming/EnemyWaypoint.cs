@@ -13,6 +13,7 @@ public class EnemyWaypoint : MonoBehaviour
     public EnemyWaypoint nextNodeWestExit;
     public EnemyWaypoint nextNodeEastExit;
     public EnemyWaypoint nextNodeStairsExit;
+    public EnemyWaypoint nextNodeBathroomExit;
     [Header("This will only be used in the scene where the home is.")]
     public EnemyWaypoint nextNodeHome;
     //public Waypoint nextNodeSouthExit;

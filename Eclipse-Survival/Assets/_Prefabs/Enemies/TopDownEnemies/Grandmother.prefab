@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1313248463
   m_SortingLayer: 2
-  m_SortingOrder: 1
+  m_SortingOrder: 50
   m_Sprite: {fileID: 21300000, guid: 6eb19ecbf24266044abfb6befd45b033, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -204,6 +204,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353577, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
+      propertyPath: m_Mass
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4033998086720353577, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_GravityScale
       value: 0
       objectReference: {fileID: 0}
@@ -217,7 +221,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353578, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353578, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_SortingLayerID
@@ -367,7 +371,7 @@ MonoBehaviour:
   alertTimeDuration: 5
   alertRange: 0
   attackRange: 1
-  strength: 0
+  strength: 10
   health: 0
   isAlerted: 0
   target: {fileID: 0}
@@ -407,7 +411,7 @@ MonoBehaviour:
   sleepTimerInterval: 15
   sleepTimer: 0
   hittingDuration: 2.3
-  fryingPanStrength: 3
+  fryingPanStrength: 500
   strikeTimeInterval: 0.3
   holdTimeInterval: 0.2
   pullBackTimeInterval: 0.2
@@ -443,4 +447,4 @@ MonoBehaviour:
   - {x: -0.13392957, y: 0.14324386, z: 0}
   m_ShapePathHash: 859679023
   m_Mesh: {fileID: 0}
-  m_InstanceId: -158644
+  m_InstanceId: 222878

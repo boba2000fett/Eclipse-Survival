@@ -77,7 +77,7 @@ public class SceneTransitionScriptBasic : MonoBehaviour
                 if (nextScene == Constants.ALPHA_CAMERON_TEST_SCENE)
                 {
                     GamePlayManager.GPM.NewGame();
-                    SceneManager.LoadSceneAsync("DownstairsTopLeftKitchen");
+                    SceneManager.LoadScene("DownstairsTopLeftKitchen");
                     AudioManagement.Instance.SwitchBackgroundMusic(BackgroundMusicType.Normal);
                 }
                 else if(nextScene == Constants.OPTION_SCENE)
