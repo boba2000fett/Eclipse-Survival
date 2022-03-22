@@ -82,12 +82,15 @@ public class EnemyManager : MonoBehaviour
 
     public void ActivateObjects()
     {
-
-
         exitedMenuScene = true;
 
         catInstance = GameObject.Find("Cat").GetComponent<Cat>();
         grandmotherInstance = GameObject.Find("Grandmother").GetComponent<Grandmother>();
+
+        if (wolfSpider1Instance != null || wolfSpider2Instance != null)
+        {
+            return;
+        }
 
         //GameObject go = GameObject.Instantiate(wolfSpider1Prefab.gameObject);
         wolfSpider1Instance = GameObject.Instantiate(wolfSpider1Prefab.gameObject).GetComponent<WolfSpiderRoaming>();
@@ -112,10 +115,16 @@ public class EnemyManager : MonoBehaviour
         {
             exitedMenuScene = false;
             Destroy(wolfSpider1Instance.gameObject);
-            Destroy(wolfSpider2Instance);
+            Destroy(wolfSpider2Instance.gameObject);
             Destroy(grandmotherInstance.gameObject);
             Destroy(catInstance.gameObject);
         }
 
     }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
 }
