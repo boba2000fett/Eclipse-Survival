@@ -23,8 +23,8 @@ public class CreditsScroll : MonoBehaviour
         "Lead Artist: Brendan Adams,\n,Supporting Artist: Damion Shirkey,\n,Fill-In Artist: Trent Andrews,\n,\n,\n,\n," +
         "Lead Sound Designer: Lukas Stanley,\n,\n,\n,\n,Lead Programmer: Michael Hoekstra,\n,Programmer 1: Trent Andrews,\n," +
         "Programmer 2: Cameron Abrams,\n,Programmer 3: Lukas Stanley,\n,\n,\n,\n,Lead Designer: Trent Andrews,\n,Lead Level Designer: Alex Reid,\n,\n,\n,\n," +
-        "Lead Story Writer: Trent Andrews,\n,Supporting Story Writer: Cameron Abrams,\n,Concept Creation: Lukas Stanley," +
-        "\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n";
+        "Lead Story Writer: Trent Andrews,\n,Supporting Story Writer: Cameron Abrams,\n,\n,\n,\n,Concept Creation: Lukas Stanley," +
+        "\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n";
 
     string[] creditLines;
     int onLineNum = 0;
@@ -45,7 +45,7 @@ public class CreditsScroll : MonoBehaviour
         bgm1.loop = false;
         bgm1.playOnAwake = false;
 
-        bgm1.PlayOneShot(optionsBGM, 1f);
+        bgm1.PlayOneShot(optionsBGM, 0.75f);
     }
 
     void FixedUpdate()
@@ -63,7 +63,7 @@ public class CreditsScroll : MonoBehaviour
             {
                 onLineNum = 0;
                 textLoc = 0f;
-                scrollMultiPerSec *= 2;
+                scrollMultiPerSec *= 3;
                 if(!bgm1.isPlaying) doneScrolling = true;
             }
 

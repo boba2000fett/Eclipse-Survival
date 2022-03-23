@@ -241,7 +241,7 @@ MonoBehaviour:
   tbPrefab: {fileID: 256469104109822949, guid: 5df7931541450f340827c93297fb1a69, type: 3}
   optionsBGM: {fileID: 8300000, guid: 477957fd61b5bf14bb388b473cfbe0a0, type: 3}
   scrollSpeed: 0.005
-  scrollMultiPerSec: 0.035
+  scrollMultiPerSec: 0.04
 --- !u!1 &674341121
 GameObject:
   m_ObjectHideFlags: 0
