@@ -35,8 +35,13 @@ public class Constants : MonoBehaviour
     //public const int DownstairsTopLeftKitchen = 5;
     //public const int PLAY_SCENE_WALL_VIEW = 6;
     //public const int PAUSE_SCENE = 7;
-    
 
+    // Foods
+    public const string BIG_CHEESE = "BigCheese";
+    public const string BREAD = "Bread";
+    public const string DEATH_CHEESE = "DeathCheese";
+    public const string FRUIT_SEED = "FruitSeed";
+    public const string BREAD_CRUMB = "BreadCrumb";
 
     //Test Constant Scene for transition between two scenes
     //public const int PLAYABLE_TOP_DOWN_VIEW = 0;
