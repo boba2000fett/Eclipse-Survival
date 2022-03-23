@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = Vector2.zero;
         bool dirSwitch = false;
 
-        if (Input.GetKey(KeyCode.Space) && stamina > 0 && state != ActionState.Idle && state != ActionState.Scratching)
+        if (Input.GetKey(KeyCode.LeftShift) && stamina > 0 && state != ActionState.Idle && state != ActionState.Scratching)
         {
             moveSpeed = RUN_SPEED;
             detectionCollider.radius = runningDetectionRadius;
@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) && state != ActionState.Scratching)
         {
-            if (Input.GetKey(KeyCode.Space) && !staminaIsInCooldownPeriod)
+            if (Input.GetKey(KeyCode.LeftShift) && !staminaIsInCooldownPeriod)
             {
                 moveSpeed = RUN_SPEED;
                 state = ActionState.Running;
@@ -106,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) && state != ActionState.Scratching)
         {
-            if (Input.GetKey(KeyCode.Space) && !staminaIsInCooldownPeriod)
+            if (Input.GetKey(KeyCode.LeftShift) && !staminaIsInCooldownPeriod)
             {
                 moveSpeed = RUN_SPEED;
                 state = ActionState.Running;
@@ -126,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) && state != ActionState.Scratching)
         {
-            if (Input.GetKey(KeyCode.Space) && !staminaIsInCooldownPeriod)
+            if (Input.GetKey(KeyCode.LeftShift) && !staminaIsInCooldownPeriod)
             {
                 moveSpeed = RUN_SPEED;
                 state = ActionState.Running;
@@ -146,7 +146,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) && state != ActionState.Scratching)
         {
-            if (Input.GetKey(KeyCode.Space) && !staminaIsInCooldownPeriod)
+            if (Input.GetKey(KeyCode.LeftShift) && !staminaIsInCooldownPeriod)
             {
                 moveSpeed = RUN_SPEED;
                 state = ActionState.Running;

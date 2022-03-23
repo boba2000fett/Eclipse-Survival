@@ -111,9 +111,18 @@ public class SceneTransitionScriptBasic : MonoBehaviour
             case Constants.GAME_OVER_SCENE:
                 SceneManager.LoadScene(Constants.MAIN_MENU_SCENE);
                 break;
+            default:
+                if (nextScene == Constants.GAME_OVER_SCENE)
+                {
+                    SceneManager.LoadScene(Constants.GAME_OVER_SCENE);
+                }
+                else if (nextScene == Constants.OPTION_SCENE)
+                {
+                    SceneManager.LoadScene(Constants.OPTION_SCENE);
+                }
+                break;
         }
 
-        
         //else if (currentScene.buildIndex == Constants.PLAYABLE_TOP_DOWN_VIEW)
         //{
         //    SceneManager.LoadScene(Constants.PLAYABLE_WALL_VIEW);
@@ -123,5 +132,10 @@ public class SceneTransitionScriptBasic : MonoBehaviour
         //    SceneManager.LoadScene(Constants.PLAYABLE_TOP_DOWN_VIEW);
         //    Physics2D.gravity = new Vector2(0, 0);
         //}
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }
