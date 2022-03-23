@@ -204,8 +204,16 @@ public class EnemyRoomRoaming : Enemy
         else 
         //This is when the enemy has not traveled to the required waypoints. 
         {
-            
+
             //Possilby add in fix here ()
+
+            if (currentWaypointDestination.possibleTravelPoints.Length == 0)
+            {
+                this.GetComponent<BoxCollider2D>().enabled = false;
+                currentWaypointDestination.FindPotentialWaypoints();
+                this.GetComponent<BoxCollider2D>().enabled = true;
+            }
+
             nextNodeIndex = Random.Range(0, currentWaypointDestination.possibleTravelPoints.Length);
             currentWaypointDestination = currentWaypointDestination.possibleTravelPoints[nextNodeIndex];
             waypointCount++;
