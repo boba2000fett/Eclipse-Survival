@@ -50,6 +50,8 @@ public class ClimbingEnemy : MonoBehaviour
     protected bool canClimb;
     protected bool canRun;
 
+    protected bool moving;
+
     public bool onClimbable;
     protected bool climbing = false;
     public bool onGround;
@@ -64,6 +66,7 @@ public class ClimbingEnemy : MonoBehaviour
     public GameObject target;
 
     protected Rigidbody2D rigid;
+    protected Animator anim;
 
     protected List<Node> graph;
     protected List<Node> path = new List<Node>();
@@ -86,8 +89,10 @@ public class ClimbingEnemy : MonoBehaviour
     public virtual void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         moveSpeed = runSpeed;
         graph = AIPathfinding.GenerateNodesForLevel();
+        moving = false;
     }
 
     public virtual void FixedUpdate()
@@ -134,6 +139,7 @@ public class ClimbingEnemy : MonoBehaviour
                 if (dist < attackRange)
                 {
                     Attack(dist);
+                    return;
                 }
             }
             else if (attackTimer >= attackCooldown)
@@ -141,7 +147,14 @@ public class ClimbingEnemy : MonoBehaviour
                 canAttack = true;
                 attackTimer = 0f;
             }
-            else attackTimer += Time.deltaTime;
+            else
+            {
+                if (anim.GetBool("attacking") && attackTimer >= 1f)
+                {
+                    anim.SetBool("attacking", false);
+                }
+                attackTimer += Time.deltaTime;
+            }
 
             // Alert Timer
             alertTime += Time.deltaTime;
@@ -244,7 +257,62 @@ public class ClimbingEnemy : MonoBehaviour
             }
         }
 
+        RotateClimbingEnemy();
+
         rigid.velocity = eVel;
+    }
+
+    private void RotateClimbingEnemy()
+    {
+        if (eVel.magnitude <= 0.05f || !onGround)
+        {
+            moving = false;
+        }
+        else
+        {
+            moving = true;
+
+            if (climbing)
+            {
+                if (Mathf.Abs(eVel.x) < Mathf.Abs(eVel.y))
+                {
+                    if (eVel.y > 0) facing = Facing.Up;
+                    else facing = Facing.Down;
+                }
+                else
+                {
+                    if (eVel.x > 0) facing = Facing.Right;
+                    else facing = Facing.Left;
+                }
+
+                switch (facing)
+                {
+                    case Facing.Up:
+                        transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, 0f);
+                        break;
+                    case Facing.Down:
+                        transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, 180f);
+                        break;
+                    case Facing.Left:
+                        transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, 90f);
+                        break;
+                    case Facing.Right:
+                        transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, 270f);
+                        break;
+                }
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, 0f);
+
+                if (eVel.x > 0) facing = Facing.Right;
+                else facing = Facing.Left;
+            }
+        }
+
+        anim.SetBool("moving", moving);
+        anim.SetBool("climbing", climbing);
+        anim.SetBool("facingLeft", facing == Facing.Left);
     }
 
     public void ExitRoom(Vector2 exitPos)
@@ -301,6 +369,7 @@ public class ClimbingEnemy : MonoBehaviour
             else if (xDiff < -0.1f) eVel.x = (-moveSpeed) * Time.deltaTime;
 
             rigid.velocity = eVel;
+            RotateClimbingEnemy();
             return false;
         }
         else
@@ -343,6 +412,7 @@ public class ClimbingEnemy : MonoBehaviour
             }
             // Return statement to avoid xander chasing movement
             rigid.velocity = eVel;
+            RotateClimbingEnemy();
             return true;
         }
     }

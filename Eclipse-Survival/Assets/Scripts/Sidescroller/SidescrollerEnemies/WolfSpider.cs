@@ -55,6 +55,10 @@ public class WolfSpider : ClimbingEnemy
     {
         if (distance < basicAttackRange)
         {
+            if (climbing) anim.Play("SpiderClimbAttack");
+            else if (facing == Facing.Left) anim.Play("SpiderLeftAttack");
+            else if (facing == Facing.Right) anim.Play("SpiderRightAttack");
+            anim.SetBool("attacking", true);
             Xander x = target.GetComponent<Xander>();
             x.TakeDamage(damage);
             canAttack = false;

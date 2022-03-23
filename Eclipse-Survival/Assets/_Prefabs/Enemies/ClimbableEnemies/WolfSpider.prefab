@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 8860836230694857038}
   - component: {fileID: 8860836230694857072}
   - component: {fileID: 8860836230694857075}
+  - component: {fileID: 1182861367}
   m_Layer: 6
   m_Name: WolfSpider
   m_TagString: ClimbingEnemy
@@ -196,12 +197,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2931812a13ee8704c9ac8518f2def798, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 30
-  runSpeed: 50
-  climbSpeed: 30
+  walkSpeed: 35
+  runSpeed: 60
   jumpPower: 50
   jumpCooldown: 0.5
-  attentionSpan: 120
+  attentionSpan: 10
   pathResetTime: 2
   attackRange: 1.75
   attackCooldown: 1.5
@@ -217,8 +217,8 @@ MonoBehaviour:
   webSlowdown: 0.7
   webExpire: 10
   webSlowDuration: 5
-  webSpeed: 4
-  basicAttackRange: 0.3
+  webSpeed: 3
+  basicAttackRange: 0.5
   webPrefab: {fileID: 9095454945232909076, guid: f3a421c11c8585947a1a6b8ffec726ba, type: 3}
 --- !u!58 &8860836230694857075
 CircleCollider2D:
@@ -236,3 +236,22 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.32
+--- !u!95 &1182861367
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8860836230694857037}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d99e8d06f60cea64f91b4b474589a65e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

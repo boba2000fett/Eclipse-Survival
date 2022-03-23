@@ -39,7 +39,7 @@ public class SceneTransitionScriptBasic : MonoBehaviour
             //Check for the input key of Space for transitioning to the next scene
             if (Input.GetKey(KeyCode.Space))
             {
-                    TransitionScene(0);
+                TransitionScene(0);
             }
         }
         
