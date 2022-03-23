@@ -9,9 +9,12 @@ public class SceneTransitionScriptBasic : MonoBehaviour
 {
     [Header("Set In Inspector")]
     public float delayBetweenAutoTransition;
+    public bool autoTransition = false;
 
     [Header("Set Dynamically")]
     Scene currentScene;
+    float transitionTime = 0f;
+    
     
     void Start()
     {
@@ -22,15 +25,24 @@ public class SceneTransitionScriptBasic : MonoBehaviour
 
         //If the current scene is the splash or studio sceen activate a
         //delay time for progressing to the next scene
-        if(currentScene.buildIndex == Constants.SPLASH_SCENE || 
-            currentScene.buildIndex == Constants.STUDIO_SCENE)
-        {
+        //if(currentScene.buildIndex == Constants.SPLASH_SCENE || 
+        //    currentScene.buildIndex == Constants.STUDIO_SCENE)
+        //{
             
-        }
+        //}
     }
 
     void Update()
-    {     
+    {
+        if (autoTransition)
+        {
+            if (transitionTime >= delayBetweenAutoTransition)
+            {
+                TransitionScene(0);
+            }
+            else transitionTime += Time.deltaTime;
+        }
+
         //If the current scene is the splash or studio sceen activate 
         //The space button can be pressed to progress the transition faster
         if (currentScene.buildIndex == Constants.SPLASH_SCENE ||
@@ -40,14 +52,15 @@ public class SceneTransitionScriptBasic : MonoBehaviour
             if (Input.GetKey(KeyCode.Space))
             {
                 TransitionScene(0);
+                autoTransition = false;
             }
         }
         
         //Check for the input key of X for switching between the two playable scenes
-        if (Input.GetKey(KeyCode.Space))
-        {
-            TransitionScene(3);    
-        }
+        //if (Input.GetKey(KeyCode.Space))
+        //{
+        //    TransitionScene(3);    
+        //}
 
         //TODO
         /*
