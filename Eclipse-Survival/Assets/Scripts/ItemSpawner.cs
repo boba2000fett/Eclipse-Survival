@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using static Constants;
 public class ItemSpawner : MonoBehaviour
 {
     [Header("Set in Inspector: Item Spawner")]
@@ -43,20 +44,20 @@ public class ItemSpawner : MonoBehaviour
                             //Switch statement for identifying the item name, which then sets the index value of the list of items
                             switch (GamePlayManager.GPM.itemsLeftInMasterBedRoomType[i])
                             {
-                                case "BigCheese":
+                                case BIG_CHEESE:
                                     itemIndexValue = 0;
                                     break;
-                                case "Bread":
+                                case BREAD:
                                     itemIndexValue = 1;
                                     break;
 
-                                case "DeathCheese":
+                                case DEATH_CHEESE:
                                     itemIndexValue = 2;
                                     break;
-                                case "FoodA":
+                                case FRUIT_SEED:
                                     itemIndexValue = 3;
                                     break;
-                                case "FoodB":
+                                case BREAD_CRUMB:
                                     itemIndexValue = 4;
                                     break;
                             }
@@ -90,20 +91,20 @@ public class ItemSpawner : MonoBehaviour
                             //Switch statement for identifying the item name, which then sets the index value of the list of items
                             switch (GamePlayManager.GPM.itemsLeftInKitchenRoomType[i])
                             {
-                                case "BigCheese":
+                                case BIG_CHEESE:
                                     itemIndexValue = 0;
                                     break;
-                                case "Bread":
+                                case BREAD:
                                     itemIndexValue = 1;
                                     break;
 
-                                case "DeathCheese":
+                                case DEATH_CHEESE:
                                     itemIndexValue = 2;
                                     break;
-                                case "FoodA":
+                                case FRUIT_SEED:
                                     itemIndexValue = 3;
                                     break;
-                                case "FoodB":
+                                case BREAD_CRUMB:
                                     itemIndexValue = 4;
                                     break;
                             }
@@ -135,20 +136,20 @@ public class ItemSpawner : MonoBehaviour
                             //Switch statement for identifying the item name, which then sets the index value of the list of items
                             switch (GamePlayManager.GPM.itemsLeftInDinningRoomType[i])
                             {
-                                case "BigCheese":
+                                case BIG_CHEESE:
                                     itemIndexValue = 0;
                                     break;
-                                case "Bread":
+                                case BREAD:
                                     itemIndexValue = 1;
                                     break;
 
-                                case "DeathCheese":
+                                case DEATH_CHEESE:
                                     itemIndexValue = 2;
                                     break;
-                                case "FoodA":
+                                case FRUIT_SEED:
                                     itemIndexValue = 3;
                                     break;
-                                case "FoodB":
+                                case BREAD_CRUMB:
                                     itemIndexValue = 4;
                                     break;
                             }
@@ -156,7 +157,7 @@ public class ItemSpawner : MonoBehaviour
                             //Reinstatiate the item object and place it based on the stored vector value
                             GameObject go = Instantiate<GameObject>(foodItemsIndex[itemIndexValue]);
                             go.transform.position =
-                                GamePlayManager.GPM.itemsLeftInKitchenRoomLocation[i];
+                                GamePlayManager.GPM.itemsLeftInDinningRoomLocation[i];
                         }
                     }
                 }
@@ -180,20 +181,20 @@ public class ItemSpawner : MonoBehaviour
                             //Switch statement for identifying the item name, which then sets the index value of the list of items
                             switch (GamePlayManager.GPM.itemsLeftInLivingRoomType[i])
                             {
-                                case "BigCheese":
+                                case BIG_CHEESE:
                                     itemIndexValue = 0;
                                     break;
-                                case "Bread":
+                                case BREAD:
                                     itemIndexValue = 1;
                                     break;
 
-                                case "DeathCheese":
+                                case DEATH_CHEESE:
                                     itemIndexValue = 2;
                                     break;
-                                case "FoodA":
+                                case FRUIT_SEED:
                                     itemIndexValue = 3;
                                     break;
-                                case "FoodB":
+                                case BREAD_CRUMB:
                                     itemIndexValue = 4;
                                     break;
                             }
@@ -201,7 +202,7 @@ public class ItemSpawner : MonoBehaviour
                             //Reinstatiate the item object and place it based on the stored vector value
                             GameObject go = Instantiate<GameObject>(foodItemsIndex[itemIndexValue]);
                             go.transform.position =
-                                GamePlayManager.GPM.itemsLeftInKitchenRoomLocation[i];
+                                GamePlayManager.GPM.itemsLeftInLivingRoomLocation[i];
                         }
                     }
                 }
@@ -225,20 +226,20 @@ public class ItemSpawner : MonoBehaviour
                             //Switch statement for identifying the item name, which then sets the index value of the list of items
                             switch (GamePlayManager.GPM.itemsLeftInFirstFloorHallwayType[i])
                             {
-                                case "BigCheese":
+                                case BIG_CHEESE:
                                     itemIndexValue = 0;
                                     break;
-                                case "Bread":
+                                case BREAD:
                                     itemIndexValue = 1;
                                     break;
 
-                                case "DeathCheese":
+                                case DEATH_CHEESE:
                                     itemIndexValue = 2;
                                     break;
-                                case "FoodA":
+                                case FRUIT_SEED:
                                     itemIndexValue = 3;
                                     break;
-                                case "FoodB":
+                                case BREAD_CRUMB:
                                     itemIndexValue = 4;
                                     break;
                             }
@@ -246,7 +247,7 @@ public class ItemSpawner : MonoBehaviour
                             //Reinstatiate the item object and place it based on the stored vector value
                             GameObject go = Instantiate<GameObject>(foodItemsIndex[itemIndexValue]);
                             go.transform.position =
-                                GamePlayManager.GPM.itemsLeftInKitchenRoomLocation[i];
+                                GamePlayManager.GPM.itemsLeftInFirstFloorHallwayLocation[i];
                         }
                     }
                 }
@@ -270,20 +271,20 @@ public class ItemSpawner : MonoBehaviour
                             //Switch statement for identifying the item name, which then sets the index value of the list of items
                             switch (GamePlayManager.GPM.itemsLeftInGrandKidsBedRoomType[i])
                             {
-                                case "BigCheese":
+                                case BIG_CHEESE:
                                     itemIndexValue = 0;
                                     break;
-                                case "Bread":
+                                case BREAD:
                                     itemIndexValue = 1;
                                     break;
 
-                                case "DeathCheese":
+                                case DEATH_CHEESE:
                                     itemIndexValue = 2;
                                     break;
-                                case "FoodA":
+                                case FRUIT_SEED:
                                     itemIndexValue = 3;
                                     break;
-                                case "FoodB":
+                                case BREAD_CRUMB:
                                     itemIndexValue = 4;
                                     break;
                             }
@@ -291,7 +292,7 @@ public class ItemSpawner : MonoBehaviour
                             //Reinstatiate the item object and place it based on the stored vector value
                             GameObject go = Instantiate<GameObject>(foodItemsIndex[itemIndexValue]);
                             go.transform.position =
-                                GamePlayManager.GPM.itemsLeftInKitchenRoomLocation[i];
+                                GamePlayManager.GPM.itemsLeftInGrandKidsBedRoomLocation[i];
                         }
                     }
                 }
@@ -315,20 +316,20 @@ public class ItemSpawner : MonoBehaviour
                             //Switch statement for identifying the item name, which then sets the index value of the list of items
                             switch (GamePlayManager.GPM.itemsLeftInGuestBedRoomOneType[i])
                             {
-                                case "BigCheese":
+                                case BIG_CHEESE:
                                     itemIndexValue = 0;
                                     break;
-                                case "Bread":
+                                case BREAD:
                                     itemIndexValue = 1;
                                     break;
 
-                                case "DeathCheese":
+                                case DEATH_CHEESE:
                                     itemIndexValue = 2;
                                     break;
-                                case "FoodA":
+                                case FRUIT_SEED:
                                     itemIndexValue = 3;
                                     break;
-                                case "FoodB":
+                                case BREAD_CRUMB:
                                     itemIndexValue = 4;
                                     break;
                             }
@@ -336,7 +337,7 @@ public class ItemSpawner : MonoBehaviour
                             //Reinstatiate the item object and place it based on the stored vector value
                             GameObject go = Instantiate<GameObject>(foodItemsIndex[itemIndexValue]);
                             go.transform.position =
-                                GamePlayManager.GPM.itemsLeftInKitchenRoomLocation[i];
+                                GamePlayManager.GPM.itemsLeftInGuestBedRoomOneLocation[i];
                         }
                     }
                 }
@@ -360,20 +361,20 @@ public class ItemSpawner : MonoBehaviour
                             //Switch statement for identifying the item name, which then sets the index value of the list of items
                             switch (GamePlayManager.GPM.itemsLeftInGuestBedRoomTwoType[i])
                             {
-                                case "BigCheese":
+                                case BIG_CHEESE:
                                     itemIndexValue = 0;
                                     break;
-                                case "Bread":
+                                case BREAD:
                                     itemIndexValue = 1;
                                     break;
 
-                                case "DeathCheese":
+                                case DEATH_CHEESE:
                                     itemIndexValue = 2;
                                     break;
-                                case "FoodA":
+                                case FRUIT_SEED:
                                     itemIndexValue = 3;
                                     break;
-                                case "FoodB":
+                                case BREAD_CRUMB:
                                     itemIndexValue = 4;
                                     break;
                             }
@@ -381,7 +382,7 @@ public class ItemSpawner : MonoBehaviour
                             //Reinstatiate the item object and place it based on the stored vector value
                             GameObject go = Instantiate<GameObject>(foodItemsIndex[itemIndexValue]);
                             go.transform.position =
-                                GamePlayManager.GPM.itemsLeftInKitchenRoomLocation[i];
+                                GamePlayManager.GPM.itemsLeftInGuestBedRoomTwoLocation[i];
                         }
                     }
                 }
@@ -405,20 +406,20 @@ public class ItemSpawner : MonoBehaviour
                             //Switch statement for identifying the item name, which then sets the index value of the list of items
                             switch (GamePlayManager.GPM.itemsLeftInBathRoomType[i])
                             {
-                                case "BigCheese":
+                                case BIG_CHEESE:
                                     itemIndexValue = 0;
                                     break;
-                                case "Bread":
+                                case BREAD:
                                     itemIndexValue = 1;
                                     break;
 
-                                case "DeathCheese":
+                                case DEATH_CHEESE:
                                     itemIndexValue = 2;
                                     break;
-                                case "FoodA":
+                                case FRUIT_SEED:
                                     itemIndexValue = 3;
                                     break;
-                                case "FoodB":
+                                case BREAD_CRUMB:
                                     itemIndexValue = 4;
                                     break;
                             }
@@ -426,7 +427,7 @@ public class ItemSpawner : MonoBehaviour
                             //Reinstatiate the item object and place it based on the stored vector value
                             GameObject go = Instantiate<GameObject>(foodItemsIndex[itemIndexValue]);
                             go.transform.position =
-                                GamePlayManager.GPM.itemsLeftInKitchenRoomLocation[i];
+                                GamePlayManager.GPM.itemsLeftInBathRoomLocation[i];
                         }
                     }
                 }
@@ -450,20 +451,20 @@ public class ItemSpawner : MonoBehaviour
                             //Switch statement for identifying the item name, which then sets the index value of the list of items
                             switch (GamePlayManager.GPM.itemsLeftInSecondFloorHallwayType[i])
                             {
-                                case "BigCheese":
+                                case BIG_CHEESE:
                                     itemIndexValue = 0;
                                     break;
-                                case "Bread":
+                                case BREAD:
                                     itemIndexValue = 1;
                                     break;
 
-                                case "DeathCheese":
+                                case DEATH_CHEESE:
                                     itemIndexValue = 2;
                                     break;
-                                case "FoodA":
+                                case FRUIT_SEED:
                                     itemIndexValue = 3;
                                     break;
-                                case "FoodB":
+                                case BREAD_CRUMB:
                                     itemIndexValue = 4;
                                     break;
                             }
@@ -471,7 +472,7 @@ public class ItemSpawner : MonoBehaviour
                             //Reinstatiate the item object and place it based on the stored vector value
                             GameObject go = Instantiate<GameObject>(foodItemsIndex[itemIndexValue]);
                             go.transform.position =
-                                GamePlayManager.GPM.itemsLeftInKitchenRoomLocation[i];
+                                GamePlayManager.GPM.itemsLeftInSecondFloorHallwayLocation[i];
                         }
                     }
                 }

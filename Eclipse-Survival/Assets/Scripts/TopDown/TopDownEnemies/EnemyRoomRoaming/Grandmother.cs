@@ -73,12 +73,12 @@ public class Grandmother : EnemyRoomRoaming
 
     public override void Update()
     {
-        if (atHome && SceneManager.GetActiveScene().name == roomList[currentRoomIndex].sceneName)
+        if (atHome && SceneManager.GetActiveScene().name == "UpstairsTopLeftBedroom")
         {
             Debug.LogWarning("Grandmother is Sleep");
             GameObject.FindObjectOfType<Bed>().GrandmaInBed();
         }
-        else if(!atHome && SceneManager.GetActiveScene().name == roomList[currentRoomIndex].sceneName)
+        else if(!atHome && SceneManager.GetActiveScene().name == "UpstairsTopLeftBedroom")
         {
             GameObject.FindObjectOfType<Bed>().RegularBed();
         }
