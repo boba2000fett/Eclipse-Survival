@@ -328,6 +328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delayBetweenAutoTransition: 0
+  autoTransition: 0
 --- !u!114 &674341126
 MonoBehaviour:
   m_ObjectHideFlags: 0

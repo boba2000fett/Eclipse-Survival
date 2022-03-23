@@ -133,9 +133,4 @@ public class SceneTransitionScriptBasic : MonoBehaviour
         //    Physics2D.gravity = new Vector2(0, 0);
         //}
     }
-
-    public void ExitGame()
-    {
-        Application.Quit();
-    }
 }
