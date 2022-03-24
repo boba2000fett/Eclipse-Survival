@@ -78,7 +78,7 @@ public class Xander : MonoBehaviour
         if (hungerTimer <= 0)
         {
             Hunger -= 1;
-            if (Hunger < 0)
+            if (Hunger <= 0)
             {
                 Hunger = 0;
                 Health -= 1;
