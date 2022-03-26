@@ -425,6 +425,7 @@ MonoBehaviour:
   nextNodeHome: {fileID: 0}
   isExitNode: 0
   isHomeNode: 0
+  isSpawnNode: 1
   completedWaypoint: 0
 --- !u!1001 &86802587
 PrefabInstance:
@@ -2151,6 +2152,7 @@ MonoBehaviour:
   nextNodeHome: {fileID: 0}
   isExitNode: 1
   isHomeNode: 0
+  isSpawnNode: 0
   completedWaypoint: 0
 --- !u!61 &425863857
 BoxCollider2D:
@@ -4153,6 +4155,7 @@ MonoBehaviour:
   nextNodeHome: {fileID: 0}
   isExitNode: 1
   isHomeNode: 0
+  isSpawnNode: 0
   completedWaypoint: 0
 --- !u!61 &940616958
 BoxCollider2D:
@@ -4688,8 +4691,8 @@ MonoBehaviour:
   - {x: 0.022848941, y: 0.29399073, z: 0}
   - {x: -0.12293116, y: 0.2026081, z: 0}
   m_ShapePathHash: 592046037
-  m_Mesh: {fileID: 1392948638}
-  m_InstanceId: 150556
+  m_Mesh: {fileID: 1412676642}
+  m_InstanceId: 79132
 --- !u!212 &1066281966
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5653,7 +5656,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!43 &1392948638
+--- !u!43 &1412676642
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7098,6 +7101,7 @@ MonoBehaviour:
   nextNodeHome: {fileID: 0}
   isExitNode: 0
   isHomeNode: 0
+  isSpawnNode: 1
   completedWaypoint: 0
 --- !u!61 &1683958121
 BoxCollider2D:
@@ -8542,6 +8546,7 @@ MonoBehaviour:
   nextNodeHome: {fileID: 0}
   isExitNode: 0
   isHomeNode: 0
+  isSpawnNode: 1
   completedWaypoint: 0
 --- !u!1001 &2006531078
 PrefabInstance:
@@ -9401,6 +9406,7 @@ MonoBehaviour:
   nextNodeHome: {fileID: 0}
   isExitNode: 0
   isHomeNode: 0
+  isSpawnNode: 1
   completedWaypoint: 0
 --- !u!61 &2127691183
 BoxCollider2D:

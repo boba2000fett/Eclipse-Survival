@@ -410,9 +410,11 @@ MonoBehaviour:
   nextNodeWestExit: {fileID: 0}
   nextNodeEastExit: {fileID: 0}
   nextNodeStairsExit: {fileID: 0}
+  nextNodeBathroomExit: {fileID: 0}
   nextNodeHome: {fileID: 0}
   isExitNode: 1
   isHomeNode: 0
+  isSpawnNode: 0
   completedWaypoint: 0
 --- !u!61 &13001442
 BoxCollider2D:
@@ -4047,9 +4049,11 @@ MonoBehaviour:
   nextNodeWestExit: {fileID: 0}
   nextNodeEastExit: {fileID: 0}
   nextNodeStairsExit: {fileID: 0}
+  nextNodeBathroomExit: {fileID: 0}
   nextNodeHome: {fileID: 0}
   isExitNode: 0
   isHomeNode: 0
+  isSpawnNode: 0
   completedWaypoint: 0
 --- !u!61 &164012703
 BoxCollider2D:
@@ -20796,9 +20800,11 @@ MonoBehaviour:
   nextNodeWestExit: {fileID: 0}
   nextNodeEastExit: {fileID: 0}
   nextNodeStairsExit: {fileID: 0}
+  nextNodeBathroomExit: {fileID: 0}
   nextNodeHome: {fileID: 0}
   isExitNode: 0
   isHomeNode: 0
+  isSpawnNode: 1
   completedWaypoint: 0
 --- !u!61 &915480110
 BoxCollider2D:
@@ -24392,9 +24398,11 @@ MonoBehaviour:
   nextNodeWestExit: {fileID: 0}
   nextNodeEastExit: {fileID: 0}
   nextNodeStairsExit: {fileID: 0}
+  nextNodeBathroomExit: {fileID: 0}
   nextNodeHome: {fileID: 0}
   isExitNode: 0
   isHomeNode: 1
+  isSpawnNode: 0
   completedWaypoint: 0
 --- !u!61 &1077110426
 BoxCollider2D:
@@ -25269,9 +25277,11 @@ MonoBehaviour:
   nextNodeWestExit: {fileID: 0}
   nextNodeEastExit: {fileID: 0}
   nextNodeStairsExit: {fileID: 0}
+  nextNodeBathroomExit: {fileID: 0}
   nextNodeHome: {fileID: 0}
   isExitNode: 0
   isHomeNode: 0
+  isSpawnNode: 1
   completedWaypoint: 0
 --- !u!61 &1122302184
 BoxCollider2D:
@@ -26791,9 +26801,11 @@ MonoBehaviour:
   nextNodeWestExit: {fileID: 0}
   nextNodeEastExit: {fileID: 0}
   nextNodeStairsExit: {fileID: 0}
+  nextNodeBathroomExit: {fileID: 0}
   nextNodeHome: {fileID: 0}
   isExitNode: 0
   isHomeNode: 0
+  isSpawnNode: 0
   completedWaypoint: 0
 --- !u!61 &1184423775
 BoxCollider2D:
@@ -33045,9 +33057,11 @@ MonoBehaviour:
   nextNodeWestExit: {fileID: 0}
   nextNodeEastExit: {fileID: 0}
   nextNodeStairsExit: {fileID: 0}
+  nextNodeBathroomExit: {fileID: 0}
   nextNodeHome: {fileID: 0}
   isExitNode: 0
   isHomeNode: 0
+  isSpawnNode: 0
   completedWaypoint: 0
 --- !u!61 &1386711680
 BoxCollider2D:
@@ -35889,6 +35903,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 485cf830b4caaca449e8760bd9853c31, type: 3}
   - {fileID: 21300000, guid: 6f657a55935477d43a1504ee61c36b47, type: 3}
   - {fileID: 21300000, guid: 692a456926cacdf46b8d92f702b33542, type: 3}
+  hoursSurvivedText: {fileID: 0}
 --- !u!114 &1522243738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40403,9 +40418,11 @@ MonoBehaviour:
   nextNodeWestExit: {fileID: 0}
   nextNodeEastExit: {fileID: 0}
   nextNodeStairsExit: {fileID: 0}
+  nextNodeBathroomExit: {fileID: 0}
   nextNodeHome: {fileID: 0}
   isExitNode: 0
   isHomeNode: 0
+  isSpawnNode: 1
   completedWaypoint: 0
 --- !u!61 &1735813389
 BoxCollider2D:
@@ -40846,9 +40863,11 @@ MonoBehaviour:
   nextNodeWestExit: {fileID: 0}
   nextNodeEastExit: {fileID: 0}
   nextNodeStairsExit: {fileID: 0}
+  nextNodeBathroomExit: {fileID: 0}
   nextNodeHome: {fileID: 0}
   isExitNode: 1
   isHomeNode: 0
+  isSpawnNode: 0
   completedWaypoint: 0
 --- !u!61 &1753629196
 BoxCollider2D:
@@ -47074,6 +47093,7 @@ MonoBehaviour:
   walkingDetectionRadius: 1
   runningDetectionRadius: 3
   scratchingDetectionRadius: 5
+  knockbackTimeInterval: 0.5
   staminaBar: {fileID: 0}
   facing: 0
   stamina: 0
@@ -50342,6 +50362,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8509967476707215607, guid: 5f11e47fd2adc0a458d2d218ac8f5735, type: 3}
+      propertyPath: currentRoom
+      value: 
+      objectReference: {fileID: 2619627699124755209, guid: 88f780d33fdfe2f4392cf21b51d028da, type: 3}
+    - target: {fileID: 8509967476707215607, guid: 5f11e47fd2adc0a458d2d218ac8f5735, type: 3}
+      propertyPath: roomManager
+      value: 
+      objectReference: {fileID: 6202258368021614728, guid: 88c5413f1ac09d64e9a60325f6aa3d35, type: 3}
+    - target: {fileID: 8509967476707215607, guid: 5f11e47fd2adc0a458d2d218ac8f5735, type: 3}
+      propertyPath: exitWaypoint
+      value: 
+      objectReference: {fileID: 7820197560689148092, guid: 01426e7f4bcd599458df3fcb1b34be50, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f11e47fd2adc0a458d2d218ac8f5735, type: 3}
 --- !u!1 &2096163703
@@ -51625,9 +51657,11 @@ MonoBehaviour:
   nextNodeWestExit: {fileID: 0}
   nextNodeEastExit: {fileID: 0}
   nextNodeStairsExit: {fileID: 0}
+  nextNodeBathroomExit: {fileID: 0}
   nextNodeHome: {fileID: 0}
   isExitNode: 0
   isHomeNode: 0
+  isSpawnNode: 1
   completedWaypoint: 0
 --- !u!61 &2141345589
 BoxCollider2D:
@@ -51655,63 +51689,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1001 &758081580172842551
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2862997889626436118, guid: ad9213fe91872b84cae28f4941bc0a59, type: 3}
-      propertyPath: m_Name
-      value: Cockroach (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2862997889626436203, guid: ad9213fe91872b84cae28f4941bc0a59, type: 3}
-      propertyPath: m_RootOrder
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2862997889626436203, guid: ad9213fe91872b84cae28f4941bc0a59, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.38
-      objectReference: {fileID: 0}
-    - target: {fileID: 2862997889626436203, guid: ad9213fe91872b84cae28f4941bc0a59, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2862997889626436203, guid: ad9213fe91872b84cae28f4941bc0a59, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2862997889626436203, guid: ad9213fe91872b84cae28f4941bc0a59, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2862997889626436203, guid: ad9213fe91872b84cae28f4941bc0a59, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2862997889626436203, guid: ad9213fe91872b84cae28f4941bc0a59, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2862997889626436203, guid: ad9213fe91872b84cae28f4941bc0a59, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2862997889626436203, guid: ad9213fe91872b84cae28f4941bc0a59, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2862997889626436203, guid: ad9213fe91872b84cae28f4941bc0a59, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2862997889626436203, guid: ad9213fe91872b84cae28f4941bc0a59, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ad9213fe91872b84cae28f4941bc0a59, type: 3}
 --- !u!1001 &2862997889017297449
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -34,6 +34,8 @@ public class Room : MonoBehaviour
     //This is useful because if switched to a scene where the enemy is supposed to be in that scene, the enemy can be moved
     //To a random variable 
     public EnemyWaypoint[] waypointsInRoom;
+    [SerializeField]
+    public List<EnemyWaypoint> spawnWaypoints = new List<EnemyWaypoint>();
     public EnemyWaypoint southExit;
     public EnemyWaypoint northExit;
     public EnemyWaypoint eastExit;
@@ -247,6 +249,11 @@ public class Room : MonoBehaviour
             else if (waypointList[i].gameObject.name == "Wall5Exit")
             {
                 wall5Exit = waypointList[i];
+            }
+
+            if (waypointList[i].isSpawnNode && !spawnWaypoints.Contains(waypointList[i]))
+            {
+                spawnWaypoints.Add(waypointList[i]);
             }
             
         }

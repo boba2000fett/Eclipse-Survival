@@ -20,6 +20,7 @@ public class EnemyWaypoint : MonoBehaviour
 
     public bool isExitNode;
     public bool isHomeNode = false;
+    public bool isSpawnNode = false;
 
     [Header("Set Dynamically: EnemyWaypoint")]
     public bool completedWaypoint = false;

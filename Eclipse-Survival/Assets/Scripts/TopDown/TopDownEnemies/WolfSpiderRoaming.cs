@@ -536,10 +536,11 @@ If spider is currently in the same Room as player
 
             Room roomInstance = GameObject.FindGameObjectWithTag("Room").GetComponent<Room>();
 
-            int index = UnityEngine.Random.Range(1, roomInstance.waypointsInRoom.Length);
+            //int index = UnityEngine.Random.Range(1, roomInstance.waypointsInRoom.Length);
+            int index = UnityEngine.Random.Range(1, roomInstance.spawnWaypoints.Count);
 
-            wolfSpiderTopDownInstance.transform.position =
-                roomInstance.waypointsInRoom[index].gameObject.transform.position;
+            //wolfSpiderTopDownInstance.transform.position = roomInstance.waypointsInRoom[index].gameObject.transform.position;
+            wolfSpiderTopDownInstance.transform.position = roomInstance.spawnWaypoints[index].gameObject.transform.position;
 
             //Optional: Make Wolf Spider spawn away from one of the exits (so it doesn't spawn right next to Xander
             //when Xander is entering a room
