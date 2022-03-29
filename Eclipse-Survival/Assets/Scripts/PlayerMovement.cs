@@ -27,10 +27,10 @@ public enum ActionState
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Set in Inspector")]    
-    public float idleDetectionRadius;
-    public float walkingDetectionRadius;
-    public float runningDetectionRadius;
-    public float scratchingDetectionRadius;
+    //public float idleDetectionRadius;
+    //public float walkingDetectionRadius;
+    //public float runningDetectionRadius;
+    //public float scratchingDetectionRadius;
     public float knockbackTimeInterval = .5f;
     
     [Header("Set Dynamically")]
@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift) && stamina > 0 && state != ActionState.Idle && state != ActionState.Scratching)
         {
             moveSpeed = RUN_SPEED;
-            detectionCollider.radius = runningDetectionRadius;
+            detectionCollider.radius = RUNNING_DETECTION_RADIUS;
 
             state = ActionState.Running;
 
@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             moveSpeed = WALK_SPEED;
-            detectionCollider.radius = walkingDetectionRadius;
+            detectionCollider.radius = WALKING_DETECTION_RADIUS;
             if (stamina < 100)
             {
                 stamina += STAMINA_RECHARGE_INCREMENT;
@@ -232,19 +232,19 @@ public class PlayerMovement : MonoBehaviour
 
         if (state == ActionState.Idle)
         {
-            detectionCollider.radius = idleDetectionRadius + radiusAdd;
+            detectionCollider.radius = IDLE_DETECTION_RADIUS + radiusAdd;
         }
         else if (state == ActionState.Walking)
         {
-            detectionCollider.radius = walkingDetectionRadius + radiusAdd;
+            detectionCollider.radius = WALKING_DETECTION_RADIUS + radiusAdd;
         }
         else if (state == ActionState.Running)
         {
-            detectionCollider.radius = runningDetectionRadius + radiusAdd;
+            detectionCollider.radius = RUNNING_DETECTION_RADIUS + radiusAdd;
         }
         else if (state == ActionState.Scratching)
         {
-            detectionCollider.radius = scratchingDetectionRadius + radiusAdd;
+            detectionCollider.radius = SCRATCHING_DETECTION_RADIUS + radiusAdd;
         }
 
         // Trigger Xander Sound Effects
