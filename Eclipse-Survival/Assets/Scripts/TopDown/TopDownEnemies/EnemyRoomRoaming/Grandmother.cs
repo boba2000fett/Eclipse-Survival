@@ -36,13 +36,13 @@ public class Grandmother : EnemyRoomRoaming
     private Vector2 downFacingPositionFryingPan = new Vector2(0, -.25f);
     private Vector2 standardPositionFryingPan = new Vector2(0, 0);
 
-  
+
 
     public override void Awake()
     {
-        base.Awake();        
+        base.Awake();
 
-        #region Grandma Singleton 
+        #region Grandma Singleton
         if (grandmaSingleton == null)
         {
             //Set the GPM instance
@@ -62,7 +62,7 @@ public class Grandmother : EnemyRoomRoaming
         #region Grandmother Awake
         fryingPan = this.gameObject.transform.GetChild(0).gameObject;
         fryingPan.transform.localPosition = standardPositionFryingPan;
-        fryingPan.SetActive(false);        
+        fryingPan.SetActive(false);
         Damage fryingPanDamage = fryingPan.GetComponent<Damage>();
         fryingPanDamage.strength = fryingPanStrength;
 
@@ -278,8 +278,8 @@ public class Grandmother : EnemyRoomRoaming
     }
     #endregion
 }
-/* 
- Grandmother: 
+/*
+ Grandmother:
 To make her have a STRIKE - HOLD - PULL BACK type of attack, I will implement a simular system as the PounceSystem for the Cat
 StrikeState
 STRIKE - The Grandmother Stops in Place, and the Animation of her striking with the Frying Pan plays
@@ -287,7 +287,7 @@ HOLD - The Grandmother fully strikes the Frying Pan, with her Holding it in Plac
 PULL BACK - The Grandmother retracts the Frying Pan, pulling it back
 NotStriking - Default State, make this when the grandma is not striking anything
 
-bool isHitting; 
+bool isHitting;
 //Set all 3 of these times to zero
 float strikeTime
 float holdTime

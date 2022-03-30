@@ -242,7 +242,10 @@ public class AudioManagement : MonoBehaviour
                 SwapTrack(menuHoldBGM, 5.0f);
                 break;
             case BackgroundMusicType.Normal:
-                SwapTrack(primaryBGM, 3.0f);
+                SwapTrack(primaryBGM, 10.0f);
+                break;
+            case BackgroundMusicType.UnderAttack:
+                SwapTrack(chaseBGM, 0.1f);
                 break;
         }
     }
@@ -301,8 +304,14 @@ public class AudioManagement : MonoBehaviour
     //------------------------------FRYING PAN --------------------------------------------
     public void PlayFryingPanSFX() // Does not need a timer control here because the calling method is already timer controlled
     {
-            int clipToPlay = (int)Random.Range(0, fryingPanClips.Length - 1);
-            fryingPanChannel.PlayOneShot(fryingPanClips[clipToPlay]);       
+        int clipToPlay = (int)Random.Range(0, fryingPanClips.Length - 1);
+        fryingPanChannel.PlayOneShot(fryingPanClips[clipToPlay]);       
+    }
+
+    //----------------------------JUMP SCARES --------------------------------------------
+    public void PlayEnemyAlertedSFX()
+    {
+        // TODO
     }
 
     #endregion
