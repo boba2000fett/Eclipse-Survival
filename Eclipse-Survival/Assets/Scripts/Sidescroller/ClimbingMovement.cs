@@ -25,6 +25,8 @@ public class ClimbingMovement : MonoBehaviour
     public float jumpCooldown;
     public float gravity;
 
+    public float maxFallSpeed;
+
     // For distinguishing circle colliders
     public CircleCollider2D detectionCollider; //GameObject detectCircle;
     public SpriteRenderer spr;
@@ -94,6 +96,12 @@ public class ClimbingMovement : MonoBehaviour
         //{
         //    AIPathfinding.GenerateNodesForLevel();
         //}
+
+        if (rb.velocity.y < -maxFallSpeed)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, -maxFallSpeed);
+        }
+
 
         if (Input.GetKey(KeyCode.Space) && onGround && canJump)
         {

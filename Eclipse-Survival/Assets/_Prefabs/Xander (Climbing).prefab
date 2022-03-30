@@ -156,7 +156,7 @@ MonoBehaviour:
   - {x: -0.20230006, y: 0.20230006, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: -164806
+  m_InstanceId: -224468
 --- !u!50 &204743650828012497
 Rigidbody2D:
   serializedVersion: 4
@@ -201,11 +201,12 @@ MonoBehaviour:
   jumpPower: 15
   jumpCooldown: 0.5
   gravity: 9.8
+  maxFallSpeed: 20
   detectionCollider: {fileID: 204743651679854308}
   spr: {fileID: 204743650828012508}
-  staminaBar: {fileID: 0}
   sideView: {fileID: 21300000, guid: 83999b1f1028e76429c83f8cb274cb87, type: 3}
   topView: {fileID: 21300000, guid: 50c718cce5dc8cd42bc5fb3f9c853258, type: 3}
+  staminaBar: {fileID: 0}
   facing: 1
   stamina: 0
   staminaCooldown: 0
