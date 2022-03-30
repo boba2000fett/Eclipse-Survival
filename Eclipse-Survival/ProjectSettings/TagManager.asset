@@ -33,6 +33,7 @@ TagManager:
   - HUDHealthBar
   - HUDHungerBar
   - HUDStaminaBar
+  - MouseHoleDetector
   layers:
   - Default
   - TransparentFX
