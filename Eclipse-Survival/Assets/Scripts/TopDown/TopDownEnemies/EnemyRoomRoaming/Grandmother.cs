@@ -115,6 +115,7 @@ public class Grandmother : EnemyRoomRoaming
             if (target == null || (alertTime > alertTimeDuration))
             {
                 isAlerted = false;
+                AudioManagement.Instance.SwitchBackgroundMusic(BackgroundMusicType.Normal);
                 return;
             }
 

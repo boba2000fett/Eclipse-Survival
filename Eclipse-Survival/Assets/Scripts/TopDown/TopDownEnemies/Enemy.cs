@@ -170,6 +170,14 @@ public class Enemy : MonoBehaviour
             }
             target = collider.gameObject;
             isAlerted = true;
+            if (tag == "Grandmother")
+            {
+                AudioManagement.Instance.SwitchBackgroundMusic(BackgroundMusicType.UnderAttack);
+            }
+            else
+            {
+                AudioManagement.Instance.PlayEnemyAlertedSFX();
+            }
             alertTime = 0;
         }
     }
