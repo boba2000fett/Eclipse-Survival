@@ -70,7 +70,10 @@ public class Enemy : MonoBehaviour
     public virtual void TurnOffIsAlerted()
     {
         isAlerted = false;
-        AudioManagement.Instance.SwitchBackgroundMusic(BackgroundMusicType.Normal);
+        if (tag == "Grandmother")
+        {
+            AudioManagement.Instance.SwitchBackgroundMusic(BackgroundMusicType.Normal);
+        }       
     }
 
     public virtual void AlertMoveTowards()
