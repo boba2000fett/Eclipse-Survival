@@ -114,7 +114,7 @@ public class Grandmother : EnemyRoomRoaming
             //Possibly add in more conditions to make the object leave alert phase, like checking if the target left the room
             if (target == null || (alertTime > alertTimeDuration))
             {
-                isAlerted = false;
+                TurnOffIsAlerted();
                 return;
             }
 
@@ -241,21 +241,25 @@ public class Grandmother : EnemyRoomRoaming
     {
         if (this.direction == Facing.Down)
         {
+            fryingPan.GetComponent<SpriteRenderer>().enabled = true;
             fryingPan.transform.rotation = Quaternion.Euler(0, 0, 180);
             fryingPan.transform.localPosition = downFacingPositionFryingPan;
         }
         else if (this.direction == Facing.Up)
         {
+            fryingPan.GetComponent<SpriteRenderer>().enabled = false;
             fryingPan.transform.rotation = Quaternion.Euler(0, 0, 0);
             fryingPan.transform.localPosition = upFacingPositionFryingPan;
         }
         else if (this.direction == Facing.Right)
         {
+            fryingPan.GetComponent<SpriteRenderer>().enabled = true;
             fryingPan.transform.rotation = Quaternion.Euler(0, 0, -90);
             fryingPan.transform.localPosition = rightFacingPositionFryingPan;
         }
         else if (this.direction == Facing.Left)
         {
+            fryingPan.GetComponent<SpriteRenderer>().enabled = true;
             fryingPan.transform.rotation = Quaternion.Euler(0, 0, 90);
             fryingPan.transform.localPosition = leftFacingPositionFryingPan;
         }

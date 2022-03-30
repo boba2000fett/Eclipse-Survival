@@ -39,7 +39,7 @@ public class WolfSpiderTopDown : Enemy
         base.Update();
         if (target == null || (alertTime > alertTimeDuration))
         {
-            isAlerted = false;
+            TurnOffIsAlerted();
         }
         if (leavingRoom && !reachedExit)
         {
@@ -84,7 +84,7 @@ public class WolfSpiderTopDown : Enemy
         //Possibly add in more conditions to make the object leave alert phase, like checking if the target left the room
         if (target == null || (alertTime > alertTimeDuration))
         {
-            isAlerted = false;
+            TurnOffIsAlerted();
         }
 
         Vector2 distanceFromTarget = target.gameObject.transform.position - transform.position;
@@ -173,7 +173,7 @@ public class WolfSpiderTopDown : Enemy
         //}
         if (target == null || (alertTime > alertTimeDuration))
         {
-            isAlerted = false;
+            TurnOffIsAlerted();
         }
 
 

@@ -62,13 +62,24 @@ public class Enemy : MonoBehaviour
         }
     }
     
+    public virtual void TurnOnIsAlerted()
+    {
+        isAlerted = true;
+    }
+    
+    public virtual void TurnOffIsAlerted()
+    {
+        isAlerted = false;
+    }
+
     public virtual void AlertMoveTowards()
     {
         //Possibly add in more conditions to make the object leave alert phase, like checking if the target left the room
-        if (target == null || (alertTime > alertTimeDuration)) 
+        if (target == null || (alertTime > alertTimeDuration))
         {
-            isAlerted = false;
+            TurnOffIsAlerted();
         }
+
 
         transform.position = Vector2.MoveTowards(transform.position, target.gameObject.transform.position, runSpeed * Time.deltaTime);
     }
