@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Cat : EnemyRoomRoaming
 {
@@ -47,6 +48,20 @@ public class Cat : EnemyRoomRoaming
         //Do not Destroy this gameobject when a new scene is loaded
         DontDestroyOnLoad(gameObject);
         #endregion
+    }
+
+    public override void Update()
+    {
+        base.Update();
+        if (atHome && SceneManager.GetActiveScene().name == "DownstairsBottomRightLivingRoom")
+        {
+            //Debug.LogWarning("Grandmother is Sleep");
+            GameObject.FindObjectOfType<Bed>().GrandmaInBed();
+        }
+        else if (!atHome && SceneManager.GetActiveScene().name == "DownstairsBottomRightLivingRoom")
+        {
+            GameObject.FindObjectOfType<Bed>().RegularBed();
+        }
     }
 
     public override void AlertMoveTowards()

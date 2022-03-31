@@ -75,7 +75,7 @@ public class Grandmother : EnemyRoomRoaming
     {
         if (atHome && SceneManager.GetActiveScene().name == "UpstairsTopLeftBedroom")
         {
-            Debug.LogWarning("Grandmother is Sleep");
+            //Debug.LogWarning("Grandmother is Sleep");
             GameObject.FindObjectOfType<Bed>().GrandmaInBed();
         }
         else if(!atHome && SceneManager.GetActiveScene().name == "UpstairsTopLeftBedroom")
