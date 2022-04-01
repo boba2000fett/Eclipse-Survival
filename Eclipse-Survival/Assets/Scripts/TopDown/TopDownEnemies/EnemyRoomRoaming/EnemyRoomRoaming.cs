@@ -321,6 +321,53 @@ public class EnemyRoomRoaming : Enemy
         }
     }
 
+
+    public virtual void SwitchAttackingAnimation(bool setBool)
+    {
+        if (setBool)
+        {
+            switch (direction)
+            {
+                case Facing.Down:
+                    anim.SetBool("isAttackingDown", true);
+                    break;
+                case Facing.Right:
+                    anim.SetBool("isAttackingRight", true);
+                    break;
+                case Facing.Left:
+                    anim.SetBool("isAttackingLeft", true);
+                    break;
+                case Facing.Up:
+                    anim.SetBool("isAttackingUp", true);
+                    break;
+            }
+        }
+        else
+        {
+            anim.SetBool("isAttackingDown", false);
+            anim.SetBool("isAttackingRight", false);
+            anim.SetBool("isAttackingLeft", false);
+            anim.SetBool("isAttackingUp", false);
+
+            //switch (direction)
+            //{
+            //    case Facing.Down:
+            //        anim.SetBool("isAttackingDown", false);
+            //        break;
+            //    case Facing.Right:
+            //        anim.SetBool("isAttackingRight", false);
+            //        break;
+            //    case Facing.Left:
+            //        anim.SetBool("isAttackingLeft", false);
+            //        break;
+            //    case Facing.Up:
+            //        anim.SetBool("isAttackingUp", false);
+            //        break;
+            //}
+        }
+    }
+
+
     public void SetPositionComingBackIntoRoom()
     {
         /*Here we will want to place the Grandmother object at the correct node. This might

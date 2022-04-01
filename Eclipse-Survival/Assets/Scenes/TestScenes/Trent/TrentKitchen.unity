@@ -6097,7 +6097,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 249530754}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -98.4, y: 82.200005, z: -10}
+  m_LocalPosition: {x: -15, y: 13, z: -10}
   m_LocalScale: {x: 20, y: 20, z: 1}
   m_Children:
   - {fileID: 1173076926}
@@ -8474,10 +8474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0df749cd8f8605343bce8fc658b243f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleDetectionRadius: 0.5
-  walkingDetectionRadius: 1
-  runningDetectionRadius: 3
-  scratchingDetectionRadius: 5
+  knockbackTimeInterval: 0.5
   staminaBar: {fileID: 1791152899}
   facing: 0
   stamina: 0
@@ -8586,9 +8583,10 @@ GameObject:
   m_Component:
   - component: {fileID: 342571572}
   - component: {fileID: 342571573}
+  - component: {fileID: 342571574}
   m_Layer: 0
   m_Name: BottomLeftTable
-  m_TagString: Untagged
+  m_TagString: EnemyWaypoint
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8616,21 +8614,48 @@ MonoBehaviour:
   m_GameObject: {fileID: 342571571}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 639f873a5a09e26419054114e1136cab, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f8cbb8d9426cad48b121fb6e0b075bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  possibleTravelPoints:
-  - {fileID: 1829780474}
-  - {fileID: 957094752}
-  - {fileID: 658091851}
+  possibleTravelPoints: []
   pathToExit: []
   nextNodeSouthExit: {fileID: 0}
   nextNodeNorthExit: {fileID: 0}
-  nextNodeWestExit: {fileID: 957094752}
+  nextNodeWestExit: {fileID: 0}
   nextNodeEastExit: {fileID: 0}
-  nextNodeHome: {fileID: 936532816}
+  nextNodeStairsExit: {fileID: 0}
+  nextNodeBathroomExit: {fileID: 0}
+  nextNodeHome: {fileID: 0}
   isExitNode: 0
   isHomeNode: 0
+  isSpawnNode: 0
+  completedWaypoint: 0
+--- !u!61 &342571574
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342571571}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &343715222
 GameObject:
   m_ObjectHideFlags: 0
@@ -9854,6 +9879,71 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &398116393
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1695650865346061920, guid: 7ed4b781bd930da45bff6d586d9a0571, type: 3}
+      propertyPath: m_Name
+      value: Grandmother
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695650865346061927, guid: 7ed4b781bd930da45bff6d586d9a0571, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695650865346061927, guid: 7ed4b781bd930da45bff6d586d9a0571, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -16.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695650865346061927, guid: 7ed4b781bd930da45bff6d586d9a0571, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695650865346061927, guid: 7ed4b781bd930da45bff6d586d9a0571, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695650865346061927, guid: 7ed4b781bd930da45bff6d586d9a0571, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695650865346061927, guid: 7ed4b781bd930da45bff6d586d9a0571, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695650865346061927, guid: 7ed4b781bd930da45bff6d586d9a0571, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695650865346061927, guid: 7ed4b781bd930da45bff6d586d9a0571, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695650865346061927, guid: 7ed4b781bd930da45bff6d586d9a0571, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695650865346061927, guid: 7ed4b781bd930da45bff6d586d9a0571, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695650865346061927, guid: 7ed4b781bd930da45bff6d586d9a0571, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7802919155815681985, guid: 7ed4b781bd930da45bff6d586d9a0571, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1777243930}
+    - target: {fileID: 7802919155815681985, guid: 7ed4b781bd930da45bff6d586d9a0571, type: 3}
+      propertyPath: m_InstanceId
+      value: -20074
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7ed4b781bd930da45bff6d586d9a0571, type: 3}
 --- !u!1 &412672848
 GameObject:
   m_ObjectHideFlags: 0
@@ -12282,9 +12372,10 @@ GameObject:
   m_Component:
   - component: {fileID: 509214712}
   - component: {fileID: 509214713}
+  - component: {fileID: 509214714}
   m_Layer: 0
   m_Name: TopRightTable
-  m_TagString: Untagged
+  m_TagString: EnemyWaypoint
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12312,21 +12403,48 @@ MonoBehaviour:
   m_GameObject: {fileID: 509214711}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 639f873a5a09e26419054114e1136cab, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f8cbb8d9426cad48b121fb6e0b075bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  possibleTravelPoints:
-  - {fileID: 1423326195}
-  - {fileID: 1829780474}
-  - {fileID: 957094752}
+  possibleTravelPoints: []
   pathToExit: []
   nextNodeSouthExit: {fileID: 0}
   nextNodeNorthExit: {fileID: 0}
-  nextNodeWestExit: {fileID: 1423326195}
+  nextNodeWestExit: {fileID: 0}
   nextNodeEastExit: {fileID: 0}
-  nextNodeHome: {fileID: 957094752}
+  nextNodeStairsExit: {fileID: 0}
+  nextNodeBathroomExit: {fileID: 0}
+  nextNodeHome: {fileID: 0}
   isExitNode: 0
   isHomeNode: 0
+  isSpawnNode: 0
+  completedWaypoint: 0
+--- !u!61 &509214714
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509214711}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &514304672
 GameObject:
   m_ObjectHideFlags: 0
@@ -12583,9 +12701,10 @@ GameObject:
   m_Component:
   - component: {fileID: 521513050}
   - component: {fileID: 521513049}
+  - component: {fileID: 521513051}
   m_Layer: 0
   m_Name: WestExit(East)
-  m_TagString: Untagged
+  m_TagString: EnemyWaypoint
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12599,19 +12718,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 521513048}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 639f873a5a09e26419054114e1136cab, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f8cbb8d9426cad48b121fb6e0b075bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  possibleTravelPoints:
-  - {fileID: 1423326195}
+  possibleTravelPoints: []
   pathToExit: []
   nextNodeSouthExit: {fileID: 0}
   nextNodeNorthExit: {fileID: 0}
   nextNodeWestExit: {fileID: 0}
   nextNodeEastExit: {fileID: 0}
-  nextNodeHome: {fileID: 1423326195}
-  isExitNode: 1
+  nextNodeStairsExit: {fileID: 0}
+  nextNodeBathroomExit: {fileID: 0}
+  nextNodeHome: {fileID: 0}
+  isExitNode: 0
   isHomeNode: 0
+  isSpawnNode: 0
+  completedWaypoint: 0
 --- !u!4 &521513050
 Transform:
   m_ObjectHideFlags: 0
@@ -12626,6 +12748,32 @@ Transform:
   m_Father: {fileID: 2014059742}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &521513051
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521513048}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &522309517
 GameObject:
   m_ObjectHideFlags: 0
@@ -13949,9 +14097,10 @@ GameObject:
   m_Component:
   - component: {fileID: 589432919}
   - component: {fileID: 589432920}
+  - component: {fileID: 589432921}
   m_Layer: 0
   m_Name: BottomRightRoom
-  m_TagString: Untagged
+  m_TagString: EnemyWaypoint
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13979,21 +14128,48 @@ MonoBehaviour:
   m_GameObject: {fileID: 589432918}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 639f873a5a09e26419054114e1136cab, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f8cbb8d9426cad48b121fb6e0b075bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  possibleTravelPoints:
-  - {fileID: 957094752}
-  - {fileID: 342571573}
-  - {fileID: 658091851}
+  possibleTravelPoints: []
   pathToExit: []
   nextNodeSouthExit: {fileID: 0}
   nextNodeNorthExit: {fileID: 0}
-  nextNodeWestExit: {fileID: 957094752}
+  nextNodeWestExit: {fileID: 0}
   nextNodeEastExit: {fileID: 0}
-  nextNodeHome: {fileID: 936532816}
+  nextNodeStairsExit: {fileID: 0}
+  nextNodeBathroomExit: {fileID: 0}
+  nextNodeHome: {fileID: 0}
   isExitNode: 0
   isHomeNode: 0
+  isSpawnNode: 0
+  completedWaypoint: 0
+--- !u!61 &589432921
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 589432918}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &590992382
 GameObject:
   m_ObjectHideFlags: 0
@@ -15470,9 +15646,10 @@ GameObject:
   m_Component:
   - component: {fileID: 658091850}
   - component: {fileID: 658091851}
+  - component: {fileID: 658091852}
   m_Layer: 0
   m_Name: BottomLeftRoom
-  m_TagString: Untagged
+  m_TagString: EnemyWaypoint
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15500,21 +15677,48 @@ MonoBehaviour:
   m_GameObject: {fileID: 658091849}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 639f873a5a09e26419054114e1136cab, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f8cbb8d9426cad48b121fb6e0b075bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  possibleTravelPoints:
-  - {fileID: 342571573}
-  - {fileID: 957094752}
-  - {fileID: 589432920}
+  possibleTravelPoints: []
   pathToExit: []
   nextNodeSouthExit: {fileID: 0}
   nextNodeNorthExit: {fileID: 0}
-  nextNodeWestExit: {fileID: 957094752}
+  nextNodeWestExit: {fileID: 0}
   nextNodeEastExit: {fileID: 0}
-  nextNodeHome: {fileID: 936532816}
+  nextNodeStairsExit: {fileID: 0}
+  nextNodeBathroomExit: {fileID: 0}
+  nextNodeHome: {fileID: 0}
   isExitNode: 0
   isHomeNode: 0
+  isSpawnNode: 0
+  completedWaypoint: 0
+--- !u!61 &658091852
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 658091849}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &659413545
 GameObject:
   m_ObjectHideFlags: 0
@@ -15989,6 +16193,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 485cf830b4caaca449e8760bd9853c31, type: 3}
   - {fileID: 21300000, guid: 6f657a55935477d43a1504ee61c36b47, type: 3}
   - {fileID: 21300000, guid: 692a456926cacdf46b8d92f702b33542, type: 3}
+  hoursSurvivedText: {fileID: 0}
 --- !u!114 &685878903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17373,6 +17578,170 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!43 &771864240
+Mesh:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 10
+  m_SubMeshes:
+  - serializedVersion: 2
+    firstByte: 0
+    indexCount: 78
+    topology: 0
+    baseVertex: 0
+    firstVertex: 0
+    vertexCount: 28
+    localAABB:
+      m_Center: {x: 0.105107784, y: -0.09009224, z: 0}
+      m_Extent: {x: 0.34233856, y: 0.40990776, z: 0}
+  m_Shapes:
+    vertices: []
+    shapes: []
+    channels: []
+    fullWeights: []
+  m_BindPose: []
+  m_BoneNameHashes: 
+  m_RootBoneNameHash: 0
+  m_BonesAABB: []
+  m_VariableBoneCountWeights:
+    m_Data: 
+  m_MeshCompression: 0
+  m_IsReadable: 1
+  m_KeepVertices: 1
+  m_KeepIndices: 1
+  m_IndexFormat: 0
+  m_IndexBuffer: 0000010002000000030001000400030000000500030004000600030005000700030006000800030007000800090003000a00090008000b0009000a000c0009000b0009000c000d0002000e00000000000f000400010010000200030011000100090012000300040013000500050014000600060015000700070016000800080017000a000d00180009000a0019000b000b001a000c000c001b000d00
+  m_VertexData:
+    serializedVersion: 3
+    m_VertexCount: 28
+    m_Channels:
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 3
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 12
+      format: 0
+      dimension: 4
+    - stream: 0
+      offset: 28
+      format: 0
+      dimension: 4
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    m_DataSize: 1232
+    _typelessdata: e8bdc23e5e17903e000000000e45fe3e22335ebf0000008000000080b017e53edcbea33e2064a03ec0df783e486bc43ee8c199bd00000000aab87cbf695c233e0000008000000080e0bea33ed09ff0beb017e53edcbea33eb017e53edcbea33e00000000aab87cbf695c233e0000008000000080b017e53edcbea33eb017e53edcbea33ee0bea33ed09ff0be000000006f7f5cbdf9a07f3f0000008000000080e0bea33ed09ff0bee0bea33ed09ff0be2064a03ec0df783e000000000e45fe3e22335ebf00000080000000802064a03ec0df783e2064a03ec0df783e50bf773e1ea88f3e000000004576eebe038a62bf00000000000000802064a03ec0df783e60b62e3e5ce0a23e60b62e3e5ce0a23e000000004576eebe038a62bf000000000000008060b62e3e5ce0a23e60b62e3e5ce0a23e4006273e3c974e3e0000000007787f3f5bdb83bd000000800000008060b62e3e5ce0a23e20561f3e80dbae3d20561f3e80dbae3d0000000007787f3f5bdb83bd000000800000008020561f3e80dbae3d20561f3e80dbae3d4022293de84ff8be000000006f7f5cbdf9a07f3f0000008000000080a0ec72be000000bfe0bea33ed09ff0be0059d3bc20b9de3d0000000008da02bebce67dbf000000000000008020561f3e80dbae3d602c54be604b073e602c54be604b073e0000000008da02bebce67dbf0000000000000080602c54be604b073e602c54be604b073e808c63be505a3cbe000000002bb67f3f845e42bd0000008000000080602c54be604b073ea0ec72be000000bfa0ec72be000000bf000000002bb67f3f845e42bd0000008000000080a0ec72be000000bfa0ec72be000000bfb017e53edcbea33e000000000e45fe3e22335ebf0000008000000080b017e53edcbea33eb017e53edcbea33ee8bdc23e5e17903e000000000e45fe3e22335ebf0000008000000080b017e53edcbea33e2064a03ec0df783e486bc43ee8c199bd00000000aab87cbf695c233e0000008000000080e0bea33ed09ff0beb017e53edcbea33ee0bea33ed09ff0be00000000aab87cbf695c233e0000008000000080e0bea33ed09ff0bee0bea33ed09ff0be4022293de84ff8be000000006f7f5cbdf9a07f3f0000008000000080a0ec72be000000bfe0bea33ed09ff0be2064a03ec0df783e000000004576eebe038a62bf00000000000000802064a03ec0df783e2064a03ec0df783e50bf773e1ea88f3e000000004576eebe038a62bf00000000000000802064a03ec0df783e60b62e3e5ce0a23e60b62e3e5ce0a23e0000000007787f3f5bdb83bd000000800000008060b62e3e5ce0a23e60b62e3e5ce0a23e4006273e3c974e3e0000000007787f3f5bdb83bd000000800000008060b62e3e5ce0a23e20561f3e80dbae3d20561f3e80dbae3d0000000008da02bebce67dbf000000000000008020561f3e80dbae3d20561f3e80dbae3da0ec72be000000bf000000006f7f5cbdf9a07f3f0000008000000080a0ec72be000000bfa0ec72be000000bf0059d3bc20b9de3d0000000008da02bebce67dbf000000000000008020561f3e80dbae3d602c54be604b073e602c54be604b073e000000002bb67f3f845e42bd0000008000000080602c54be604b073e602c54be604b073e808c63be505a3cbe000000002bb67f3f845e42bd0000008000000080602c54be604b073ea0ec72be000000bf
+  m_CompressedMesh:
+    m_Vertices:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UV:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Normals:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Tangents:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Weights:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_NormalSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_TangentSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_FloatColors:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_BoneIndices:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Triangles:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UVInfo: 0
+  m_LocalAABB:
+    m_Center: {x: 0.105107784, y: -0.09009224, z: 0}
+    m_Extent: {x: 0.34233856, y: 0.40990776, z: 0}
+  m_MeshUsageFlags: 0
+  m_BakedConvexCollisionMesh: 
+  m_BakedTriangleCollisionMesh: 
+  m_MeshMetrics[0]: 1
+  m_MeshMetrics[1]: 1
+  m_MeshOptimizationFlags: 1
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
 --- !u!1 &781126185
 GameObject:
   m_ObjectHideFlags: 0
@@ -17991,7 +18360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   possibleTravelPoints:
-  - {fileID: 936532816}
+  - {fileID: 0}
   pathToExit: []
   nextNodeSouthExit: {fileID: 0}
   nextNodeNorthExit: {fileID: 0}
@@ -20360,9 +20729,10 @@ GameObject:
   m_Component:
   - component: {fileID: 936532817}
   - component: {fileID: 936532816}
+  - component: {fileID: 936532818}
   m_Layer: 0
   m_Name: InFrontCatBed
-  m_TagString: Untagged
+  m_TagString: EnemyWaypoint
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20376,21 +20746,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 936532815}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 639f873a5a09e26419054114e1136cab, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f8cbb8d9426cad48b121fb6e0b075bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  possibleTravelPoints:
-  - {fileID: 342571573}
-  - {fileID: 1829780474}
-  - {fileID: 658091851}
+  possibleTravelPoints: []
   pathToExit: []
   nextNodeSouthExit: {fileID: 0}
   nextNodeNorthExit: {fileID: 0}
-  nextNodeWestExit: {fileID: 342571573}
+  nextNodeWestExit: {fileID: 0}
   nextNodeEastExit: {fileID: 0}
-  nextNodeHome: {fileID: 796967013}
+  nextNodeStairsExit: {fileID: 0}
+  nextNodeBathroomExit: {fileID: 0}
+  nextNodeHome: {fileID: 0}
   isExitNode: 0
   isHomeNode: 0
+  isSpawnNode: 0
+  completedWaypoint: 0
 --- !u!4 &936532817
 Transform:
   m_ObjectHideFlags: 0
@@ -20405,6 +20776,32 @@ Transform:
   m_Father: {fileID: 2014059742}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &936532818
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936532815}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &937982326
 GameObject:
   m_ObjectHideFlags: 0
@@ -20789,9 +21186,10 @@ GameObject:
   m_Component:
   - component: {fileID: 957094751}
   - component: {fileID: 957094752}
+  - component: {fileID: 957094753}
   m_Layer: 0
   m_Name: BottomRightTable
-  m_TagString: Untagged
+  m_TagString: EnemyWaypoint
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20819,21 +21217,48 @@ MonoBehaviour:
   m_GameObject: {fileID: 957094750}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 639f873a5a09e26419054114e1136cab, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f8cbb8d9426cad48b121fb6e0b075bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  possibleTravelPoints:
-  - {fileID: 509214713}
-  - {fileID: 342571573}
-  - {fileID: 1423326195}
+  possibleTravelPoints: []
   pathToExit: []
   nextNodeSouthExit: {fileID: 0}
   nextNodeNorthExit: {fileID: 0}
-  nextNodeWestExit: {fileID: 1423326195}
+  nextNodeWestExit: {fileID: 0}
   nextNodeEastExit: {fileID: 0}
+  nextNodeStairsExit: {fileID: 0}
+  nextNodeBathroomExit: {fileID: 0}
   nextNodeHome: {fileID: 0}
   isExitNode: 0
   isHomeNode: 0
+  isSpawnNode: 0
+  completedWaypoint: 0
+--- !u!61 &957094753
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957094750}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &957597675
 GameObject:
   m_ObjectHideFlags: 0
@@ -32616,9 +33041,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1423326194}
   - component: {fileID: 1423326195}
+  - component: {fileID: 1423326196}
   m_Layer: 0
   m_Name: InFrontWestDoor(East)
-  m_TagString: Untagged
+  m_TagString: EnemyWaypoint
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32646,21 +33072,48 @@ MonoBehaviour:
   m_GameObject: {fileID: 1423326193}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 639f873a5a09e26419054114e1136cab, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f8cbb8d9426cad48b121fb6e0b075bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  possibleTravelPoints:
-  - {fileID: 509214713}
-  - {fileID: 957094752}
-  - {fileID: 589432920}
+  possibleTravelPoints: []
   pathToExit: []
   nextNodeSouthExit: {fileID: 0}
   nextNodeNorthExit: {fileID: 0}
-  nextNodeWestExit: {fileID: 521513049}
+  nextNodeWestExit: {fileID: 0}
   nextNodeEastExit: {fileID: 0}
-  nextNodeHome: {fileID: 957094752}
+  nextNodeStairsExit: {fileID: 0}
+  nextNodeBathroomExit: {fileID: 0}
+  nextNodeHome: {fileID: 0}
   isExitNode: 0
   isHomeNode: 0
+  isSpawnNode: 0
+  completedWaypoint: 0
+--- !u!61 &1423326196
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423326193}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &1424221636
 GameObject:
   m_ObjectHideFlags: 0
@@ -41847,6 +42300,170 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!43 &1777243930
+Mesh:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 10
+  m_SubMeshes:
+  - serializedVersion: 2
+    firstByte: 0
+    indexCount: 42
+    topology: 0
+    baseVertex: 0
+    firstVertex: 0
+    vertexCount: 16
+    localAABB:
+      m_Center: {x: -0.0016700327, y: -0.14906743, z: 0}
+      m_Extent: {x: 0.13225953, y: 0.29231128, z: 0}
+  m_Shapes:
+    vertices: []
+    shapes: []
+    channels: []
+    fullWeights: []
+  m_BindPose: []
+  m_BoneNameHashes: 
+  m_RootBoneNameHash: 0
+  m_BonesAABB: []
+  m_VariableBoneCountWeights:
+    m_Data: 
+  m_MeshCompression: 0
+  m_IsReadable: 1
+  m_KeepVertices: 1
+  m_KeepIndices: 1
+  m_IndexFormat: 0
+  m_IndexBuffer: 00000100020000000300010000000400030000000500040000000600050006000000070002000800000000000900070001000a00020003000b00010004000c00030005000d00040006000e00050007000f000600
+  m_VertexData:
+    serializedVersion: 3
+    m_VertexCount: 16
+    m_Channels:
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 3
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 12
+      format: 0
+      dimension: 4
+    - stream: 0
+      offset: 28
+      format: 0
+      dimension: 4
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    m_DataSize: 704
+    _typelessdata: 00e5daba75220e3e00000000947109bd18db7fbf000000000000008041b9053e6596093ed52409be85ae123e263b003e80d318be0000000048f47fbf55e89a3c0000008000000080177af53db39eddbe41b9053e6596093e41b9053e6596093e0000000048f47fbf64e89a3c000000800000008041b9053e6596093e41b9053e6596093e177af53db39eddbe000000003f9c0fbdb5d77f3f0000008000000080177af53db39eddbe177af53db39eddbec0ebdaba8ccddfbe00000000fd9b0fbdb5d77f3f00000080000000807551fcbd64fce1be177af53db39eddbe7551fcbd64fce1be00000000f8f47f3f7f4a963c00000080000000807551fcbd64fce1be7551fcbd64fce1bec8a603be22a518be00000000f8f47f3f704a963c0000008000000080d52409be85ae123e7551fcbd64fce1bed52409be85ae123e00000000947109bd18db7fbf0000000000000080d52409be85ae123ed52409be85ae123e41b9053e6596093e00000000947109bd18db7fbf000000000000008041b9053e6596093e41b9053e6596093e00e5daba75220e3e00000000947109bd18db7fbf000000000000008041b9053e6596093ed52409be85ae123e263b003e80d318be0000000048f47fbf64e89a3c0000008000000080177af53db39eddbe41b9053e6596093e177af53db39eddbe0000000048f47fbf55e89a3c0000008000000080177af53db39eddbe177af53db39eddbec0ebdaba8ccddfbe000000003f9c0fbdb5d77f3f00000080000000807551fcbd64fce1be177af53db39eddbe7551fcbd64fce1be00000000fd9b0fbdb5d77f3f00000080000000807551fcbd64fce1be7551fcbd64fce1bec8a603be22a518be00000000f8f47f3f7f4a963c0000008000000080d52409be85ae123e7551fcbd64fce1bed52409be85ae123e00000000f8f47f3f704a963c0000008000000080d52409be85ae123ed52409be85ae123e
+  m_CompressedMesh:
+    m_Vertices:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UV:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Normals:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Tangents:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Weights:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_NormalSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_TangentSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_FloatColors:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_BoneIndices:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Triangles:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UVInfo: 0
+  m_LocalAABB:
+    m_Center: {x: -0.0016700327, y: -0.14906743, z: 0}
+    m_Extent: {x: 0.13225953, y: 0.29231128, z: 0}
+  m_MeshUsageFlags: 0
+  m_BakedConvexCollisionMesh: 
+  m_BakedTriangleCollisionMesh: 
+  m_MeshMetrics[0]: 1
+  m_MeshMetrics[1]: 1
+  m_MeshOptimizationFlags: 1
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
 --- !u!1 &1777854575
 GameObject:
   m_ObjectHideFlags: 0
@@ -43423,9 +44040,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1829780473}
   - component: {fileID: 1829780474}
+  - component: {fileID: 1829780475}
   m_Layer: 0
   m_Name: TopLeftTable
-  m_TagString: Untagged
+  m_TagString: EnemyWaypoint
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43453,20 +44071,48 @@ MonoBehaviour:
   m_GameObject: {fileID: 1829780472}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 639f873a5a09e26419054114e1136cab, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f8cbb8d9426cad48b121fb6e0b075bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  possibleTravelPoints:
-  - {fileID: 509214713}
-  - {fileID: 342571573}
+  possibleTravelPoints: []
   pathToExit: []
   nextNodeSouthExit: {fileID: 0}
   nextNodeNorthExit: {fileID: 0}
-  nextNodeWestExit: {fileID: 509214713}
+  nextNodeWestExit: {fileID: 0}
   nextNodeEastExit: {fileID: 0}
-  nextNodeHome: {fileID: 936532816}
+  nextNodeStairsExit: {fileID: 0}
+  nextNodeBathroomExit: {fileID: 0}
+  nextNodeHome: {fileID: 0}
   isExitNode: 0
   isHomeNode: 0
+  isSpawnNode: 0
+  completedWaypoint: 0
+--- !u!61 &1829780475
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829780472}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &1832050778
 GameObject:
   m_ObjectHideFlags: 0

@@ -101,6 +101,8 @@ public class Cat : EnemyRoomRoaming
 
     private void Pounce()
     {
+        SwitchAttackingAnimation(true);
+
         if (pounceState == PounceState.Prepare)
         {
             //Switch to stance position animation
@@ -114,10 +116,10 @@ public class Cat : EnemyRoomRoaming
         }
         else if (pounceState == PounceState.Jumping)
         {
-            transform.position = Vector2.MoveTowards(transform.position, hoppingPoint, runSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, hoppingPoint, runSpeed * 2 * Time.deltaTime);
             //Switch to jumping position animation
 
-            if ((this.transform.position.magnitude - hoppingPoint.magnitude) <= .2)
+            if ((this.transform.position.magnitude - hoppingPoint.magnitude) <= .01)
             {                
                 pounceState = PounceState.Landed;                
             }
@@ -132,6 +134,9 @@ public class Cat : EnemyRoomRoaming
                 isPouncing = false;
                 pounceState = PounceState.NotPouncing;
                 pounceStopTime = 0f;
+
+                SwitchAttackingAnimation(false);
+
             }
         }           
     }

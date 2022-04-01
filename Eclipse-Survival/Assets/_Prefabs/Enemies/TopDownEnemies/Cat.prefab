@@ -121,7 +121,7 @@ MonoBehaviour:
   runSpeed: 2.73
   alertTimeDuration: 10
   alertRange: 0
-  attackRange: 0.75
+  attackRange: 1.5
   strength: 18
   health: 0
   isAlerted: 0
@@ -156,8 +156,8 @@ MonoBehaviour:
   resetCollisionTimerInterval: 2
   sleepTimerInterval: 5
   sleepTimer: 0
-  pouncePrepateTimeInverval: 0.5
-  pounceStopTimeInverval: 0.5
+  pouncePrepateTimeInverval: 0.2
+  pounceStopTimeInverval: 0.2
   damage: 0
   hoppingPoint: {x: 0, y: 0, z: 0}
   isPouncing: 0
