@@ -109,6 +109,7 @@ public class DayNightCycle : MonoBehaviour
         if (timeRemainingInRound <= 0)
         {
             roundsElapsed++;
+            GamePlayManager.GPM.NewCycle((int)roundsElapsed);
             InitializeRound();
         }
 
@@ -139,6 +140,6 @@ public class DayNightCycle : MonoBehaviour
             lightIncrement = (startingBrightness - MIN_LIGHT_INTENSITY) / LIGHT_DECREASE_DURATION;
         }
 
-        GamePlayManager.GPM.NewCycle((int)roundsElapsed);
+        //GamePlayManager.GPM.NewCycle((int)roundsElapsed);
     }
 }
