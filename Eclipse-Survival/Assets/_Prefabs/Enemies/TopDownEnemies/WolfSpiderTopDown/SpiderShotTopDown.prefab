@@ -100,9 +100,13 @@ MonoBehaviour:
   webExpireInterval: 1.14
   speed: 1.74
   collisionRadius: 0.5
+  slowDuration: 1.26
+  webSlowDownFactor: 0.75
   target: {x: 0, y: 0}
   expireTimer: 0
   targetGameObject: {fileID: 0}
+  hurtXander: 0
+  stopMovement: 0
 --- !u!58 &6938033993561588100
 CircleCollider2D:
   m_ObjectHideFlags: 0

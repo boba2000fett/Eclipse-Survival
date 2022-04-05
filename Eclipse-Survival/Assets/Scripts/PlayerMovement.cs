@@ -45,6 +45,12 @@ public class PlayerMovement : MonoBehaviour
     private float timeLeftInStaminaCoolDown;
     private float knockbackTime;
 
+    [Header("Set Dynamically: Spider Slowdown")]
+    public bool slowedDown = false;
+    static public float slowdownTimeInterval = 5;
+    static public float slowdownFactor = 0;
+    static public float slowTimer = 0;
+
     private void Awake()
     {
         detectionCollider = gameObject.GetComponent<CircleCollider2D>();
@@ -96,6 +102,9 @@ public class PlayerMovement : MonoBehaviour
                 moveSpeed = WALK_SPEED;
                 state = ActionState.Walking;
             }
+
+            SlowDownSpeed();
+
             rb.velocity = new Vector2(0, -moveSpeed * Time.deltaTime);
             if (facing != Facing.Down && dirSwitch == false)
             {
@@ -116,6 +125,9 @@ public class PlayerMovement : MonoBehaviour
                 moveSpeed = WALK_SPEED;
                 state = ActionState.Walking;
             }
+
+            SlowDownSpeed();
+
             rb.velocity = new Vector2(moveSpeed * Time.deltaTime, 0);
             if (facing != Facing.Right && dirSwitch == false)
             {
@@ -136,6 +148,9 @@ public class PlayerMovement : MonoBehaviour
                 moveSpeed = WALK_SPEED;
                 state = ActionState.Walking;
             }
+
+            SlowDownSpeed();
+
             rb.velocity = new Vector2(0, moveSpeed * Time.deltaTime);
             if (facing != Facing.Up && dirSwitch == false)
             {
@@ -156,6 +171,9 @@ public class PlayerMovement : MonoBehaviour
                 moveSpeed = WALK_SPEED;
                 state = ActionState.Walking;
             }
+
+            SlowDownSpeed();
+
             rb.velocity = new Vector2(-moveSpeed * Time.deltaTime, 0);
             if (facing != Facing.Left && dirSwitch == false)
             {
@@ -187,6 +205,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        SlowDownCheck();
+
         if (state != ActionState.Knockback)
         {
             ReadInput();
@@ -251,6 +271,34 @@ public class PlayerMovement : MonoBehaviour
         AudioManagement.Instance.PlayXanderSFX(state);        
     }
 
+    public void SlowDownCheck()
+    {
+        if (slowedDown)
+        {
+            slowTimer += Time.deltaTime;
+            if (slowTimer >= slowdownTimeInterval)
+            {
+                slowedDown = false;
+                slowTimer = 0f;
+            }
+        }
+    }
+
+    public void SlowDownSpeed()
+    {
+        if (slowedDown)
+        {
+            moveSpeed *= slowdownFactor;
+        }
+    }
+
+    public void SlowdownXander(float slowDuration, float slowEffect)
+    {
+        slowdownTimeInterval = slowDuration;
+        slowdownFactor = slowEffect;  
+        slowedDown = true;
+        slowTimer = 0f;
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
