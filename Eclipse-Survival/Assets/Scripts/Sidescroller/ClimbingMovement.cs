@@ -47,6 +47,8 @@ public class ClimbingMovement : MonoBehaviour
 
     //SpriteRenderer spr;
 
+    float fallSpeed = 0f;
+
     bool climbMode;
     bool onClimbable;
     bool climbing;
@@ -97,10 +99,30 @@ public class ClimbingMovement : MonoBehaviour
         //    AIPathfinding.GenerateNodesForLevel();
         //}
 
-        if (rb.velocity.y < -maxFallSpeed)
+        // Added Fall Damage and Velocity Check
+        if (!onGround)
         {
-            rb.velocity = new Vector2(rb.velocity.x, -maxFallSpeed);
+            if (rb.velocity.y < fallSpeed)
+            {
+                fallSpeed = rb.velocity.y;
+                if (rb.velocity.y < -maxFallSpeed)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, -maxFallSpeed);
+                }
+            }
         }
+        else if (fallSpeed != 0f)
+        {
+            if (fallSpeed <= -7.5f)
+            {
+                Xander x = this.GetComponent<Xander>();
+                int fallDmg = Mathf.RoundToInt((-fallSpeed - 6.5f) * 5);
+                if (climbing) fallDmg = Mathf.RoundToInt(fallDmg / 2.0f);
+                x.TakeDamage(fallDmg);
+            }
+            fallSpeed = 0f;
+        }
+
 
 
         if (Input.GetKey(KeyCode.Space) && onGround && canJump)

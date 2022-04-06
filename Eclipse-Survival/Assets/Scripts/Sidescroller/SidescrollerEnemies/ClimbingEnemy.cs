@@ -139,7 +139,6 @@ public class ClimbingEnemy : MonoBehaviour
                 if (dist < attackRange)
                 {
                     Attack(dist);
-                    return;
                 }
             }
             else if (attackTimer >= attackCooldown)
@@ -163,7 +162,7 @@ public class ClimbingEnemy : MonoBehaviour
                 moveState = EnemyMovementState.Roaming;
                 alertTime = 0f;
             }
-            else
+            else if(attackTimer >= 1f || canAttack)
             {
                 // Move Towards Target
 
@@ -264,9 +263,18 @@ public class ClimbingEnemy : MonoBehaviour
 
     private void RotateClimbingEnemy()
     {
-        if (eVel.magnitude <= 0.05f || !onGround)
+        if (eVel.magnitude <= 0.05f)
         {
             moving = false;
+        }
+        else if (!onGround)
+        {
+            moving = false;
+
+            if (eVel.x > 0) facing = Facing.Right;
+            else facing = Facing.Left;
+            
+            transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, 0f);
         }
         else
         {
@@ -363,6 +371,11 @@ public class ClimbingEnemy : MonoBehaviour
             {
                 eVel.y = (-moveSpeed) * Time.deltaTime;
                 facing = Facing.Down;
+            }
+            else
+            {
+                if (xDiff > 0.1f) facing = Facing.Right;
+                else if (xDiff < -0.1f) facing = Facing.Left;
             }
 
             if (xDiff > 0.1f) eVel.x = moveSpeed * Time.deltaTime;

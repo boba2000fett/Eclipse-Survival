@@ -39,6 +39,8 @@ public class SceneTransitionScriptBasic : MonoBehaviour
             if (transitionTime >= delayBetweenAutoTransition)
             {
                 TransitionScene(0);
+                autoTransition = false;
+                return;
             }
             else transitionTime += Time.deltaTime;
         }
@@ -53,6 +55,7 @@ public class SceneTransitionScriptBasic : MonoBehaviour
             {
                 TransitionScene(0);
                 autoTransition = false;
+                return;
             }
         }
         
