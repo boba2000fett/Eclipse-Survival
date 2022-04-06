@@ -431,10 +431,19 @@ public class EnemyRoomRoaming : Enemy
         {
             //Place at a random waypoint
             //Use room.waypointsInRoom? 
-            int index = Random.Range(1, waypoints.Length);
+            Room roomInstance = GameObject.FindGameObjectWithTag("Room").GetComponent<Room>();
 
-            currentWaypointDestination = waypoints[index];
+            int index = UnityEngine.Random.Range(1, roomInstance.spawnWaypoints.Count);
+
+            currentWaypointDestination = roomInstance.spawnWaypoints[index];
+
             transform.position = currentWaypointDestination.gameObject.transform.position;
+
+
+
+            //int index = UnityEngine.Random.Range(1, roomInstance.waypointsInRoom.Length);
+
+            //wolfSpiderTopDownInstance.transform.position = roomInstance.waypointsInRoom[index].gameObject.transform.position;
         }
 
         //Reset Variables

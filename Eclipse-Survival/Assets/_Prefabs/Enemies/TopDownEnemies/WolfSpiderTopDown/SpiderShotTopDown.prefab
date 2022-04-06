@@ -98,7 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   webDamage: 5
   webExpireInterval: 1.14
-  speed: 1.74
+  speed: 2.71
   collisionRadius: 0.5
   slowDuration: 1.26
   webSlowDownFactor: 0.75
@@ -107,6 +107,7 @@ MonoBehaviour:
   targetGameObject: {fileID: 0}
   hurtXander: 0
   stopMovement: 0
+  destroyWeb: 0
 --- !u!58 &6938033993561588100
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -20,7 +20,7 @@ public class Bed : MonoBehaviour
     }
     public void RegularBed()
     {
-        regularBed.SetActive(true);
-        grandmotherBed.SetActive(false);
+        this.regularBed.SetActive(true);
+        this.grandmotherBed.SetActive(false);
     }
 }

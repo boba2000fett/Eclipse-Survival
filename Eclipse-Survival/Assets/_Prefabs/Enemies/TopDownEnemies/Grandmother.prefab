@@ -370,7 +370,7 @@ MonoBehaviour:
   runSpeed: 2
   alertTimeDuration: 5
   alertRange: 0
-  attackRange: 1
+  attackRange: 1.51
   strength: 10
   health: 0
   isAlerted: 0
@@ -417,9 +417,9 @@ MonoBehaviour:
   pullBackTimeInterval: 0.2
   fryingPan: {fileID: 0}
   isHitting: 0
-  hittingTime: 0.3
-  strikeTime: 0.2
-  holdTime: 0.2
+  hittingTime: 0
+  strikeTime: 0
+  holdTime: 0
   pullBackTime: 0
   strikeState: 3
 --- !u!114 &7802919155815681985
@@ -447,4 +447,4 @@ MonoBehaviour:
   - {x: -0.13392957, y: 0.14324386, z: 0}
   m_ShapePathHash: 859679023
   m_Mesh: {fileID: 0}
-  m_InstanceId: 222878
+  m_InstanceId: -9106

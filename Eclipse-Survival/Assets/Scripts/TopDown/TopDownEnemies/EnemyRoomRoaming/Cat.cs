@@ -19,7 +19,7 @@ public class Cat : EnemyRoomRoaming
     public float pouncePrepateTimeInverval;
     public float pounceStopTimeInverval;
     public int damage;
-    public int pounceSpeed;
+    public float pounceSpeed;
 
     [Header("Set Dynamically: Cat")]
     public Vector3 hoppingPoint;
@@ -116,7 +116,7 @@ public class Cat : EnemyRoomRoaming
         }
         else if (pounceState == PounceState.Jumping)
         {
-            transform.position = Vector2.MoveTowards(transform.position, hoppingPoint, runSpeed * 1.5f * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, hoppingPoint, pounceSpeed * Time.deltaTime);
             //Switch to jumping position animation
 
             Debug.LogWarning($"Distance to Hopping Point" +

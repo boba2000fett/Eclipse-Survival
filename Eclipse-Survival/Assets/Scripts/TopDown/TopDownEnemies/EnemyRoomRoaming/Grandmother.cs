@@ -33,7 +33,7 @@ public class Grandmother : EnemyRoomRoaming
     private Vector2 leftFacingPositionFryingPan = new Vector2(-0.26f, -0.171f);
     private Vector2 rightFacingPositionFryingPan = new Vector2(0.26f, -0.171f);
     private Vector2 upFacingPositionFryingPan = new Vector2(0, 0.317f);
-    private Vector2 downFacingPositionFryingPan = new Vector2(0, -.25f);
+    private Vector2 downFacingPositionFryingPan = new Vector2(-0.122f, -0.451f);
     private Vector2 standardPositionFryingPan = new Vector2(0, 0);
 
 

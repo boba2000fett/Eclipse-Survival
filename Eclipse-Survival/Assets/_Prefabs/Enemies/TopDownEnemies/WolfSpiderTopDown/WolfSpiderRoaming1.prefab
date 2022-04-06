@@ -46,8 +46,8 @@ MonoBehaviour:
   travelListSee: []
   wolfSpiderTopDownPrefab: {fileID: 8655196720532275969, guid: 5b86554ec1da48c438babc9aa86a277d, type: 3}
   wolfSpiderSidePrefab: {fileID: 8860836230694857072, guid: fbee7adfbf3fcc74e84e06bbeafcb50b, type: 3}
-  roomTimeIntervalLeftBound: 6.48
-  roomTimeIntervalRightBound: 7.54
+  roomTimeIntervalLeftBound: 12.6
+  roomTimeIntervalRightBound: 19.95
   roomManager: {fileID: 1524003704404103227, guid: 25ebfeb9e8dd4e148bc39bdc1c83cd17, type: 3}
   roomTime: 0
   roomTimeInterval: 0

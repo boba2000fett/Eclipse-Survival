@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5457754703775355596}
   - component: {fileID: 5457754703775355603}
   - component: {fileID: 5457754703775355602}
-  - component: {fileID: 5457754703775355597}
   m_Layer: 0
   m_Name: CatBedInBed
   m_TagString: Untagged
@@ -100,21 +99,6 @@ CircleCollider2D:
   m_Offset: {x: -0.036928117, y: -0.11928135}
   serializedVersion: 2
   m_Radius: 0.3016339
---- !u!114 &5457754703775355597
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5457754703775355599}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82b0c3c13536c7a4092e11759222ac4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  regularBed: {fileID: 0}
-  grandmotherBed: {fileID: 0}
-  catBed: {fileID: 0}
 --- !u!1 &5457754703818587445
 GameObject:
   m_ObjectHideFlags: 0

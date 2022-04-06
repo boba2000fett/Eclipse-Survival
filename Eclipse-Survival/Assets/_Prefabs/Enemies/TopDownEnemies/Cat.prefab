@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4033998086720353576, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
+      propertyPath: m_Radius
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353577, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_GravityScale
       value: 0
@@ -25,11 +29,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353579, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.92
+      value: 5.56
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353579, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.11
+      value: 2.94
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353579, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -118,7 +122,7 @@ MonoBehaviour:
   - {fileID: 0}
   home: {fileID: 0}
   moveSpeed: 1.76
-  runSpeed: 2.73
+  runSpeed: 2.4
   alertTimeDuration: 10
   alertRange: 0
   attackRange: 1.5
@@ -133,16 +137,19 @@ MonoBehaviour:
   anim: {fileID: 0}
   rigid: {fileID: 0}
   circle: {fileID: 0}
-  roomListSet: []
+  roomListSet:
+  - {fileID: 6558327903196666450, guid: 11fcf71e8b6ba7d4b87add428ae1f770, type: 3}
+  - {fileID: 3507768772690859300, guid: 89064a2297b942d46b5df99cb7c69b4e, type: 3}
+  - {fileID: 414688176703143036, guid: 627eb93a581df3148904d4e7d23440e7, type: 3}
   seeRoomList: []
   setRooms: 1
-  requiredWaypointsCount: 4
-  outsideRoomTimeInterval: 5
+  requiredWaypointsCount: 3
+  outsideRoomTimeInterval: 3
   currentRoomIndex: 0
   roomList: []
   pathToExit: 0
   destinationSceneName: 
-  roomManager: {fileID: 6202258368021614728, guid: ef89909fa174a554b85c5d3e2599031f, type: 3}
+  roomManager: {fileID: 6202258368021614728, guid: a5b1ef80e65909442852770eeb70c446, type: 3}
   waypointCount: 0
   isInRoom: 0
   outsideRoomTime: 0
@@ -159,6 +166,7 @@ MonoBehaviour:
   pouncePrepateTimeInverval: 0.2
   pounceStopTimeInverval: 0.2
   damage: 0
+  pounceSpeed: 5.46
   hoppingPoint: {x: 0, y: 0, z: 0}
   isPouncing: 0
   pounceState: 3
@@ -192,4 +200,4 @@ MonoBehaviour:
   - {x: -0.20720053, y: 0.13212347, z: 0}
   m_ShapePathHash: 1457734999
   m_Mesh: {fileID: 0}
-  m_InstanceId: 356606
+  m_InstanceId: 283792

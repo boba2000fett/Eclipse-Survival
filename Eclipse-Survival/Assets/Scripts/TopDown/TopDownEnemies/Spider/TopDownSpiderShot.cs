@@ -19,22 +19,27 @@ public class TopDownSpiderShot : MonoBehaviour
     public GameObject targetGameObject;
     public bool hurtXander = false;
     public bool stopMovement = false;
-
+    public bool destroyWeb = false;
 
     private void Update()
     {
 
+        if (hurtXander)
+        {
+            transform.position = targetGameObject.transform.position;
+            DisappearSpider();
+            return;
+        }
+
         if (!stopMovement)
         {
-            transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, targetGameObject.transform.position, speed * Time.deltaTime);
         }
          
 
         if (expireTimer >= webExpireInterval)
         {
-            float alpha = this.GetComponent<SpriteRenderer>().color.a;
-            alpha--;
-            Destroy(this.gameObject);
+            DisappearSpider();
         }
         else
         {
@@ -42,7 +47,33 @@ public class TopDownSpiderShot : MonoBehaviour
         }
     }
 
+    public void DisappearSpider()
+    {        
+        if (!destroyWeb)
+        {
+            destroyWeb = true;
+            if (hurtXander)
+                Destroy(this.gameObject, slowDuration);
+            else
+                Destroy(this.gameObject, 2f);
+        }
 
+        if (hurtXander)
+        {
+            if (targetGameObject.GetComponent<PlayerMovement>().slowTimer <
+                (targetGameObject.GetComponent<PlayerMovement>().slowdownTimeInterval * (2/3)))
+            {
+                return;
+            }
+        }
+
+        float alpha = this.GetComponent<SpriteRenderer>().color.a;
+        float blue = this.GetComponent<SpriteRenderer>().color.b;
+        float red = this.GetComponent<SpriteRenderer>().color.r;
+        float green = this.GetComponent<SpriteRenderer>().color.g;
+        alpha -= .1f;
+        this.GetComponent<SpriteRenderer>().color = new Color(red, green, blue, alpha--);
+    }
 
     public void FixedUpdate()
     {
@@ -55,10 +86,22 @@ public class TopDownSpiderShot : MonoBehaviour
 
     public void InjureXander()
     {
-        Xander x = targetGameObject.GetComponent<Xander>();
-        x.TakeDamage((int)webDamage);
-        targetGameObject.GetComponent<PlayerMovement>().SlowdownXander(slowDuration, webSlowDownFactor);
-        hurtXander = true;
+        if (!hurtXander)
+        {
+            try
+            {
+                Xander x = targetGameObject.GetComponent<Xander>();
+                x.TakeDamage((int)webDamage);
+                targetGameObject.GetComponent<PlayerMovement>().SlowdownXander(slowDuration, webSlowDownFactor);
+                hurtXander = true;
+                destroyWeb = true;
+                DisappearSpider();
+            }
+            catch
+            {
+                Destroy(this.gameObject);
+            }
+        }
     }
 
 

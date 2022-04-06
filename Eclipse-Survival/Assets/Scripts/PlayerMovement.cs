@@ -47,9 +47,9 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Set Dynamically: Spider Slowdown")]
     public bool slowedDown = false;
-    static public float slowdownTimeInterval = 5;
-    static public float slowdownFactor = 0;
-    static public float slowTimer = 0;
+    public float slowdownTimeInterval = 5;
+    public float slowdownFactor = 0;
+    public float slowTimer = 0;
 
     private void Awake()
     {

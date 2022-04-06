@@ -48,6 +48,8 @@ public class Enemy : MonoBehaviour
 
     public virtual void Update()
     {
+        this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
         ConfigureAnimation();
         ConfigureDirection();
 
