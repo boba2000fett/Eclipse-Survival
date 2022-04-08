@@ -121,6 +121,7 @@ public class Enemy : MonoBehaviour
     {
         if (!isAlerted)
         {
+            anim.speed = 1f;
             anim.SetFloat("xMovement", (currentWaypointDestination.transform.position.x - transform.position.x));
             anim.SetFloat("yMovement", (currentWaypointDestination.transform.position.y - transform.position.y));
         }
@@ -129,6 +130,7 @@ public class Enemy : MonoBehaviour
             if (target == null)
                 return;
 
+            anim.speed = 2f;
             anim.SetFloat("xMovement", (target.transform.position.x - transform.position.x));
             anim.SetFloat("yMovement", (target.transform.position.y - transform.position.y));
         }

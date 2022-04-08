@@ -20,6 +20,7 @@ public class Cat : EnemyRoomRoaming
     public float pounceStopTimeInverval;
     public int damage;
     public float pounceSpeed;
+    public float pounceCooldownTimeInterval = 1f;
 
     [Header("Set Dynamically: Cat")]
     public Vector3 hoppingPoint;
@@ -27,6 +28,31 @@ public class Cat : EnemyRoomRoaming
     public PounceState pounceState = PounceState.NotPouncing;
     public float pouncePrepareTime;
     public float pounceStopTime;
+    public float pounceCooldownTime = 0;
+
+    [Header("Set in Inspector: Obstacle Variables")]
+    public float stuckTimeCheckInterval = 1f; //1.52
+    public float travelTimeInterval = 1f; //1
+
+    [Header("Set Dynamically: Obstacle Variables")]
+    public Vector2 acceleration;
+    public Vector2 previousVelocity;
+    public Vector2 velocity;
+    public Vector2 previousPosition;
+
+    public float stuckTimeCheck = 0;
+    public float travelTime = 0;
+    public int unstuckDirection = 0;
+    public bool stuck = false;
+
+    public float previousDistanceToXander;
+    public float distanceToXander;
+    public float velocityTowardsXander;
+
+
+    //public Vector2 previousDistanceToXander;
+    //public Vector2 distanceToXander;
+    //public Vector2 velocityTowardsXander;
 
     public override void Awake()
     {
@@ -65,27 +91,39 @@ public class Cat : EnemyRoomRoaming
     }
 
     public override void AlertMoveTowards()
-    {
+    {       
         if (!isPouncing)
         {
-            //Possibly add in more conditions to make the object leave alert phase, like checking if the target left the room
+            if (stuck)
+            {
+                TravelInDirection();
+            }
+            else
+            {
+                VelocityChecker();
+            }
+
             if (target == null || (alertTime > alertTimeDuration))
             {
                 isAlerted = false;
                 return;
             }
 
-            Vector2 distanceFromTarget = target.gameObject.transform.position - transform.position;
+            Vector2 distanceFromTarget = target.transform.position - transform.position;
             Debug.Log(distanceFromTarget.magnitude);
 
             if (distanceFromTarget.magnitude > attackRange)
             {
+                previousPosition = transform.position;
+                
+                previousDistanceToXander = distanceToXander;
+                
                 transform.position = Vector2.MoveTowards(transform.position, target.gameObject.transform.position, runSpeed * Time.deltaTime);
+
+                distanceToXander = Vector2.Distance(target.transform.position, transform.position);
             }
             else
             {
-                //Attack Xander when you are within range
-                /* Lunge at Xander (Cat, Rat) */
                 hoppingPoint = target.transform.position;
                 isPouncing = true;
                 pouncePrepareTime = 0f;
@@ -94,10 +132,93 @@ public class Cat : EnemyRoomRoaming
             }
         }
         else
-        {           
+        {
             Pounce();
         }
     }
+
+    #region
+
+
+    public void VelocityChecker()
+    {
+        previousVelocity = velocity;
+
+        velocity = ((Vector2)transform.position - previousPosition) / Time.deltaTime; ;
+
+        //velocityTowardsXander = distanceToXander - previousDistanceToXander;
+        acceleration = (velocity - previousVelocity);
+
+        stuckTimeCheck += Time.deltaTime;
+
+        //if ((Mathf.Abs(previousVelocity.x) - Mathf.Abs(velocity.x) > 1f || 
+        //    Mathf.Abs(previousVelocity.y) - Mathf.Abs(velocity.y) > 1f) &&
+        //    Mathf.Abs(previousDistanceToXander - distanceToXander) > .01)
+        if (Mathf.Abs(previousDistanceToXander - distanceToXander) > .051)
+        {
+            stuckTimeCheck = 0;
+            return;
+        }
+        else if (stuckTimeCheck > stuckTimeCheckInterval)
+        {
+            stuck = true;
+            stuckTimeCheck = 0;
+            DecideUnstuckDirection();
+        }
+    }
+
+    public void DecideUnstuckDirection()
+    {
+        //unstuckDirection = Random.Range(1, 4);
+        if (Mathf.Abs(acceleration.x) > Mathf.Abs(acceleration.y))
+        {
+            //unstuckDirection = Random.Range(1, 2);
+            unstuckDirection = Random.Range(3, 4);
+        }
+        else
+        {
+            //unstuckDirection = Random.Range(3, 4);
+            unstuckDirection = Random.Range(1, 2);
+        }
+    }
+
+    public void TravelInDirection()
+    {
+        travelTime += Time.deltaTime;
+
+        if (travelTime > travelTimeInterval)
+        {
+            stuck = false;
+            travelTime = 0;
+            isAlerted = true; //Maybe put this here?
+            return;
+        }
+
+        switch (unstuckDirection)
+        {
+            case 1: //(Go Left)
+                transform.position = Vector2.MoveTowards(transform.position,
+                    new Vector2(transform.position.x - 5, transform.position.y), runSpeed * Time.deltaTime);
+                break;
+            case 2: //(Go Right)
+                transform.position = Vector2.MoveTowards(transform.position,
+                    new Vector2(transform.position.x + 5, transform.position.y), runSpeed * Time.deltaTime);
+                break;
+            case 3: //(Go Up)
+                transform.position = Vector2.MoveTowards(transform.position,
+                    new Vector2(transform.position.x, transform.position.y + 5), runSpeed * Time.deltaTime);
+                break;
+            case 4: //(Go Down)
+                transform.position = Vector2.MoveTowards(transform.position, new
+                    Vector2(transform.position.x, transform.position.y - 5), runSpeed * Time.deltaTime);
+                break;
+        }
+    }
+
+
+
+    #endregion
+
 
     private void Pounce()
     {
@@ -152,14 +273,12 @@ public class Cat : EnemyRoomRoaming
 
         switch (collision.gameObject.tag)
         {
-            //case "Xander":
-            //    //Here we will want to damage Xander
-            //    Xander xander = collision.gameObject.GetComponent<Xander>();
-            //    xander.TakeDamage(damage);
-            //    return;
+            case "Xander":
+                //Reset Time float variables, and bool variables (isPouncing, stuck, etc.)
+                return;
             case "Grandmother":
                 //If Cat Collides with Grandmother, it will chose a different path.
-                if (!currentWaypointDestination.isExitNode)
+                if (!currentWaypointDestination.isExitNode && !isAlerted)
                 {
                     DetermineDestination();
                 }
@@ -171,41 +290,113 @@ public class Cat : EnemyRoomRoaming
 
 #region Planning
 /*
- * Planning: 
- * What I am thinking for the AI
- * The cat will run at Xander. If within range, the Cat will lunge. The cat will use a 
- * simular child Game Object like the Grandmother does for the frying pan, except the cat will lunge at that position. 
- * So, the Cat will change to a jump stance, and then change to a jumping stance towards that position. Then, it will land (same animation
- * as the jump stance), and wait for a few seconds. The ordeal should take in total around 2 seconds. 
- * 
- * Variables
- * Vector2 - Xander's Last Position - Hopping Point (This will be where the Cat hops too (Don't really need a child game object))
- * enum Pounce State {Prepare, Jumping, Landed, NotPouncing}
- * 
- * If (within Range)
- *  state = Pounce: (or just have isPouncing)
- * 
- * Update Method
- * Pounce();
- * 
- * 
- * void Pounce()
- *  if (isPouncing)
- *      if(PounceState.Prepare)
- *          Switch to stance position animation
- *          pouncePrepareTime += Time.deltaTime;
- *      else if(PounceState.Jumping)
- *          Move towards pouncePosition
- *          Switch to jumping position animation    
- *      else if (Reached pouncePosition)
- *          Switch to stance position animation
- *          pounceStopTime += Time.deltaTime;    
- *
- *      if(pouncePrepareTime >= pouncePrepateTimeInverval)
- *          pounceState = PounceState.Jump
- *      if(pounceStopTime  >= pounceStopTimeInverval)
- *          isPouncing = false;
- *  
- * 
+ Planning: Implementing Cat Improved Movement System 
+(Will need to implement this into Cat, Grandmother, and WolfSpiderTopDown scripts)
+
+
+Goals:
+-Record Velocity that the Cat is moving when Alerted
+-If cat is not changing verticle or horizontal velocity enough over a period of time, then switch off isAlerted,
+    travel along the axis that was not stuck, and travel in that direction for a few seconds (random whether right or 
+    left, or up or down), and then begin targeting Xander again
+
+Variables I will need
+-Vector2 velocity DYNAMIC
+-Vector2 previousPosition DYNAMIC
+-float stuckTimeCheck DYNAMIC
+-float stuckTimeCheckInterval STATIC
+-float travelTime DYNAMIC
+-float travelTimeInterval STATIC
+-int unstuckDirection DYNAMIC
+
+
+
+Current AlertMoveTowards() Method in script
+{
+if(stuck)
+{
+TravelInDirection();
+}
+else
+{
+VelocityChecker();
+}
+
+
+If Not Pouncing
+    Check if you need to set isAlerted = false;
+
+    Get Distance from Target
+
+    if(Not within attacking range)
+        previousPosition = transform.position
+previousDistanceToXander = transform.position - target.transform.position;
+        Move towards Target	
+distanceToXander = transform.position - target.transform.position;
+    else
+	    Begin hopping towards enemy
+else
+	Pounce()
+}
+
+
+public bool VelocityChecker()
+{
+    velocity = transform.position - previous.position
+
+    velocityTowardsXander = distanceToXander - previousDistanceToXander
+
+    stuckTimeCheck += Time.deltaTime;
+
+    if(velocity.magnitude > .5f)
+    {
+        stuckTimeCheck = 0;
+        return;
+    }
+    else if(stuckTimeCheck > stuckTimeInterval)
+    {
+        stuck = true;
+        DecideUnstuckDirection();
+    }
+}
+
+public void DecideUnstuckDirection()
+{
+    unstuckDirection = Random.Range(1,4);
+}
+
+public void TravelinDirection()
+{
+travelTime += Time.deltaTime;
+
+if(traveltime > travelTimeInterval)
+{
+    stuck = false;
+    travelTime = 0;
+    isAlerted = true; //Maybe put this here?
+    return;
+}
+
+case(unstuckDirection)
+{
+    case 1: (Go Left)
+        Vector2.TravelTowards(transform.position, new Vector2(transform.position.x - 5, transform.position.y), runSpeed * Time.deltaTime)
+        break;
+    case 2: (Go Right)
+        Vector2.TravelTowards(transform.position, new Vector2(transform.position.x + 5, transform.position.y), runSpeed * Time.deltaTime)
+        break;
+    case 3: (Go Up)
+        Vector2.TravelTowards(transform.position, new Vector2(transform.position.x, transform.position.y + 5), runSpeed * Time.deltaTime)
+        break;
+    case 4: (Go Down)
+        Vector2.TravelTowards(transform.position, new Vector2(transform.position.x, transform.position.y - 5), runSpeed * Time.deltaTime)
+        break;
+}
+
+
+
+}
+
+ 
  */
 #endregion

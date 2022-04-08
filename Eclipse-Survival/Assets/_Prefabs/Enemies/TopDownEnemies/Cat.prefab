@@ -122,7 +122,7 @@ MonoBehaviour:
   - {fileID: 0}
   home: {fileID: 0}
   moveSpeed: 1.76
-  runSpeed: 2.4
+  runSpeed: 2.13
   alertTimeDuration: 10
   alertRange: 0
   attackRange: 1.5
@@ -172,6 +172,19 @@ MonoBehaviour:
   pounceState: 3
   pouncePrepareTime: 0
   pounceStopTime: 0
+  stuckTimeCheckInterval: 1.52
+  travelTimeInterval: 1
+  acceleration: {x: 0, y: 0}
+  previousVelocity: {x: 0, y: 0}
+  velocity: {x: 0, y: 0}
+  previousPosition: {x: 0, y: 0}
+  stuckTimeCheck: 0
+  travelTime: 0
+  unstuckDirection: 0
+  stuck: 0
+  previousDistanceToXander: 0
+  distanceToXander: 0
+  velocityTowardsXander: 0
 --- !u!114 &1942783862328796363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,4 +213,4 @@ MonoBehaviour:
   - {x: -0.20720053, y: 0.13212347, z: 0}
   m_ShapePathHash: 1457734999
   m_Mesh: {fileID: 0}
-  m_InstanceId: 283792
+  m_InstanceId: 120482

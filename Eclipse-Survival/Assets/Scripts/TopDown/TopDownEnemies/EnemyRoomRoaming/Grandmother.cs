@@ -108,39 +108,29 @@ public class Grandmother : EnemyRoomRoaming
 
     public override void AlertMoveTowards()
     {
-        //if (!isHitting)
-        //{
+        if (target == null || (alertTime > alertTimeDuration))
+        {
+            TurnOffIsAlerted();
+            return;
+        }
 
-            //Possibly add in more conditions to make the object leave alert phase, like checking if the target left the room
-            if (target == null || (alertTime > alertTimeDuration))
+        Vector2 distanceFromTarget = target.gameObject.transform.position - transform.position;
+
+        Debug.Log(distanceFromTarget.magnitude);
+
+        if (distanceFromTarget.magnitude > attackRange)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, target.gameObject.transform.position, runSpeed * Time.deltaTime);
+        }
+        else
+        {
+            if (!isHitting)
             {
-                TurnOffIsAlerted();
-                return;
+                AudioManagement.Instance.PlayFryingPanSFX();
             }
-
-            Vector2 distanceFromTarget = target.gameObject.transform.position - transform.position;
-
-            Debug.Log(distanceFromTarget.magnitude);
-
-            if (distanceFromTarget.magnitude > attackRange)
-            {
-                transform.position = Vector2.MoveTowards(transform.position, target.gameObject.transform.position, runSpeed * Time.deltaTime);
-            }
-            else
-            {
-                if (!isHitting)
-                {
-                    AudioManagement.Instance.PlayFryingPanSFX();
-                }
-                isHitting = true;
-                strikeState = StrikeState.Strike;
-            }
-        //}
-        //else
-        //{
-        //    StrikeFryingPan();
-
-        //}
+            isHitting = true;
+            strikeState = StrikeState.Strike;
+        }
     }
 
     #region Frying Pan Methods
