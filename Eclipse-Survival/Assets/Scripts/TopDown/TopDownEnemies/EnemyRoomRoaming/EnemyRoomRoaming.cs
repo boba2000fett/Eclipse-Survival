@@ -25,7 +25,8 @@ public class EnemyRoomRoaming : Enemy
 
     
 
-    [Header("Enemy Roaming : Set in Inspector")]    
+    [Header("Enemy Roaming : Set in Inspector")]
+    public float attackCooldownTimeInterval = 1f;
     [Tooltip("This variable is to set the roomList.")]    
     public Room[] roomListSet; //This variable is to set the roomList.
     [Tooltip("This variable is only here to display the Room list.")]
@@ -48,6 +49,8 @@ public class EnemyRoomRoaming : Enemy
     public RoomManager roomManager;
 
     [Header("Set Dynamically: Enemy Roaming")]
+    public bool attackCooldown = false;
+    public float attackCooldownTime = 0;
     //public int currentRoomSee; //Implement this later when doing adding in the Room change functionality
     public int waypointCount = 0;
     public bool isInRoom;

@@ -20,6 +20,7 @@ public class Grandmother : EnemyRoomRoaming
     public float holdTimeInterval = .5f;
     [Tooltip("This is the time interval it takes the Grandmother to pull back the Frying Pan after hitting")]
     public float pullBackTimeInterval = .25f;
+    public GameObject middleOfGrandmother;
 
     [Header("Set Dynamically: Grandmother")]
     public GameObject fryingPan;
@@ -114,15 +115,22 @@ public class Grandmother : EnemyRoomRoaming
             return;
         }
 
-        Vector2 distanceFromTarget = target.gameObject.transform.position - transform.position;
-
-        Debug.Log(distanceFromTarget.magnitude);
-
-        if (distanceFromTarget.magnitude > attackRange)
+        if (attackCooldown)
         {
-            transform.position = Vector2.MoveTowards(transform.position, target.gameObject.transform.position, runSpeed * Time.deltaTime);
+            attackCooldownTime += Time.deltaTime;
+            if (attackCooldownTime > attackCooldownTimeInterval)
+            {
+                attackCooldown = false;
+                attackCooldownTime = 0;
+            }
         }
-        else
+
+        Vector2 distanceFromTarget = target.gameObject.transform.position - middleOfGrandmother.transform.position;
+
+        //Debug.Log($"Grandmother: Distance from Middle to Xander{distanceFromTarget.magnitude}, attackRange {attackRange}");
+
+
+        if (distanceFromTarget.magnitude <= attackRange && !attackCooldown)
         {
             if (!isHitting)
             {
@@ -131,6 +139,24 @@ public class Grandmother : EnemyRoomRoaming
             isHitting = true;
             strikeState = StrikeState.Strike;
         }
+        else
+        {
+            transform.position = Vector2.MoveTowards(transform.position, target.gameObject.transform.position, runSpeed * Time.deltaTime);
+        }
+
+        //if (distanceFromTarget.magnitude > attackRange)
+        //{
+        //    transform.position = Vector2.MoveTowards(transform.position, target.gameObject.transform.position, runSpeed * Time.deltaTime);
+        //}
+        //else
+        //{
+        //    if (!isHitting)
+        //    {
+        //        AudioManagement.Instance.PlayFryingPanSFX();
+        //    }
+        //    isHitting = true;
+        //    strikeState = StrikeState.Strike;
+        //}
     }
 
     #region Frying Pan Methods
@@ -183,6 +209,9 @@ public class Grandmother : EnemyRoomRoaming
 
                 //Possibly Check if Target is Null here, and then if it is, make isAlerted False
                 SwitchAttackingAnimation(false);
+
+                attackCooldown = true;
+                attackCooldownTime = 0;
             }
         }
     }

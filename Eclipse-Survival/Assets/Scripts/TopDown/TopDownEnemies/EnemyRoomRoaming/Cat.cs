@@ -20,7 +20,6 @@ public class Cat : EnemyRoomRoaming
     public float pounceStopTimeInverval;
     public int damage;
     public float pounceSpeed;
-    public float pounceCooldownTimeInterval = 1f;
 
     [Header("Set Dynamically: Cat")]
     public Vector3 hoppingPoint;
@@ -28,8 +27,7 @@ public class Cat : EnemyRoomRoaming
     public PounceState pounceState = PounceState.NotPouncing;
     public float pouncePrepareTime;
     public float pounceStopTime;
-    public float pounceCooldownTime = 0;
-
+    
     
 
     //public Vector2 previousDistanceToXander;
@@ -91,24 +89,25 @@ public class Cat : EnemyRoomRoaming
 
             if (target == null || (alertTime > alertTimeDuration))
             {
-                isAlerted = false;
+                TurnOffIsAlerted();
                 return;
+            }
+
+            if (attackCooldown)
+            {
+                attackCooldownTime += Time.deltaTime;   
+                if (attackCooldownTime > attackCooldownTimeInterval)
+                {
+                    attackCooldown = false;
+                    attackCooldownTime = 0;
+                }
             }
 
             Vector2 distanceFromTarget = target.transform.position - transform.position;
             Debug.Log(distanceFromTarget.magnitude);
 
-            if (distanceFromTarget.magnitude > attackRange)
-            {
-                previousPosition = transform.position;
-                
-                previousDistanceToXander = distanceToXander;
-                
-                transform.position = Vector2.MoveTowards(transform.position, target.gameObject.transform.position, runSpeed * Time.deltaTime);
 
-                distanceToXander = Vector2.Distance(target.transform.position, transform.position);
-            }
-            else
+            if (distanceFromTarget.magnitude <= attackRange && !attackCooldown)
             {
                 hoppingPoint = target.transform.position;
                 isPouncing = true;
@@ -116,6 +115,36 @@ public class Cat : EnemyRoomRoaming
                 pounceStopTime = 0f;
                 pounceState = PounceState.Prepare;
             }
+            else
+            {
+                previousPosition = transform.position;
+
+                previousDistanceToXander = distanceToXander;
+
+                transform.position = Vector2.MoveTowards(transform.position, target.gameObject.transform.position, runSpeed * Time.deltaTime);
+
+                distanceToXander = Vector2.Distance(target.transform.position, transform.position);
+            }
+
+
+            //if (distanceFromTarget.magnitude > attackRange)
+            //{
+            //    previousPosition = transform.position;
+
+            //    previousDistanceToXander = distanceToXander;
+
+            //    transform.position = Vector2.MoveTowards(transform.position, target.gameObject.transform.position, runSpeed * Time.deltaTime);
+
+            //    distanceToXander = Vector2.Distance(target.transform.position, transform.position);
+            //}
+            //else
+            //{
+            //    hoppingPoint = target.transform.position;
+            //    isPouncing = true;
+            //    pouncePrepareTime = 0f;
+            //    pounceStopTime = 0f;
+            //    pounceState = PounceState.Prepare;
+            //}
         }
         else
         {
@@ -124,6 +153,10 @@ public class Cat : EnemyRoomRoaming
     }
 
    
+    public void SwitchOffIsAlerted()
+    {
+
+    }
 
     private void Pounce()
     {
@@ -167,6 +200,8 @@ public class Cat : EnemyRoomRoaming
 
                 SwitchAttackingAnimation(false);
 
+                attackCooldown = true;
+                attackCooldownTime = 0;
             }
         }           
     }
