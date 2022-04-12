@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3162683669028837501}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -49,12 +49,26 @@ MonoBehaviour:
   westSceneName: 
   southSceneName: 
   stairSceneName: UpstairsCenterHallway
+  wall1SceneName: Hallway-BedroomWall
+  wall2SceneName: 
+  wall3SceneName: 
+  wall4SceneName: 
+  wall5SceneName: 
+  bathroomScene: 
   availableExits: 0
+  enemyWaypointExitPrefab: {fileID: 0}
   waypointsInRoom: []
+  spawnWaypoints: []
   southExit: {fileID: 0}
   northExit: {fileID: 0}
   eastExit: {fileID: 0}
   westExit: {fileID: 0}
   stairsExit: {fileID: 0}
   homeNode: {fileID: 0}
+  wall1Exit: {fileID: 0}
+  wall2Exit: {fileID: 0}
+  wall3Exit: {fileID: 0}
+  wall4Exit: {fileID: 0}
+  wall5Exit: {fileID: 0}
+  bathroomExit: {fileID: 0}
   isWallCrawlingStage: 0

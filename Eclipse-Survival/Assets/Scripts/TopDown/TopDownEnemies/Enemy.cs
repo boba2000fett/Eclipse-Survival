@@ -6,11 +6,9 @@ public class Enemy : MonoBehaviour
 {
     [Header("Set in Inspector: Enemy Base Class")]
     public EnemyWaypoint[] waypoints;
-    public GameObject home;
     public float moveSpeed = 2;
     public float runSpeed = 3;
     public float alertTimeDuration;
-    public float alertRange;
     public float attackRange;
     public int strength;
     [Tooltip("This is the Enemy's health. This will only really be implemented by Cockroach and Rat enemies (when they are struck by either the Cat or Grandma)")]
@@ -25,7 +23,31 @@ public class Enemy : MonoBehaviour
     public EnemyWaypoint currentWaypointDestination;
     public Facing direction;
 
-    //Components
+    [Header("Set in Inspector: Obstacle Variables")]
+    public float stuckTimeCheckInterval = 1f; //1.52
+    public float travelTimeInterval = 1f; //1
+
+    [Header("Set Dynamically: Obstacle Variables")]
+    public Vector2 acceleration;
+    public Vector2 previousVelocity;
+    public Vector2 velocity;
+    public float speed;
+    public Vector2 previousPosition;
+
+    public float stuckTimeCheck = 0;
+    public float travelTime = 0;
+    public int unstuckDirection = 0;
+    public bool stuck = false;
+
+    public float stuckTimePauseTimer;
+    private float stuckTimePauseTimerInterval = .1f;
+
+    public float previousDistanceToXander;
+    public float distanceToXander;
+    public float velocityTowardsXander;
+
+
+    [Header("Components: Enemy Base Class")]
     public Animator anim;
     public Rigidbody2D rigid;
     public CircleCollider2D circle;
@@ -48,6 +70,7 @@ public class Enemy : MonoBehaviour
 
     public virtual void Update()
     {
+        speed = velocity.magnitude;
         this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
         ConfigureAnimation();
@@ -63,6 +86,7 @@ public class Enemy : MonoBehaviour
             RegularMove();
         }
     }
+
     
     public virtual void TurnOnIsAlerted()
     {
@@ -177,6 +201,219 @@ public class Enemy : MonoBehaviour
         //Here, we have to potential to add in some sort of Sound Effect or a Particle Effect or Something.
     }
 
+
+    public void VelocityChecker()
+    {
+        previousVelocity = velocity;
+
+        velocity = ((Vector2)transform.position - previousPosition) / Time.deltaTime;
+
+        //velocityTowardsXander = distanceToXander - previousDistanceToXander;
+        acceleration = (velocity - previousVelocity);
+
+        //stuckTimeCheck += Time.deltaTime;
+        stuckTimePauseTimer += Time.deltaTime;
+        stuckTimeCheck += Time.deltaTime;
+
+        //if ((Mathf.Abs(previousVelocity.x) - Mathf.Abs(velocity.x) > 1f || 
+        //    Mathf.Abs(previousVelocity.y) - Mathf.Abs(velocity.y) > 1f) &&
+        //    Mathf.Abs(previousDistanceToXander - distanceToXander) > .01)
+
+
+        //Debug.LogError($"distanceToXander - previousDistanceToXander / Time.deltaTime = " + 
+        //    $"{Mathf.Abs((distanceToXander) - (previousDistanceToXander) ) / Time.deltaTime}");
+        //Debug.LogWarning($"Mathf.Abs(distanceToXander - previousDistanceToXander)" +
+        //    $"{Mathf.Abs(distanceToXander - previousDistanceToXander)}");
+
+        //if (velocity.magnitude > .5f)
+        //{
+        //    stuckTimeCheck = 0;
+        //    return;
+        //}
+        //else if (stuckTimeCheck > stuckTimeCheckInterval)
+        //{
+        //    stuck = true;
+        //    stuckTimeCheck = 0;
+        //    DecideUnstuckDirection();
+        //}
+        //.05
+
+        if (stuckTimePauseTimer >= stuckTimePauseTimerInterval)
+        {
+            stuckTimePauseTimer = 0;
+
+            this.GetComponent<BoxCollider2D>().enabled = false;
+            this.GetComponent<CircleCollider2D>().enabled = false;
+            GameObject.Find("MapBounds").gameObject.GetComponent<BoxCollider2D>().enabled = false;
+
+            Ray ray = new Ray(transform.position, target.transform.position);
+
+            RaycastHit2D hit = Physics2D.Raycast
+                (transform.position,
+                target.transform.position - transform.position);
+
+            if (hit.collider.gameObject.tag == "Xander")
+            {
+                stuckTimeCheck = 0;
+            }
+            this.GetComponent<BoxCollider2D>().enabled = true;
+            this.GetComponent<CircleCollider2D>().enabled = true;
+            GameObject.Find("MapBounds").gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        }
+
+        if (stuckTimeCheck > stuckTimeCheckInterval)
+        {
+            stuck = true;
+            stuckTimeCheck = 0;
+
+            stuckTimePauseTimer = 0;
+
+            DecideUnstuckDirection();
+        }
+    }
+
+    /// <summary>
+    /// This method uses a more intelligent method for the enemy to get unstuck from a projectile.
+    /// </summary>
+    public void DecideUnstuckDirection()
+    {
+        //unstuckDirection = Random.Range(1, 4);
+        //if (Mathf.Abs(acceleration.x) > Mathf.Abs(acceleration.y))//If stuck against surface either above or below enemy
+        if (direction == Facing.Right || direction == Facing.Left)
+        {
+            //unstuckDirection = Random.Range(3, 4);
+
+            Vector2 travelUp = new Vector2(transform.position.x, transform.position.y + 10);
+            Vector2 travelDown = new Vector2(transform.position.x, transform.position.y - 10);
+
+            Vector2 upDistance = travelUp - (Vector2)target.transform.position;
+            Vector2 downDistance = travelDown- (Vector2)target.transform.position;
+            
+            RaycastHit2D upHit;
+            RaycastHit2D downHit;
+            if (direction == Facing.Right)
+            {
+                upHit = Physics2D.Raycast(travelUp, Vector2.right);
+                downHit = Physics2D.Raycast(travelDown, Vector2.right);
+            }
+            else
+            {
+                upHit = Physics2D.Raycast(travelUp, Vector2.left);
+                downHit = Physics2D.Raycast(travelDown, Vector2.left);
+            }
+
+            if (upHit.collider.gameObject.tag == "Xander")
+            {
+                unstuckDirection = 3;
+            }
+            else if(downHit.collider.gameObject.tag == "Xander")
+            {
+                unstuckDirection = 4;
+            }
+            else if(upHit.distance > downHit.distance)
+            {
+                unstuckDirection = 3;
+            }
+            else if (upHit.distance < downHit.distance)
+            {
+                unstuckDirection = 4;
+            }
+            else if (upDistance.magnitude <= downDistance.magnitude)
+            {
+                unstuckDirection = 3;
+            }
+            else
+            {
+                unstuckDirection = 4;
+            }
+        }
+        else 
+        {
+            //unstuckDirection = Random.Range(1, 2);
+
+
+            Vector2 travelRight = new Vector2(transform.position.x + 10, transform.position.y);
+            Vector2 travelLeft = new Vector2(transform.position.x - 10, transform.position.y);
+
+            Vector2 rightDistance = travelRight - (Vector2)target.transform.position;
+            Vector2 leftDistance = travelLeft - (Vector2)target.transform.position;
+
+            //1 left 2 right 3 up 4 down
+            RaycastHit2D rightHit;
+            RaycastHit2D leftHit;
+            if (direction == Facing.Up)
+            {
+                rightHit = Physics2D.Raycast(travelRight, Vector2.up);
+                leftHit = Physics2D.Raycast(travelLeft, Vector2.up);
+            }
+            else
+            {
+                rightHit = Physics2D.Raycast(travelRight, Vector2.down);
+                leftHit = Physics2D.Raycast(travelLeft, Vector2.down);
+            }
+
+            if (rightHit.collider.gameObject.tag == "Xander")
+            {
+                unstuckDirection = 1;
+            }
+            else if (leftHit.collider.gameObject.tag == "Xander")
+            {
+                unstuckDirection = 2;
+            }
+            else if (rightHit.distance > leftHit.distance)
+            {
+                unstuckDirection = 1;
+            }
+            else if (rightHit.distance < leftHit.distance)
+            {
+                unstuckDirection = 2;
+            }
+            else if (rightDistance.magnitude <= leftDistance.magnitude)
+            {
+                unstuckDirection = 2;
+            }
+            else
+            {
+                unstuckDirection = 1;
+            }
+        }
+    }
+
+    public void TravelInDirection()
+    {
+        travelTime += Time.deltaTime;
+
+        if (travelTime > travelTimeInterval)
+        {
+            stuck = false;
+            travelTime = 0;
+            isAlerted = true; //Maybe put this here?
+            return;
+        }
+
+        switch (unstuckDirection)
+        {
+            case 1: //(Go Left)
+                transform.position = Vector2.MoveTowards(transform.position,
+                    new Vector2(transform.position.x - 5, transform.position.y), runSpeed * Time.deltaTime);
+                break;
+            case 2: //(Go Right)
+                transform.position = Vector2.MoveTowards(transform.position,
+                    new Vector2(transform.position.x + 5, transform.position.y), runSpeed * Time.deltaTime);
+                break;
+            case 3: //(Go Up)
+                transform.position = Vector2.MoveTowards(transform.position,
+                    new Vector2(transform.position.x, transform.position.y + 5), runSpeed * Time.deltaTime);
+                break;
+            case 4: //(Go Down)
+                transform.position = Vector2.MoveTowards(transform.position, new
+                    Vector2(transform.position.x, transform.position.y - 5), runSpeed * Time.deltaTime);
+                break;
+        }
+    }
+
+
+
     public virtual void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.tag == "Xander" || collider.tag == "Cockroach")
@@ -232,3 +469,39 @@ public class Enemy : MonoBehaviour
         }
     }
 }
+
+/*
+
+
+    public void VelocityChecker()
+    {
+        previousVelocity = velocity;
+
+        velocity = ((Vector2)transform.position - previousPosition) / Time.deltaTime;
+
+        //velocityTowardsXander = distanceToXander - previousDistanceToXander;
+        acceleration = (velocity - previousVelocity);
+
+        stuckTimeCheck += Time.deltaTime;
+        stuckTimePauseTimer += Time.deltaTime;
+
+        if ((Mathf.Abs(distanceToXander - previousDistanceToXander) > .1 || //(Used to be .05)
+            velocity.magnitude > 1f) && stuckTimePauseTimer >= stuckTimePauseTimerInterval)
+        {
+            stuckTimeCheck = 0;
+            stuckTimePauseTimer = 0;
+            return;
+        }
+        else if (stuckTimeCheck > stuckTimeCheckInterval)
+        {
+            stuck = true;
+            stuckTimeCheck = 0;
+
+            stuckTimePauseTimer = 0;
+
+            DecideUnstuckDirection();
+        }
+    }
+
+
+ * */

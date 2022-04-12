@@ -30,25 +30,7 @@ public class Cat : EnemyRoomRoaming
     public float pounceStopTime;
     public float pounceCooldownTime = 0;
 
-    [Header("Set in Inspector: Obstacle Variables")]
-    public float stuckTimeCheckInterval = 1f; //1.52
-    public float travelTimeInterval = 1f; //1
-
-    [Header("Set Dynamically: Obstacle Variables")]
-    public Vector2 acceleration;
-    public Vector2 previousVelocity;
-    public Vector2 velocity;
-    public Vector2 previousPosition;
-
-    public float stuckTimeCheck = 0;
-    public float travelTime = 0;
-    public int unstuckDirection = 0;
-    public bool stuck = false;
-
-    public float previousDistanceToXander;
-    public float distanceToXander;
-    public float velocityTowardsXander;
-
+    
 
     //public Vector2 previousDistanceToXander;
     //public Vector2 distanceToXander;
@@ -94,13 +76,17 @@ public class Cat : EnemyRoomRoaming
     {       
         if (!isPouncing)
         {
+
             if (stuck)
             {
                 TravelInDirection();
+                return;
             }
             else
             {
                 VelocityChecker();
+                if (stuck)
+                    return;
             }
 
             if (target == null || (alertTime > alertTimeDuration))
@@ -137,88 +123,7 @@ public class Cat : EnemyRoomRoaming
         }
     }
 
-    #region
-
-
-    public void VelocityChecker()
-    {
-        previousVelocity = velocity;
-
-        velocity = ((Vector2)transform.position - previousPosition) / Time.deltaTime; ;
-
-        //velocityTowardsXander = distanceToXander - previousDistanceToXander;
-        acceleration = (velocity - previousVelocity);
-
-        stuckTimeCheck += Time.deltaTime;
-
-        //if ((Mathf.Abs(previousVelocity.x) - Mathf.Abs(velocity.x) > 1f || 
-        //    Mathf.Abs(previousVelocity.y) - Mathf.Abs(velocity.y) > 1f) &&
-        //    Mathf.Abs(previousDistanceToXander - distanceToXander) > .01)
-        if (Mathf.Abs(previousDistanceToXander - distanceToXander) > .051)
-        {
-            stuckTimeCheck = 0;
-            return;
-        }
-        else if (stuckTimeCheck > stuckTimeCheckInterval)
-        {
-            stuck = true;
-            stuckTimeCheck = 0;
-            DecideUnstuckDirection();
-        }
-    }
-
-    public void DecideUnstuckDirection()
-    {
-        //unstuckDirection = Random.Range(1, 4);
-        if (Mathf.Abs(acceleration.x) > Mathf.Abs(acceleration.y))
-        {
-            //unstuckDirection = Random.Range(1, 2);
-            unstuckDirection = Random.Range(3, 4);
-        }
-        else
-        {
-            //unstuckDirection = Random.Range(3, 4);
-            unstuckDirection = Random.Range(1, 2);
-        }
-    }
-
-    public void TravelInDirection()
-    {
-        travelTime += Time.deltaTime;
-
-        if (travelTime > travelTimeInterval)
-        {
-            stuck = false;
-            travelTime = 0;
-            isAlerted = true; //Maybe put this here?
-            return;
-        }
-
-        switch (unstuckDirection)
-        {
-            case 1: //(Go Left)
-                transform.position = Vector2.MoveTowards(transform.position,
-                    new Vector2(transform.position.x - 5, transform.position.y), runSpeed * Time.deltaTime);
-                break;
-            case 2: //(Go Right)
-                transform.position = Vector2.MoveTowards(transform.position,
-                    new Vector2(transform.position.x + 5, transform.position.y), runSpeed * Time.deltaTime);
-                break;
-            case 3: //(Go Up)
-                transform.position = Vector2.MoveTowards(transform.position,
-                    new Vector2(transform.position.x, transform.position.y + 5), runSpeed * Time.deltaTime);
-                break;
-            case 4: //(Go Down)
-                transform.position = Vector2.MoveTowards(transform.position, new
-                    Vector2(transform.position.x, transform.position.y - 5), runSpeed * Time.deltaTime);
-                break;
-        }
-    }
-
-
-
-    #endregion
-
+   
 
     private void Pounce()
     {
