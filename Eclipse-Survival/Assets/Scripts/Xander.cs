@@ -64,7 +64,7 @@ public class Xander : MonoBehaviour
         hungerTimer = GamePlayManager.GPM.hungerTimer;
         isAlive = true;
         GameObject spawnPoint = GameObject.FindGameObjectWithTag(GamePlayManager.GPM.targetTag);
-        gameObject.transform.position = spawnPoint.GetComponent<PerspectiveSceneChange>().spawnPoint.transform.position;
+        gameObject.transform.position = spawnPoint.GetComponent<PerspectiveSceneChange>().spawnPoint.transform.position;       
         UpdateUI();
     }
 

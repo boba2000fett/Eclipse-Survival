@@ -10,6 +10,7 @@ public class PerspectiveSceneChange : MonoBehaviour
     public string targetPerspectiveScene;
     public string targetPerspectiveSpawnPoint;
     public DirectionKey transitionKeyNeeded;
+    public Facing facingOnSpawn;
     public string nameOfItem;
     public GameObject spawnPoint;
 
@@ -82,6 +83,7 @@ public class PerspectiveSceneChange : MonoBehaviour
     {
         GameObject go = GameObject.Find("ItemSpawnPlaceholder");
         ItemSpawner temp = go.GetComponent<ItemSpawner>();
+        AudioManagement.Instance.SwitchBackgroundMusic(BackgroundMusicType.Normal); // default back to normal background music on every scene change
         int i = 0;
 
         //A switch case for identifying the current room name, which is set in the inspector

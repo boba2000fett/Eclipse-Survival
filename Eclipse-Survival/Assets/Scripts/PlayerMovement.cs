@@ -62,6 +62,24 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         facing = Facing.Left;       
         stamina = GamePlayManager.GPM.XanderStamina;
+        GameObject spawnPoint = GameObject.FindGameObjectWithTag(GamePlayManager.GPM.targetTag);
+        facing = spawnPoint.GetComponent<PerspectiveSceneChange>().facingOnSpawn;
+
+        switch (facing)
+        {
+            case Facing.Up:
+                transform.localRotation = Quaternion.Euler(0, 0, 180);
+                break;
+            case Facing.Down:
+                transform.localRotation = Quaternion.Euler(0, 0, 0);
+                break;
+            case Facing.Left:
+                transform.localRotation = Quaternion.Euler(0, 0, -90);
+                break;
+            case Facing.Right:
+                transform.localRotation = Quaternion.Euler(0, 0, 90);
+                break;
+        }
         //Physics2D.gravity = new Vector2(0, 0);
     }
 
