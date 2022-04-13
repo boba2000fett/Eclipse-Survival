@@ -46,6 +46,8 @@ public class Constants : MonoBehaviour
     public const string DEATH_CHEESE = "DeathCheese";
     public const string FRUIT_SEED = "FruitSeed";
     public const string BREAD_CRUMB = "BreadCrumb";
+    public const string COOKIE_CRUMB = "CookieCrumb";
+    public const string COOKIE_FULL = "FullCookie";
 
     //Test Constant Scene for transition between two scenes
     //public const int PLAYABLE_TOP_DOWN_VIEW = 0;
