@@ -60,6 +60,12 @@ public class ItemSpawner : MonoBehaviour
                                 case BREAD_CRUMB:
                                     itemIndexValue = 4;
                                     break;
+                                case COOKIE_CRUMB:
+                                    itemIndexValue = 5;
+                                    break;
+                                case COOKIE_FULL:
+                                    itemIndexValue = 6;
+                                    break;
                             }
 
                             //Reinstatiate the item object and place it based on the stored vector value
@@ -107,6 +113,12 @@ public class ItemSpawner : MonoBehaviour
                                 case BREAD_CRUMB:
                                     itemIndexValue = 4;
                                     break;
+                                case COOKIE_CRUMB:
+                                    itemIndexValue = 5;
+                                    break;
+                                case COOKIE_FULL:
+                                    itemIndexValue = 6;
+                                    break;
                             }
 
                             //Reinstatiate the item object and place it based on the stored vector value
@@ -151,6 +163,12 @@ public class ItemSpawner : MonoBehaviour
                                     break;
                                 case BREAD_CRUMB:
                                     itemIndexValue = 4;
+                                    break;
+                                case COOKIE_CRUMB:
+                                    itemIndexValue = 5;
+                                    break;
+                                case COOKIE_FULL:
+                                    itemIndexValue = 6;
                                     break;
                             }
 
@@ -197,6 +215,12 @@ public class ItemSpawner : MonoBehaviour
                                 case BREAD_CRUMB:
                                     itemIndexValue = 4;
                                     break;
+                                case COOKIE_CRUMB:
+                                    itemIndexValue = 5;
+                                    break;
+                                case COOKIE_FULL:
+                                    itemIndexValue = 6;
+                                    break;
                             }
 
                             //Reinstatiate the item object and place it based on the stored vector value
@@ -241,6 +265,12 @@ public class ItemSpawner : MonoBehaviour
                                     break;
                                 case BREAD_CRUMB:
                                     itemIndexValue = 4;
+                                    break;
+                                case COOKIE_CRUMB:
+                                    itemIndexValue = 5;
+                                    break;
+                                case COOKIE_FULL:
+                                    itemIndexValue = 6;
                                     break;
                             }
 
@@ -287,6 +317,12 @@ public class ItemSpawner : MonoBehaviour
                                 case BREAD_CRUMB:
                                     itemIndexValue = 4;
                                     break;
+                                case COOKIE_CRUMB:
+                                    itemIndexValue = 5;
+                                    break;
+                                case COOKIE_FULL:
+                                    itemIndexValue = 6;
+                                    break;
                             }
 
                             //Reinstatiate the item object and place it based on the stored vector value
@@ -331,6 +367,12 @@ public class ItemSpawner : MonoBehaviour
                                     break;
                                 case BREAD_CRUMB:
                                     itemIndexValue = 4;
+                                    break;
+                                case COOKIE_CRUMB:
+                                    itemIndexValue = 5;
+                                    break;
+                                case COOKIE_FULL:
+                                    itemIndexValue = 6;
                                     break;
                             }
 
@@ -377,6 +419,12 @@ public class ItemSpawner : MonoBehaviour
                                 case BREAD_CRUMB:
                                     itemIndexValue = 4;
                                     break;
+                                case COOKIE_CRUMB:
+                                    itemIndexValue = 5;
+                                    break;
+                                case COOKIE_FULL:
+                                    itemIndexValue = 6;
+                                    break;
                             }
 
                             //Reinstatiate the item object and place it based on the stored vector value
@@ -422,6 +470,12 @@ public class ItemSpawner : MonoBehaviour
                                 case BREAD_CRUMB:
                                     itemIndexValue = 4;
                                     break;
+                                case COOKIE_CRUMB:
+                                    itemIndexValue = 5;
+                                    break;
+                                case COOKIE_FULL:
+                                    itemIndexValue = 6;
+                                    break;
                             }
 
                             //Reinstatiate the item object and place it based on the stored vector value
@@ -466,6 +520,12 @@ public class ItemSpawner : MonoBehaviour
                                     break;
                                 case BREAD_CRUMB:
                                     itemIndexValue = 4;
+                                    break;
+                                case COOKIE_CRUMB:
+                                    itemIndexValue = 5;
+                                    break;
+                                case COOKIE_FULL:
+                                    itemIndexValue = 6;
                                     break;
                             }
 
