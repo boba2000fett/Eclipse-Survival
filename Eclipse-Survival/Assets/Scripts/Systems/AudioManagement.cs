@@ -14,6 +14,8 @@ public class AudioManagement : MonoBehaviour
     public float timeBetweenXanderFootstepsWalking;
     public float timeBetweenXanderFootstepsRunning;
     public float timeBetweenXanderSqueaks;
+    public float timeBetweenCatSfx;
+    public float timeBetweenCatAttackSfx;
 
     // Private controls
     private float backgroundMusicVolume;
@@ -22,6 +24,7 @@ public class AudioManagement : MonoBehaviour
     private float fryingPanVolume;
     private float xanderSqueaksVolume;
     private bool isPlayingAmbiantSound;
+    private float catSFXVolume;
 
     // Public Controls
     public float BackgroundMusicVolume
@@ -75,6 +78,16 @@ public class AudioManagement : MonoBehaviour
         }
     }
 
+    public float CatSFXVolume
+    {
+        get { return catSFXVolume; }
+        set
+        {
+            catSFXVolume = value;
+            catChannel.volume = catSFXVolume;
+        }
+    }
+
     // Audio Source (Registered by Start method)
     public AudioSource backgroundMusicChannel1;
     public AudioSource backgroundMusicChannel2;
@@ -82,6 +95,7 @@ public class AudioManagement : MonoBehaviour
     public AudioSource xanderFootstepsChannel;
     public AudioSource fryingPanChannel;
     public AudioSource xanderSqueaksChannel;
+    public AudioSource catChannel;
 
     private bool isPlayingTrack1;
 
@@ -98,6 +112,8 @@ public class AudioManagement : MonoBehaviour
     public AudioClip[] ambientSoundClips;
     public AudioClip[] fryingPanClips;
     public AudioClip[] xanderSqueaksClips;
+    public AudioClip[] catSoundClips;
+    public AudioClip[] catAttackingSoundClips;
 
 
     // Awake is called before Start()
@@ -128,6 +144,7 @@ public class AudioManagement : MonoBehaviour
         xanderFootstepsChannel = gameObject.AddComponent<AudioSource>();
         fryingPanChannel = gameObject.AddComponent<AudioSource>();
         xanderSqueaksChannel = gameObject.AddComponent<AudioSource>();
+        catChannel = gameObject.AddComponent<AudioSource>();
 
         // Set to loop
         backgroundMusicChannel1.loop = true;
@@ -136,6 +153,7 @@ public class AudioManagement : MonoBehaviour
         xanderFootstepsChannel.loop = false;
         fryingPanChannel.loop = false;
         xanderSqueaksChannel.loop = false;
+        catChannel.loop = false;
 
         // Set play on awake to false
         backgroundMusicChannel1.playOnAwake = false;
@@ -144,12 +162,14 @@ public class AudioManagement : MonoBehaviour
         xanderFootstepsChannel.playOnAwake = false;
         fryingPanChannel.playOnAwake = false;
         xanderSqueaksChannel.playOnAwake = false;
+        catChannel.playOnAwake = false;
 
         // ------- Initialize Voume Mix Properties ----------
         AmbientSFXVolume = 0.5f;
-        XanderFootstepsVolume = 0.3f;
+        XanderFootstepsVolume = 0.25f;
         FryingPanVolume = 0.4f;
         XanderSqueaksVolume = 0.01f;
+        CatSFXVolume = 0.14f;
 
         // -------- Fine Tune other AudioSource Attributes ----------
         xanderFootstepsChannel.pitch = 1.8f;
@@ -236,16 +256,57 @@ public class AudioManagement : MonoBehaviour
     #region Public Methods
     public void SwitchBackgroundMusic(BackgroundMusicType type)
     {
+        AudioClip currentClipPlaying;
+        if (isPlayingTrack1)
+        {
+            currentClipPlaying = backgroundMusicChannel1.clip;
+        }
+        else
+        {
+            currentClipPlaying = backgroundMusicChannel2.clip;
+        }
+
         switch (type)
         {
-            case BackgroundMusicType.Menu:
-                SwapTrack(menuHoldBGM, 5.0f);
+            case BackgroundMusicType.Menu:  
+                if (currentClipPlaying != null)
+                {
+                    if (currentClipPlaying.name != menuHoldBGM.name)
+                    {
+                        SwapTrack(menuHoldBGM, 5.0f);
+                    }                       
+                }
+                else
+                {
+                    SwapTrack(menuHoldBGM, 5.0f);
+                }               
+                             
                 break;
             case BackgroundMusicType.Normal:
-                SwapTrack(primaryBGM, 10.0f);
+                if (currentClipPlaying != null)
+                {
+                    if (currentClipPlaying.name != primaryBGM.name)
+                    {
+                        SwapTrack(primaryBGM, 10.0f);
+                    }
+                }
+                else
+                {
+                    SwapTrack(primaryBGM, 10.0f);
+                }                           
                 break;
             case BackgroundMusicType.UnderAttack:
-                SwapTrack(chaseBGM, 0.1f);
+                if (currentClipPlaying != null)
+                {
+                    if (currentClipPlaying.name != chaseBGM.name)
+                    {
+                        SwapTrack(chaseBGM, 0.1f);
+                    }
+                }
+                else
+                {
+                    SwapTrack(chaseBGM, 0.1f);
+                }            
                 break;
         }
     }
@@ -301,11 +362,53 @@ public class AudioManagement : MonoBehaviour
         }
     }
 
-    //------------------------------FRYING PAN --------------------------------------------
+    //------------------------------ FRYING PAN --------------------------------------------
     public void PlayFryingPanSFX() // Does not need a timer control here because the calling method is already timer controlled
     {
         int clipToPlay = (int)Random.Range(0, fryingPanClips.Length - 1);
         fryingPanChannel.PlayOneShot(fryingPanClips[clipToPlay]);       
+    }
+
+    //------------------------------ CAT ----------------------------------------------------
+    bool canPlayCatSfx;
+    float catSfxTimer;
+    bool catState = false;
+    public void PlayCatSFX(bool isAttacking, bool isInRoom)
+    {
+        catSfxTimer -= Time.deltaTime;
+        if (catState != isAttacking && isAttacking == true)
+        {
+            catChannel.Stop();
+            catSfxTimer = 0;
+        }
+
+        catState = isAttacking;
+
+        if (catSfxTimer <= 0)
+        {
+            canPlayCatSfx = true;
+        }
+
+        if (isInRoom)
+        {
+            if (canPlayCatSfx)
+            {
+                canPlayCatSfx = false;
+
+                if (isAttacking)
+                {
+                    catSfxTimer = timeBetweenCatAttackSfx;
+                    int clipToPlay = (int)Random.Range(0, catAttackingSoundClips.Length - 1);
+                    catChannel.PlayOneShot(catAttackingSoundClips[clipToPlay]);
+                }
+                else
+                {
+                    catSfxTimer = timeBetweenCatSfx;
+                    int clipToPlay = (int)Random.Range(0, catSoundClips.Length - 1);
+                    catChannel.PlayOneShot(catSoundClips[clipToPlay]);
+                }
+            }
+        }       
     }
 
     //----------------------------JUMP SCARES --------------------------------------------
@@ -315,6 +418,11 @@ public class AudioManagement : MonoBehaviour
     }
 
     #endregion
+
+    public void ResetSoundsOnSceneChange()
+    {
+        SwitchBackgroundMusic(BackgroundMusicType.Normal);
+    }
 }
 
 public enum BackgroundMusicType

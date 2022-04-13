@@ -68,6 +68,7 @@ public class Cat : EnemyRoomRoaming
         {
             GameObject.FindObjectOfType<Bed>().RegularBed();
         }
+        AudioManagement.Instance.PlayCatSFX(isAlerted, isInRoom);
     }
 
     public override void AlertMoveTowards()
