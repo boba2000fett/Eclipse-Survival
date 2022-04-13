@@ -88,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = Vector2.zero;
         bool dirSwitch = false;
 
-        if (Input.GetKey(KeyCode.LeftShift) && stamina > 0 && state != ActionState.Idle && state != ActionState.Scratching)
+        if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Run")) && stamina > 0 && state != ActionState.Idle && state != ActionState.Scratching)
         {
             moveSpeed = RUN_SPEED;
             detectionCollider.radius = RUNNING_DETECTION_RADIUS;
@@ -108,9 +108,9 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) && state != ActionState.Scratching)
+        if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Down")) && state != ActionState.Scratching)
         {
-            if (Input.GetKey(KeyCode.LeftShift) && !staminaIsInCooldownPeriod)
+            if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Run")) && !staminaIsInCooldownPeriod)
             {
                 moveSpeed = RUN_SPEED;
                 state = ActionState.Running;
@@ -131,9 +131,9 @@ public class PlayerMovement : MonoBehaviour
                 dirSwitch = true;
             }
         }
-        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) && state != ActionState.Scratching)
+        else if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Right")) && state != ActionState.Scratching)
         {
-            if (Input.GetKey(KeyCode.LeftShift) && !staminaIsInCooldownPeriod)
+            if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Run")) && !staminaIsInCooldownPeriod)
             {
                 moveSpeed = RUN_SPEED;
                 state = ActionState.Running;
@@ -154,9 +154,9 @@ public class PlayerMovement : MonoBehaviour
                 dirSwitch = true;
             }
         }
-        else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) && state != ActionState.Scratching)
+        else if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Up")) && state != ActionState.Scratching)
         {
-            if (Input.GetKey(KeyCode.LeftShift) && !staminaIsInCooldownPeriod)
+            if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Run")) && !staminaIsInCooldownPeriod)
             {
                 moveSpeed = RUN_SPEED;
                 state = ActionState.Running;
@@ -177,9 +177,9 @@ public class PlayerMovement : MonoBehaviour
                 dirSwitch = true;
             }
         }
-        else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) && state != ActionState.Scratching)
+        else if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Left")) && state != ActionState.Scratching)
         {
-            if (Input.GetKey(KeyCode.LeftShift) && !staminaIsInCooldownPeriod)
+            if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Run")) && !staminaIsInCooldownPeriod)
             {
                 moveSpeed = RUN_SPEED;
                 state = ActionState.Running;
@@ -200,7 +200,7 @@ public class PlayerMovement : MonoBehaviour
                 dirSwitch = true;
             }
         }
-        else if (Input.GetKey(KeyCode.V))
+        else if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Scratch")))
         {
             state = ActionState.Scratching;
         }

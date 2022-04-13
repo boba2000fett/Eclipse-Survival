@@ -57,19 +57,19 @@ public class PerspectiveSceneChange : MonoBehaviour
 
     private bool PressingEntranceKey()
     {
-        if (transitionKeyNeeded == DirectionKey.Up && (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)))
+        if (transitionKeyNeeded == DirectionKey.Up && (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Up"))))
         {
             return true;
         }
-        else if (transitionKeyNeeded == DirectionKey.Down && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)))
+        else if (transitionKeyNeeded == DirectionKey.Down && (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Down"))))
         {
             return true;
         }
-        else if (transitionKeyNeeded == DirectionKey.Right && (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)))
+        else if (transitionKeyNeeded == DirectionKey.Right && (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Right"))))
         {
             return true;
         }
-        else if (transitionKeyNeeded == DirectionKey.Left && (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)))
+        else if (transitionKeyNeeded == DirectionKey.Left && (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Left"))))
         {
             return true;
         }

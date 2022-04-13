@@ -108,6 +108,7 @@ public class GamePlayManager : MonoBehaviour
     private void InitializeGame()
     {
         targetTag = "SpawnPoint1";
+        if (!PlayerPrefs.HasKey(CustomizeControls.ControlNames[0])) CustomizeControls.SetDefaults();
         //persistingItems = new Dictionary<string, PersistingGameObject>();
     }
 

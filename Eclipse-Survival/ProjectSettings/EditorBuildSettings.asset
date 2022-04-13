@@ -16,7 +16,7 @@ EditorBuildSettings:
     guid: 9d23b331fac76c0488ab0715388d0403
   - enabled: 1
     path: Assets/Scenes/FinalBuildScenes/Menu/Options_Scene.unity
-    guid: 9f76eb9e7d2aef0469ce98653fdebf76
+    guid: 52d061eb21a806d4599d0f0befc669c0
   - enabled: 1
     path: Assets/Scenes/FinalBuildScenes/Menu/Credits_Scene.unity
     guid: 89bbf5b6d1620fd42b568826e10405b5

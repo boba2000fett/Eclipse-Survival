@@ -126,7 +126,7 @@ public class ClimbingMovement : MonoBehaviour
 
 
 
-        if (Input.GetKey(KeyCode.Space) && onGround && canJump)
+        if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Jump")) && onGround && canJump)
         {
             rb.AddForce(new Vector2(0f, jumpPower));
             onGround = false;
@@ -158,9 +158,9 @@ public class ClimbingMovement : MonoBehaviour
         if(climbing) pVel.y = 0f;
 
         // Adding running
-        if (Input.GetKey(KeyCode.LeftShift) && stamina > 0 && !staminaCooldown && onGround
-            && ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
-            || (climbing && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)))))
+        if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Run")) && stamina > 0 && !staminaCooldown && onGround
+            && ((Input.GetKey((KeyCode)PlayerPrefs.GetInt("Right")) || Input.GetKey((KeyCode)PlayerPrefs.GetInt("Left")))
+            || (climbing && (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Down")) || Input.GetKey((KeyCode)PlayerPrefs.GetInt("Up"))))))
         {
             state = ActionState.Running;
             stamina -= Constants.STAMINA_USE_INCREMENT;
@@ -238,7 +238,7 @@ public class ClimbingMovement : MonoBehaviour
             state = ActionState.Idle;
         }
 
-        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+        if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Down")))
         {
             // Place Ducking here if we want
             if (onClimbable && !climbing)
@@ -255,7 +255,7 @@ public class ClimbingMovement : MonoBehaviour
                 TurnXander();
             }
         }
-        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+        else if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Right")))
         {
             state = ActionState.Walking;
             pVel.x = moveSpeed * Time.deltaTime;
@@ -266,7 +266,7 @@ public class ClimbingMovement : MonoBehaviour
                 TurnXander();
             }           
         }
-        else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+        else if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Up")))
         {
             if (onClimbable && !climbing)
             {
@@ -283,7 +283,7 @@ public class ClimbingMovement : MonoBehaviour
                 TurnXander();
             }
         }
-        else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+        else if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Left")))
         {
             state = ActionState.Walking;
             pVel.x = -moveSpeed * Time.deltaTime;
