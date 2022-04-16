@@ -49,8 +49,8 @@ pathToExit: Node 4, Node 3, Node 10
         if (isHomeNode)
             return;
 
-        Camera.main.GetComponent<CameraFollow>().enabled = false;
-        GameObject.Find("MapBounds").gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        //Camera.main.GetComponent<CameraFollow>().enabled = false;
+        //GameObject.Find("MapBounds").gameObject.GetComponent<BoxCollider2D>().enabled = false;
 
         //GameObject.FindGameObjectWithTag("MainCamera").GetComponent
         GameObject[] waypointsInScene = GameObject.FindGameObjectsWithTag("EnemyWaypoint");
@@ -68,7 +68,9 @@ pathToExit: Node 4, Node 3, Node 10
 
             RaycastHit2D hit = Physics2D.Raycast
                 (transform.position,
-                waypoint.transform.position - transform.position);
+                waypoint.transform.position - transform.position,
+                100f,
+                LayerMask.GetMask("Default"));
 
 
             if (hit.collider.gameObject.tag == "EnemyWaypoint")
@@ -89,8 +91,8 @@ pathToExit: Node 4, Node 3, Node 10
 
         possibleTravelPoints = availableNodes.ToArray();
         //Main Camera/MapBounds
-        GameObject.Find("MapBounds").gameObject.GetComponent<BoxCollider2D>().enabled = true;
-        Camera.main.GetComponent<CameraFollow>().enabled = true;
+        //GameObject.Find("MapBounds").gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        //Camera.main.GetComponent<CameraFollow>().enabled = true;
 
         completedWaypoint = true;
     }

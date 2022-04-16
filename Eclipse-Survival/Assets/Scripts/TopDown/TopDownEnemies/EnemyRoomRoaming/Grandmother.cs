@@ -166,7 +166,7 @@ public class Grandmother : EnemyRoomRoaming
         //fryingPan.SetActive(true);
         //isHitting = true;
         var ts = TimeSpan.FromSeconds(strikeTimeInterval);
-        Debug.Log($"strikeTimeInterval {string.Format("{0:00}:{1:00}", ts.TotalMinutes, ts.Seconds)}");
+        //Debug.Log($"strikeTimeInterval {string.Format("{0:00}:{1:00}", ts.TotalMinutes, ts.Seconds)}");
 
         SwitchAttackingAnimation(true);
 

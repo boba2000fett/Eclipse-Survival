@@ -95,7 +95,7 @@ public class EnemyRoomRoaming : Enemy
         //DontDestroyOnLoad(gameObject);
         #endregion
 
-        Debug.Log(this.gameObject.name);
+        //Debug.Log(this.gameObject.name);
         if (this.gameObject.name == "Cat")
         {
             roomList = roomListSet;
@@ -103,7 +103,7 @@ public class EnemyRoomRoaming : Enemy
         }
 
         RestartCycle();
-        Debug.LogWarning("Found");
+        //Debug.LogWarning("Found");
     }
 
     public override void Update()

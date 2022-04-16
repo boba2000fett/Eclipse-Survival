@@ -89,7 +89,7 @@ public class WolfSpiderTopDown : Enemy
 
         Vector2 distanceFromTarget = target.gameObject.transform.position - transform.position;
 
-        Debug.Log(distanceFromTarget.magnitude);
+        //Debug.Log(distanceFromTarget.magnitude);
 
         if (distanceFromTarget.magnitude > attackRange)
         {

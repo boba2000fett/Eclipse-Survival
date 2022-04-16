@@ -438,7 +438,7 @@ If spider is currently in the same Room as player
     {
         /* 
          ReachedExit() 
-        If Spider has reached the Exit of a Room()
+        If Spider has reached the Exit of a Room()s
             Delete the Spider Instance in the current room
             Call SwitchRoom()
          */

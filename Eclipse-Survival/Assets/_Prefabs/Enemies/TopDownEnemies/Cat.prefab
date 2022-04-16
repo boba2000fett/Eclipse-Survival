@@ -120,8 +120,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  moveSpeed: 1.76
-  runSpeed: 2.13
+  moveSpeed: 1.58
+  runSpeed: 1.94
   alertTimeDuration: 10
   attackRange: 1.5
   strength: 18
@@ -132,7 +132,8 @@ MonoBehaviour:
   alertTime: 0
   currentWaypointDestination: {fileID: 0}
   direction: 0
-  stuckTimeCheckInterval: 1.01
+  stuckTimeCheckInterval: 0.1
+  stuckTimePauseTimerInterval: 0.4
   travelTimeInterval: 0.71
   acceleration: {x: 0, y: 0}
   previousVelocity: {x: 0, y: 0}
@@ -150,6 +151,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   rigid: {fileID: 0}
   circle: {fileID: 0}
+  attackCooldownTimeInterval: 1
   roomListSet:
   - {fileID: 6558327903196666450, guid: 11fcf71e8b6ba7d4b87add428ae1f770, type: 3}
   - {fileID: 3507768772690859300, guid: 89064a2297b942d46b5df99cb7c69b4e, type: 3}
@@ -163,6 +165,8 @@ MonoBehaviour:
   pathToExit: 0
   destinationSceneName: 
   roomManager: {fileID: 6202258368021614728, guid: a5b1ef80e65909442852770eeb70c446, type: 3}
+  attackCooldown: 0
+  attackCooldownTime: 0
   waypointCount: 0
   isInRoom: 0
   outsideRoomTime: 0
@@ -180,13 +184,12 @@ MonoBehaviour:
   pounceStopTimeInverval: 0.2
   damage: 0
   pounceSpeed: 5.46
-  pounceCooldownTimeInterval: 1
+  previousFacing: 0
   hoppingPoint: {x: 0, y: 0, z: 0}
   isPouncing: 0
   pounceState: 3
   pouncePrepareTime: 0
   pounceStopTime: 0
-  pounceCooldownTime: 0
 --- !u!114 &1942783862328796363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,4 +218,4 @@ MonoBehaviour:
   - {x: -0.20720053, y: 0.13212347, z: 0}
   m_ShapePathHash: 1457734999
   m_Mesh: {fileID: 0}
-  m_InstanceId: 310256
+  m_InstanceId: 158738
