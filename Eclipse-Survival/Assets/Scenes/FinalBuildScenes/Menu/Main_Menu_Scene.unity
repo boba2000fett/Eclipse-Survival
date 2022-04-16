@@ -371,6 +371,7 @@ MonoBehaviour:
   timeBetweenXanderSqueaks: 10
   timeBetweenCatSfx: 7
   timeBetweenCatAttackSfx: 4
+  xanderDeathVolume: 0
   backgroundMusicChannel1: {fileID: 0}
   backgroundMusicChannel2: {fileID: 0}
   ambienceChannel: {fileID: 0}
@@ -378,6 +379,11 @@ MonoBehaviour:
   fryingPanChannel: {fileID: 0}
   xanderSqueaksChannel: {fileID: 0}
   catChannel: {fileID: 0}
+  xanderFallDamageChannel: {fileID: 0}
+  xanderEatChannel: {fileID: 0}
+  xanderTakeDamageChannel: {fileID: 0}
+  spiderWebChannel: {fileID: 0}
+  xanderDeathChannel: {fileID: 0}
   menuHoldBGM: {fileID: 8300000, guid: 5b61d8c4cf5332d4f86f784c0ed00f43, type: 3}
   primaryBGM: {fileID: 8300000, guid: 84f4f690e82951042aa78a5db47a8e73, type: 3}
   chaseBGM: {fileID: 8300000, guid: 52bde66afeed7b04e872a5715591e4fe, type: 3}
@@ -435,6 +441,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0ae76e3d027b589408c1b9d28f6c2e9b, type: 3}
   - {fileID: 8300000, guid: 15612143f28a09d46b8e42a618c7bbd7, type: 3}
   - {fileID: 8300000, guid: d978f87d0b85f5442abfe217928f8d1a, type: 3}
+  xanderFallDamageClip: {fileID: 8300000, guid: 7db14067738edd54fb210584fc2c945b, type: 3}
+  xanderEatClip: {fileID: 8300000, guid: c1febf99e11bba547b35eb2f8058ee1d, type: 3}
+  xanderTakeDamageClip: {fileID: 8300000, guid: 0efbbdb167fdac3488686c7bf0307089, type: 3}
+  spiderWebClip: {fileID: 8300000, guid: 206ca34d29ab551409a7268b394a928e, type: 3}
+  xanderDeathClip: {fileID: 8300000, guid: eee9d436e7664ef4cbecdcd4c12af132, type: 3}
 --- !u!1 &373127576
 GameObject:
   m_ObjectHideFlags: 0

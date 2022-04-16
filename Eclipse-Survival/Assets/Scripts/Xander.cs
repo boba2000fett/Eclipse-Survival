@@ -39,6 +39,7 @@ public class Xander : MonoBehaviour
             else if (health <= 0)
             {
                 isAlive = false;
+                AudioManagement.Instance.PlayXanderDeath();
                 GamePlayManager.GPM.EndGame();
             }
         }
@@ -93,6 +94,7 @@ public class Xander : MonoBehaviour
     public void TakeDamage(int damage)
     {
         Health -= damage;
+        AudioManagement.Instance.PlayXanderTakeDamage();
         
         UpdateManager();
         UpdateUI();
@@ -120,10 +122,12 @@ public class Xander : MonoBehaviour
             if (itemValue.isDamage)
             {
                 TakeDamage(itemValue.healthValue);
+
             }
             else
             {
                 Health += itemValue.healthValue;
+                AudioManagement.Instance.PlayXanderEatFood();
             }
             Hunger += itemValue.hungerValue;           
 

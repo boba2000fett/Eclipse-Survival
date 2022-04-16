@@ -223,7 +223,7 @@ public class Enemy : MonoBehaviour
             }
             else
             {
-                AudioManagement.Instance.PlayEnemyAlertedSFX();
+                //AudioManagement.Instance.PlayEnemyAlertedSFX(); TODO?
             }
             alertTime = 0;
         }

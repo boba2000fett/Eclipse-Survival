@@ -120,6 +120,7 @@ public class ClimbingMovement : MonoBehaviour
                 int fallDmg = Mathf.RoundToInt((-fallSpeed - 6.5f) * 5);
                 if (climbing) fallDmg = Mathf.RoundToInt(fallDmg / 2.0f);
                 x.TakeDamage(fallDmg);
+                AudioManagement.Instance.PlayFallDamage();
             }
             fallSpeed = 0f;
         }

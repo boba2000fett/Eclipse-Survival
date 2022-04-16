@@ -25,8 +25,13 @@ public class AudioManagement : MonoBehaviour
     private float xanderSqueaksVolume;
     private bool isPlayingAmbiantSound;
     private float catSFXVolume;
+    private float xanderFallDamageVolume;
+    private float xanderEatVolume;
+    private float xanderTakeDamageVolume;
+    private float spiderWebVolume;
+    public float xanderDeathVolume;
 
-    // Public Controls
+    #region Public Controls
     public float BackgroundMusicVolume
     {
         get { return backgroundMusicVolume; }
@@ -88,6 +93,56 @@ public class AudioManagement : MonoBehaviour
         }
     }
 
+    public float XanderFallDamageVolume
+    {
+        get { return xanderFallDamageVolume; }
+        set
+        {
+            xanderFallDamageVolume = value;
+            xanderFallDamageChannel.volume = xanderFallDamageVolume;
+        }
+    }
+
+    public float XanderEatVolume
+    {
+        get { return xanderEatVolume; }
+        set
+        {
+            xanderEatVolume = value;
+            xanderEatChannel.volume = xanderEatVolume;
+        }
+    }
+
+    public float XanderTakeDamageVolume
+    {
+        get { return xanderTakeDamageVolume; }
+        set
+        {
+            xanderTakeDamageVolume = value;
+            xanderTakeDamageChannel.volume = xanderTakeDamageVolume;
+        }
+    }
+
+    public float SpiderWebVolume
+    {
+        get { return spiderWebVolume; }
+        set
+        {
+            spiderWebVolume = value;
+            spiderWebChannel.volume = spiderWebVolume;
+        }
+    }
+
+    public float XanderDeathVolume
+    {
+        get { return xanderDeathVolume; }
+        set
+        {
+            xanderDeathVolume = value;
+            xanderDeathChannel.volume = xanderDeathVolume;
+        }
+    }
+    #endregion
     // Audio Source (Registered by Start method)
     public AudioSource backgroundMusicChannel1;
     public AudioSource backgroundMusicChannel2;
@@ -96,6 +151,11 @@ public class AudioManagement : MonoBehaviour
     public AudioSource fryingPanChannel;
     public AudioSource xanderSqueaksChannel;
     public AudioSource catChannel;
+    public AudioSource xanderFallDamageChannel;
+    public AudioSource xanderEatChannel;
+    public AudioSource xanderTakeDamageChannel;
+    public AudioSource spiderWebChannel;
+    public AudioSource xanderDeathChannel;
 
     private bool isPlayingTrack1;
 
@@ -114,7 +174,11 @@ public class AudioManagement : MonoBehaviour
     public AudioClip[] xanderSqueaksClips;
     public AudioClip[] catSoundClips;
     public AudioClip[] catAttackingSoundClips;
-
+    public AudioClip xanderFallDamageClip;
+    public AudioClip xanderEatClip;
+    public AudioClip xanderTakeDamageClip;
+    public AudioClip spiderWebClip;
+    public AudioClip xanderDeathClip;
 
     // Awake is called before Start()
     private void Awake()
@@ -145,6 +209,11 @@ public class AudioManagement : MonoBehaviour
         fryingPanChannel = gameObject.AddComponent<AudioSource>();
         xanderSqueaksChannel = gameObject.AddComponent<AudioSource>();
         catChannel = gameObject.AddComponent<AudioSource>();
+        xanderFallDamageChannel = gameObject.AddComponent<AudioSource>();
+        xanderEatChannel = gameObject.AddComponent<AudioSource>();
+        xanderTakeDamageChannel = gameObject.AddComponent<AudioSource>();
+        spiderWebChannel = gameObject.AddComponent<AudioSource>();
+        xanderDeathChannel = gameObject.AddComponent<AudioSource>();
 
         // Set to loop
         backgroundMusicChannel1.loop = true;
@@ -154,6 +223,11 @@ public class AudioManagement : MonoBehaviour
         fryingPanChannel.loop = false;
         xanderSqueaksChannel.loop = false;
         catChannel.loop = false;
+        xanderFallDamageChannel.loop = false;
+        xanderEatChannel.loop = false;
+        xanderTakeDamageChannel.loop = false;
+        spiderWebChannel.loop = false;
+        xanderDeathChannel.loop = false;
 
         // Set play on awake to false
         backgroundMusicChannel1.playOnAwake = false;
@@ -163,6 +237,11 @@ public class AudioManagement : MonoBehaviour
         fryingPanChannel.playOnAwake = false;
         xanderSqueaksChannel.playOnAwake = false;
         catChannel.playOnAwake = false;
+        xanderFallDamageChannel.playOnAwake = false;
+        xanderEatChannel.playOnAwake = false;
+        xanderTakeDamageChannel.playOnAwake = false;
+        spiderWebChannel.playOnAwake = false;
+        xanderDeathChannel.playOnAwake = false;
 
         // ------- Initialize Voume Mix Properties ----------
         AmbientSFXVolume = 0.5f;
@@ -170,6 +249,11 @@ public class AudioManagement : MonoBehaviour
         FryingPanVolume = 0.4f;
         XanderSqueaksVolume = 0.01f;
         CatSFXVolume = 0.14f;
+        xanderFallDamageVolume = 0.2f;
+        xanderEatVolume = 0.02f;
+        xanderTakeDamageVolume = 0.1f;
+        spiderWebVolume = 0.07f;
+        XanderDeathVolume = 0.2f;
 
         // -------- Fine Tune other AudioSource Attributes ----------
         xanderFootstepsChannel.pitch = 1.8f;
@@ -411,10 +495,34 @@ public class AudioManagement : MonoBehaviour
         }       
     }
 
-    //----------------------------JUMP SCARES --------------------------------------------
-    public void PlayEnemyAlertedSFX()
+    //--------------------------- FALL DAMAGE -------------------------------------------
+    public void PlayFallDamage()
     {
-        // TODO
+        xanderFallDamageChannel.PlayOneShot(xanderFallDamageClip);
+    }
+
+    //------------------------- EAT FOOD ------------------------------------------------
+    public void PlayXanderEatFood()
+    {
+        xanderEatChannel.PlayOneShot(xanderEatClip);
+    }
+    
+    //------------------------ TAKE DAMAGE ----------------------------------------------
+    public void PlayXanderTakeDamage()
+    {
+        xanderTakeDamageChannel.PlayOneShot(xanderTakeDamageClip);
+    }
+
+    //---------------------- SPIDER WEB ------------------------------------------------
+    public void PlaySpiderWeb()
+    {
+        spiderWebChannel.PlayOneShot(spiderWebClip);
+    }
+
+    //----------------------- XANDER DEATH ---------------------------------------------
+    public void PlayXanderDeath()
+    {
+        xanderDeathChannel.PlayOneShot(xanderDeathClip);
     }
 
     #endregion

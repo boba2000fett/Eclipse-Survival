@@ -31,6 +31,11 @@ public class WebShotProjectile : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        AudioManagement.Instance.PlaySpiderWeb();
+    }
+
     private void OnCollisionEnter2D(Collision2D collider)
     {
         if (collider.gameObject.tag == "Xander")

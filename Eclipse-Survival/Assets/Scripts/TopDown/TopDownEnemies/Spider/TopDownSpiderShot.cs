@@ -47,6 +47,11 @@ public class TopDownSpiderShot : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        AudioManagement.Instance.PlaySpiderWeb();
+    }
+
     public void DisappearSpider()
     {        
         if (!destroyWeb)
