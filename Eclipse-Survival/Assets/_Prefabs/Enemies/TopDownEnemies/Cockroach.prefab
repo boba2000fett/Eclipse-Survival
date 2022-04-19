@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1313248463
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 3054089113052382688, guid: 310dcbe5afd2b0d41b80f451d816ca90, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -119,11 +119,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints: []
-  home: {fileID: 0}
   moveSpeed: 0.5
   runSpeed: 1
   alertTimeDuration: 8.08
-  alertRange: 4.14
   attackRange: 0.76
   strength: 2
   health: 3
@@ -133,6 +131,22 @@ MonoBehaviour:
   alertTime: 0
   currentWaypointDestination: {fileID: 0}
   direction: 0
+  stuckTimeCheckInterval: 1
+  stuckTimePauseTimerInterval: 0.1
+  travelTimeInterval: 1
+  acceleration: {x: 0, y: 0}
+  previousVelocity: {x: 0, y: 0}
+  velocity: {x: 0, y: 0}
+  speed: 0
+  previousPosition: {x: 0, y: 0}
+  stuckTimeCheck: 0
+  travelTime: 0
+  unstuckDirection: 0
+  stuck: 0
+  stuckTimePauseTimer: 0
+  previousDistanceToXander: 0
+  distanceToXander: 0
+  velocityTowardsXander: 0
   anim: {fileID: 0}
   rigid: {fileID: 0}
   circle: {fileID: 0}
