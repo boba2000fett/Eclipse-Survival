@@ -57,6 +57,7 @@ public class Room : MonoBehaviour
     //public int startsExitInt;
 
     public bool isWallCrawlingStage;
+    public bool levelVisited = false;
 
     public void Start()
     {
@@ -66,7 +67,11 @@ public class Room : MonoBehaviour
         }
         else
         {
-            FindExitNodesSideViewScreen();
+            if (!levelVisited)
+            {
+                FindExitNodesSideViewScreen();
+                levelVisited = true;
+            }
         }
         
     }

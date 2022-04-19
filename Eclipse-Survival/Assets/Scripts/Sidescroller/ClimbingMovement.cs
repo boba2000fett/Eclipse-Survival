@@ -114,6 +114,7 @@ public class ClimbingMovement : MonoBehaviour
         }
         else if (fallSpeed != 0f)
         {
+            //Debug.Log($"Xander fallSpeed: {fallSpeed}");
             if (fallSpeed <= -7.5f)
             {
                 Xander x = this.GetComponent<Xander>();

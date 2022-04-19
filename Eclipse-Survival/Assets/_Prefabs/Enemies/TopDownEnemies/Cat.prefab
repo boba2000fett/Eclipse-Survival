@@ -21,11 +21,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353579, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353579, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 4033998086720353579, guid: 0427dc5f30234294f92f991696065a4a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -185,6 +185,7 @@ MonoBehaviour:
   damage: 0
   pounceSpeed: 5.46
   previousFacing: 0
+  avoidPosition: {x: 0, y: 0}
   hoppingPoint: {x: 0, y: 0, z: 0}
   isPouncing: 0
   pounceState: 3
@@ -218,4 +219,4 @@ MonoBehaviour:
   - {x: -0.20720053, y: 0.13212347, z: 0}
   m_ShapePathHash: 1457734999
   m_Mesh: {fileID: 0}
-  m_InstanceId: 158738
+  m_InstanceId: 54360

@@ -25,9 +25,9 @@ public class Cockroach : Enemy
         Room currentRoomInstance = GameObject.FindGameObjectWithTag("Room").GetComponent<Room>();
         currentRoomInstance.Start();
                 
-        int index = UnityEngine.Random.Range(1, currentRoomInstance.waypointsInRoom.Length);
+        int index = UnityEngine.Random.Range(1, currentRoomInstance.spawnWaypoints.Count);
 
-        transform.position = currentRoomInstance.waypointsInRoom[index].gameObject.transform.position;
+        transform.position = currentRoomInstance.spawnWaypoints[index].gameObject.transform.position;
 
 
         boxCollider = GetComponent<BoxCollider2D>();

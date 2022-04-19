@@ -282,8 +282,12 @@ If spider is currently in the same Room as player
     public void FindExitNode()
     {
         Room currentRoomInstance = GameObject.FindGameObjectWithTag("Room").GetComponent<Room>();
-        
-        if (currentRoomInstance.waypointsInRoom.Length == 0)
+
+        if (currentRoomInstance.waypointsInRoom.Length == 0 && !currentRoomInstance.isWallCrawlingStage)
+        {
+            currentRoomInstance.Start();
+        }
+        else if (currentRoomInstance.isWallCrawlingStage && !currentRoomInstance.levelVisited)
         {
             currentRoomInstance.Start();
         }
@@ -551,25 +555,25 @@ If spider is currently in the same Room as player
             wolfSpiderSideInstance = go.GetComponent<WolfSpider>();
             Room currentRoomInstance = GameObject.FindGameObjectWithTag("Room").GetComponent<Room>();
 
-            Debug.LogWarning($"SIDE Spider Position Before Switch: {wolfSpiderTopDownInstance.transform.position}");
+            Debug.LogWarning($"SIDE Spider Position Before Switch: {wolfSpiderSideInstance.gameObject.transform.position}");
 
             //Place at an Endpoint pertaining to the direction the Enemy is Traveling From
             switch (spawnEntrance)
             {
                 case PathToExit.Wall1:
-                    wolfSpiderTopDownInstance.transform.position = currentRoomInstance.wall1Exit.gameObject.transform.position;
+                    wolfSpiderSideInstance.gameObject.transform.position = currentRoomInstance.wall1Exit.gameObject.transform.position;
                     break;
                 case PathToExit.Wall2:
-                    wolfSpiderTopDownInstance.transform.position = currentRoomInstance.wall2Exit.gameObject.transform.position;
+                    wolfSpiderSideInstance.gameObject.transform.position = currentRoomInstance.wall2Exit.gameObject.transform.position;
                     break;
                 case PathToExit.Wall3:
-                    wolfSpiderTopDownInstance.transform.position = currentRoomInstance.wall3Exit.gameObject.transform.position;
+                    wolfSpiderSideInstance.gameObject.transform.position = currentRoomInstance.wall3Exit.gameObject.transform.position;
                     break;
                 case PathToExit.Wall4:
-                    wolfSpiderTopDownInstance.transform.position = currentRoomInstance.wall4Exit.gameObject.transform.position;
+                    wolfSpiderSideInstance.transform.position = currentRoomInstance.wall4Exit.gameObject.transform.position;
                     break;
                 case PathToExit.Wall5:
-                    wolfSpiderTopDownInstance.transform.position = currentRoomInstance.wall5Exit.gameObject.transform.position;
+                    wolfSpiderSideInstance.transform.position = currentRoomInstance.wall5Exit.gameObject.transform.position;
                     break;
             }
         }
