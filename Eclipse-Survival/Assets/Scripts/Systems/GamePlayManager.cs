@@ -15,6 +15,7 @@ public class GamePlayManager : MonoBehaviour
     public bool DinningRoomVisited;
     public bool LivingRoomVisited;
     public bool FirstFloorHallwayVisited;
+    
     //Second Floor Rooms/Scenes
     public bool MasterBedRoomVisited;
     public bool GrandKidsBedroomVisited;
@@ -22,6 +23,11 @@ public class GamePlayManager : MonoBehaviour
     public bool GuestBedRoom2Visited;
     public bool BathroomVisited;
     public bool SecondFloorHallwayVisited;
+
+    //Wall Scenes
+    public bool WallScene1Visited;
+    public bool WallScene2Visited;
+    public bool WallScene3Visited;
 
 
     [Header("Set in Inspector")]
@@ -69,6 +75,16 @@ public class GamePlayManager : MonoBehaviour
 
     public string[] itemsLeftInSecondFloorHallwayType;
     public Vector2[] itemsLeftInSecondFloorHallwayLocation;
+
+    //Wall Scene Item Management
+    public string[] itemsLeftInWallScene1Type;
+    public Vector2[] itemsLeftInWallScene1Location;
+
+    public string[] itemsLeftInWallScene2Type;
+    public Vector2[] itemsLeftInWallScene2Location;
+
+    public string[] itemsLeftInWallScene3Type;
+    public Vector2[] itemsLeftInWallScene3Location;
 
     //Dictionary<string, PersistingGameObject> persistingItems;
 
@@ -168,6 +184,10 @@ public class GamePlayManager : MonoBehaviour
         GuestBedRoom2Visited = false;
         SecondFloorHallwayVisited = false;
         BathroomVisited = false;
+        WallScene1Visited = false;
+        WallScene2Visited = false;
+        WallScene3Visited = false;
+
         CurrentHoursSurvived = 0;
 
         XanderHealth = STARTING_HEALTH;
@@ -191,6 +211,9 @@ public class GamePlayManager : MonoBehaviour
         GuestBedRoom2Visited = false;
         SecondFloorHallwayVisited = false;
         BathroomVisited = false;
+        WallScene1Visited = false;
+        WallScene2Visited = false;
+        WallScene3Visited = false;
     }
 
     public void EndGame()

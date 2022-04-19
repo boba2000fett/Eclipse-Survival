@@ -59,4 +59,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FinalBuildScenes/SidescrollerScenes/Bathroom-Bedroom-DiningroomWall.unity
     guid: 227417017bd911849860445887ce08c5
+  - enabled: 1
+    path: Assets/Scenes/FinalBuildScenes/SidescrollerScenes/Hallway-BedroomWall.unity
+    guid: 9584df1c2f1a5434bb65a52eb3708ce7
   m_configObjects: {}

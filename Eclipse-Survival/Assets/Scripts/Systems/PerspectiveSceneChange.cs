@@ -300,6 +300,69 @@ public class PerspectiveSceneChange : MonoBehaviour
                     i++;
                 }
                 break;
+
+            case "WallScene1":
+                tempItemHolder = GameObject.FindGameObjectsWithTag("Item");
+                GamePlayManager.GPM.itemsLeftInWallScene1Type = new string[tempItemHolder.Length];
+                GamePlayManager.GPM.itemsLeftInWallScene1Location = new Vector2[tempItemHolder.Length];
+
+
+                foreach (GameObject item in tempItemHolder)
+                {
+
+
+                    nameOfItem = item.gameObject.name;
+
+                    tempArray = nameOfItem.Split(char.Parse("("));
+
+                    GamePlayManager.GPM.itemsLeftInWallScene1Type[i] = tempArray[0];
+                    GamePlayManager.GPM.itemsLeftInWallScene1Location[i] = item.gameObject.transform.position;
+
+                    i++;
+                }
+                break;
+
+            case "WallScene2":
+                tempItemHolder = GameObject.FindGameObjectsWithTag("Item");
+                GamePlayManager.GPM.itemsLeftInWallScene2Type = new string[tempItemHolder.Length];
+                GamePlayManager.GPM.itemsLeftInWallScene2Location = new Vector2[tempItemHolder.Length];
+
+
+                foreach (GameObject item in tempItemHolder)
+                {
+
+
+                    nameOfItem = item.gameObject.name;
+
+                    tempArray = nameOfItem.Split(char.Parse("("));
+
+                    GamePlayManager.GPM.itemsLeftInWallScene2Type[i] = tempArray[0];
+                    GamePlayManager.GPM.itemsLeftInWallScene2Location[i] = item.gameObject.transform.position;
+
+                    i++;
+                }
+                break;
+
+            case "WallScene3":
+                tempItemHolder = GameObject.FindGameObjectsWithTag("Item");
+                GamePlayManager.GPM.itemsLeftInWallScene3Type = new string[tempItemHolder.Length];
+                GamePlayManager.GPM.itemsLeftInWallScene3Location = new Vector2[tempItemHolder.Length];
+
+
+                foreach (GameObject item in tempItemHolder)
+                {
+
+
+                    nameOfItem = item.gameObject.name;
+
+                    tempArray = nameOfItem.Split(char.Parse("("));
+
+                    GamePlayManager.GPM.itemsLeftInWallScene3Type[i] = tempArray[0];
+                    GamePlayManager.GPM.itemsLeftInWallScene3Location[i] = item.gameObject.transform.position;
+
+                    i++;
+                }
+                break;
         }
 
         //if (SceneManager.GetActiveScene().buildIndex == 5)

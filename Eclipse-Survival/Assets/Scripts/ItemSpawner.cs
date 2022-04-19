@@ -537,6 +537,159 @@ public class ItemSpawner : MonoBehaviour
                     }
                 }
                 break;
+
+            case "WallScene1":
+                if (!GamePlayManager.GPM.WallScene1Visited)
+                {
+                    SpawnItems();
+                    GamePlayManager.GPM.WallScene1Visited = true;
+                }
+                else
+                {
+                    //Verify that both the items left lists of name and positions are not length of 0
+                    if (GamePlayManager.GPM.itemsLeftInWallScene1Type.Length != 0 &&
+                        GamePlayManager.GPM.itemsLeftInWallScene1Location.Length != 0)
+                    {
+                        //Go through each of the array value in the room list
+                        for (int i = 0; i < GamePlayManager.GPM.itemsLeftInWallScene1Type.Length; i++)
+                        {
+                            //Switch statement for identifying the item name, which then sets the index value of the list of items
+                            switch (GamePlayManager.GPM.itemsLeftInWallScene1Type[i])
+                            {
+                                case BIG_CHEESE:
+                                    itemIndexValue = 0;
+                                    break;
+                                case BREAD:
+                                    itemIndexValue = 1;
+                                    break;
+
+                                case DEATH_CHEESE:
+                                    itemIndexValue = 2;
+                                    break;
+                                case FRUIT_SEED:
+                                    itemIndexValue = 3;
+                                    break;
+                                case BREAD_CRUMB:
+                                    itemIndexValue = 4;
+                                    break;
+                                case COOKIE_CRUMB:
+                                    itemIndexValue = 5;
+                                    break;
+                                case COOKIE_FULL:
+                                    itemIndexValue = 6;
+                                    break;
+                            }
+
+                            //Reinstatiate the item object and place it based on the stored vector value
+                            GameObject go = Instantiate<GameObject>(foodItemsIndex[itemIndexValue]);
+                            go.transform.position =
+                                GamePlayManager.GPM.itemsLeftInWallScene1Location[i];
+                        }
+                    }
+                }
+                break;
+
+            case "WallScene2":
+                if (!GamePlayManager.GPM.WallScene2Visited)
+                {
+                    SpawnItems();
+                    GamePlayManager.GPM.WallScene2Visited = true;
+                }
+                else
+                {
+                    //Verify that both the items left lists of name and positions are not length of 0
+                    if (GamePlayManager.GPM.itemsLeftInWallScene2Type.Length != 0 &&
+                        GamePlayManager.GPM.itemsLeftInWallScene2Location.Length != 0)
+                    {
+                        //Go through each of the array value in the room list
+                        for (int i = 0; i < GamePlayManager.GPM.itemsLeftInWallScene2Type.Length; i++)
+                        {
+                            //Switch statement for identifying the item name, which then sets the index value of the list of items
+                            switch (GamePlayManager.GPM.itemsLeftInWallScene2Type[i])
+                            {
+                                case BIG_CHEESE:
+                                    itemIndexValue = 0;
+                                    break;
+                                case BREAD:
+                                    itemIndexValue = 1;
+                                    break;
+
+                                case DEATH_CHEESE:
+                                    itemIndexValue = 2;
+                                    break;
+                                case FRUIT_SEED:
+                                    itemIndexValue = 3;
+                                    break;
+                                case BREAD_CRUMB:
+                                    itemIndexValue = 4;
+                                    break;
+                                case COOKIE_CRUMB:
+                                    itemIndexValue = 5;
+                                    break;
+                                case COOKIE_FULL:
+                                    itemIndexValue = 6;
+                                    break;
+                            }
+
+                            //Reinstatiate the item object and place it based on the stored vector value
+                            GameObject go = Instantiate<GameObject>(foodItemsIndex[itemIndexValue]);
+                            go.transform.position =
+                                GamePlayManager.GPM.itemsLeftInWallScene2Location[i];
+                        }
+                    }
+                }
+                break;
+
+            case "WallScene3":
+                if (!GamePlayManager.GPM.WallScene3Visited)
+                {
+                    SpawnItems();
+                    GamePlayManager.GPM.WallScene3Visited = true;
+                }
+                else
+                {
+                    //Verify that both the items left lists of name and positions are not length of 0
+                    if (GamePlayManager.GPM.itemsLeftInWallScene3Type.Length != 0 &&
+                        GamePlayManager.GPM.itemsLeftInWallScene3Location.Length != 0)
+                    {
+                        //Go through each of the array value in the room list
+                        for (int i = 0; i < GamePlayManager.GPM.itemsLeftInWallScene3Type.Length; i++)
+                        {
+                            //Switch statement for identifying the item name, which then sets the index value of the list of items
+                            switch (GamePlayManager.GPM.itemsLeftInWallScene3Type[i])
+                            {
+                                case BIG_CHEESE:
+                                    itemIndexValue = 0;
+                                    break;
+                                case BREAD:
+                                    itemIndexValue = 1;
+                                    break;
+
+                                case DEATH_CHEESE:
+                                    itemIndexValue = 2;
+                                    break;
+                                case FRUIT_SEED:
+                                    itemIndexValue = 3;
+                                    break;
+                                case BREAD_CRUMB:
+                                    itemIndexValue = 4;
+                                    break;
+                                case COOKIE_CRUMB:
+                                    itemIndexValue = 5;
+                                    break;
+                                case COOKIE_FULL:
+                                    itemIndexValue = 6;
+                                    break;
+                            }
+
+                            //Reinstatiate the item object and place it based on the stored vector value
+                            GameObject go = Instantiate<GameObject>(foodItemsIndex[itemIndexValue]);
+                            go.transform.position =
+                                GamePlayManager.GPM.itemsLeftInWallScene3Location[i];
+                        }
+                    }
+                }
+                break;
         }  
     }
 
@@ -626,6 +779,30 @@ public class ItemSpawner : MonoBehaviour
                 {
                     SpawnItems();
                     GamePlayManager.GPM.SecondFloorHallwayVisited = true;
+                }
+                break;
+
+            case "WallScene1":
+                if (!GamePlayManager.GPM.WallScene1Visited)
+                {
+                    SpawnItems();
+                    GamePlayManager.GPM.WallScene1Visited = true;
+                }
+                break;
+
+            case "WallScene2":
+                if (!GamePlayManager.GPM.WallScene2Visited)
+                {
+                    SpawnItems();
+                    GamePlayManager.GPM.WallScene2Visited = true;
+                }
+                break;
+
+            case "WallScene3":
+                if (!GamePlayManager.GPM.WallScene3Visited)
+                {
+                    SpawnItems();
+                    GamePlayManager.GPM.WallScene3Visited = true;
                 }
                 break;
         }
