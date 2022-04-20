@@ -100,13 +100,13 @@ public class Xander : MonoBehaviour
         UpdateUI();
     }
 
-    void UpdateManager()
+    public void UpdateManager()
     {
         GamePlayManager.GPM.XanderHealth = Health;
         GamePlayManager.GPM.XanderHunger = Hunger;
     }
 
-    void UpdateUI()
+    public void UpdateUI()
     {
         hungerBar.GetComponent<Slider>().value = (float)Hunger / STARTING_HUNGER;
         healthBar.GetComponent<Slider>().value = (float)Health / STARTING_HEALTH;
