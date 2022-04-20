@@ -23,8 +23,8 @@ public class CreditsScroll : MonoBehaviour
         "Lead Artist: Brendan Adams,\n,Supporting Artist: Damion Shirkey,\n,Fill-In Artist: Trent Andrews,\n,\n,\n,\n," +
         "Lead Sound Designer: Lukas Stanley,\n,\n,\n,\n,Lead Programmer: Michael Hoekstra,\n,Programmer 1: Trent Andrews,\n," +
         "Programmer 2: Cameron Abrams,\n,Programmer 3: Lukas Stanley,\n,\n,\n,\n,Lead Designer: Trent Andrews,\n,Lead Level Designer: Alex Reid,\n,\n,\n,\n," +
-        "Lead Story Writer: Trent Andrews,\n,Supporting Story Writer: Cameron Abrams,\n,\n,\n,\n,Concept Creation: Lukas Stanley,\n,\n," +
-        "Hall of the Mountain by King Kevin MacLeod,\n,\n,*[LPC] Spider*,Created by William Thompson,Designed by Stephen Challener,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n";
+        "Lead Story Writer: Trent Andrews,\n,Supporting Writer: Cameron Abrams,\n,\n,\n,\n,Concept Creation: Lukas Stanley,\n,\n," +
+        "Hall of the Mountain King,By Kevin MacLeod,\n,\n,*[LPC] Spider*,Created by William Thompson,Designed by Stephen Challener,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n";
 
     string[] creditLines;
     int onLineNum = 0;
