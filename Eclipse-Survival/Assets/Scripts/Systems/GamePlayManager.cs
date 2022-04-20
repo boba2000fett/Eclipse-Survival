@@ -173,7 +173,8 @@ public class GamePlayManager : MonoBehaviour
     //This method will be called from the scene transition when the player clicks start new game
     public void NewGame()
     {
-        
+        InitializeGame();
+
         KitchenRoomVisited = false;
         DinningRoomVisited = false;
         LivingRoomVisited = false;

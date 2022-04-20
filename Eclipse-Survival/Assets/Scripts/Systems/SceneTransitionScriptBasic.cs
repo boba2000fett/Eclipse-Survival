@@ -90,19 +90,19 @@ public class SceneTransitionScriptBasic : MonoBehaviour
                 SceneManager.LoadScene(Constants.MAIN_MENU_SCENE);
                 break;
             case Constants.MAIN_MENU_SCENE:
-                if (nextScene == Constants.ALPHA_CAMERON_TEST_SCENE)
-                {
-                    GamePlayManager.GPM.NewGame();
-                    SceneManager.LoadScene("DownstairsTopLeftKitchen");
-                    AudioManagement.Instance.SwitchBackgroundMusic(BackgroundMusicType.Normal);
-                }
-                else if(nextScene == Constants.OPTION_SCENE)
+                if (nextScene == Constants.OPTION_SCENE)
                 {
                     SceneManager.LoadScene(Constants.OPTION_SCENE);
                 }
                 else if (nextScene == Constants.CREDIT_SCENE)
                 {
                     SceneManager.LoadScene(Constants.CREDIT_SCENE);
+                }
+                else
+                {
+                    GamePlayManager.GPM.NewGame();
+                    SceneManager.LoadScene("DownstairsTopLeftKitchen");
+                    AudioManagement.Instance.SwitchBackgroundMusic(BackgroundMusicType.Normal);
                 }
                 break;
             case Constants.OPTION_SCENE:
