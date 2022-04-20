@@ -18,13 +18,13 @@ public class CreditsScroll : MonoBehaviour
     private float scrollTimer = 0f;
 
     string creditsText =
-        "'Alpha Dogs Studio',\n,\n,\n,\n,Producer 1: Michael Hoekstra,\n,Producer 2: Cameron Abrams,\n,Producer 3: Damion Shirkey,\n," +
+        "'Scurry',\n,\n,\n,\n,'Alpha Dogs Studio',\n,\n,Producer 1: Michael Hoekstra,\n,Producer 2: Cameron Abrams,\n,Producer 3: Damion Shirkey,\n," +
         "Producer 4: Lukas Stanley,\n,Producer 5: Alex Reid,\n,Producer 6: Trent Andrews,\n,Producer 7: Brendan Adams,\n,\n,\n,\n," +
         "Lead Artist: Brendan Adams,\n,Supporting Artist: Damion Shirkey,\n,Fill-In Artist: Trent Andrews,\n,\n,\n,\n," +
         "Lead Sound Designer: Lukas Stanley,\n,\n,\n,\n,Lead Programmer: Michael Hoekstra,\n,Programmer 1: Trent Andrews,\n," +
         "Programmer 2: Cameron Abrams,\n,Programmer 3: Lukas Stanley,\n,\n,\n,\n,Lead Designer: Trent Andrews,\n,Lead Level Designer: Alex Reid,\n,\n,\n,\n," +
-        "Lead Story Writer: Trent Andrews,\n,Supporting Story Writer: Cameron Abrams,\n,\n,\n,\n,Concept Creation: Lukas Stanley," +
-        "\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n";
+        "Lead Story Writer: Trent Andrews,\n,Supporting Story Writer: Cameron Abrams,\n,\n,\n,\n,Concept Creation: Lukas Stanley,\n,\n," +
+        "Hall of the Mountain by King Kevin MacLeod,\n,\n,*[LPC] Spider*,Created by William Thompson,Designed by Stephen Challener,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n,\n";
 
     string[] creditLines;
     int onLineNum = 0;
@@ -63,8 +63,11 @@ public class CreditsScroll : MonoBehaviour
             {
                 onLineNum = 0;
                 textLoc = 0f;
-                scrollMultiPerSec *= 3;
-                if(!bgm1.isPlaying) doneScrolling = true;
+                scrollMultiPerSec *= 3.5f;
+                if (!bgm1.isPlaying)
+                {
+                    doneScrolling = true;
+                }
             }
 
             if (creditLines[onLineNum] != "\n" && !doneScrolling)
@@ -80,13 +83,18 @@ public class CreditsScroll : MonoBehaviour
                     txt.fontSize = 150;
                     txt.alignment = TextAnchor.MiddleCenter;
                 }
+                else if (creditLines[onLineNum].Contains("*"))
+                {
+                    txt.fontSize = 100;
+                    txt.alignment = TextAnchor.MiddleCenter;
+                }
                 else
                 {
                     txt.fontSize = 100;
                     txt.alignment = TextAnchor.MiddleLeft;
                 }
 
-                txt.text = creditLines[onLineNum].Trim('\'');
+                txt.text = creditLines[onLineNum].Trim(new char[] { '\'', '*'});
 
                 tBoxes.Add(txt);
             }
