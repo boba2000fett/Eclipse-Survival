@@ -132,6 +132,7 @@ public class WolfSpiderRoaming : MonoBehaviour
             if (wolfSpiderSideInstance.ReachedExit)
             {
                 Destroy(wolfSpiderSideInstance.gameObject);
+                wolfSpiderSideInstance = null;
                 spiderTravelingToExit = false;
                 SwitchRoom();
             }
@@ -150,6 +151,7 @@ public class WolfSpiderRoaming : MonoBehaviour
             if (wolfSpiderTopDownInstance.reachedExit)
             {
                 Destroy(wolfSpiderTopDownInstance.gameObject);
+                wolfSpiderTopDownInstance = null;
                 spiderTravelingToExit = false;
                 SwitchRoom();
             }            
@@ -389,8 +391,6 @@ If spider is currently in the same Room as player
 
         if (roomTime >= roomTimeInterval)
         {
-            roomTime = 0;
-            roomTimeInterval = UnityEngine.Random.Range(roomTimeIntervalLeftBound, roomTimeIntervalRightBound);
             TimeToLeave();
         }
     }
@@ -458,6 +458,10 @@ If spider is currently in the same Room as player
         /*     Add the currentRoom to the travelList
             Set nextRoom = currentRoom
         */
+        spiderTravelingToExit = false;
+
+        roomTime = 0;
+        roomTimeInterval = UnityEngine.Random.Range(roomTimeIntervalLeftBound, roomTimeIntervalRightBound);
         travelList.AddLast(currentRoom);
         currentRoom = nextRoom;
         nextRoom = null;
@@ -487,6 +491,8 @@ If spider is currently in the same Room as player
     /// <param name="isTopDownScene"></param>
     private void SpawnSpider(bool isTopDownScene, bool isAlreadyInScene)
     {
+        if (wolfSpiderTopDownInstance != null && isTopDownScene) return;
+        if (wolfSpiderSideInstance != null && !isTopDownScene) return;
         if (isTopDownScene && !isAlreadyInScene)
         {
             GameObject go = GameObject.Instantiate(wolfSpiderTopDownPrefab.gameObject);
@@ -632,6 +638,14 @@ If Scene Changes
         if (SceneManager.GetActiveScene().name != currentRoom.sceneName)
         {
             Debug.LogWarning("Spider is no longer in scene");
+            if (currentRoom.isWallCrawlingStage && wolfSpiderSideInstance != null)
+            {
+                Destroy(wolfSpiderSideInstance.gameObject);
+            }
+            else if(wolfSpiderTopDownInstance != null)
+            {
+                Destroy(wolfSpiderTopDownInstance.gameObject);
+            }
             wolfSpiderSideInstance = null;
             wolfSpiderTopDownInstance = null;
         }
