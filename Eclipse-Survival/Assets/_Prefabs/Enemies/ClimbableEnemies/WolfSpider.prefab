@@ -202,7 +202,7 @@ MonoBehaviour:
   jumpPower: 50
   jumpCooldown: 0.5
   attentionSpan: 15
-  pathResetTime: 5
+  pathResetTime: 3
   attackRange: 1.75
   attackCooldown: 1.5
   damage: 10
