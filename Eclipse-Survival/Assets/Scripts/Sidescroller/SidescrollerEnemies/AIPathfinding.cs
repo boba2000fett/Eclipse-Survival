@@ -83,7 +83,11 @@ public class AIPathfinding
                     }
                     else if (groundToRemove.Contains(kvStart.Key)) closest = false;
                 }
-                if (closest) groundNodes[i].connections.Add(groundNodes[kvStart.Key]);
+                if (closest)
+                {
+                    if (!groundNodes[i].connections.Contains(groundNodes[kvStart.Key])) groundNodes[i].connections.Add(groundNodes[kvStart.Key]);
+                    if (!groundNodes[kvStart.Key].connections.Contains(groundNodes[i])) groundNodes[kvStart.Key].connections.Add(groundNodes[i]);
+                }
             }
             // Now check for climbables
             Dictionary<int, float> climbNodeDirs = new Dictionary<int, float>();
@@ -143,8 +147,8 @@ public class AIPathfinding
                 }
                 if (closest)
                 {
-                    groundNodes[i].connections.Add(climbableNodes[kvStart.Key - groundArray.Length]);
-                    climbableNodes[kvStart.Key - groundArray.Length].connections.Add(groundNodes[i]);
+                    if (!groundNodes[i].connections.Contains(climbableNodes[kvStart.Key - groundArray.Length])) groundNodes[i].connections.Add(climbableNodes[kvStart.Key - groundArray.Length]);
+                    if (!climbableNodes[kvStart.Key - groundArray.Length].connections.Contains(groundNodes[i])) climbableNodes[kvStart.Key - groundArray.Length].connections.Add(groundNodes[i]);
                 }
             }
         }
@@ -202,7 +206,207 @@ public class AIPathfinding
                     }
                     else if (climbToRemove.Contains(kvStart.Key)) closest = false;
                 }
-                if (closest) climbableNodes[i].connections.Add(climbableNodes[kvStart.Key - groundArray.Length]);
+                if (closest)
+                {
+                    if (!climbableNodes[i].connections.Contains(climbableNodes[kvStart.Key - groundArray.Length])) climbableNodes[i].connections.Add(climbableNodes[kvStart.Key - groundArray.Length]);
+                    if (!climbableNodes[kvStart.Key - groundArray.Length].connections.Contains(climbableNodes[i])) climbableNodes[kvStart.Key - groundArray.Length].connections.Add(climbableNodes[i]);
+                }
+            }
+        }
+
+        // Fixes:
+        //Node Lengths:
+        //182 / 183 for Bathroom - Bedroom
+        //124 / 125 for Hallway - BedRoom
+        //103 / 104 for Kitchen - Bedroom
+
+        // If in Hallway SideScene
+        if (groundArray.Length + climbableArray.Length == 125)
+        {
+            KeyValuePair<int, int>[] addConnections = new KeyValuePair<int, int>[]
+            {
+                //new KeyValuePair<int, int>(52, 75),
+                new KeyValuePair<int, int>(80, 94),
+                new KeyValuePair<int, int>(81, 94),
+                new KeyValuePair<int, int>(81, 95),
+                new KeyValuePair<int, int>(54, 84),
+                new KeyValuePair<int, int>(96, 74),
+                new KeyValuePair<int, int>(53, 87),
+                new KeyValuePair<int, int>(53, 90),
+                new KeyValuePair<int, int>(90, 89),
+                new KeyValuePair<int, int>(79, 91)
+            };
+
+            for (int i = 0; i < addConnections.Length; i++)
+            {
+                if (addConnections[i].Key >= groundNodes.Length)
+                {
+                    if (addConnections[i].Value >= groundNodes.Length)
+                    {
+                        climbableNodes[addConnections[i].Key - groundNodes.Length].connections.Add(climbableNodes[addConnections[i].Value - groundNodes.Length]);
+                        climbableNodes[addConnections[i].Value - groundNodes.Length].connections.Add(climbableNodes[addConnections[i].Key - groundNodes.Length]);
+                    }
+                    else
+                    {
+                        climbableNodes[addConnections[i].Key - groundNodes.Length].connections.Add(groundNodes[addConnections[i].Value]);
+                        groundNodes[addConnections[i].Value].connections.Add(climbableNodes[addConnections[i].Key - groundNodes.Length]);
+                    }
+                }
+                else
+                {
+                    if (addConnections[i].Value >= groundNodes.Length)
+                    {
+                        groundNodes[addConnections[i].Key].connections.Add(climbableNodes[addConnections[i].Value - groundNodes.Length]);
+                        climbableNodes[addConnections[i].Value - groundNodes.Length].connections.Add(groundNodes[addConnections[i].Key]);
+                    }
+                    else
+                    {
+                        groundNodes[addConnections[i].Key].connections.Add(groundNodes[addConnections[i].Value]);
+                        groundNodes[addConnections[i].Value].connections.Add(groundNodes[addConnections[i].Key]);
+                    }
+                }
+            }
+
+            KeyValuePair<int, int>[] removeConnections = new KeyValuePair<int, int>[]
+            {
+                new KeyValuePair<int, int>(122, 123),
+                new KeyValuePair<int, int>(108, 109),
+                new KeyValuePair<int, int>(72, 119),
+                new KeyValuePair<int, int>(72, 121)
+            };
+
+            for (int i = 0; i < removeConnections.Length; i++)
+            {
+                if (removeConnections[i].Key >= groundNodes.Length)
+                {
+                    if (removeConnections[i].Value >= groundNodes.Length)
+                    {
+                        climbableNodes[removeConnections[i].Key - groundNodes.Length].connections.Remove(climbableNodes[removeConnections[i].Value - groundNodes.Length]);
+                        climbableNodes[removeConnections[i].Value - groundNodes.Length].connections.Remove(climbableNodes[removeConnections[i].Key - groundNodes.Length]);
+                    }
+                    else
+                    {
+                        climbableNodes[removeConnections[i].Key - groundNodes.Length].connections.Remove(groundNodes[removeConnections[i].Value]);
+                        groundNodes[removeConnections[i].Value].connections.Remove(climbableNodes[removeConnections[i].Key - groundNodes.Length]);
+                    }
+                }
+                else
+                {
+                    if (removeConnections[i].Value >= groundNodes.Length)
+                    {
+                        groundNodes[removeConnections[i].Key].connections.Remove(climbableNodes[removeConnections[i].Value - groundNodes.Length]);
+                        climbableNodes[removeConnections[i].Value - groundNodes.Length].connections.Remove(groundNodes[removeConnections[i].Key]);
+                    }
+                    else
+                    {
+                        groundNodes[removeConnections[i].Key].connections.Remove(groundNodes[removeConnections[i].Value]);
+                        groundNodes[removeConnections[i].Value].connections.Remove(groundNodes[removeConnections[i].Key]);
+                    }
+                }
+            }
+        }
+        else if (groundArray.Length + climbableArray.Length == 184)
+        {
+            KeyValuePair<int, int>[] addConnections = new KeyValuePair<int, int>[]
+            {
+                new KeyValuePair<int, int>(45, 46),
+                new KeyValuePair<int, int>(58, 84),
+                new KeyValuePair<int, int>(26, 144)
+            };
+
+            for (int i = 0; i < addConnections.Length; i++)
+            {
+                if (addConnections[i].Key >= groundNodes.Length)
+                {
+                    if (addConnections[i].Value >= groundNodes.Length)
+                    {
+                        climbableNodes[addConnections[i].Key - groundNodes.Length].connections.Add(climbableNodes[addConnections[i].Value - groundNodes.Length]);
+                        climbableNodes[addConnections[i].Value - groundNodes.Length].connections.Add(climbableNodes[addConnections[i].Key - groundNodes.Length]);
+                    }
+                    else
+                    {
+                        climbableNodes[addConnections[i].Key - groundNodes.Length].connections.Add(groundNodes[addConnections[i].Value]);
+                        groundNodes[addConnections[i].Value].connections.Add(climbableNodes[addConnections[i].Key - groundNodes.Length]);
+                    }
+                }
+                else
+                {
+                    if (addConnections[i].Value >= groundNodes.Length)
+                    {
+                        groundNodes[addConnections[i].Key].connections.Add(climbableNodes[addConnections[i].Value - groundNodes.Length]);
+                        climbableNodes[addConnections[i].Value - groundNodes.Length].connections.Add(groundNodes[addConnections[i].Key]);
+                    }
+                    else
+                    {
+                        groundNodes[addConnections[i].Key].connections.Add(groundNodes[addConnections[i].Value]);
+                        groundNodes[addConnections[i].Value].connections.Add(groundNodes[addConnections[i].Key]);
+                    }
+                }
+            }
+
+            KeyValuePair<int, int>[] removeConnections = new KeyValuePair<int, int>[]
+            {
+                new KeyValuePair<int, int>(150, 151),
+                new KeyValuePair<int, int>(64, 155),
+                new KeyValuePair<int, int>(68, 69),
+                new KeyValuePair<int, int>(69, 70),
+                new KeyValuePair<int, int>(69, 102),
+                new KeyValuePair<int, int>(69, 103),
+                new KeyValuePair<int, int>(69, 177),
+                new KeyValuePair<int, int>(103, 177),
+                new KeyValuePair<int, int>(70, 177),
+                new KeyValuePair<int, int>(102, 176),
+                new KeyValuePair<int, int>(70, 176),
+                new KeyValuePair<int, int>(101, 175),
+                new KeyValuePair<int, int>(98, 174),
+                new KeyValuePair<int, int>(174, 182),
+                new KeyValuePair<int, int>(100, 172),
+                new KeyValuePair<int, int>(99, 173),
+                new KeyValuePair<int, int>(98, 173),
+                new KeyValuePair<int, int>(21, 34),
+                new KeyValuePair<int, int>(21, 76),
+                new KeyValuePair<int, int>(13, 75),
+                new KeyValuePair<int, int>(13, 76),
+                new KeyValuePair<int, int>(77, 112),
+                new KeyValuePair<int, int>(78, 112),
+                new KeyValuePair<int, int>(79, 112),
+                new KeyValuePair<int, int>(82, 112),
+                new KeyValuePair<int, int>(111, 112),
+                new KeyValuePair<int, int>(77, 113),
+                new KeyValuePair<int, int>(78, 113),
+                new KeyValuePair<int, int>(79, 113),
+                new KeyValuePair<int, int>(57, 60),
+                new KeyValuePair<int, int>(59, 85)
+            };
+
+            for (int i = 0; i < removeConnections.Length; i++)
+            {
+                if (removeConnections[i].Key >= groundNodes.Length)
+                {
+                    if (removeConnections[i].Value >= groundNodes.Length)
+                    {
+                        climbableNodes[removeConnections[i].Key - groundNodes.Length].connections.Remove(climbableNodes[removeConnections[i].Value - groundNodes.Length]);
+                        climbableNodes[removeConnections[i].Value - groundNodes.Length].connections.Remove(climbableNodes[removeConnections[i].Key - groundNodes.Length]);
+                    }
+                    else
+                    {
+                        climbableNodes[removeConnections[i].Key - groundNodes.Length].connections.Remove(groundNodes[removeConnections[i].Value]);
+                        groundNodes[removeConnections[i].Value].connections.Remove(climbableNodes[removeConnections[i].Key - groundNodes.Length]);
+                    }
+                }
+                else
+                {
+                    if (removeConnections[i].Value >= groundNodes.Length)
+                    {
+                        groundNodes[removeConnections[i].Key].connections.Remove(climbableNodes[removeConnections[i].Value - groundNodes.Length]);
+                        climbableNodes[removeConnections[i].Value - groundNodes.Length].connections.Remove(groundNodes[removeConnections[i].Key]);
+                    }
+                    else
+                    {
+                        groundNodes[removeConnections[i].Key].connections.Remove(groundNodes[removeConnections[i].Value]);
+                        groundNodes[removeConnections[i].Value].connections.Remove(groundNodes[removeConnections[i].Key]);
+                    }
+                }
             }
         }
 

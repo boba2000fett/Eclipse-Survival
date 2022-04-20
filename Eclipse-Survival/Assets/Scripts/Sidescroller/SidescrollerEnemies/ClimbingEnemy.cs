@@ -464,6 +464,10 @@ public class ClimbingEnemy : MonoBehaviour
         {
             Physics2D.IgnoreCollision(collision.collider, collision.otherCollider);
         }
+        if (collision.gameObject.tag.Contains("Item"))
+        {
+            Physics2D.IgnoreCollision(collision.collider, collision.otherCollider);
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -472,16 +476,16 @@ public class ClimbingEnemy : MonoBehaviour
         {
             if (collision.gameObject.transform.position.y - this.transform.position.y >= -0.125)
             {
-                float push = 1f;
+                float push = 10f;
                 if (collision.gameObject.transform.position.x - this.transform.position.x >= 0) push = -1f;
-                rigid.AddForce(new Vector2(push, -1f));
+                rigid.AddForce(new Vector2(push, -2f));
             }
         }
         else if (collision.gameObject.tag == "Wall")
         {
-            float push = 1f;
+            float push = 10f;
             if (collision.gameObject.transform.position.x - this.transform.position.x >= 0) push = -1f;
-            rigid.AddForce(new Vector2(push, -1f));
+            rigid.AddForce(new Vector2(push, -2f));
         }
     }
 
@@ -495,7 +499,7 @@ public class ClimbingEnemy : MonoBehaviour
                 Vector2 target = path[nodeNumber].position;
                 float xDiff = target.x - pos.x;
                 float yDiff = target.y - pos.y;
-                if (Mathf.Abs(xDiff) > 1f && yDiff < -0.2f)
+                if (Mathf.Abs(xDiff) > 1f && yDiff > -1.5f)
                 {
                     rigid.AddForce(new Vector2(0f, jumpPower));
                     onGround = false;

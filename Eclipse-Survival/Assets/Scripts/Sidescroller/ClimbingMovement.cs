@@ -73,15 +73,19 @@ public class ClimbingMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         staminaBar = GameObject.FindGameObjectWithTag("HUDStaminaBar");
-        GameObject spawnPoint = GameObject.FindGameObjectWithTag(GamePlayManager.GPM.targetTag);
-        facing = spawnPoint.GetComponent<PerspectiveSceneChange>().facingOnSpawn;
-        TurnXander();
+        
         collisionCollider = gameObject.GetComponent<CircleCollider2D>();
 
         //detectionCollider = detectCircle.GetComponent<CircleCollider2D>();
         detectionCollider.radius = defaultRadius;
 
-        if (GamePlayManager.GPM != null) stamina = GamePlayManager.GPM.XanderStamina;
+        if (GamePlayManager.GPM != null)
+        {
+            stamina = GamePlayManager.GPM.XanderStamina;
+            GameObject spawnPoint = GameObject.FindGameObjectWithTag(GamePlayManager.GPM.targetTag);
+            facing = spawnPoint.GetComponent<PerspectiveSceneChange>().facingOnSpawn;
+            TurnXander();
+        }
         else stamina = 100;
 
         spr = gameObject.GetComponent<SpriteRenderer>();
