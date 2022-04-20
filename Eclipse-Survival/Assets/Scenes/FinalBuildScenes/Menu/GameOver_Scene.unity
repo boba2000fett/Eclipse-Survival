@@ -242,6 +242,7 @@ GameObject:
   - component: {fileID: 674341126}
   - component: {fileID: 674341125}
   - component: {fileID: 674341127}
+  - component: {fileID: 674341128}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -375,6 +376,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1445342115}
+--- !u!114 &674341128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674341121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 308a6a0815dd9ad489796e78e162a953, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &819915964
 GameObject:
   m_ObjectHideFlags: 0
@@ -1022,10 +1035,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 674341125}
-        m_TargetAssemblyTypeName: SceneTransitionScriptBasic, Assembly-CSharp
-        m_MethodName: TransitionScene
-        m_Mode: 3
+      - m_Target: {fileID: 674341128}
+        m_TargetAssemblyTypeName: TransitionFix, Assembly-CSharp
+        m_MethodName: ExitGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1054,7 +1067,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1eccf9ec01d0fb64b81e20062c1f91aa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a11ceed3634f37f40a95ceaa737e463c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
