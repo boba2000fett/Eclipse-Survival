@@ -143,9 +143,10 @@ public class DayNightCycle : MonoBehaviour
         //GamePlayManager.GPM.NewCycle((int)roundsElapsed);
     }
 
-    private void Reset()
+    public void Reset()
     {
-        
+        roundsElapsed = 0;
+        InitializeRound();
     }
 
 }

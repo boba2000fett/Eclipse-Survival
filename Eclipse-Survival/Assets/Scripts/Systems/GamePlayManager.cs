@@ -175,6 +175,10 @@ public class GamePlayManager : MonoBehaviour
     {
         InitializeGame();
 
+        Time.timeScale = 1f;
+
+        if (DayNightCycle.DNC != null) DayNightCycle.DNC.Reset();
+
         KitchenRoomVisited = false;
         DinningRoomVisited = false;
         LivingRoomVisited = false;
