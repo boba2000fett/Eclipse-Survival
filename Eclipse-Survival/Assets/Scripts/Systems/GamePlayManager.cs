@@ -125,6 +125,7 @@ public class GamePlayManager : MonoBehaviour
     {
         targetTag = "SpawnPoint1";
         if (!PlayerPrefs.HasKey(CustomizeControls.ControlNames[0])) CustomizeControls.SetDefaults();
+        if (!PlayerPrefs.HasKey("HighScore")) PlayerPrefs.SetInt("HighScore", 0);
         //persistingItems = new Dictionary<string, PersistingGameObject>();
     }
 
